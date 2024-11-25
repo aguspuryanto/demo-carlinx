@@ -11,12 +11,12 @@
 
     <!-- manifest meta -->
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="manifest" href="/manifest.json">
+    <link rel="manifest" href="manifest.json">
 
     <!-- Favicons -->
-    <link rel="apple-touch-icon" href="/assets/img/favicon180.png" sizes="180x180">
-    <link rel="icon" href="/assets/img/favicon32.png" sizes="32x32" type="image/png">
-    <link rel="icon" href="/assets/img/favicon16.png" sizes="16x16" type="image/png">
+    <link rel="apple-touch-icon" href="assets/img/favicon180.png" sizes="180x180">
+    <link rel="icon" href="assets/img/favicon32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="assets/img/favicon16.png" sizes="16x16" type="image/png">
 
     <!-- Google fonts-->
 
@@ -25,13 +25,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <!-- bootstrap icons -->
-    <link rel="stylesheet" href="/assets/css/bootstrap-icons.css">
+    <link rel="stylesheet" href="assets/css/bootstrap-icons.css">
 
     <!-- swiper carousel css -->
-    <link rel="stylesheet" href="/assets/css/swiper-bundle.min.css">
+    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
 
     <!-- style css for this template -->
-    <link href="/assets/css/style.css" rel="stylesheet" id="style">
+    <link href="assets/css/style.css" rel="stylesheet" id="style">
 </head>
 
 <body class="body-scroll" data-page="index">
@@ -55,7 +55,7 @@
     <?= $this->renderSection('content') ?>
     <!-- Page ends-->
 
-    <?= $this->include('footer') ?>
+    <?= $this->include('layouts/footer') ?>
 
 </body>
 </html>
