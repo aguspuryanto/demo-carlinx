@@ -65,7 +65,7 @@
                                 </div>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item nav-link" href="/profile.html">
+                                <li><a class="dropdown-item nav-link" href="<?= base_url('profile') ?>">
                                         <div class="avatar avatar-40 rounded icon"><i class="bi bi-calendar2"></i></div>
                                         <div class="col">Profile</div>
                                         <div class="arrow"><i class="bi bi-chevron-right"></i></div>
@@ -79,7 +79,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/chat.html" tabindex="-1">
+                            <a class="nav-link" href="<?= base_url('chat') ?>" tabindex="-1">
                                 <div class="avatar avatar-40 rounded icon"><i class="bi bi-chat-text"></i></div>
                                 <div class="col">Pesan</div>
                                 <div class="arrow"><i class="bi bi-chevron-right"></i></div>
