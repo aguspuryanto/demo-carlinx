@@ -1,4 +1,4 @@
-<?= $this->extend('layouts/main') ?>
+<?= $this->extend('layouts/login') ?>
 
 <?= $this->section('content') ?>
 <main class="container-fluid h-100" style="min-height: 945px;">
@@ -38,7 +38,7 @@
                         </a>
                     </p>
 
-                    <button type="button" class="btn btn-lg btn-default w-100 mb-4 shadow" onclick="window.location.replace('index.html');">
+                    <button type="button" class="btn btn-lg btn-default w-100 mb-4 shadow" onclick="window.location.replace('/');">
                        Login
                     </button>
                 </form>
