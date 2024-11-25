@@ -87,30 +87,30 @@
     </div>
 
     <!-- Required jquery and libraries -->
-    <script src="./demo_files/jquery-3.3.1.min.js"></script>
-    <script src="./demo_files/popper.min.js"></script>
-    <script src="./demo_files/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/jquery-3.3.1.min.js"></script>
+    <script src="assets/js/popper.min.js"></script>
+    <script src="assets/js/bootstrap.bundle.min.js"></script>
 
     <!-- cookie js -->
-    <script src="./demo_files/jquery.cookie.js"></script>
+    <script src="assets/js/jquery.cookie.js"></script>
 
     <!-- Customized jquery file  -->
-    <script src="./demo_files/main.js"></script>
-    <script src="./demo_files/color-scheme.js"></script>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/color-scheme.js"></script>
 
     <!-- PWA app service registration and works -->
-    <script src="./demo_files/pwa-services.js"></script>
+    <script src="assets/js/pwa-services.js"></script>
 
     <!-- Chart js script -->
-    <script src="./demo_files/chart.min.js"></script>
+    <script src="assets/js/chart.min.js"></script>
 
     <!-- Progress circle js script -->
-    <script src="./demo_files/progressbar.min.js"></script>
+    <script src="assets/js/progressbar.min.js"></script>
 
     <!-- swiper js script -->
-    <script src="./demo_files/swiper-bundle.min.js"></script>
+    <script src="assets/js/swiper-bundle.min.js"></script>
     <!-- daterange picker script -->
-    <script src="./demo_files/moment.min.js"></script>
-    <script src="./demo_files/daterangepicker.js"></script>
+    <script src="assets/js/moment.min.js"></script>
+    <script src="assets/js/daterangepicker.js"></script>
     <!-- page level custom script -->
-    <script src="./demo_files/app.js"></script>
+    <script src="assets/js/app.js"></script>
