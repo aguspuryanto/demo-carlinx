@@ -40,8 +40,8 @@
     <!-- Google fonts-->
 
     <link rel="preconnect" href="https://fonts.googleapis.com/">
-    <link href="./demo_files/css2" rel="stylesheet">
-    <link href="./demo_files/css2(1)" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <!-- bootstrap icons -->
     <link rel="stylesheet" href="/assets/css/bootstrap-icons.css">
