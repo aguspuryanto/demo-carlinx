@@ -14,4 +14,9 @@ class Home extends BaseController
     {
         return view('profile');
     }
+
+    public function chat()
+    {
+        return view('chat');
+    }
 }
