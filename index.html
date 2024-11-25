@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+  <title>CarLinx Theme</title>
+  <style>
+    body {
+      background-color: #f7f9fc;
+      font-family: 'Arial', sans-serif;
+    }
+    .card {
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .fixed-bottom-btn {
+      position: fixed;
+      bottom: 15px;
+      right: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container py-4">
+    <!-- Sidebar/Menu -->
+    <div class="d-flex align-items-center mb-4">
+      <button class="btn btn-light me-3">
+        <i class="bi bi-list"></i>
+      </button>
+      <h1 class="h4 mb-0">CarLinx</h1>
+    </div>
+
+    <!-- Main Section -->
+    <div class="row g-3">
+      <div class="col-md-3">
+        <div class="card text-center p-3">
+          <span class="text-muted">Hitung</span>
+          <h5 class="mt-2">RATE</h5>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card text-center p-3">
+          <span class="text-muted">Order</span>
+          <h5 class="mt-2">LAYANAN</h5>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card text-center p-3">
+          <span class="text-muted">Lepas</span>
+          <h5 class="mt-2">KUNCI</h5>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="card text-center p-3">
+          <span class="text-muted">Order</span>
+          <h5 class="mt-2">BULANAN</h5>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats Section -->
+    <div class="card my-4 p-4">
+      <h5>Statistik</h5>
+      <span class="text-muted">1/8/2024 - 7/8/2024</span>
+    </div>
+
+    <!-- Connections -->
+    <h6 class="mt-4">Connections</h6>
+    <div class="d-flex gap-2">
+      <div class="rounded-circle bg-light" style="width: 50px; height: 50px;"></div>
+      <div class="rounded-circle bg-light" style="width: 50px; height: 50px;"></div>
+      <div class="rounded-circle bg-light" style="width: 50px; height: 50px;"></div>
+    </div>
+  </div>
+
+  <!-- PWA Install Button -->
+  <div class="fixed-bottom-btn">
+    <button class="btn btn-primary rounded-pill">
+      <i class="bi bi-download me-2"></i>Install PWA
+    </button>
+  </div>
+
+  <script>
+    // PWA Service Worker
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js')
+        .then(() => console.log('Service Worker Registered'));
+    }
+  </script>
+</body>
+</html>
