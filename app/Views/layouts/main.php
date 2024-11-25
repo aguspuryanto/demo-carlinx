@@ -1,25 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $title ?? 'Dashboard' ?></title>
-    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
-</head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="/">MyApp</a>
-    </nav>
-    <div class="container mt-4">
-        <?= $this->renderSection('content') ?>
-    </div>
-    <script src="/assets/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
-<!DOCTYPE html>
-<!-- saved from url=(0024)/ -->
-<html lang="en">
-<head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
