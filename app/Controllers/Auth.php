@@ -42,6 +42,33 @@ class Auth extends BaseController
         return view('auth/login');
     }
 
+    public function loginSubmit()
+    {
+        $session = session();
+        $userModel = new \App\Models\User();
+
+        // Ambil data input dari form
+        $email = $this->request->getPost('email');
+        $password = $this->request->getPost('password');
+
+        // Cari pengguna berdasarkan email
+        $user = $userModel->getUserByEmail($email);
+
+        if ($user && password_verify($password, $user['password'])) {
+            // Simpan data pengguna ke session
+            $session->set('isLoggedIn', true);
+            $session->set('user', [
+                'id' => $user['id'],
+                'username' => $user['username'],
+                'email' => $user['email']
+            ]);
+
+            return redirect()->to('/');
+        } else {
+            return redirect()->back()->with('error', 'Email atau password salah!');
+        }
+    }
+
     public function logout()
     {
         session()->destroy();

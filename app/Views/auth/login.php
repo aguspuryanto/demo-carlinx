@@ -19,7 +19,8 @@
             </div>
             <div class="col-10 col-md-6 col-lg-5 col-xl-3 mx-auto align-self-center text-center py-4">
                 <h1 class="mb-4 text-color-theme">Login</h1>
-                <form class="was-validated needs-validation" novalidate="">
+                <form method="post" action="/login" class="was-validated needs-validation" novalidate="">
+                    <?= csrf_field(); ?>
                     <div class="form-group form-floating mb-3 is-valid">
                         <input type="text" class="form-control" value="muniro" id="email" placeholder="Username">
                         <label class="form-control-label" for="email">Username</label>
@@ -38,7 +39,7 @@
                         </a>
                     </p>
 
-                    <button type="button" class="btn btn-lg btn-default w-100 mb-4 shadow" onclick="window.location.replace('/');">
+                    <button type="submit" class="btn btn-lg btn-default w-100 mb-4 shadow">
                        Login
                     </button>
                 </form>
