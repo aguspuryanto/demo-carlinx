@@ -26,20 +26,22 @@ class Auth extends BaseController
 
     public function login()
     {
-        if ($this->request->getMethod() === 'post') {
-            $email = $this->request->getPost('email');
-            $password = $this->request->getPost('password');
+        // if ($this->request->getMethod() === 'post') {
+        //     $email = $this->request->getPost('email');
+        //     $password = $this->request->getPost('password');
 
-            $userModel = new \App\Models\User();
-            $user = $userModel->where('email', $email)->first();
+        //     $userModel = new \App\Models\User();
+        //     $user = $userModel->where('email', $email)->first();
 
-            if ($user && password_verify($password, $user['password'])) {
-                session()->set('logged_in', true);
-                return redirect()->to('/dashboard');
-            }
-            return redirect()->back()->with('error', 'Invalid credentials.');
-        }
-        return view('auth/login');
+        //     if ($user && password_verify($password, $user['password'])) {
+        //         session()->set('logged_in', true);
+        //         return redirect()->to('/dashboard');
+        //     }
+        //     return redirect()->back()->with('error', 'Invalid credentials.');
+        // }
+        // return view('auth/login');
+
+        return view('auth/login', ['title' => 'Login']);
     }
 
     public function loginSubmit()

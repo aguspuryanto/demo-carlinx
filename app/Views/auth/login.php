@@ -18,16 +18,21 @@
                 </header>
             </div>
             <div class="col-10 col-md-6 col-lg-5 col-xl-3 mx-auto align-self-center text-center py-4">
+                <!-- Notifikasi Error -->
+                <?php if (session()->getFlashdata('error')): ?>
+                    <div class="alert alert-danger"><?= session()->getFlashdata('error'); ?></div>
+                <?php endif; ?>
+                
                 <h1 class="mb-4 text-color-theme">Login</h1>
                 <form method="post" action="/login" class="was-validated needs-validation" novalidate="">
                     <?= csrf_field(); ?>
                     <div class="form-group form-floating mb-3 is-valid">
-                        <input type="text" class="form-control" value="muniro" id="email" placeholder="Username">
+                        <input type="email" name="email" id="email" class="form-control" value="muniro" placeholder="Username" required>
                         <label class="form-control-label" for="email">Username</label>
                     </div>
 
                     <div class="form-group form-floating is-invalid mb-3">
-                        <input type="password" class="form-control " id="password" placeholder="Password">
+                        <input type="password" name="password" id="password" class="form-control " placeholder="Password" required>
                         <label class="form-control-label" for="password">Password</label>
                         <button type="button" class="text-danger tooltip-btn" data-bs-toggle="tooltip" data-bs-placement="left" title="" id="passworderror" data-bs-original-title="Enter valid Password">
                             <i class="bi bi-info-circle"></i>
