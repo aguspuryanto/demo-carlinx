@@ -10,5 +10,6 @@ class History extends BaseController
     public function index()
     {
         //
+        return view('default');
     }
 }

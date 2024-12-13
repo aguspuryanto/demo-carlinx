@@ -24,4 +24,13 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
 
     // rate
     $routes->get('rate', 'Rate::index');
+
+    // akun
+    $routes->get('akun', 'Akun::index');
+
+    // history
+    $routes->get('history', 'History::index');
+
+    // proses
+    $routes->get('proses', 'Proses::index');
 });
