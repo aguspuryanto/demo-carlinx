@@ -2,32 +2,6 @@
 
 <?= $this->section('content') ?>
 
-<main class="h-100" style="min-height: 633px; padding-top: 85.7188px; padding-bottom: 70px;">
-
-<!-- Header -->
-<header class="header position-fixed">
-    <div class="row">
-        <div class="col-auto">
-            <a href="javascript:void(0)" target="_self" class="btn btn-light btn-44 menu-btn">
-                <i class="bi bi-list"></i>
-            </a>
-        </div>
-        <div class="col align-self-center text-center">
-            <div class="logo-small">
-                <img src="/assets/img/logo.png" alt="">
-                <h5>CarLinx</h5>
-            </div>
-        </div>
-        <div class="col-auto">
-            <a href="/#" target="_self" class="btn btn-light btn-44">
-                <i class="bi bi-bell"></i>
-                <span class="count-indicator"></span>
-            </a>
-        </div>
-    </div>
-</header>
-<!-- Header ends -->
-
 <!-- main page content -->
 <div class="main-container container">
      
@@ -251,8 +225,5 @@
 
 </div>
 <!-- main page content ends -->
-
-
-</main>
 
 <?= $this->endSection() ?>
