@@ -5,7 +5,7 @@ helper('form');
 <?= form_open('rate/hitung', []); ?>
   <div class="form-group">
     <label for="exampleFormControlSelect1">Nama Unit</label>
-    <select class="form-control" id="exampleFormControlSelect1">
+    <select class="form-control" name="unit" id="exampleFormControlSelect1">
       <option>Avanza 2017 (Test)</option>
       <option>Avanza 2020 (Test)</option>
       <option>Avanza TSS (Test)</option>
@@ -38,6 +38,7 @@ helper('form');
 <script>
     $(function () {
       // 
+      $('#exampleFormControlSelect1').select2();
     });
 </script>
 <?= $this->endSection() ?>

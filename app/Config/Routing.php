@@ -94,7 +94,8 @@ class Routing extends BaseRouting
      *
      * If FALSE, will stop searching and do NO automatic routing.
      */
-    public bool $autoRoute = false;
+    // public bool $autoRoute = false;
+    public bool $autoRoute = true; //And you need to change the property $autoRoutesImproved to true in app/Config/Feature.php:
 
     /**
      * For Defined Routes.
