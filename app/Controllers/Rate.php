@@ -15,6 +15,11 @@ class Rate extends BaseController
         return view('pages/rate/hitung');
     }
 
+    public function layanan()
+    {
+        // return;
+    }
+
     public function hitung()
     {
         // helper('my');
