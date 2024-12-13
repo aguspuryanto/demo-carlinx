@@ -3,7 +3,7 @@
         <div class="container">
             <ul class="nav nav-pills nav-justified">
                 <li class="nav-item">
-                    <a class="nav-link active" href="/index.html">
+                    <a class="nav-link active" href="<?= base_url('/') ?>">
                         <span>
                             <i class="nav-icon bi bi-house"></i>
                             <span class="nav-text">Home</span>
@@ -11,7 +11,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/#">
+                    <a class="nav-link" href="<?= base_url('proses') ?>">
                         <span>
                             <i class="nav-icon bi bi-speedometer"></i>
                             <span class="nav-text">Proses</span>
@@ -44,7 +44,7 @@
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/#">
+                    <a class="nav-link" href="<?= base_url('history') ?>">
                         <span>
                             <i class="nav-icon bi bi-stack"></i>
                             <span class="nav-text">History</span>
@@ -52,7 +52,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/profile.html">
+                    <a class="nav-link" href="<?= base_url('akun') ?>">
                         <span>
                             <i class="nav-icon bi bi-person"></i>
                             <span class="nav-text">Akun</span>
