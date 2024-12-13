@@ -32,6 +32,8 @@
 
     <!-- style css for this template -->
     <link href="assets/css/style.css" rel="stylesheet" id="style">
+
+    <?= $this->renderSection('styles') ?>
 </head>
 
 <body class="body-scroll" data-page="index">

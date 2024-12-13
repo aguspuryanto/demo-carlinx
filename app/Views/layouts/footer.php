@@ -114,3 +114,5 @@
     <script src="assets/js/daterangepicker.js"></script>
     <!-- page level custom script -->
     <script src="assets/js/app.js"></script>
+
+    <?= $this->renderSection('javascript') ?>
