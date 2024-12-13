@@ -22,7 +22,7 @@
                     <div class="nav-link">
                         <span class="theme-radial-gradient">
                             <i class="close bi bi-x"></i>
-                            <img src="/assets/img/search.png" class="nav-icond" alt="">
+                            <img src="<?= base_url(); ?>/assets/img/search.png" class="nav-icond" alt="">
                         </span>
                         <div class="nav-menu-popover justify-content-between">
                             <button type="button" class="btn btn-lg btn-icon-text">
@@ -68,7 +68,7 @@
     <div class="position-fixed bottom-0 start-50 translate-middle-x  z-index-10">
         <div class="toast mb-3 fade hide" role="alert" aria-live="assertive" aria-atomic="true" id="toastinstall" data-bs-animation="true">
             <div class="toast-header">
-                <img src="/assets/img/carlinx.png" class="rounded me-2" alt="..." height="32">
+                <img src="<?= base_url(); ?>/assets/img/carlinx.png" class="rounded me-2" alt="..." height="32">
                 <strong class="me-auto">Install PWA App</strong>
                 <small>now</small>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
@@ -87,32 +87,32 @@
     </div>
 
     <!-- Required jquery and libraries -->
-    <script src="assets/js/jquery-3.3.1.min.js"></script>
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/js/bootstrap.bundle.min.js"></script>
+    <script src="<?= base_url(); ?>assets/js/jquery-3.3.1.min.js"></script>
+    <script src="<?= base_url(); ?>assets/js/popper.min.js"></script>
+    <script src="<?= base_url(); ?>assets/js/bootstrap.bundle.min.js"></script>
 
     <!-- cookie js -->
-    <script src="assets/js/jquery.cookie.js"></script>
+    <script src="<?= base_url(); ?>assets/js/jquery.cookie.js"></script>
 
     <!-- Customized jquery file  -->
-    <script src="assets/js/main.js"></script>
-    <script src="assets/js/color-scheme.js"></script>
+    <script src="<?= base_url(); ?>assets/js/main.js"></script>
+    <script src="<?= base_url(); ?>assets/js/color-scheme.js"></script>
 
     <!-- PWA app service registration and works -->
-    <script src="assets/js/pwa-services.js"></script>
+    <script src="<?= base_url(); ?>assets/js/pwa-services.js"></script>
 
     <!-- Chart js script -->
-    <script src="assets/js/chart.min.js"></script>
+    <script src="<?= base_url(); ?>assets/js/chart.min.js"></script>
 
     <!-- Progress circle js script -->
-    <script src="assets/js/progressbar.min.js"></script>
+    <script src="<?= base_url(); ?>assets/js/progressbar.min.js"></script>
 
     <!-- swiper js script -->
-    <script src="assets/js/swiper-bundle.min.js"></script>
+    <script src="<?= base_url(); ?>assets/js/swiper-bundle.min.js"></script>
     <!-- daterange picker script -->
-    <script src="assets/js/moment.min.js"></script>
-    <script src="assets/js/daterangepicker.js"></script>
+    <script src="<?= base_url(); ?>assets/js/moment.min.js"></script>
+    <script src="<?= base_url(); ?>assets/js/daterangepicker.js"></script>
     <!-- page level custom script -->
-    <script src="assets/js/app.js"></script>
+    <script src="<?= base_url(); ?>assets/js/app.js"></script>
 
     <?= $this->renderSection('javascript') ?>

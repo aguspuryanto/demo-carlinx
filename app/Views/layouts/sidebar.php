@@ -11,7 +11,7 @@
                             <div class="row">
                                 <div class="col-auto">
                                     <figure class="avatar avatar-44 rounded-15">
-                                        <img src="/assets/img/user1.jpg" alt="">
+                                        <img src="<?= base_url(); ?>/assets/img/user1.jpg" alt="">
                                     </figure>
                                 </div>
                                 <div class="col px-0 align-self-center">
