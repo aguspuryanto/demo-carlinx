@@ -5,7 +5,14 @@
     <!-- main page content -->
     <div class="main-container container">
         <div class="row">
-            <h4>Hitung Tarif</h4>
+            <div class="card">
+                <div class="card-header">
+                    <h4>Hitung Tarif</h4>
+                </div>
+                <div class="card-body">
+                    <?php include_once '_form.php'; ?>
+                </div>
+            </div>
         </div>
     </div>
     <!-- end main page content -->
