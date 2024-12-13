@@ -52,7 +52,7 @@
     <?= $this->include('layouts/sidebar'); ?>
 
     <!-- Begin page -->
-    <main class="h-100" style="min-height: 633px; padding-top: 85.7188px; padding-bottom: 70px;">
+    <main class="h-100" style="">
 
         <!-- Header -->
         <header class="header position-fixed">
