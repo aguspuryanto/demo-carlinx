@@ -21,4 +21,7 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
     $routes->get('logout', 'Auth::logout');
 
     $routes->get('profile', 'Profile::index');
+
+    // rate
+    $routes->get('rate', 'Rate::index');
 });

@@ -4,7 +4,7 @@
         <div class="col-12 col-md-6">
             <div class="row">
                 <div class="col-6 col-md-12">
-                    <a href="/#" class="card shadow-sm mb-4">
+                    <a href="<?= base_url('rate'); ?>" class="card shadow-sm mb-4">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-auto">
