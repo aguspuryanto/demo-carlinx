@@ -27,12 +27,12 @@
                 <form method="post" action="/login" class="was-validated needs-validation" novalidate="">
                     <?= csrf_field(); ?>
                     <div class="form-group form-floating mb-3 is-valid">
-                        <input type="email" name="email" id="email" class="form-control" value="muniro" placeholder="Username" required>
+                        <input type="email" name="email" id="email" class="form-control" placeholder="test@test.com" required>
                         <label class="form-control-label" for="email">Username</label>
                     </div>
 
                     <div class="form-group form-floating is-invalid mb-3">
-                        <input type="password" name="password" id="password" class="form-control " placeholder="Password" required>
+                        <input type="password" name="password" id="password" class="form-control " placeholder="admin123" required>
                         <label class="form-control-label" for="password">Password</label>
                         <button type="button" class="text-danger tooltip-btn" data-bs-toggle="tooltip" data-bs-placement="left" title="" id="passworderror" data-bs-original-title="Enter valid Password">
                             <i class="bi bi-info-circle"></i>

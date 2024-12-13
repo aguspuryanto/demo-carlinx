@@ -1,0 +1,23 @@
+{
+    "name": "Carlinx",
+    "short_name": "Carlinx",
+    "start_url": "splash.html",
+    "display": "fullscreen",
+    "background_color": "#092C9F",
+    "theme_color": "#092C9F",
+    "orientation": "portrait-primary",
+    "icons": [
+      {
+        "src": "assets/img/favicon180.png",
+        "type": "image/png", "sizes": "180x180"
+      },
+      {
+        "src": "assets/img/favicon192.png",
+        "type": "image/png", "sizes": "192x192"
+      },
+      {
+        "src": "assets/img/favicon512.png",
+        "type": "image/png", "sizes": "512x512"
+      }
+    ]
+  }
