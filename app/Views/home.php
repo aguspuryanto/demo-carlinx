@@ -41,7 +41,7 @@
         </div>
     </div>
 
-    <?php include_once('_parts/home_menu.php'); ?>   
+    <?php include_once('_parts/content.php'); ?>
      
     <?php include_once('_parts/connection.php'); ?>
 

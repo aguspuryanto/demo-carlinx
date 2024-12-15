@@ -54,24 +54,24 @@ helper('form');
 
   <!-- Biaya Tambahan -->
   <div class="mb-3">
-    <label class="form-label">Biaya Tambahan</label>
-    <div class="form-check">
+    <label class="form-label d-block">Biaya Tambahan</label>
+    <div class="form-check form-check-inline">
       <input type="checkbox" class="form-check-input" id="fuel">
       <label class="form-check-label" for="fuel">BBM</label>
     </div>
-    <div class="form-check">
+    <div class="form-check form-check-inline">
       <input type="checkbox" class="form-check-input" id="driverMeal">
       <label class="form-check-label" for="driverMeal">Makan Driver</label>
     </div>
-    <div class="form-check">
+    <div class="form-check form-check-inline">
       <input type="checkbox" class="form-check-input" id="driverStay">
       <label class="form-check-label" for="driverStay">Inap Driver</label>
     </div>
-    <div class="form-check">
+    <div class="form-check form-check-inline">
       <input type="checkbox" class="form-check-input" id="transferIn">
       <label class="form-check-label" for="transferIn">Transfer In</label>
     </div>
-    <div class="form-check">
+    <div class="form-check form-check-inline">
       <input type="checkbox" class="form-check-input" id="transferOut">
       <label class="form-check-label" for="transferOut">Transfer Out</label>
     </div>
@@ -105,7 +105,7 @@ helper('form');
 <script>
     $(function () {
       // 
-      $('#unitName').select2();
+      // $('#unitName').select2();
     });
 </script>
 <?= $this->endSection() ?>
