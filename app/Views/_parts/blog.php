@@ -2,7 +2,7 @@
     <!-- Blogs -->
     <div class="row mb-3">
         <div class="col">
-            <h6 class="title">News and Updates</h6>
+            <h6 class="title">Berita</h6>
         </div>
         <div class="col-auto align-self-center">
             <a href="/#" class="small">Read more</a>

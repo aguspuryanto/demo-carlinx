@@ -42,8 +42,6 @@
     </div>
 
     <?php include_once('_parts/content.php'); ?>
-     
-    <?php include_once('_parts/connection.php'); ?>
 
     <?php include_once('_parts/blog.php'); ?>
 
