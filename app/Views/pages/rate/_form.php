@@ -44,10 +44,10 @@ helper('form');
     <label class="form-label">Rute Perjalanan</label>
     <div class="row">
       <div class="col-6">
-        <input type="text" class="form-control" placeholder="Lokasi Jemput">
+        <input type="text" class="form-control" id="lokasiJemput" placeholder="Lokasi Jemput" autocomplete="on">
       </div>
       <div class="col-6">
-        <input type="text" class="form-control" placeholder="Lokasi Tujuan">
+        <input type="text" class="form-control" id="lokasiTujuan" placeholder="Lokasi Tujuan">
       </div>
     </div>
   </div>
@@ -100,12 +100,33 @@ helper('form');
 <?= $this->endSection() ?>
 
 <?= $this->section('javascript') ?>
-<!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
 <?= registerJsUrl("https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"); ?>
 <script>
-    $(function () {
-      // 
-      // $('#unitName').select2();
+  $(function () {
+    // $('#unitName').select2();
+    var requestOptions = {
+      method: 'GET',
+    };
+
+    $('#lokasiJemput').on('input', function () {
+      var textAddress = $(this).val();
+
+      fetch("https://autocomplete.search.hereapi.com/v1/autocomplete?q=" + textAddress + "&apiKey=Cikgr94iiQ3Z3EwJG43WSoYhgBpyVw3XtHrI-CsM0Is", requestOptions)
+      .then(response => response.json())
+      .then(function (result) {
+        console.log(result);
+        // looping data
+        var data = result.items;
+        var selectOptions = '';
+        $.each(data, function (index, item) {
+          selectOptions += '<option value="' + item.address.label + '">' + item.address.label + '</option>';
+        });
+        $(this).html(selectOptions);
+      })
+      .catch(function (error) {
+        console.log('error', error)
+      });
     });
+  });
 </script>
 <?= $this->endSection() ?>
