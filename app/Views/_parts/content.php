@@ -1,32 +1,9 @@
-    <!-- Header -->
-    <header class="header position-fixed">
-        <div class="row">
-            <div class="col-auto">
-                <a href="javascript:void(0)" target="_self" class="btn btn-light btn-44 menu-btn">
-                    <i class="bi bi-list"></i>
-                </a>
-            </div>
-            <div class="col align-self-center text-center">
-                <div class="logo-small">
-                    <img src="/assets/img/logo.png" alt="">
-                    <h5>CarLinx</h5>
-                </div>
-            </div>
-            <div class="col-auto">
-                <a href="/#" target="_self" class="btn btn-light btn-44">
-                    <i class="bi bi-bell"></i>
-                    <span class="count-indicator"></span>
-                </a>
-            </div>
-        </div>
-    </header>
-    <!-- Header ends -->
      
     <!-- chart js areachart-->
     <div class="row justify-content-md-center text-center">
         <div class="col-12 col-md-6">
             <div class="row">
-                <div class="col-4 col-md-12">
+                <div class="col-4 col-md-6 col-lg-6">
                     <a href="#" class="card shadow-sm mb-4">
                         <div class="card-body px-1">
                             <div class="xrow">
@@ -43,7 +20,7 @@
                     </a>
                 </div>
 
-                <div class="col-4 col-md-12">
+                <div class="col-4 col-md-6 col-lg-6">
                     <a href="<?= base_url('rate'); ?>" class="card shadow-sm mb-4">
                         <div class="card-body px-1">
                             <div class="xrow">
@@ -60,7 +37,7 @@
                     </a>
                 </div>
 
-                <div class="col-4 col-md-12">
+                <div class="col-4 col-md-6 col-lg-6">
                     <a href="<?= base_url('rate/orderlayanan'); ?>" class="card shadow-sm mb-4">
                         <div class="card-body px-1">
                             <div class="xrow">
@@ -77,7 +54,7 @@
                     </a>
                 </div>
 
-                <div class="col-4 col-md-12">
+                <div class="col-4 col-md-6 col-lg-6">
                     <a href="<?= base_url('rate/lepaskunci'); ?>" class="card shadow-sm mb-4">
                         <div class="card-body px-1">
                             <div class="xrow">
@@ -94,7 +71,7 @@
                     </a>
                 </div>
 
-                <div class="col-4 col-md-12">
+                <div class="col-4 col-md-6 col-lg-6">
                     <a href="<?= base_url('rate/orderbulanan'); ?>" class="card shadow-sm mb-4">
                         <div class="card-body px-1">
                             <div class="xrow">
@@ -111,7 +88,7 @@
                     </a>
                 </div>
 
-                <div class="col-4 col-md-12">
+                <div class="col-4 col-md-6 col-lg-6">
                     <a href="<?= base_url('rate/orderbulanan'); ?>" class="card shadow-sm mb-4">
                         <div class="card-body px-1">
                             <div class="xrow">
@@ -128,7 +105,7 @@
                     </a>
                 </div>
 
-                <div class="col-4 col-md-12">
+                <div class="col-4 col-md-6 col-lg-6">
                     <a href="<?= base_url('rate/orderbulanan'); ?>" class="card shadow-sm mb-4">
                         <div class="card-body px-1">
                             <div class="xrow">
@@ -145,7 +122,7 @@
                     </a>
                 </div>
 
-                <div class="col-4 col-md-12">
+                <div class="col-4 col-md-6 col-lg-6">
                     <a href="<?= base_url('rate/orderbulanan'); ?>" class="card shadow-sm mb-4">
                         <div class="card-body px-1">
                             <div class="xrow">
@@ -162,7 +139,7 @@
                     </a>
                 </div>
 
-                <div class="col-4 col-md-12">
+                <div class="col-4 col-md-6 col-lg-6">
                     <a href="<?= base_url('rate/orderbulanan'); ?>" class="card shadow-sm mb-4">
                         <div class="card-body px-1">
                             <div class="xrow">
@@ -179,7 +156,7 @@
                     </a>
                 </div>
 
-                <div class="col-4 col-md-12">
+                <div class="col-4 col-md-6 col-lg-6">
                     <a href="<?= base_url('rate/orderbulanan'); ?>" class="card shadow-sm mb-4">
                         <div class="card-body px-1">
                             <div class="xrow">
@@ -196,7 +173,7 @@
                     </a>
                 </div>
 
-                <div class="col-4 col-md-12">
+                <div class="col-4 col-md-6 col-lg-6">
                     <a href="<?= base_url('rate/orderbulanan'); ?>" class="card shadow-sm mb-4">
                         <div class="card-body px-1">
                             <div class="xrow">
@@ -213,7 +190,7 @@
                     </a>
                 </div>
 
-                <div class="col-4 col-md-12">
+                <div class="col-4 col-md-6 col-lg-6">
                     <a href="<?= base_url('rate/orderbulanan'); ?>" class="card shadow-sm mb-4">
                         <div class="card-body px-1">
                             <div class="xrow">

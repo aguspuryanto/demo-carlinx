@@ -57,6 +57,8 @@
     <!-- Begin page -->
     <main class="h-100" style="">
 
+        <?= $this->include('_parts/header') ?>
+        
         <?= $this->renderSection('content') ?>
     
     </main>
