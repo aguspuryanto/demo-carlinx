@@ -174,7 +174,7 @@ helper('form');
       minLength: 3,
       select: function(event, ui) {
         // console.log(ui.item.value);
-        // console.log(ui.item.label);
+        console.log(ui.item.address.label);
       }
     });
   });
