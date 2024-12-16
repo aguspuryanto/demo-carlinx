@@ -25,6 +25,7 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
     // rate
     $routes->get('rate', 'Rate::index');
     $routes->post('rate/hitung', 'Rate::hitung');
+    $routes->get('rate/placeid', 'Rate::placeid');
 
     // akun
     $routes->get('akun', 'Akun::index');

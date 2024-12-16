@@ -9,6 +9,7 @@ class Rate extends BaseController
 {
     protected $appId = 'JzYGTa7wXt8X4PAfHFgJ';
     protected $appKey = 'Cikgr94iiQ3Z3EwJG43WSoYhgBpyVw3XtHrI-CsM0Is';
+    protected $apiUrl = 'https://autocomplete.search.hereapi.com/v1';
 
     //https://api.geoapify.com/v1/geocode/autocomplete?text=Mosco&apiKey=b13dfbfe7b934de88fdf373de1f1c1c9
     protected $geoapify = 'b13dfbfe7b934de88fdf373de1f1c1c9'; 
@@ -35,6 +36,27 @@ class Rate extends BaseController
     public function hitung()
     {
         return view('pages/rate/hitung');
+    }
+
+    public function placeid()
+    {
+        //Create guzzle http client
+        $client = new \GuzzleHttp\Client();
+
+        $options = [
+            'q' => $this->request->getGet('term'),
+            'in' => 'countryCode:IDN',
+            'apikey' => $this->appKey
+        ];
+
+        try {
+            $response = $client->request('GET', $this->apiUrl . '/autocomplete?' . http_build_query($options));
+            echo $response->getBody();
+        } catch (GuzzleHttp\Exception\BadResponseException $e) {
+            $response = $e->getResponse();
+            $responseBodyAsString = $response->getBody()->getContents();
+            print_r($responseBodyAsString);
+        }
     }
 
     function hitungJarakQuery()

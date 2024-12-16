@@ -45,9 +45,11 @@ helper('form');
     <div class="row">
       <div class="col-6">
         <input type="text" class="form-control" id="lokasiJemput" placeholder="Lokasi Jemput" autocomplete="on">
+        <div id="lokasiJemputList"></div>
       </div>
       <div class="col-6">
         <input type="text" class="form-control" id="lokasiTujuan" placeholder="Lokasi Tujuan">
+        <div id="lokasiTujuanList"></div>
       </div>
     </div>
   </div>
@@ -96,11 +98,14 @@ helper('form');
 </form>
 
 <?= $this->section('styles') ?>
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> -->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 <?= $this->endSection() ?>
 
 <?= $this->section('javascript') ?>
-<?= registerJsUrl("https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"); ?>
+<!-- <?= registerJsUrl("https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"); ?> -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script> -->
 <script>
   $(function () {
     // $('#unitName').select2();
@@ -108,24 +113,69 @@ helper('form');
       method: 'GET',
     };
 
-    $('#lokasiJemput').on('input', function () {
-      var textAddress = $(this).val();
+    // $('#lokasiJemput').on('input', function() {
+    //   var textAddress = $(this).val();
+    //   console.log(textAddress.length);
+    //   if(textAddress.length > 2) {
+    //     fetch("https://autocomplete.search.hereapi.com/v1/autocomplete?q=" + textAddress + "&countryCode=INA&apiKey=Cikgr94iiQ3Z3EwJG43WSoYhgBpyVw3XtHrI-CsM0Is", requestOptions)
+    //     .then(response => response.json())
+    //     .then(function (result) {
+    //       console.log(result);
+    //       // looping data
+    //       var data = result.items;
+    //       if(data) {
+    //         var selectOptions = '<select class="form-control">';
+    //         $.each(data, function (index, item) {
+    //           selectOptions += '<option value="' + item.address.label + '">' + item.address.label + '</option>';
+    //         });
+    //         selectOptions += '</select>';
 
-      fetch("https://autocomplete.search.hereapi.com/v1/autocomplete?q=" + textAddress + "&apiKey=Cikgr94iiQ3Z3EwJG43WSoYhgBpyVw3XtHrI-CsM0Is", requestOptions)
-      .then(response => response.json())
-      .then(function (result) {
-        console.log(result);
-        // looping data
-        var data = result.items;
-        var selectOptions = '';
-        $.each(data, function (index, item) {
-          selectOptions += '<option value="' + item.address.label + '">' + item.address.label + '</option>';
+    //         $('#lokasiJemputList').html(selectOptions);
+    //         // $(this).html(selectOptions);
+    //       } else {
+    //         $('#lokasiJemputList').html('');
+    //       }
+    //     })
+    //     .catch(function (error) {
+    //       console.log('error', error)
+    //     });
+    //   }
+    // });
+
+    $("#lokasiJemput").autocomplete({
+      source: function(request, response) {
+        $.ajax({
+          url: '/rate/placeid',
+          type: 'GET',
+          dataType: "json",
+          data: {
+            term: request.term,
+          },
+          success: function(data) {
+            // response(data);
+            console.log(data);                  
+            // looping data
+            // var data = result.items;
+            if(data.items) {
+              var selectOptions = '<select class="form-control">';
+              $.each(data.items, function (index, item) {
+                selectOptions += '<option value="' + item.address.label + '">' + item.address.label + '</option>';
+              });
+              selectOptions += '</select>';
+
+              $('#lokasiJemputList').html(selectOptions);
+              // $(this).html(selectOptions);
+            } else {
+              $('#lokasiJemputList').html('');
+            }
+          }
         });
-        $(this).html(selectOptions);
-      })
-      .catch(function (error) {
-        console.log('error', error)
-      });
+      },
+      minLength: 3,
+      select: function(event, ui) {
+        // console.log(ui.item.value);
+        // console.log(ui.item.label);
+      }
     });
   });
 </script>
