@@ -1,7 +1,5 @@
 <?php
 
-// $ipAddress = 'http://103.178.174.7/foxrent/';
-
 // not working
 function registerJsUrl($url) {
     if(!$url) return;
@@ -15,6 +13,11 @@ function registerCssUrl($url) {
     // $context->addCss($url);
     $context = '<link rel="stylesheet" type="text/css" href="' . $url . '">';
     return $context;
+}
+
+function getUrlApi() {
+	// return 'http://103.178.174.7/foxrent/';
+	return $_ENV['API_BASEURL'];
 }
 
 function getCurl($data, $url){

@@ -8,13 +8,12 @@ use GuzzleHttp\Client;
 
 class Akun extends BaseController
 {
-    protected $ipAddress = 'http://103.178.174.7/foxrent/';
-    // protected $helpers = ['my_helper'];
+    protected $ipAddress;
 
     public function __construct()
     {
-        // load helper
         helper('my');
+        $this->ipAddress = $_ENV['API_BASEURL'];
     }
 
     public function index()

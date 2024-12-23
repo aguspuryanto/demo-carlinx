@@ -12974,7 +12974,7 @@ a.card {
 
 .footer .nav {
   align-items: center;
-  max-width: 480px;
+  /* max-width: 480px; */
   margin: 0 auto;
 }
 

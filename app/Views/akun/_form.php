@@ -50,22 +50,37 @@ echo json_encode($userList);
             <input type="text" class="form-control" id="noCS" placeholder="No. Customer Service" value="<?= $userList[0]['hp_cs']; ?>">
         </div>
         <div class="mb-3">
-            <label for="jenisLayanan" class="form-label">Jenis Layanan</label>
-            <select class="form-select" id="jenisLayanan">
-                <option selected>Pilih Layanan</option>
-                <option value="pelayanan">Pelayanan</option>
-            </select>
+            <label class="form-label d-block">Jenis Layanan</label>
+            <div class="form-check form-check-inline">
+                <input type="checkbox" class="form-check-input" id="pelayanan" <?= $userList[0]['is_layanan'] == 1 ? 'checked' : ''; ?>>
+                <label class="form-check-label" for="fuel">Pelayanan</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input type="checkbox" class="form-check-input" id="pelayanan" <?= $userList[0]['is_bulanan'] == 1 ? 'checked' : ''; ?>>
+                <label class="form-check-label" for="fuel">Bulanan</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input type="checkbox" class="form-check-input" id="pelayanan" <?= $userList[0]['is_lepaskunci'] == 1 ? 'checked' : ''; ?>>
+                <label class="form-check-label" for="fuel">Lepas Kunci</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input type="checkbox" class="form-check-input" id="pelayanan" <?= $userList[0]['is_event'] == 1 ? 'checked' : ''; ?>>
+                <label class="form-check-label" for="fuel">Event</label>
+            </div>
         </div>
         <div class="mb-3">
-            <label for="tipe" class="form-label">Tipe</label>
-            <select class="form-select" id="tipe">
-                <option selected>Pilih Tipe</option>
-                <option value="bulanan">Bulanan</option>
-            </select>
-        </div>
-        <div class="mb-3">
-            <label for="dokumenPendukung" class="form-label">Dokumen Pendukung</label>
-            <input type="file" class="form-control" id="dokumenPendukung" multiple>
+            <label class="form-label d-block">Dokumen Pendukung</label>
+            <div class="row">
+                <?php for($j=1; $j<=4; $j++) {
+                echo '<div class="col-md-3">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <img class="mr-3" src="' . $_ENV['API_BASEURL'] . $userList[0]['foto_' . $j] . '" alt="Generic placeholder image">
+                        </div>
+                    </div>
+                </div>';
+                } ?>
+            </div>
         </div>
         <button type="submit" class="btn btn-primary">Kirim</button>
     <?php echo form_close(); ?>
