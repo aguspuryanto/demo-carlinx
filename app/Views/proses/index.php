@@ -10,7 +10,7 @@
                     <h4><?= $title ?></h4>
                 </div>
                 <div class="card-body">
-                    <?php include_once '_form.php'; ?>
+                    <?php //include_once '_form.php'; ?>
                 </div>
             </div>
         </div>

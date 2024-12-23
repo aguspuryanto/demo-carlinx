@@ -35,6 +35,6 @@ class Akun extends BaseController
             $userList = $client['result'];
         }
 
-        return view('akun/index', ['userList' => $userList]);
+        return view('akun/index', ['title' => 'Akun', 'userList' => $userList]);
     }
 }

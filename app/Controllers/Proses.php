@@ -10,6 +10,6 @@ class Proses extends BaseController
     public function index()
     {
         //
-        return view('default');
+        return view('proses/index', ['title' => 'Proses']);
     }
 }
