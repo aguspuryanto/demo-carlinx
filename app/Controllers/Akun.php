@@ -21,15 +21,19 @@ class Akun extends BaseController
     {
         $userList = [];
 
-        $client = getCurl([
-            'usernm' => '0876543210',
-        ], $this->ipAddress . 'select_user.php');
+        // $client = new Client();
+        // $response = $client->request('POST', $this->ipAddress . 'select_user.php', [
+        //     'form_params' => [
+        //         'usernm' => '0876543210'
+        //     ]
+        // ]);
+        // $data = json_decode($response->getBody()->getContents(), true);
 
-        // echo json_encode($client);
-        if($client['success']){
-            $userList = $client['result'];
+        $data = getCurl(['usernm' => '0876543210'], $this->ipAddress . 'select_user.php');
+        if($data['success']){
+            $userList = $data['result'];
         }
 
-        return view('index', ['userList' => $userList]);
+        return view('akun/index', ['userList' => $userList]);
     }
 }
