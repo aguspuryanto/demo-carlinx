@@ -174,7 +174,7 @@
                 </div>
 
                 <div class="col-4 col-md-6 col-lg-6">
-                    <a href="<?= base_url('rate/orderbulanan'); ?>" class="card shadow-sm mb-4">
+                    <a href="<?= base_url('pengaturan'); ?>" class="card shadow-sm mb-4">
                         <div class="card-body px-1">
                             <div class="xrow">
                                 <div class="col-auto">

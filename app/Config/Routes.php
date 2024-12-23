@@ -31,10 +31,39 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
     $routes->get('akun', 'Akun::index');
 
     // history
-    $routes->get('history', 'History::index');
+    // $routes->get('history', 'History::index');
 
     // proses
     $routes->get('proses', 'Proses::index');
+});
+
+// history
+$routes->group('history', ['filter' => 'auth'], function($routes) {
+    $routes->get('/', 'History::index');
+});
+
+// pelaporan: order masuk, order keluar, hutang, piutang, status pembayaran, verifikasi pembayaran
+$routes->group('pelaporan', ['filter' => 'auth'], function($routes) {
+    $routes->get('/', 'Pelaporan::index');
+    $routes->get('order-masuk', 'Pelaporan::orderMasuk');
+    $routes->get('order-keluar', 'Pelaporan::orderKeluar');
+    $routes->get('hutang', 'Pelaporan::hutang');
+    $routes->get('piutang', 'Pelaporan::piutang');
+    $routes->get('status-pembayaran', 'Pelaporan::statusPembayaran');
+    $routes->get('verifikasi-pembayaran', 'Pelaporan::verifikasiPembayaran');
+});
+
+// pengaturan: akun, bbm, driver, batas wilayah, lokasi garasi, unit, pengguna, ganti password
+$routes->group('pengaturan', ['filter' => 'auth'], function($routes) {
+    $routes->get('/', 'Pengaturan::index');
+    $routes->get('akun', 'Pengaturan::akun');
+    $routes->get('bbm', 'Pengaturan::bbm');
+    $routes->get('driver', 'Pengaturan::driver');
+    $routes->get('batas-wilayah', 'Pengaturan::batasWilayah');
+    $routes->get('lokasi-garasi', 'Pengaturan::lokasiGarasi');
+    $routes->get('unit', 'Pengaturan::unit');
+    $routes->get('pengguna', 'Pengaturan::pengguna');
+    $routes->get('ganti-password', 'Pengaturan::gantiPassword');
 });
 
 $routes->group('api', function($routes) {
