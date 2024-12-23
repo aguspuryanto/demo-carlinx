@@ -29,9 +29,11 @@ class Akun extends BaseController
         // ]);
         // $data = json_decode($response->getBody()->getContents(), true);
 
-        $data = getCurl(['usernm' => '0876543210'], $this->ipAddress . 'select_user.php');
-        if($data['success']){
-            $userList = $data['result'];
+        if(empty($userList)) $client = getCurl(['usernm' => '0876543210'], $this->ipAddress . 'select_user.php');
+        // echo json_encode($client);
+        
+        if($client['success']){
+            $userList = $client['result'];
         }
 
         return view('akun/index', ['userList' => $userList]);

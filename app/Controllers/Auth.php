@@ -50,7 +50,7 @@ class Auth extends BaseController
         // $userModel = new \App\Models\User();
 
         // Ambil data input dari form
-        $email = $this->request->getPost('email');
+        $username = $this->request->getPost('username');
         $password = $this->request->getPost('password');
 
         // Cari pengguna berdasarkan email

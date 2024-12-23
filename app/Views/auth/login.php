@@ -27,8 +27,8 @@
                 <form method="post" action="/login" class="was-validated needs-validation" novalidate="">
                     <?= csrf_field(); ?>
                     <div class="form-group form-floating mb-3 is-valid">
-                        <input type="email" name="email" id="email" class="form-control" placeholder="test@test.com" required>
-                        <label class="form-control-label" for="email">Username</label>
+                        <input type="text" name="username" id="username" class="form-control" placeholder="username" required>
+                        <label class="form-control-label" for="username">Username</label>
                     </div>
 
                     <div class="form-group form-floating is-invalid mb-3">
