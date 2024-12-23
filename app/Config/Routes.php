@@ -36,3 +36,7 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
     // proses
     $routes->get('proses', 'Proses::index');
 });
+
+$routes->group('api', function($routes) {
+    // $routes->get('rate', 'Rate::api');
+});
