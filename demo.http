@@ -1,0 +1,8 @@
+###
+
+POST http://103.178.174.7/fileman/select_user.php HTTP/1.1
+content-type: application/json
+
+{
+    "usernm": "0876543210",
+}
