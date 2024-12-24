@@ -10,10 +10,13 @@
                     <h4><?= $title ?></h4>
                 </div>
                 <div class="card-body">
-                    <?php //include_once '_form.php'; ?>
+                    <?php 
+                    //include_once '_form.php';
+                    // echo json_encode($listData);
+                    ?>
                     <ul class="list-group">
                         <?php foreach ($listData as $item) : ?>
-                        <li class="list-group-item"><a href="<?= base_url('pengaturan/'. strtolower($item)); ?>"><?= $item ?></a></li>
+                        <li class="list-group-item"><a href="<?= base_url('pengaturan/'. strtolower(url_title($item, '-', true))); ?>"><?= $item ?></a></li>
                         <?php endforeach ?>
                     </ul>
                 </div>

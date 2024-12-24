@@ -57,14 +57,46 @@ class Pengaturan extends BaseController
 
     public function driver()
     {
-        //
-        return view('pengaturan/driver', ['title' => 'Driver']);
+        /* params: 
+         * caller optional
+         * kd_member required
+         */
+        // echo json_encode($this->session->get('user'));
+
+        $listData = [];
+
+        if(empty($listData)) $listData = getCurl([
+            'caller' => 'MASTER',
+            'kd_member' => $this->session->get('user')['kode']
+        ], $this->ipAddress . 'select_driver.php');
+        // echo json_encode($listData); die();
+        
+        return view('pengaturan/driver', [
+            'title' => 'Driver',
+            'listData' => $listData['result_driver']
+        ]);
     }
 
     public function batasWilayah()
     {
-        //
-        return view('pengaturan/batas-wilayah', ['title' => 'Batas Wilayah']);
+        /* params: 
+         * caller optional
+         * kd_member required
+         */
+        // echo json_encode($this->session->get('user'));
+
+        $listData = [];
+
+        if(empty($listData)) $listData = getCurl([
+            'caller' => 'MASTER',
+            'kd_member' => $this->session->get('user')['kode']
+        ], $this->ipAddress . 'select_wilayah.php');
+        // echo json_encode($listData); die();
+
+        return view('pengaturan/batas-wilayah', [
+            'title' => 'Batas Wilayah',
+            'listData' => $listData['result_wilayah']
+        ]);
     }
 
     public function lokasiGarasi()
