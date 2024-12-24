@@ -11,7 +11,7 @@
                 <div class="modal-body">
                         <div class="form-group">
                             <label for="descr">Deskripsi</label>
-                            <input type="text" class="form-control" id="descr" name="descr" required>
+                            <input type="text" class="form-control" id="nm_bbm" name="nm_bbm" required>
                         </div>
                         <div class="form-group">
                             <label for="harga">Harga</label>
@@ -19,7 +19,7 @@
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">Rp.</div>
                                 </div>
-                                <input type="number" class="form-control" id="harga" name="harga" required>
+                                <input type="number" class="form-control" id="hrg_bbm" name="hrg_bbm" required>
                             </div>
                         </div>
                 </div>

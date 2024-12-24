@@ -41,10 +41,18 @@ class Pengaturan extends BaseController
         $listData = [];
         
         // handle POST
-        // echo $this->request->getMethod();
         if ($this->request->getMethod() == 'POST') {
             $data = $this->request->getPost();
-            echo json_encode($data);
+            // echo json_encode($data);
+            // $kd_member = $data['kd_member'];
+            $nm_bbm = $data['nm_bbm'];
+            $hrg_bbm = $data['hrg_bbm'];
+
+            $submitData = getCurl([
+                'kd_member' => $this->session->get('user')['kode'],
+                'nm_bbm' => $nm_bbm,
+                'hrg_bbm' => $hrg_bbm,
+            ], $this->ipAddress . 'select_bbm.php');
 
         }
 
