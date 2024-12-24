@@ -57,7 +57,7 @@ $routes->group('pelaporan', ['filter' => 'auth'], function($routes) {
 $routes->group('pengaturan', ['filter' => 'auth'], function($routes) {
     $routes->get('/', 'Pengaturan::index');
     $routes->get('akun', 'Pengaturan::akun');
-    $routes->get('bbm', 'Pengaturan::bbm');
+    $routes->add('bbm', 'Pengaturan::bbm'); //handle GET and POST
     $routes->get('driver', 'Pengaturan::driver');
     $routes->get('batas-wilayah', 'Pengaturan::batasWilayah');
     $routes->get('lokasi-garasi', 'Pengaturan::lokasiGarasi');

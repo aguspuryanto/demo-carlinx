@@ -39,6 +39,14 @@ class Pengaturan extends BaseController
         // echo json_encode($this->session->get('user'));
 
         $listData = [];
+        
+        // handle POST
+        // echo $this->request->getMethod();
+        if ($this->request->getMethod() == 'POST') {
+            $data = $this->request->getPost();
+            echo json_encode($data);
+
+        }
 
         if(empty($listData)) $listData = getCurl([
             'caller' => 'MASTER',
