@@ -8,11 +8,13 @@ use CodeIgniter\HTTP\ResponseInterface;
 class Pengaturan extends BaseController
 {
     protected $ipAddress;
+    protected $session;
 
     public function __construct()
     {
         helper('my');
         $this->ipAddress = $_ENV['API_BASEURL'];
+        $this->session = session();
     }
 
     public function index()
@@ -30,7 +32,62 @@ class Pengaturan extends BaseController
 
     public function bbm()
     {
+        /* params: 
+         * caller optional
+         * kd_member required
+         */
+        // echo json_encode($this->session->get('user'));
+
+        $listData = [];
+
+        if(empty($listData)) $listData = getCurl([
+            'caller' => 'pengaturan',
+            'kd_member' => $this->session->get('user')['kode']
+        ], $this->ipAddress . 'select_bbm.php');
+        // echo json_encode($listData); die();
+        // if($listData['success']){
+        //     $listData = $listData['result_bbm'];
+        // }
+
+        return view('pengaturan/bbm', [
+            'title' => 'BBM',
+            'listData' => $listData['result_bbm']
+        ]);
+    }
+
+    public function driver()
+    {
         //
-        return view('pengaturan/bbm', ['title' => 'BBM']);
+        return view('pengaturan/driver', ['title' => 'Driver']);
+    }
+
+    public function batasWilayah()
+    {
+        //
+        return view('pengaturan/batas-wilayah', ['title' => 'Batas Wilayah']);
+    }
+
+    public function lokasiGarasi()
+    {
+        //
+        return view('pengaturan/lokasi-garasi', ['title' => 'Lokasi Garasi']);
+    }
+
+    public function unit()
+    {
+        //
+        return view('pengaturan/unit', ['title' => 'Unit']);
+    }
+
+    public function pengguna()
+    {
+        //
+        return view('pengaturan/pengguna', ['title' => 'Pengguna']);
+    }
+
+    public function gantiPassword()
+    {
+        //
+        return view('pengaturan/ganti-pwd', ['title' => 'Ganti Password']);
     }
 }

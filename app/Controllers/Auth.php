@@ -7,6 +7,14 @@ use CodeIgniter\HTTP\ResponseInterface;
 
 class Auth extends BaseController
 {
+    protected $ipAddress;
+
+    public function __construct()
+    {
+        helper('my');
+        $this->ipAddress = $_ENV['API_BASEURL'];
+    }
+
     public function index()
     {
         //
@@ -40,21 +48,17 @@ class Auth extends BaseController
 
         // Cari pengguna berdasarkan email
         // $user = $userModel->getUserByEmail($email);
-        $user = [
-            'id' => 1,
-            'username' => 'admin',
-            'email' => 'test@test.com',
-            'password' => password_hash($password, PASSWORD_BCRYPT)
-        ];
 
-        if ($user && password_verify($password, $user['password'])) {
+        $userData = getCurl(['usernm' => $username], $this->ipAddress . 'select_user.php');
+        // echo json_encode($userData); die();
+        if($userData){
+            $userData['password'] = password_hash($password, PASSWORD_BCRYPT);
+        }
+
+        if ($userData && password_verify($password, $userData['password'])) {
             // Simpan data pengguna ke session
             $session->set('isLoggedIn', true);
-            $session->set('user', [
-                'id' => $user['id'],
-                'username' => $user['username'],
-                'email' => $user['email']
-            ]);
+            $session->set('user', $userData['result'][0]);
 
             return redirect()->to('/');
         } else {
