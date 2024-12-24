@@ -33,7 +33,7 @@ class Pengaturan extends BaseController
     public function bbm()
     {
         /* params: 
-         * caller optional
+         * caller required, default: MASTER
          * kd_member required
          */
         // echo json_encode($this->session->get('user'));
@@ -41,7 +41,7 @@ class Pengaturan extends BaseController
         $listData = [];
 
         if(empty($listData)) $listData = getCurl([
-            'caller' => 'pengaturan',
+            'caller' => 'MASTER',
             'kd_member' => $this->session->get('user')['kode']
         ], $this->ipAddress . 'select_bbm.php');
         // echo json_encode($listData); die();

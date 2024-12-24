@@ -9,7 +9,7 @@
                 <div class="card-header">
                     <h4 class="card-title float-left"><?= $title ?></h4>
                     <div class="card-header-action float-right">
-                        <a href="#" class="btn btn-primary" data-toggle="modal" data-target="#addModal"><i class="fas fa-plus"></i> Tambah</a>
+                        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal"><i class="fas fa-plus"></i> Tambah</a>
                     </div>
                 </div>
                 <div class="card-body">
@@ -28,6 +28,6 @@
     </div>
     <!-- end main page content -->
      
-    <?php include_once '_modals_bbm.php'; ?>
+    <?php include_once '_modal_bbm.php'; ?>
 
 <?= $this->endSection() ?>
