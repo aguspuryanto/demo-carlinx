@@ -11,11 +11,6 @@
                 </div>
                 <div class="card-body">
                     <?php //include_once '_form.php'; ?>
-                    <ul class="list-group">
-                        <?php foreach ($listData as $item) : ?>
-                        <li class="list-group-item"><a href="<?= base_url('pengaturan/'. strtolower($item)); ?>"><?= $item ?></a></li>
-                        <?php endforeach ?>
-                    </ul>
                 </div>
             </div>
         </div>

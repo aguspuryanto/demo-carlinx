@@ -65,7 +65,7 @@
     <!-- Footer ends-->
 
     <!-- PWA app install toast message -->
-    <div class="position-fixed bottom-0 start-50 translate-middle-x z-index-10">
+    <div class="d-none position-fixed bottom-0 start-50 translate-middle-x z-index-10">
         <div class="toast mb-3 fade show" role="alert" aria-live="assertive" aria-atomic="true" id="toastinstall" data-bs-animation="true">
             <div class="toast-header">
                 <img src="<?= base_url(); ?>/assets/img/carlinx.png" class="rounded me-2" alt="..." height="32">

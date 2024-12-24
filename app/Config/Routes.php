@@ -54,20 +54,16 @@ $routes->group('pelaporan', ['filter' => 'auth'], function($routes) {
 });
 
 // pengaturan: akun, bbm, driver, batas wilayah, lokasi garasi, unit, pengguna, ganti password
-// $routes->group('pengaturan', ['filter' => 'auth'], function($routes) {
-//     $routes->get('/', 'Pengaturan::index');
-//     $routes->get('akun', 'Pengaturan::akun');
-//     $routes->get('bbm', 'Pengaturan::bbm');
-//     $routes->get('driver', 'Pengaturan::driver');
-//     $routes->get('batas-wilayah', 'Pengaturan::batasWilayah');
-//     $routes->get('lokasi-garasi', 'Pengaturan::lokasiGarasi');
-//     $routes->get('unit', 'Pengaturan::unit');
-//     $routes->get('pengguna', 'Pengaturan::pengguna');
-//     $routes->get('ganti-password', 'Pengaturan::gantiPassword');
-// });
-
 $routes->group('pengaturan', ['filter' => 'auth'], function($routes) {
     $routes->get('/', 'Pengaturan::index');
+    $routes->get('akun', 'Pengaturan::akun');
+    $routes->get('bbm', 'Pengaturan::bbm');
+    $routes->get('driver', 'Pengaturan::driver');
+    $routes->get('batas-wilayah', 'Pengaturan::batasWilayah');
+    $routes->get('lokasi-garasi', 'Pengaturan::lokasiGarasi');
+    $routes->get('unit', 'Pengaturan::unit');
+    $routes->get('pengguna', 'Pengaturan::pengguna');
+    $routes->get('ganti-password', 'Pengaturan::gantiPassword');
 });
 
 $routes->group('api', function($routes) {

@@ -26,21 +26,6 @@ class Auth extends BaseController
 
     public function login()
     {
-        // if ($this->request->getMethod() === 'post') {
-        //     $email = $this->request->getPost('email');
-        //     $password = $this->request->getPost('password');
-
-        //     $userModel = new \App\Models\User();
-        //     $user = $userModel->where('email', $email)->first();
-
-        //     if ($user && password_verify($password, $user['password'])) {
-        //         session()->set('logged_in', true);
-        //         return redirect()->to('/dashboard');
-        //     }
-        //     return redirect()->back()->with('error', 'Invalid credentials.');
-        // }
-        // return view('auth/login');
-
         return view('auth/login', ['title' => 'Login']);
     }
 
@@ -50,8 +35,8 @@ class Auth extends BaseController
         // $userModel = new \App\Models\User();
 
         // Ambil data input dari form
-        $username = $this->request->getPost('username');
-        $password = $this->request->getPost('password');
+        $username = $this->request->getPost('username'); //0876543210
+        $password = $this->request->getPost('password'); //123456
 
         // Cari pengguna berdasarkan email
         // $user = $userModel->getUserByEmail($email);
