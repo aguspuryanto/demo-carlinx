@@ -1,5 +1,5 @@
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer d-sm-block d-md-block d-lg-none d-xl-none">
         <div class="container">
             <ul class="nav nav-pills nav-justified">
                 <li class="nav-item">

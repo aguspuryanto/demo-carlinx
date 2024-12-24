@@ -1,6 +1,6 @@
      
     <!-- chart js areachart-->
-    <div class="row justify-content-md-center text-center">
+    <div class="row justify-content-md-center text-center mb-4">
         <div class="col-12 col-md-6">
             <div class="row">
                 <div class="col-4 col-md-6 col-lg-6">
@@ -174,7 +174,7 @@
                 </div>
 
                 <div class="col-4 col-md-6 col-lg-6">
-                    <a href="<?= base_url('pengaturan'); ?>" class="card shadow-sm mb-4">
+                    <a href="<?= base_url('pengaturan'); ?>" class="card shadow-sm mb-0">
                         <div class="card-body px-1">
                             <div class="xrow">
                                 <div class="col-auto">
@@ -191,7 +191,7 @@
                 </div>
 
                 <div class="col-4 col-md-6 col-lg-6">
-                    <a href="<?= base_url('rate/orderbulanan'); ?>" class="card shadow-sm mb-4">
+                    <a href="<?= base_url('rate/orderbulanan'); ?>" class="card shadow-sm mb-0">
                         <div class="card-body px-1">
                             <div class="xrow">
                                 <div class="col-auto">
@@ -209,7 +209,7 @@
             </div>
         </div>
         <div class="col-12 col-md-6">
-            <div class="card mb-4">
+            <div class="card mb-4" style="height: 100%;">
                 <div class="card-header border-0">
                     <!-- calendar -->
                     <div class="row">

@@ -72,7 +72,7 @@ echo json_encode($userList);
             <label class="form-label d-block">Dokumen Pendukung</label>
             <div class="row">
                 <?php for($j=1; $j<=4; $j++) {
-                echo '<div class="col-md-3">
+                echo '<div class="col-sm-3">
                     <div class="card mb-3">
                         <div class="card-body">
                             <img class="mr-3" src="' . $_ENV['API_BASEURL'] . $userList[0]['foto_' . $j] . '" alt="Generic placeholder image">
