@@ -12,14 +12,14 @@
                 <div class="card-body">
                     <?php 
                     //include_once '_form.php';
-                    echo json_encode($listData);
+                    // echo json_encode($listData);
                     ?>
                     <ul class="list-group">
                         <?php foreach ($listData as $item) : ?>
                         <li class="list-group-item">
-                            <p class="mb-0">Dalam Kota Rp. <?= number_format($item['dlm_kota'], 0, ',', '.') ?></p>
-                            <p class="mb-0">Luar Kota Rp. <?= number_format($item['dlm_prop'], 0, ',', '.') ?></p>
-                            <p class="mb-0">Luar Batas Rp. <?= number_format($item['luar_batas'], 0, ',', '.') ?></p>
+                            <p class="mb-0">Dalam Kota <?= ($item['dlm_kota']) ?> Km</p>
+                            <p class="mb-0">Luar Kota <?= ($item['dlm_prop']) ?> Km</p>
+                            <p class="mb-0">Luar Batas <?= ($item['luar_batas']) ?> Km</p>
                         </li>
                         <?php endforeach ?>
                     </ul>

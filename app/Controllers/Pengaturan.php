@@ -101,8 +101,24 @@ class Pengaturan extends BaseController
 
     public function lokasiGarasi()
     {
-        //
-        return view('pengaturan/lokasi-garasi', ['title' => 'Lokasi Garasi']);
+        /* params: 
+         * caller optional
+         * kd_member required
+         */
+        // echo json_encode($this->session->get('user'));
+
+        $listData = [];
+
+        if(empty($listData)) $listData = getCurl([
+            // 'caller' => 'MASTER',
+            'kd_member' => $this->session->get('user')['kode']
+        ], $this->ipAddress . 'select_garasi.php');
+        // echo json_encode($listData); die();
+
+        return view('pengaturan/lokasi-garasi', [
+            'title' => 'Lokasi Garasi',
+            'listData' => $listData['result_garasi']
+        ]);
     }
 
     public function unit()
