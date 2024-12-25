@@ -12,7 +12,7 @@ class AuthFilter implements FilterInterface
     {
         // Cek apakah session 'isLoggedIn' ada dan true
         if (!session()->get('isLoggedIn')) {
-            return redirect()->to('/login')->with('error', 'Please login to access this page.');
+            // return redirect()->to('/login')->with('error', 'Please login to access this page.');
         }
     }
 

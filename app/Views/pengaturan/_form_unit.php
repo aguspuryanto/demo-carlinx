@@ -13,15 +13,19 @@ helper('form');
                 <div class="mb-3">
                     <label for="kategori" class="form-label">Kategori</label>
                     <select class="form-select" id="kategori">
-                        <option value="FAMILY" selected>FAMILY</option>
-                        <!-- Tambahkan opsi lain jika diperlukan -->
+                        <option value="">Pilih Kategori</option>
+                        <?php foreach ($listPaketDriver as $driver_it) : ?>
+                        <option value="<?= $driver_it['id'] ?>" selected><?= $driver_it['nm_kat'] ?></option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
                 <div class="mb-3">
                     <label for="bbm" class="form-label">BBM</label>
                     <select class="form-select" id="bbm">
-                        <option value="BIO_SOLAR" selected>BIO SOLAR</option>
-                        <!-- Tambahkan opsi lain jika diperlukan -->
+                        <option value="">Pilih BBM</option>
+                        <?php foreach ($listPaketBbm as $bbm_it) : ?>
+                        <option value="<?= $bbm_it['id'] ?>" selected><?= $bbm_it['descr'] ?></option>
+                        <?php endforeach; ?>
                     </select>
                 </div>
                 <div class="mb-3">
@@ -80,7 +84,48 @@ helper('form');
                 </div>
             </div>
 
+            <div class="mb-4">
+                <h5>Harga dan Biaya Lepas Kunci</h5>
+                <div class="mb-3">
+                    <label for="lepas_kunci" class="form-label">Lepas Kunci</label>
+                    <input type="number" class="form-control" id="lepas_kunci" value="0">
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <h5>Harga Sewa Bulanan</h5>
+                <div class="mb-3">
+                    <label for="bulanan" class="form-label">Bulanan</label>
+                    <input type="number" class="form-control" id="bulanan" value="0">
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <h5>Foto Unit</h5>
+                <div class="d-flex justify-content-between">
+                    <div class="text-center">
+                        <img src="placeholder.jpg" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 1">
+                    </div>
+                    <div class="text-center">
+                        <img src="placeholder.jpg" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 2">
+                    </div>
+                    <div class="text-center">
+                        <img src="placeholder.jpg" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 3">
+                    </div>
+                    <div class="text-center">
+                        <img src="placeholder.jpg" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 4">
+                    </div>
+                </div>
+                <small class="form-text text-muted">*Unggah foto setelah data berhasil disimpan</small>
+            </div>
+
+            <div class="form-check mb-4">
+                <input type="checkbox" class="form-check-input" id="tersedia">
+                <label class="form-check-label text-primary" for="tersedia">Tersedia</label>
+                <a href="#" class="float-end text-decoration-underline">tanggal tidak tersedia</a>
+            </div>
+
             <div class="text-center">
-                <button type="submit" class="btn btn-primary">SUBMIT</button>
+                <button type="submit" class="btn btn-primary btn-block">SUBMIT</button>
             </div>
         <?php echo form_close(); ?>

@@ -207,18 +207,36 @@ class Pengaturan extends BaseController
          * kd_member required
          */
         // echo json_encode($this->session->get('user'));
+        // select_unit_1.php
+        // select_unit_by_name_1.php
+        // select_user.php
+        // select_kategori.php
+        // select_bbm.php
+        // add_unit_1.php
+        // update_unit_1.php
 
-        $listKatego = [];
-        $listDriver = [];        
+        $listData = [];
+        $listPaketDriver = [];
+        $listPaketBbm    = [];
 
-        if(empty($listDriver)) $listData = getCurl([
+        $curlOpt    = [
             'caller' => 'MASTER',
             'kd_member' => $this->session->get('user')['kode']
-        ], $this->ipAddress . 'select_driver.php');
+        ];
+
+        if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'select_unit_1.php');
+        // echo json_encode($listData);
+
+        if(empty($listPaketDriver)) $listPaketDriver = getCurl($curlOpt, $this->ipAddress . 'select_driver.php');
+        // echo json_encode($listDriver);
+
+        if(empty($listPaketBbm)) $listPaketBbm = getCurl($curlOpt, $this->ipAddress . 'select_bbm.php');
 
         return view('pengaturan/unit', [
             'title' => 'Unit',
-            'listDriver' => $listData['result_driver']
+            'listData' => $listData['result_unit'],
+            'listPaketDriver' => $listPaketDriver['result_driver'],
+            'listPaketBbm'    => $listPaketBbm['result_bbm']
         ]);
     }
 
