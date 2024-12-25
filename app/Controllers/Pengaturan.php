@@ -15,6 +15,10 @@ class Pengaturan extends BaseController
         helper('my');
         $this->ipAddress = $_ENV['API_BASEURL'];
         $this->session = session();
+        // jika tidak ada session, redirect ke login
+        if (!$this->session->get('user') || !isset($this->session->get('user')['kode'])) {
+            return redirect()->to('/login');
+        }
     }
 
     public function index()
@@ -45,14 +49,35 @@ class Pengaturan extends BaseController
             $data = $this->request->getPost();
             // echo json_encode($data);
             // $kd_member = $data['kd_member'];
-            $nm_bbm = $data['nm_bbm'];
-            $hrg_bbm = $data['hrg_bbm'];
+            // $nm_bbm = $data['nm_bbm'];
+            // $hrg_bbm = $data['hrg_bbm'];
 
-            $submitData = getCurl([
-                'kd_member' => $this->session->get('user')['kode'],
-                'nm_bbm' => $nm_bbm,
-                'hrg_bbm' => $hrg_bbm,
-            ], $this->ipAddress . 'select_bbm.php');
+            // lakukan validasi data
+            $validation =  \Config\Services::validation();
+            $validation->setRules([
+                'nm_bbm' => 'required',
+                'hrg_bbm' => 'required',
+            ]);
+            $isDataValid = $validation->withRequest($this->request)->run();
+
+            // jika data vlid, maka submit
+            if($isDataValid){
+                $submitData = getCurl([
+                    'kd_member' => $this->session->get('user')['kode'],
+                    'nm_bbm' => $data['nm_bbm'],
+                    'hrg_bbm' => $data['hrg_bbm'],
+                ], $this->ipAddress . 'add_bbm.php');
+                // echo json_encode($submitData);
+                if($submitData['success'] == '1'){
+                    $this->session->setFlashdata('success', 'Data berhasil disimpan');
+                } else {
+                    $this->session->setFlashdata('error', 'Data gagal disimpan');
+                }
+
+            } else {
+                // $error['error'] = $validation->getErrors();
+                $this->session->setFlashdata('error', 'Data tidak valid');
+            }
 
         }
 
@@ -102,6 +127,7 @@ class Pengaturan extends BaseController
         // echo json_encode($this->session->get('user'));
 
         $listData = [];
+        $listLokasi = [];
 
         if(empty($listData)) $listData = getCurl([
             'caller' => 'MASTER',
@@ -124,6 +150,41 @@ class Pengaturan extends BaseController
         // echo json_encode($this->session->get('user'));
 
         $listData = [];
+        $listkota = [];
+        
+        // handle POST
+        if ($this->request->getMethod() == 'POST') {
+            $data = $this->request->getPost();
+            // echo json_encode($data);
+            // $kd_member = $data['kd_member'];
+            // $kd_kota = $data['kd_kota'];
+
+            // lakukan validasi data
+            $validation =  \Config\Services::validation();
+            $validation->setRules([
+                'kd_kota' => 'required',
+            ]);
+            $isDataValid = $validation->withRequest($this->request)->run();
+
+            // jika data vlid, maka submit
+            if($isDataValid){
+                $submitData = getCurl([
+                    'kd_member' => $this->session->get('user')['kode'],
+                    'kd_kota' => $data['kd_kota'],
+                ], $this->ipAddress . 'add_garasi.php');
+                // echo json_encode($submitData);
+                if($submitData['success'] == '1'){
+                    $this->session->setFlashdata('success', 'Data berhasil disimpan');
+                } else {
+                    $this->session->setFlashdata('error', 'Data gagal disimpan');
+                }
+
+            } else {
+                // $error['error'] = $validation->getErrors();
+                $this->session->setFlashdata('error', 'Data tidak valid');
+            }
+
+        }
 
         if(empty($listData)) $listData = getCurl([
             // 'caller' => 'MASTER',
@@ -131,9 +192,12 @@ class Pengaturan extends BaseController
         ], $this->ipAddress . 'select_garasi.php');
         // echo json_encode($listData); die();
 
+        if(empty($listkota)) $listkota = getCurl([], $this->ipAddress . 'select_kota_1.php');
+
         return view('pengaturan/lokasi-garasi', [
             'title' => 'Lokasi Garasi',
-            'listData' => $listData['result_garasi']
+            'listData' => $listData['result_garasi'],
+            'listkota' => $listkota['result_kota']
         ]);
     }
 

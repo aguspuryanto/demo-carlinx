@@ -60,7 +60,7 @@ $routes->group('pengaturan', ['filter' => 'auth'], function($routes) {
     $routes->add('bbm', 'Pengaturan::bbm'); //handle GET and POST
     $routes->get('driver', 'Pengaturan::driver');
     $routes->get('batas-wilayah', 'Pengaturan::batasWilayah');
-    $routes->get('lokasi-garasi', 'Pengaturan::lokasiGarasi');
+    $routes->add('lokasi-garasi', 'Pengaturan::lokasiGarasi');
     $routes->get('unit', 'Pengaturan::unit');
     $routes->get('pengguna', 'Pengaturan::pengguna');
     $routes->get('ganti-password', 'Pengaturan::gantiPassword');

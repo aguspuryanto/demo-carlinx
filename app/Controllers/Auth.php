@@ -55,7 +55,7 @@ class Auth extends BaseController
             $userData['password'] = password_hash($password, PASSWORD_BCRYPT);
         }
 
-        if ($userData && password_verify($password, $userData['password'])) {
+        if ($userData['success'] == "1" && password_verify($password, $userData['password'])) {
             // Simpan data pengguna ke session
             $session->set('isLoggedIn', true);
             $session->set('user', $userData['result'][0]);
