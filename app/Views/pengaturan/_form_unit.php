@@ -104,7 +104,11 @@ helper('form');
                 <h5>Foto Unit</h5>
                 <div class="d-flex justify-content-between">
                     <div class="text-center">
-                        <img src="placeholder.jpg" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 1">
+                        <label for="imageInput" class="form-label">Pilih Gambar</label>
+                        <input type="file" class="form-control" id="imageInput" accept="image/*">
+                        <div id="previewContainer" class="d-flex flex-wrap gap-3 mb-3">
+                            <img src="placeholder.jpg" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 1">
+                        </div>
                     </div>
                     <div class="text-center">
                         <img src="placeholder.jpg" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 2">

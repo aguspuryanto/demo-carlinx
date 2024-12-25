@@ -53,3 +53,55 @@
     <?php include_once '_modal_unit_form.php'; ?>
 
 <?= $this->endSection() ?>
+
+
+<script>
+    $(document).ready(function () {
+        // Fungsi untuk preview gambar
+        $('#imageInput').on('change', function (event) {
+            const files = event.target.files; // Ambil file dari input
+            const previewContainer = $('#previewContainer');
+
+            // Kosongkan container sebelum menampilkan preview baru
+            previewContainer.empty();
+
+            // Iterasi setiap file yang diunggah
+            Array.from(files).forEach(file => {
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+
+                    // Ketika file berhasil dibaca
+                    reader.onload = function (e) {
+                        const img = $(
+                            `<div class="text-center">
+                                <img src="${e.target.result}" class="img-thumbnail" style="width: 100px; height: 100px;" alt="Preview">
+                                <p class="text-muted" style="font-size: 0.8rem;">${file.name}</p>
+                            </div>`
+                        );
+                        previewContainer.append(img);
+                    };
+
+                    // Mulai membaca file sebagai DataURL
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
+
+        // Fungsi submit form
+        $('#imageForm').on('submit', function (e) {
+            e.preventDefault(); // Cegah reload halaman
+
+            const formData = new FormData();
+            const files = $('#imageInput')[0].files;
+
+            // Tambahkan file ke FormData
+            Array.from(files).forEach(file => {
+                formData.append('images[]', file);
+            });
+
+            // Simulasi proses upload
+            alert('Gambar berhasil dipilih, siap di-upload!');
+            // Anda bisa menambahkan kode AJAX untuk mengirim data ke server di sini
+        });
+    });
+</script>
