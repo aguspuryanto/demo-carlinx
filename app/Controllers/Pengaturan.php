@@ -75,7 +75,6 @@ class Pengaturan extends BaseController
                 }
 
             } else {
-                // $error['error'] = $validation->getErrors();
                 $this->session->setFlashdata('error', 'Data tidak valid');
             }
 
