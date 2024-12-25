@@ -1,6 +1,6 @@
 <?php
 helper('form');
-echo json_encode($userList);
+// echo json_encode($userList);
 
 $attributes = [];
 $hidden_input = ['usernm' => $userList[0]['username']];

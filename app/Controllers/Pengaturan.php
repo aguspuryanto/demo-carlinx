@@ -203,8 +203,24 @@ class Pengaturan extends BaseController
 
     public function unit()
     {
-        //
-        return view('pengaturan/unit', ['title' => 'Unit']);
+        /* params: 
+         * caller optional
+         * kd_member required
+         */
+        // echo json_encode($this->session->get('user'));
+
+        $listKatego = [];
+        $listDriver = [];        
+
+        if(empty($listDriver)) $listData = getCurl([
+            'caller' => 'MASTER',
+            'kd_member' => $this->session->get('user')['kode']
+        ], $this->ipAddress . 'select_driver.php');
+
+        return view('pengaturan/unit', [
+            'title' => 'Unit',
+            'listDriver' => $listData['result_driver']
+        ]);
     }
 
     public function pengguna()
