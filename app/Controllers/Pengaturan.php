@@ -242,8 +242,56 @@ class Pengaturan extends BaseController
 
     public function pengguna()
     {
-        //
-        return view('pengaturan/pengguna', ['title' => 'Pengguna']);
+        /* params: 
+         * caller optional
+         * kd_member required
+         */
+
+        $listData   = [];
+        $curlOpt    = [
+            'caller' => 'MASTER',
+            'kd_member' => $this->session->get('user')['kode']
+        ];
+        
+        // handle POST
+        if ($this->request->getMethod() == 'POST') {
+            $data = $this->request->getPost();
+
+            // lakukan validasi data
+            $validation =  \Config\Services::validation();
+            $validation->setRules([
+                'nama' => 'required',
+                'username' => 'required',
+            ]);
+            $isDataValid = $validation->withRequest($this->request)->run();
+
+            // jika data vlid, maka submit
+            if($isDataValid){
+                $submitData = getCurl([
+                    'nama' => $data['nama'],
+                    'username' => $data['username'],
+                ], $this->ipAddress . 'add_staf.php');
+                echo json_encode($submitData); die();
+                if($submitData['success'] == '1'){
+                    $this->session->setFlashdata('success', 'Data berhasil disimpan');
+                } else {
+                    $this->session->setFlashdata('error', 'Data gagal disimpan');
+                }
+
+            } else {
+                // $error['error'] = $validation->getErrors();
+                $this->session->setFlashdata('error', 'Data tidak valid');
+            }
+
+        }
+
+        if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'select_staf.php');
+        // echo json_encode($listData);
+        
+        return view('pengaturan/pengguna', [
+            'title' => 'Pengguna',
+            'listData' => $listData['result']
+        ]);
     }
 
     public function gantiPassword()
