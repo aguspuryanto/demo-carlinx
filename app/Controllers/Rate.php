@@ -12,10 +12,17 @@ class Rate extends BaseController
     protected $apiUrl = 'https://autocomplete.search.hereapi.com/v1';
 
     //https://api.geoapify.com/v1/geocode/autocomplete?text=Mosco&apiKey=b13dfbfe7b934de88fdf373de1f1c1c9
-    protected $geoapify = 'b13dfbfe7b934de88fdf373de1f1c1c9'; 
-    protected $geoapifyUrl = 'https://api.geoapify.com/v1/geocod';
+    protected $geoapify; 
+    protected $geoapifyUrl;
         
     protected $helpers = ['url', 'form', 'my'];
+
+    public function __construct()
+    {
+        // $this->request = \Config\Services::request();
+        $this->geoapify = $_ENV['API_KEY_GEOAPIFY'];
+        $this->geoapifyUrl = $_ENV['API_BASEURL_GEOAPIFY'];
+    }
 
     public function index()
     {
@@ -25,7 +32,7 @@ class Rate extends BaseController
 
     public function orderlayanan()
     {
-        return view('pages/rate/hitung');
+        return view('pages/order/orderlayanan');
     }
 
     public function lepaskunci() 
@@ -52,7 +59,7 @@ class Rate extends BaseController
         try {
             $response = $client->request('GET', $this->apiUrl . '/autocomplete?' . http_build_query($options));
             echo $response->getBody();
-        } catch (GuzzleHttp\Exception\BadResponseException $e) {
+        } catch (\GuzzleHttp\Exception\BadResponseException $e) {
             $response = $e->getResponse();
             $responseBodyAsString = $response->getBody()->getContents();
             print_r($responseBodyAsString);
