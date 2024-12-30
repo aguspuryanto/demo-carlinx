@@ -17,7 +17,7 @@ class Pelaporan extends BaseController
 
     public function orderMasuk()
     {
-        return view('pages/pelaporan/order-masuk');
+        return view('pages/pelaporan/order-masuk', ['title' => 'Order Masuk']);
     }
 
     public function orderKeluar()
