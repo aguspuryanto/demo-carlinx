@@ -31,7 +31,26 @@ class Pelaporan extends BaseController
 
     public function orderMasuk()
     {
-        return view('pages/pelaporan/order-masuk', ['title' => 'Order Masuk']);
+        /* params: 
+         * in_out required; // 1 = in, 2 = out;
+         * kd_member required;
+         * tgl_awal required;
+         * tgl_akhir required;
+         * grouped required;
+         */
+
+        $listData   = [];
+        $curlOpt    = [
+            'in_out' => '1', // 1 = in, 2 = out
+            'tgl_awal' => date('01-m-Y', strtotime('-1 month')),
+            'tgl_akhir' => date('t-m-Y', strtotime('-1 month')),
+            'grouped' => '0',
+            'kd_member' => $this->session->get('user')['kode']
+        ];
+
+        return view('pages/pelaporan/order-masuk', [
+            'title' => 'Order Masuk'
+        ]);
     }
 
     public function orderKeluar()
@@ -44,9 +63,9 @@ class Pelaporan extends BaseController
         /* params: 
          * hut_piu required;
          * kd_member required;
-         * tgl_1 required;
-         * tgl_2 required;
-         * group _by required;
+         * tgl_awal required;
+         * tgl_akhir required;
+         * grouped required;
          */
 
         $listData   = [];
@@ -98,9 +117,9 @@ class Pelaporan extends BaseController
         /* params: 
          * hut_piu required;
          * kd_member required;
-         * tgl_1 required;
-         * tgl_2 required;
-         * group _by required;
+         * tgl_awal required;
+         * tgl_akhir required;
+         * grouped required;
          */
 
         $listData   = [];
