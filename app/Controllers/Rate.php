@@ -30,14 +30,19 @@ class Rate extends BaseController
         return view('pages/rate/hitung');
     }
 
-    public function orderlayanan()
+    public function orderLayanan()
     {
-        return view('pages/order/orderlayanan');
+        return view('pages/order/orderlayanan', ['title' => 'Order Layanan']);
     }
 
-    public function lepaskunci() 
+    public function lepasKunci() 
     {    
-        return view('pages/rate/hitung');
+        return view('pages/rate/hitung', ['title' => 'Lepaskunci']);
+    }
+
+    public function orderBulanan()
+    {
+        return view('pages/order/orderbulanan', ['title' => 'Order Bulanan']);
     }
 
     public function hitung()

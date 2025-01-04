@@ -37,6 +37,17 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
     $routes->get('proses', 'Proses::index');
 });
 
+// pelayanan
+$routes->group('order', function($routes) {
+    $routes->get('orderlayanan', 'Rate::orderLayanan');
+
+    // lepas-kunci
+    $routes->get('lepas-kunci', 'Rate::lepasKunci');
+
+    // bulanan
+    $routes->get('bulanan', 'Rate::orderBulanan');
+});
+
 // event
 $routes->group('event', ['filter' => 'auth'], function($routes) {
     $routes->get('index', 'Event::index');
