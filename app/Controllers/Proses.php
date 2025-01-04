@@ -7,9 +7,42 @@ use CodeIgniter\HTTP\ResponseInterface;
 
 class Proses extends BaseController
 {
+    protected $ipAddress;
+    protected $session;
+
+    public function __construct()
+    {
+        helper('my');
+        $this->ipAddress = $_ENV['API_BASEURL'];
+        $this->session = session();
+        // jika tidak ada session, redirect ke login
+        if (!$this->session->get('user') || !isset($this->session->get('user')['kode'])) {
+            return redirect()->to('/login');
+        }
+    }
+    
     public function index()
     {
-        //
-        return view('proses/index', ['title' => 'Proses']);
+        /* params: 
+         * caller optional
+         * kd_member required
+         */
+
+        $listData   = [];
+        $curlOpt    = [
+            'caller' => 'INBOX', // default. INBOX, AKTIF, RIWAYAT
+            'kd_member' => $this->session->get('user')['kode']
+        ];
+
+        if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'select_order_5.php');
+        // echo json_encode($listData); die();
+        if($listData['success']){
+            $listData = $listData;
+        }
+
+        return view('proses/index', [
+            'title' => 'Proses',
+            'listData' => ($listData['result_list_order']) ?? $listData
+        ]);
     }
 }
