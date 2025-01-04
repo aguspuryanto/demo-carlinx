@@ -102,7 +102,7 @@ helper('form');
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 <?= $this->endSection() ?>
 
-<?= $this->section('javascript') ?>
+<?= $this->section('scripts') ?>
 <!-- <?= registerJsUrl("https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"); ?> -->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <!-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script> -->

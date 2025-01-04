@@ -115,4 +115,4 @@
     <!-- page level custom script -->
     <script src="<?= base_url(); ?>assets/js/app.js"></script>
 
-    <?= $this->renderSection('javascript') ?>
+    <?= $this->renderSection('scripts') ?>
