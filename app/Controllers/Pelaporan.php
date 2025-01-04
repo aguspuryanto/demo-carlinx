@@ -7,6 +7,20 @@ use CodeIgniter\HTTP\ResponseInterface;
 
 class Pelaporan extends BaseController
 {
+    protected $ipAddress;
+    protected $session;
+
+    public function __construct()
+    {
+        helper('my');
+        $this->ipAddress = $_ENV['API_BASEURL'];
+        $this->session = session();
+        // jika tidak ada session, redirect ke login
+        if (!$this->session->get('user') || !isset($this->session->get('user')['kode'])) {
+            return redirect()->to('/login');
+        }
+    }
+    
     public function index()
     {
         //
@@ -22,26 +36,26 @@ class Pelaporan extends BaseController
 
     public function orderKeluar()
     {
-        return view('pages/pelaporan/order-keluar');
+        return view('pages/pelaporan/order-keluar', ['title' => 'Order Keluar']);
     }
 
     public function hutang()
     {
-        return view('pages/pelaporan/hutang');
+        return view('pages/pelaporan/hutang', ['title' => 'Hutang']);
     }
 
     public function piutang()
     {
-        return view('pages/pelaporan/piutang');
+        return view('pages/pelaporan/piutang', ['title' => 'Piutang']);
     }
 
     public function statusPembayaran()
     {
-        return view('pages/pelaporan/status-pembayaran');
+        return view('pages/pelaporan/status-pembayaran', ['title' => 'Status Pembayaran']);
     }
 
     public function verifikasiPembayaran()
     {
-        return view('pages/pelaporan/verifikasi-pembayaran');
+        return view('pages/pelaporan/verifikasi-pembayaran', ['title' => 'Verifikasi Pembayaran']);
     }
 }

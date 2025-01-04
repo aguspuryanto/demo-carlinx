@@ -67,3 +67,8 @@
 #--------------------------------------------------------------------
 
 # logger.threshold = 4
+
+#API_BASEURL = http://103.178.174.7/foxrent/
+
+#API_BASEURL_GEOAPIFY = https://api.geoapify.com/v1/geocode/search?text=
+#API_KEY_GEOAPIFY = 65555555555555555555555555555555-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
