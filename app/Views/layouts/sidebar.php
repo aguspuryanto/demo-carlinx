@@ -1,3 +1,4 @@
+    <?php //echo json_encode($_SESSION['user']); ?>
     <!-- Sidebar main menu -->
     <div class="sidebar-wrap  sidebar-pushcontent">
         <!-- Add overlay or fullmenu instead overlay -->
@@ -15,8 +16,8 @@
                                     </figure>
                                 </div>
                                 <div class="col px-0 align-self-center">
-                                    <p class="mb-1">Muniro KinG</p>
-                                    <p class="text-muted size-12">Surabaya, ID</p>
+                                    <p class="mb-1"><?= ($_SESSION['user']['nama']); ?></p>
+                                    <p class="text-muted size-12"><?= ($_SESSION['user']['kota']); ?></p>
                                 </div>
                                 <div class="col-auto">
                                     <button class="btn btn-44 btn-light">
@@ -79,7 +80,7 @@
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="<?= base_url('chat') ?>" tabindex="-1">
+                            <a class="nav-link" href="<?= base_url('inbox') ?>" tabindex="-1">
                                 <div class="avatar avatar-40 rounded icon"><i class="bi bi-chat-text"></i></div>
                                 <div class="col">Pesan</div>
                                 <div class="arrow"><i class="bi bi-chevron-right"></i></div>
