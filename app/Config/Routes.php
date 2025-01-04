@@ -37,6 +37,16 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
     $routes->get('proses', 'Proses::index');
 });
 
+// event
+$routes->group('event', ['filter' => 'auth'], function($routes) {
+    $routes->get('index', 'Event::index');
+});
+
+// inbox
+$routes->group('inbox', ['filter' => 'auth'], function($routes) {
+    $routes->get('index', 'Inbox::index');
+});
+
 // history
 $routes->group('history', ['filter' => 'auth'], function($routes) {
     $routes->get('/', 'History::index');

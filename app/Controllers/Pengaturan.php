@@ -261,17 +261,18 @@ class Pengaturan extends BaseController
             $validation =  \Config\Services::validation();
             $validation->setRules([
                 'nama' => 'required',
-                'username' => 'required',
+                'nohp' => 'required',
             ]);
             $isDataValid = $validation->withRequest($this->request)->run();
 
-            // jika data vlid, maka submit
+            // jika data valid, maka submit
             if($isDataValid){
                 $submitData = getCurl([
                     'nama' => $data['nama'],
-                    'username' => $data['username'],
+                    'nohp' => $data['nohp'],
                 ], $this->ipAddress . 'add_staf.php');
-                echo json_encode($submitData); die();
+                // echo json_encode($submitData);
+                // jika berhasil, maka tampilkan pesan
                 if($submitData['success'] == '1'){
                     $this->session->setFlashdata('success', 'Data berhasil disimpan');
                 } else {

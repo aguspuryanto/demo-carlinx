@@ -2,7 +2,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addModalLabel">Tambah BBM</h5>
+                    <h5 class="modal-title" id="addModalLabel">Tambah Pengguna</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -14,8 +14,8 @@
                             <input type="text" class="form-control" id="nama" name="nama" required>
                         </div>
                         <div class="form-group">
-                            <label for="username">No HP</label>
-                            <input type="text" class="form-control" id="username" name="username" required>
+                            <label for="nohp">No HP</label>
+                            <input type="text" class="form-control" id="nohp" name="nohp" required>
                         </div>
                 </div>
                 <div class="modal-footer">
