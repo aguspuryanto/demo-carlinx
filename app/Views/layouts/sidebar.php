@@ -16,8 +16,8 @@
                                     </figure>
                                 </div>
                                 <div class="col px-0 align-self-center">
-                                    <p class="mb-1"><?= ($_SESSION['user']['nama']); ?></p>
-                                    <p class="text-muted size-12"><?= ($_SESSION['user']['kota']); ?></p>
+                                    <p class="mb-1"><?= isset($_SESSION['user']) ? ($_SESSION['user']['nama']) : ''; ?></p>
+                                    <p class="text-muted size-12"><?= isset($_SESSION['user']) ? ($_SESSION['user']['kota']) : ''; ?></p>
                                 </div>
                                 <div class="col-auto">
                                     <button class="btn btn-44 btn-light">

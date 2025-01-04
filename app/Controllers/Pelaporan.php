@@ -41,13 +41,13 @@ class Pelaporan extends BaseController
 
     public function hutang()
     {
-        /*
-        $hut_piu = $_POST['hut_piu'];
-        $kd_member = $_POST['kd_member'];
-        $tgl_1 = $_POST['tgl_awal'];
-        $tgl_2 = $_POST['tgl_akhir'];
-        $group = $_POST['grouped'];
-        */
+        /* params: 
+         * hut_piu required;
+         * kd_member required;
+         * tgl_1 required;
+         * tgl_2 required;
+         * group _by required;
+         */
 
         $listData   = [];
         $curlOpt    = [
@@ -57,9 +57,6 @@ class Pelaporan extends BaseController
             'grouped' => '0',
             'kd_member' => $this->session->get('user')['kode']
         ];
-
-        // echo ($curlOpt['tgl_awal']);
-        // echo $this->parseTgl($curlOpt['tgl_awal']);
         
         // handle POST
         if ($this->request->getMethod() == 'POST') {
@@ -76,15 +73,12 @@ class Pelaporan extends BaseController
 
             // jika data valid, maka submit
             if($isDataValid){
-                // $curlOpt['hut_piu'] = $data['hut_piu'];
                 $curlOpt['tgl_awal'] = $data['tgl_awal'];
                 $curlOpt['tgl_akhir'] = $data['tgl_akhir'];
-                // $curlOpt['grouped'] = $data['grouped'];
 
                 $listData = getCurl($curlOpt, $this->ipAddress . 'report_hutang.php');
 
             } else {
-                // $error['error'] = $validation->getErrors();
                 $this->session->setFlashdata('error', 'Data tidak valid');
             }
         }
@@ -101,25 +95,22 @@ class Pelaporan extends BaseController
 
     public function piutang()
     {
-        /*
-        $hut_piu = $_POST['hut_piu'];
-        $kd_member = $_POST['kd_member'];
-        $tgl_1 = $_POST['tgl_awal'];
-        $tgl_2 = $_POST['tgl_akhir'];
-        $group = $_POST['grouped'];
-        */
+        /* params: 
+         * hut_piu required;
+         * kd_member required;
+         * tgl_1 required;
+         * tgl_2 required;
+         * group _by required;
+         */
 
         $listData   = [];
         $curlOpt    = [
-            'hut_piu' => '1', // 1 = hutang, 2 = piutang
+            'hut_piu' => '2', // 1 = hutang, 2 = piutang
             'tgl_awal' => date('01-m-Y', strtotime('-1 month')),
             'tgl_akhir' => date('t-m-Y', strtotime('-1 month')),
             'grouped' => '0',
             'kd_member' => $this->session->get('user')['kode']
         ];
-
-        // echo ($curlOpt['tgl_awal']);
-        // echo $this->parseTgl($curlOpt['tgl_awal']);
         
         // handle POST
         if ($this->request->getMethod() == 'POST') {
@@ -136,15 +127,12 @@ class Pelaporan extends BaseController
 
             // jika data valid, maka submit
             if($isDataValid){
-                // $curlOpt['hut_piu'] = $data['hut_piu'];
                 $curlOpt['tgl_awal'] = $data['tgl_awal'];
                 $curlOpt['tgl_akhir'] = $data['tgl_akhir'];
-                // $curlOpt['grouped'] = $data['grouped'];
 
                 $listData = getCurl($curlOpt, $this->ipAddress . 'report_hutang.php');
 
             } else {
-                // $error['error'] = $validation->getErrors();
                 $this->session->setFlashdata('error', 'Data tidak valid');
             }
         }
