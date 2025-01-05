@@ -20,8 +20,11 @@ class Rate extends BaseController
     public function __construct()
     {
         // $this->request = \Config\Services::request();
-        $this->geoapify = $_ENV['API_KEY_GEOAPIFY'];
-        $this->geoapifyUrl = $_ENV['API_BASEURL_GEOAPIFY'];
+        // $this->geoapify = $_ENV['API_KEY_GEOAPIFY'];
+        // $this->geoapifyUrl = $_ENV['API_BASEURL_GEOAPIFY'];
+
+        $this->appKey = $_ENV['API_KEY_HERE'];
+        $this->apiUrl = $_ENV['API_BASEURL_HERE'];
     }
 
     public function index()

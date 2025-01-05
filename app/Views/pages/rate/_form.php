@@ -44,12 +44,16 @@ helper('form');
     <label class="form-label">Rute Perjalanan</label>
     <div class="row">
       <div class="col-6">
-        <input type="text" class="form-control" id="lokasiJemput" placeholder="Lokasi Jemput" autocomplete="on">
-        <div id="lokasiJemputList"></div>
+        <!-- <input type="text" class="form-control" id="lokasiJemput" placeholder="Lokasi Jemput" autocomplete="on">
+        <div id="lokasiJemputList"></div> -->
+        <!-- <label for="lokasiJemput" class="form-label">Search Location</label> -->
+        <select id="lokasiJemput" class="form-select" aria-placeholder="Lokasi Jemput" style="width: 100%;"></select>
       </div>
       <div class="col-6">
-        <input type="text" class="form-control" id="lokasiTujuan" placeholder="Lokasi Tujuan">
-        <div id="lokasiTujuanList"></div>
+        <!-- <input type="text" class="form-control" id="lokasiTujuan" placeholder="Lokasi Tujuan">
+        <div id="lokasiTujuanList"></div> -->
+        <!-- <label for="lokasiTujuan" class="form-label">Search Location</label> -->
+        <select id="lokasiTujuan" class="form-select" style="width: 100%;"></select>
       </div>
     </div>
   </div>
@@ -98,13 +102,14 @@ helper('form');
 <?php echo form_close(); ?>
 
 <?= $this->section('styles') ?>
-<!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" /> -->
-<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+<!-- <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css"> -->
 <?= $this->endSection() ?>
 
 <?= $this->section('scripts') ?>
-<!-- <?= registerJsUrl("https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"); ?> -->
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<?= registerJsUrl("https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"); ?>
+<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 <!-- <script src="https://code.jquery.com/jquery-3.6.0.js"></script> -->
 <script>
   $(function () {
@@ -113,69 +118,68 @@ helper('form');
       method: 'GET',
     };
 
-    // $('#lokasiJemput').on('input', function() {
-    //   var textAddress = $(this).val();
-    //   console.log(textAddress.length);
-    //   if(textAddress.length > 2) {
-    //     fetch("https://autocomplete.search.hereapi.com/v1/autocomplete?q=" + textAddress + "&countryCode=INA&apiKey=Cikgr94iiQ3Z3EwJG43WSoYhgBpyVw3XtHrI-CsM0Is", requestOptions)
-    //     .then(response => response.json())
-    //     .then(function (result) {
-    //       console.log(result);
-    //       // looping data
-    //       var data = result.items;
-    //       if(data) {
-    //         var selectOptions = '<select class="form-control">';
-    //         $.each(data, function (index, item) {
-    //           selectOptions += '<option value="' + item.address.label + '">' + item.address.label + '</option>';
-    //         });
-    //         selectOptions += '</select>';
+    // $("#lokasiJemput").autocomplete({
+    //   source: function(request, response) {
+    //     $.ajax({
+    //       url: '/rate/placeid',
+    //       type: 'GET',
+    //       dataType: "json",
+    //       data: {
+    //         term: request.term,
+    //       },
+    //       success: function(data) {
+    //         // response(data);
+    //         console.log(data);                  
+    //         // looping data
+    //         // var data = result.items;
+    //         if(data.items) {
+    //           var selectOptions = '<select class="form-control">';
+    //           $.each(data.items, function (index, item) {
+    //             selectOptions += '<option value="' + item.address.label + '">' + item.address.label + '</option>';
+    //           });
+    //           selectOptions += '</select>';
 
-    //         $('#lokasiJemputList').html(selectOptions);
-    //         // $(this).html(selectOptions);
-    //       } else {
-    //         $('#lokasiJemputList').html('');
+    //           $('#lokasiJemputList').html(selectOptions);
+    //           // $(this).html(selectOptions);
+    //         } else {
+    //           $('#lokasiJemputList').html('');
+    //         }
     //       }
-    //     })
-    //     .catch(function (error) {
-    //       console.log('error', error)
     //     });
+    //   },
+    //   minLength: 3,
+    //   select: function(event, ui) {
+    //     // console.log(ui.item.value);
+    //     console.log(ui.item.address.label);
     //   }
     // });
 
-    $("#lokasiJemput").autocomplete({
-      source: function(request, response) {
-        $.ajax({
-          url: '/rate/placeid',
-          type: 'GET',
-          dataType: "json",
-          data: {
-            term: request.term,
-          },
-          success: function(data) {
-            // response(data);
-            console.log(data);                  
-            // looping data
-            // var data = result.items;
-            if(data.items) {
-              var selectOptions = '<select class="form-control">';
-              $.each(data.items, function (index, item) {
-                selectOptions += '<option value="' + item.address.label + '">' + item.address.label + '</option>';
-              });
-              selectOptions += '</select>';
-
-              $('#lokasiJemputList').html(selectOptions);
-              // $(this).html(selectOptions);
-            } else {
-              $('#lokasiJemputList').html('');
-            }
-          }
-        });
-      },
-      minLength: 3,
-      select: function(event, ui) {
-        // console.log(ui.item.value);
-        console.log(ui.item.address.label);
-      }
+    // Initialize Select2
+    $('#lokasiJemput, #lokasiTujuan').select2({
+        theme: 'bootstrap-5',
+        placeholder: 'Type to search...',
+        minimumInputLength: 2,
+        ajax: {
+            url: '<?= $_ENV['API_BASEURL_HERE'] ?>/autocomplete',
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                return {
+                    q: params.term, // Search term
+                    limit: 5,      // Limit results
+                    apiKey: '<?= $_ENV['API_KEY_HERE'] ?>'
+                };
+            },
+            processResults: function (data) {
+                return {
+                    results: data.items.map(item => ({
+                        id: item.id,
+                        text: item.title
+                    }))
+                };
+            },
+            cache: true
+        }
     });
   });
 </script>
