@@ -12,8 +12,32 @@
                 <div class="card-body">
                     <?php
                     //include_once '_form.php'; 
-                    echo json_encode($listData);
+                    // echo json_encode($listData);
                     ?>
+                    <!-- jika $listData kosong, tampilkan data tidak ditemukan else looping -->
+                    <?php if (empty($listData)) : ?>
+                        <p>Data tidak ditemukan</p>
+                    <?php else : ?>
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Username</th>
+                                    <th>Level</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php $no = 1; ?>
+                                <?php foreach ($listData as $data) : ?>
+                                    <tr>
+                                        <td><?= $no++ ?></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
