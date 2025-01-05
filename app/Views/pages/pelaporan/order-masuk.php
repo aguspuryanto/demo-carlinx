@@ -24,28 +24,44 @@
                         </div>
                     <?php echo form_close(); ?>
 
-                    <ul class="list-group">
+                    <?php
+                    // echo json_encode($listData);
+                    $subTotal = 0;
+                    ?>
+
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Tanggal</th>
+                                <th scope="col">Nama Rental</th>
+                                <th scope="col" style="width: 150px;">Nominal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
                         <?php if ($listData['success'] == '0'): ?>
-                            <div class="mt-3">
-                                <p class="text-center text-danger">Data tidak ditemukan</p>
+                            <tr>
+                                <td colspan="3">
+                                    <p class="text-center text-danger">Data tidak ditemukan</p>
+                                </td>
                             </div>
-                        <?php else: ?>
-                            <?php foreach ($listData as $item): ?>
-                            <li class="list-group-item">
-                                <h6>
-                                    <span class="badge <?= ($item['grp_penyewa'] == '1') ? 'bg-danger' : 'bg-info'; ?>"><?= $listGroup[$item['grp_penyewa']] ?></span>
-                                    <span class="badge bg-secondary"><?= $listOrder[$item['jns_order']] ?></span> <?= $item['tgl_order'] ?>
-                                </h6>
-                                <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-0"><?= $item['nama_unit'] ?></h5>
-                                    <small class="<?= ($item['stat'] == '9') ? 'text-success' : 'text-danger'; ?>"><?= $listStatus[$item['stat']]; ?> <br>by <?= $item['nama_cs'] ?></small>
-                                </div>
-                                <p class="mb-0">Rp. <?= number_format($item['hrg_sewa_total'], 0, ',', '.') ?></p>
-                                <small>*dipesan oleh: <?= $item['rental_penyewa'] ?></small>
-                            </li>
-                            <?php endforeach; ?>
-                        <?php endif; ?>
-                    </ul>
+                        <?php else: 
+                            foreach ($listData['result_report_order'] as $item): ?>
+                            <tr>
+                                <td><?= date('d-m-Y', strtotime($item['tgl_order'])) ?></td>
+                                <td><?= $item['nama_rental'] ?></td>
+                                <td class="text-right"><?= format_rupiah($item['hrg_sewa_total']) ?></td>
+                            </tr>
+                            <?php $subTotal += $item['hrg_sewa_total'];
+                        endforeach;
+                        endif; ?>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th scope="col" colspan="2" class="text-right">Sub Total</th>
+                                <th scope="col" class="text-right"><?= format_rupiah($subTotal) ?></th>
+                            </tr>
+                        </tfoot>
+                    </table>
                 </div>
             </div>
         </div>

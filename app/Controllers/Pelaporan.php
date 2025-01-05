@@ -48,14 +48,41 @@ class Pelaporan extends BaseController
             'kd_member' => $this->session->get('user')['kode']
         ];
 
+        if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'report_order_1.php');
+        // echo json_encode($listData);
+
         return view('pages/pelaporan/order-masuk', [
-            'title' => 'Order Masuk'
+            'title' => 'Order Masuk',
+            'listData' => ($listData),
         ]);
     }
 
     public function orderKeluar()
     {
-        return view('pages/pelaporan/order-keluar', ['title' => 'Order Keluar']);
+        /* params: 
+         * in_out required; // 1 = in, 2 = out;
+         * kd_member required;
+         * tgl_awal required;
+         * tgl_akhir required;
+         * grouped required;
+         */
+
+        $listData   = [];
+        $curlOpt    = [
+            'in_out' => '2', // 1 = in, 2 = out
+            'tgl_awal' => date('01-m-Y', strtotime('-1 month')),
+            'tgl_akhir' => date('t-m-Y', strtotime('-1 month')),
+            'grouped' => '0',
+            'kd_member' => $this->session->get('user')['kode']
+        ];
+
+        if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'report_order_1.php');
+        // echo json_encode($listData);
+
+        return view('pages/pelaporan/order-keluar', [
+            'title' => 'Order Keluar',
+            'listData' => ($listData),
+        ]);
     }
 
     public function hutang()

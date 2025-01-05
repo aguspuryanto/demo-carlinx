@@ -35,3 +35,8 @@ function getCurl($data, $url){
 	$json = json_decode($result, true);
 	return $json;
 }
+
+function format_rupiah($angka){
+  $rupiah=number_format($angka,0,',','.');
+  return $rupiah;
+}

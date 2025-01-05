@@ -25,6 +25,10 @@
                         </div>
                     <?php echo form_close(); ?>
 
+                    <?php
+                    // echo json_encode($listData);
+                    ?>
+
                     <ul class="list-group">
                         <?php if ($listData['success'] == '0'): ?>
                             <div class="mt-3">
