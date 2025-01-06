@@ -4,5 +4,6 @@ deployment:
     - export DEPLOYMENT_SOURCE="repositories/carlinx/app"
     - export DEPLOYMENT_TARGET="/home/carlinx/partner.carlinx.id/app"
     # export DEPLOYPATH=/home/carlinx/partner.carlinx.id/
-    - /bin/cp -R $DEPLOYMENT_SOURCE/* $DEPLOYMENT_TARGET
+    - /bin/cp -R $DEPLOYMENT_SOURCE/Controllers/* $DEPLOYMENT_TARGET/Controllers/
+    - /bin/cp -R $DEPLOYMENT_SOURCE/Views/* $DEPLOYMENT_TARGET/Views/
     - echo "Deployment completed."
