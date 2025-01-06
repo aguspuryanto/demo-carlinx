@@ -65,7 +65,7 @@
     <!-- Footer ends-->
 
     <!-- PWA app install toast message -->
-    <div class="d-none position-fixed bottom-0 start-50 translate-middle-x z-index-10">
+    <div class="d-none position-fixed bottom-0 start-50 translate-middle-x z-index-10" id="pwaApp">
         <div class="toast mb-3 fade show" role="alert" aria-live="assertive" aria-atomic="true" id="toastinstall" data-bs-animation="true">
             <div class="toast-header">
                 <img src="<?= base_url(); ?>/assets/img/carlinx.png" class="rounded me-2" alt="..." height="32">
@@ -115,4 +115,38 @@
     <!-- page level custom script -->
     <script src="<?= base_url(); ?>assets/js/app.js"></script>
 
+    <script>
+        function getPWADisplayMode() {
+            if (document.referrer.startsWith('android-app://'))
+                return 'twa';
+            if (window.matchMedia('(display-mode: browser)').matches)
+                return 'browser';
+            if (window.matchMedia('(display-mode: standalone)').matches)
+                return 'standalone';
+            if (window.matchMedia('(display-mode: minimal-ui)').matches)
+                return 'minimal-ui';
+            if (window.matchMedia('(display-mode: fullscreen)').matches)
+                return 'fullscreen';
+            if (window.matchMedia('(display-mode: window-controls-overlay)').matches)
+                return 'window-controls-overlay';
+
+            return 'unknown';
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            // Log launch display mode to analytics
+            console.log('DISPLAY_MODE_LAUNCH:', getPWADisplayMode());
+            if(getPWADisplayMode() != 'browser'){
+                // remove class d-none div#pwaApp
+                document.getElementById('pwaApp').classList.remove('d-none');
+            }
+        });
+
+        window.addEventListener('appinstalled', () => {
+            // If visible, hide the install promotion
+            // hideInAppInstallPromotion();
+            // Log install to analytics
+            console.log('INSTALL: Success');
+        });
+    </script>
     <?= $this->renderSection('scripts') ?>

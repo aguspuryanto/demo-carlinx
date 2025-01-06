@@ -19,7 +19,7 @@
                         <li class="list-group-item">
                             <h6><span class="badge <?=($item['grp_penyewa']=='1') ? 'bg-danger' : 'bg-info';?>"><?= $listGroup[$item['grp_penyewa']] ?></span> <span class="badge bg-secondary"><?= $listOrder[$item['jns_order']] ?></span> <?= $item['tgl_order'] ?></h6>
                             <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-0"><?= $item['nama_unit'] ?></h5>
+                                <h6 class="mb-0"><?= $item['nama_unit'] ?></h6>
                                 <small class="<?=($item['stat']=='9') ? 'text-success' : 'text-danger'; ?>"><?= $listStatus[$item['stat']]; ?> <br>by <?= $item['nama_cs'] ?></small>
                             </div>
                             <p class="mb-0">Rp. <?= number_format($item['hrg_sewa_total'], 0, ',', '.') ?></p>

@@ -72,3 +72,6 @@
 
 #API_BASEURL_GEOAPIFY = https://api.geoapify.com/v1/geocode/search?text=
 #API_KEY_GEOAPIFY = 65555555555555555555555555555555-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+
+API_KEY_HERE = Cikgr94iiQ3Z3EwJG43WSoYhgBpyVw3XtHrI-CsM0Is
+API_BASEURL_HERE = https://autocomplete.search.hereapi.com/v1
