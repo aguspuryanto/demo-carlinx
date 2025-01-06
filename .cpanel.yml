@@ -1,9 +1,8 @@
 ---
 deployment:
   tasks:
-    # export DEPLOYPATH=/home/carlinx/partner.carlinx.id/
     - export DEPLOYMENT_SOURCE="repositories/carlinx/app"
     - export DEPLOYMENT_TARGET="/home/carlinx/partner.carlinx.id/app"
-    # echo "Deploying application from $DEPLOYMENT_SOURCE to $DEPLOYMENT_TARGET"
-    - /bin/cp -R $DEPLOYMENT_SOURCE/* $DEPLOYMENT_TARGET
+    # export DEPLOYPATH=/home/carlinx/partner.carlinx.id/
+    - /bin/cp -R $DEPLOYMENT_SOURCE $DEPLOYMENT_TARGET
     - echo "Deployment completed."
