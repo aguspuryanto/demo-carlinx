@@ -17,7 +17,7 @@
                     <ul class="list-group">
                     <?php foreach ($listData as $item) : ?>
                         <li class="list-group-item">
-                            <h6><span class="badge <?=($item['grp_penyewa']=='1') ? 'bg-danger' : 'bg-info';?>"><?= $listGroup[$item['grp_penyewa']] ?></span> <span class="badge bg-secondary"><?= $listOrder[$item['jns_order']] ?></span> <?= $item['tgl_order'] ?></h6>
+                            <h6 class="mb-2"><span class="badge <?=($item['grp_penyewa']=='1') ? 'bg-danger' : 'bg-info';?>"><?= $listGroup[$item['grp_penyewa']] ?></span> <span class="badge bg-secondary"><?= $listOrder[$item['jns_order']] ?></span> <small><?= date('d-m-Y', strtotime($item['tgl_order'])) ?></small></h6>
                             <div class="d-flex w-100 justify-content-between">
                                 <h6 class="mb-0"><?= $item['nama_unit'] ?></h6>
                                 <small class="<?=($item['stat']=='9') ? 'text-success' : 'text-danger'; ?>"><?= $listStatus[$item['stat']]; ?> <br>by <?= $item['nama_cs'] ?></small>
