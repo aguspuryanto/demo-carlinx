@@ -69,6 +69,9 @@
                                 <input type="number" class="form-control" id="hotel" name="hotel" required>
                             </div>
                         </div>
+
+                        <!-- hidden fee -->
+                        <input type="hidden" name="fee" id="fee" value="0">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>

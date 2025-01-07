@@ -151,24 +151,29 @@ class Pengaturan extends BaseController
 
             if($isDataValid){
                 if(isset($data['id'])){
-                    $submitData = getCurl([
+                    $dataArray = [
                         'id' => $data['id'],
+                        'kd_kat' => $data['kd_kat'],
+                        'dlm_kota' => $data['dlm_kota'],
+                        'dlm_prop' => $data['dlm_prop'],
+                        'luar_prop' => $data['luar_prop'],
+                        'makan' => $data['makan'],
+                        'hotel' => $data['hotel'],
+                        'fee' => isset($data['fee']) ? $data['fee'] : 0,
+                    ];
+                    // echo json_encode($dataArray);
+                    $submitData = getCurl($dataArray, $this->ipAddress . 'update_driver.php');
+                } else {
+                    $dataArray = [
+                        'kd_member' => $this->session->get('user')['kode'],
                         'kd_kat' => $data['kd_kat'],
                         'dlmkota' => $data['dlm_kota'],
                         'dlmprop' => $data['dlm_prop'],
                         'luarprop' => $data['luar_prop'],
                         'makan' => $data['makan'],
                         'hotel' => $data['hotel'],
-                        'fee' => ($data['fee']) ? $data['fee'] : 0,
-                    ], $this->ipAddress . 'update_driver.php');
-                } else {
-                    $submitData = getCurl([
-                        'kd_member' => $this->session->get('user')['kode'],
-                        'kd_kat' => $data['kd_kat'],
-                        'dlmkota' => $data['dlm_kota'],
-                        'dlmprop' => $data['dlm_prop'],
-                        'luarprop' => $data['luar_prop'],
-                    ], $this->ipAddress . 'add_driver.php');
+                    ];
+                    $submitData = getCurl($dataArray, $this->ipAddress . 'add_driver.php');
                 }
                 // echo json_encode($submitData);
                 if($submitData['success'] == '1'){
