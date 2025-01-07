@@ -10,11 +10,13 @@
                 </div>
                 <div class="modal-body">
                         <div class="form-group">
-                            <label for="descr">Deskripsi</label>
-                            <input type="text" class="form-control" id="nm_bbm" name="nm_bbm" required>
+                            <label for="descr">Dalam Kota (km)</label>
+                            <input type="number" class="form-control" id="dlm_kota" name="dlm_kota" required>
                         </div>
+
+
                         <div class="form-group">
-                            <label for="harga">Harga</label>
+                            <label for="harga">Luar Kota (km)</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <div class="input-group-text">Rp.</div>
