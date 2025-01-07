@@ -106,23 +106,94 @@ class Pengaturan extends BaseController
 
     public function driver()
     {
-        /* params: 
-         * caller optional
+        /* add_driver.php params: 
          * kd_member required
+         * kd_kat required
+         * dlm_kota required
+         * dlm_prop required
+         * luar_prop required
+         * makan required
+         * hotel required
+         * fee required
          */
         // echo json_encode($this->session->get('user'));
 
         $listData = [];
+        $listKategori = [];
+        
+        // handle POST
+        if ($this->request->getMethod() == 'POST') {
+            $data = $this->request->getPost();
+            // echo json_encode($data);
+            /* update_driver.php params: 
+             * id required
+             * kd_kat required
+             * dlm_kota required
+             * dlm_prop required
+             * luar_prop required
+             * makan required
+             * hotel required
+             * fee optional
+             */
+
+            // lakukan validasi data
+            $validation =  \Config\Services::validation();
+            $validation->setRules([
+                'id' => 'required',
+                'kd_kat' => 'required',
+                'dlm_kota' => 'required',
+                'dlm_prop' => 'required',
+                'luar_prop' => 'required',
+                'makan' => 'required',
+                'hotel' => 'required',
+                // 'fee' => 'required',
+            ]);
+            $isDataValid = $validation->withRequest($this->request)->run();
+
+            if($isDataValid){
+                if(isset($data['id'])){
+                    $submitData = getCurl([
+                        'id' => $data['id'],
+                        'kd_kat' => $data['kd_kat'],
+                        'dlmkota' => $data['dlm_kota'],
+                        'dlmprop' => $data['dlm_prop'],
+                        'luarprop' => $data['luar_prop'],
+                        'makan' => $data['makan'],
+                        'hotel' => $data['hotel'],
+                        'fee' => ($data['fee']) ? $data['fee'] : 0,
+                    ], $this->ipAddress . 'update_driver.php');
+                } else {
+                    $submitData = getCurl([
+                        'kd_member' => $this->session->get('user')['kode'],
+                        'kd_kat' => $data['kd_kat'],
+                        'dlmkota' => $data['dlm_kota'],
+                        'dlmprop' => $data['dlm_prop'],
+                        'luarprop' => $data['luar_prop'],
+                        ], $this->ipAddress . 'add_driver.php');
+                }
+            } else {
+                $this->session->setFlashdata('error', 'Data tidak valid');
+            }
+
+            if($submitData['success'] == '1'){
+                $this->session->setFlashdata('success', 'Data berhasil disimpan');
+            } else {
+                $this->session->setFlashdata('error', 'Data gagal disimpan');
+            }
+        }
 
         if(empty($listData)) $listData = getCurl([
             'caller' => 'MASTER',
             'kd_member' => $this->session->get('user')['kode']
         ], $this->ipAddress . 'select_driver.php');
         // echo json_encode($listData); die();
+
+        if(empty($listKategori)) $listKategori = getCurl(['kd_member' => $this->session->get('user')['kode']], $this->ipAddress . 'select_kategori.php');
         
         return view('pengaturan/driver', [
             'title' => 'Driver',
-            'listData' => $listData['result_driver']
+            'listData' => $listData,
+            'listKategori' => $listKategori
         ]);
     }
 

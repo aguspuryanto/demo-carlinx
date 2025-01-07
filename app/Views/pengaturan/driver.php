@@ -20,7 +20,7 @@
                     // echo json_encode($listData);
                     ?>
                     <ul class="list-group d-sm-block d-md-block d-lg-none d-xl-none">
-                        <?php foreach ($listData as $item) : ?>
+                        <?php foreach ($listData['result_driver'] as $item) : ?>
                         <li class="list-group-item">
                             <h5 class="mb-1"><?= $item['nm_kat'] ?></h5>
                             <p class="mb-0">Dalam Kota Rp. <?= number_format($item['dlm_kota'], 0, ',', '.') ?></p>
@@ -43,7 +43,7 @@
                         </thead>
                         <tbody>
                             <?php $no = 1; ?>
-                            <?php foreach ($listData as $item) : ?>
+                            <?php foreach ($listData['result_driver'] as $item) : ?>
                                 <tr>
                                     <th scope="row"><?= $no++ ?></th>
                                     <td><?= $item['nm_kat'] ?></td>
