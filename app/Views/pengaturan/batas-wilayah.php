@@ -7,7 +7,10 @@
         <div class="row">
             <div class="card">
                 <div class="card-header">
-                    <h4><?= $title ?></h4>
+                    <h4 class="card-title float-left"><?= $title ?></h4>
+                    <div class="card-header-action float-right">
+                        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal"><i class="fas fa-plus"></i> Tambah</a>
+                    </div>
                 </div>
                 <div class="card-body">
                     <?php 
@@ -17,9 +20,11 @@
                     <ul class="list-group">
                         <?php foreach ($listData as $item) : ?>
                         <li class="list-group-item">
-                            <p class="mb-0">Dalam Kota <?= ($item['dlm_kota']) ?> Km</p>
-                            <p class="mb-0">Luar Kota <?= ($item['dlm_prop']) ?> Km</p>
-                            <p class="mb-0">Luar Batas <?= ($item['luar_batas']) ?> Km</p>
+                            <a href="#" class="list-group-item-action" data-bs-toggle="modal" data-bs-target="#addModal" data-id="<?= $item['id'] ?>">
+                                <p class="mb-0">Dalam Kota <?= ($item['dlm_kota']) ?> Km</p>
+                                <p class="mb-0">Luar Kota <?= ($item['dlm_prop']) ?> Km</p>
+                                <p class="mb-0">Luar Batas <?= ($item['luar_batas']) ?> Km</p>
+                            </a>
                         </li>
                         <?php endforeach ?>
                     </ul>
@@ -28,5 +33,7 @@
         </div>
     </div>
     <!-- end main page content -->
+     
+    <?php include_once '_modal_wilayah.php'; ?>
 
 <?= $this->endSection() ?>
