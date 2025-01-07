@@ -138,7 +138,7 @@ class Pengaturan extends BaseController
             // lakukan validasi data
             $validation =  \Config\Services::validation();
             $validation->setRules([
-                'id' => 'required',
+                // 'id' => 'required',
                 'kd_kat' => 'required',
                 'dlm_kota' => 'required',
                 'dlm_prop' => 'required',
@@ -204,14 +204,111 @@ class Pengaturan extends BaseController
 
     public function batasWilayah()
     {
-        /* params: 
-         * caller optional
+        /* add_wilayah.php params: 
          * kd_member required
+         * dlm_kota required
+         * dlm_prop required
+         * luar_batas required
          */
         // echo json_encode($this->session->get('user'));
 
         $listData = [];
         $listLokasi = [];
+        
+        // handle POST
+        if ($this->request->getMethod() == 'POST') {
+            $data = $this->request->getPost();
+            // echo json_encode($data);
+            // step1: add_wilayah.php, step2: update_wilayah_2.php
+
+            /* update_wilayah_2.php params
+             * id required
+             * dlm_kota required
+             * dlm_prop required
+             * luar_batas optional
+             * batas_1 required
+             * batas_2
+             * batas_3
+             * batas_4
+             * batas_5
+             * batas_6        
+             * hari_1
+             * hari_2
+             * hari_3
+             * hari_4
+             * hari_5
+             * hari_6
+             * ketr optional
+             */
+
+            // lakukan validasi data
+            $validation =  \Config\Services::validation();
+            $validation->setRules([
+                // 'id' => 'required',
+                'kd_kat' => 'required',
+                'dlm_kota' => 'required',
+                'dlm_prop' => 'required',
+                'luar_batas' => 'optional',
+                'batas_1' => 'required',
+                'batas_2' => 'required',
+                'batas_3' => 'required',
+                'batas_4' => 'required',
+                'batas_5' => 'required',
+                'batas_6' => 'required',
+                'hari_1' => 'required',
+                'hari_2' => 'required',
+                'hari_3' => 'required',
+                'hari_4' => 'required',
+                'hari_5' => 'required',
+                'hari_6' => 'required',
+                'ketr' => 'optional'
+            ]);
+            $isDataValid = $validation->withRequest($this->request)->run();
+
+            if($isDataValid){
+                if(isset($data['id'])){
+                    $dataArray = [
+                        'id' => $data['id'],
+                        'kd_kat' => $data['kd_kat'],
+                        'dlm_kota' => $data['dlm_kota'],
+                        'dlm_prop' => $data['dlm_prop'],
+                        'luar_batas' => isset($data['luar_batas']) ?? 0,
+                        'batas_1' => $data['batas_1'],
+                        'batas_2' => $data['batas_2'],
+                        'batas_3' => $data['batas_3'],
+                        'batas_4' => $data['batas_4'],
+                        'batas_5' => $data['batas_5'],
+                        'batas_6' => $data['batas_6'],
+                        'hari_1' => $data['hari_1'],
+                        'hari_2' => $data['hari_2'],
+                        'hari_3' => $data['hari_3'],
+                        'hari_4' => $data['hari_4'],
+                        'hari_5' => $data['hari_5'],
+                        'hari_6' => $data['hari_6'],
+                        'ketr' => isset($data['ketr']) ?? ''
+                    ];
+                    // echo json_encode($dataArray);
+                    $submitData = getCurl($dataArray, $this->ipAddress . 'update_wilayah_2.php');
+                } else {
+                    $dataArray = [
+                        'kd_member' => $this->session->get('user')['kode'],
+                        'dlm_kota' => $data['dlm_kota'],
+                        'dlm_prop' => $data['dlm_prop'],
+                        'luar_batas' => $data['luar_batas']
+                    ];
+                    $submitData = getCurl($dataArray, $this->ipAddress . 'add_wilayah.php');
+                }
+                // echo json_encode($submitData);
+                if($submitData['success'] == '1'){
+                    $this->session->setFlashdata('success', 'Data berhasil disimpan');
+                } else {
+                    $this->session->setFlashdata('error', 'Data gagal disimpan');
+                }
+            } else {
+                echo json_encode($validation->getErrors());
+                $this->session->setFlashdata('error', 'Data tidak valid');
+            }
+        }
 
         if(empty($listData)) $listData = getCurl([
             'caller' => 'MASTER',
@@ -221,7 +318,7 @@ class Pengaturan extends BaseController
 
         return view('pengaturan/batas-wilayah', [
             'title' => 'Batas Wilayah',
-            'listData' => $listData['result_wilayah']
+            'listData' => $listData
         ]);
     }
 
@@ -240,8 +337,6 @@ class Pengaturan extends BaseController
         if ($this->request->getMethod() == 'POST') {
             $data = $this->request->getPost();
             // echo json_encode($data);
-            // $kd_member = $data['kd_member'];
-            // $kd_kota = $data['kd_kota'];
 
             // lakukan validasi data
             $validation =  \Config\Services::validation();
