@@ -53,7 +53,12 @@
                 $('#hrg_bbm').val(e.relatedTarget.dataset.harga);
                 
                 // append id into form class modal-body
-                $('.modal-body').append('<input type="hidden" name="id" value="' + e.relatedTarget.dataset.id + '">');
+                // if name id is exist, then set value id
+                if($('#id').length > 0){
+                    $('#id').val(e.relatedTarget.dataset.id);
+                } else {
+                    $('.modal-body').append('<input type="hidden" name="id" value="' + e.relatedTarget.dataset.id + '">');
+                }
             }
         });
     });
