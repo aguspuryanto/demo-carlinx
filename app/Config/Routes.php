@@ -22,11 +22,6 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
 
     $routes->get('profile', 'Profile::index');
 
-    // rate
-    $routes->get('rate', 'Rate::index');
-    $routes->post('rate/hitung', 'Rate::hitung');
-    $routes->get('rate/placeid', 'Rate::placeid');
-
     // akun
     $routes->get('akun', 'Akun::index');
 
@@ -35,6 +30,13 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
 
     // proses
     $routes->get('proses', 'Proses::index');
+});
+
+// rate
+$routes->group('rate', function($routes) {
+    $routes->get('index', 'Rate::index');
+    $routes->post('rate/hitung', 'Rate::hitung');
+    $routes->get('rate/placeid', 'Rate::placeid');
 });
 
 // pelayanan

@@ -1,11 +1,11 @@
-    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <form action="<?= base_url('pengaturan/bbm') ?>" method="POST">
                 <div class="modal-header">
                     <h5 class="modal-title" id="addModalLabel">Tambah BBM</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                        <span>&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">

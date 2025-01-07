@@ -22,8 +22,10 @@
                     <ul class="list-group">
                         <?php foreach ($listData as $item) : ?>
                         <li class="list-group-item">
-                            <h5 class="mb-1"><?= $item['descr'] ?></h5>
-                            <p class="mb-0">Rp. <?= number_format($item['harga'], 0, ',', '.') ?></p>
+                            <a href="#" class="list-group-item-action" data-id="<?= $item['id'] ?>" data-bs-toggle="modal" data-bs-target="#addModal" data-descr="<?= $item['descr'] ?>" data-harga="<?= $item['harga'] ?>">
+                                <h5 class="mb-1"><?= $item['descr'] ?></h5> 
+                                <p class="mb-0">Rp. <?= number_format($item['harga'], 0, ',', '.') ?></p>
+                            </a>
                         </li>
                         <?php endforeach ?>
                     </ul>
@@ -35,4 +37,25 @@
      
     <?php include_once '_modal_bbm.php'; ?>
 
+<?= $this->endSection() ?>
+
+<?= $this->section('scripts') ?>
+<script>
+    $(document).ready(function() {
+        $('#addModal').on('show.bs.modal', function (e) {
+            console.log(e.relatedTarget.dataset.id);
+            if(e.relatedTarget.dataset.id){
+                // edit header modal
+                $('#addModalLabel').text('Edit BBM');
+
+                // fill form modal
+                $('#nm_bbm').val(e.relatedTarget.dataset.descr);
+                $('#hrg_bbm').val(e.relatedTarget.dataset.harga);
+                
+                // append id into form class modal-body
+                $('.modal-body').append('<input type="hidden" name="id" value="' + e.relatedTarget.dataset.id + '">');
+            }
+        });
+    });
+</script>
 <?= $this->endSection() ?>
