@@ -218,7 +218,7 @@ class Pengaturan extends BaseController
         // handle POST
         if ($this->request->getMethod() == 'POST') {
             $data = $this->request->getPost();
-            // echo json_encode($data);
+            echo json_encode($data);
             // step1: add_wilayah.php, step2: update_wilayah_2.php
 
             /* update_wilayah_2.php params
@@ -287,7 +287,7 @@ class Pengaturan extends BaseController
                         'hari_6' => $data['hari_6'],
                         'ketr' => isset($data['ketr']) ?? ''
                     ];
-                    // echo json_encode($dataArray);
+                    echo json_encode($dataArray);
                     $submitData = getCurl($dataArray, $this->ipAddress . 'update_wilayah_2.php');
                 } else {
                     $dataArray = [
