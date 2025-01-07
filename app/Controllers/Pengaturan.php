@@ -86,7 +86,6 @@ class Pengaturan extends BaseController
             } else {
                 $this->session->setFlashdata('error', 'Data tidak valid');
             }
-
         }
 
         if(empty($listData)) $listData = getCurl([
@@ -169,16 +168,16 @@ class Pengaturan extends BaseController
                         'dlmkota' => $data['dlm_kota'],
                         'dlmprop' => $data['dlm_prop'],
                         'luarprop' => $data['luar_prop'],
-                        ], $this->ipAddress . 'add_driver.php');
+                    ], $this->ipAddress . 'add_driver.php');
+                }
+                // echo json_encode($submitData);
+                if($submitData['success'] == '1'){
+                    $this->session->setFlashdata('success', 'Data berhasil disimpan');
+                } else {
+                    $this->session->setFlashdata('error', 'Data gagal disimpan');
                 }
             } else {
                 $this->session->setFlashdata('error', 'Data tidak valid');
-            }
-
-            if($submitData['success'] == '1'){
-                $this->session->setFlashdata('success', 'Data berhasil disimpan');
-            } else {
-                $this->session->setFlashdata('error', 'Data gagal disimpan');
             }
         }
 
