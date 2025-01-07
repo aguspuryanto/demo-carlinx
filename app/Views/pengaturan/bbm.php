@@ -54,8 +54,8 @@
                 
                 // append id into form class modal-body
                 // if name id is exist, then set value id
-                if($('#id').length > 0){
-                    $('#id').val(e.relatedTarget.dataset.id);
+                if($('.modal-body input[name="id"]').length > 0){
+                    $('.modal-body input[name="id"]').val(e.relatedTarget.dataset.id);
                 } else {
                     $('.modal-body').append('<input type="hidden" name="id" value="' + e.relatedTarget.dataset.id + '">');
                 }
