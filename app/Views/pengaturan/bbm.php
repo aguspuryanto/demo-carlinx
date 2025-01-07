@@ -22,7 +22,7 @@
                     <ul class="list-group">
                         <?php foreach ($listData as $item) : ?>
                         <li class="list-group-item">
-                            <a href="#" class="list-group-item-action" data-id="<?= $item['id'] ?>" data-bs-toggle="modal" data-bs-target="#addModal" data-descr="<?= $item['descr'] ?>" data-harga="<?= $item['harga'] ?>">
+                            <a href="#" class="list-group-item-action" data-kode="<?= $item['kode'] ?>" data-bs-toggle="modal" data-bs-target="#addModal" data-descr="<?= $item['descr'] ?>" data-harga="<?= $item['harga'] ?>">
                                 <h5 class="mb-1"><?= $item['descr'] ?></h5> 
                                 <p class="mb-0">Rp. <?= number_format($item['harga'], 0, ',', '.') ?></p>
                             </a>
@@ -43,8 +43,8 @@
 <script>
     $(document).ready(function() {
         $('#addModal').on('show.bs.modal', function (e) {
-            console.log(e.relatedTarget.dataset.id);
-            if(e.relatedTarget.dataset.id){
+            console.log(e.relatedTarget.dataset.kode);
+            if(e.relatedTarget.dataset.kode){
                 // edit header modal
                 $('#addModalLabel').text('Edit BBM');
 
@@ -54,10 +54,10 @@
                 
                 // append id into form class modal-body
                 // if name id is exist, then set value id
-                if($('.modal-body input[name="id"]').length > 0){
-                    $('.modal-body input[name="id"]').val(e.relatedTarget.dataset.id);
+                if($('.modal-body input[name="kode"]').length > 0){
+                    $('.modal-body input[name="kode"]').val(e.relatedTarget.dataset.id);
                 } else {
-                    $('.modal-body').append('<input type="hidden" name="id" value="' + e.relatedTarget.dataset.id + '">');
+                    $('.modal-body').append('<input type="hidden" name="kode" value="' + e.relatedTarget.dataset.kode + '">');
                 }
             }
         });

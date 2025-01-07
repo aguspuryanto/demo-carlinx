@@ -62,11 +62,20 @@ class Pengaturan extends BaseController
 
             // jika data vlid, maka submit
             if($isDataValid){
-                $submitData = getCurl([
-                    'kd_member' => $this->session->get('user')['kode'],
-                    'nm_bbm' => $data['nm_bbm'],
-                    'hrg_bbm' => $data['hrg_bbm'],
-                ], $this->ipAddress . 'add_bbm.php');
+                // if kode is exist, then update  
+                if(isset($data['kode'])){
+                    $submitData = getCurl([
+                        'kd_bbm' => $data['kode'],
+                        'nm_bbm' => $data['nm_bbm'],
+                        'hrg_bbm' => $data['hrg_bbm'],
+                    ], $this->ipAddress . 'update_bbm.php');
+                } else {
+                    $submitData = getCurl([
+                        'kd_member' => $this->session->get('user')['kode'],
+                        'nm_bbm' => $data['nm_bbm'],
+                        'hrg_bbm' => $data['hrg_bbm'],
+                    ], $this->ipAddress . 'add_bbm.php');
+                }
                 // echo json_encode($submitData);
                 if($submitData['success'] == '1'){
                     $this->session->setFlashdata('success', 'Data berhasil disimpan');
