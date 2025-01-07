@@ -145,7 +145,6 @@ class Pengaturan extends BaseController
                 'luar_prop' => 'required',
                 'makan' => 'required',
                 'hotel' => 'required',
-                // 'fee' => 'required',
             ]);
             $isDataValid = $validation->withRequest($this->request)->run();
 
@@ -245,10 +244,8 @@ class Pengaturan extends BaseController
             $validation =  \Config\Services::validation();
             $validation->setRules([
                 // 'id' => 'required',
-                'kd_kat' => 'required',
                 'dlm_kota' => 'required',
                 'dlm_prop' => 'required',
-                'luar_batas' => 'optional',
                 'batas_1' => 'required',
                 'batas_2' => 'required',
                 'batas_3' => 'required',
@@ -260,8 +257,7 @@ class Pengaturan extends BaseController
                 'hari_3' => 'required',
                 'hari_4' => 'required',
                 'hari_5' => 'required',
-                'hari_6' => 'required',
-                'ketr' => 'optional'
+                'hari_6' => 'required'
             ]);
             $isDataValid = $validation->withRequest($this->request)->run();
 
@@ -269,7 +265,6 @@ class Pengaturan extends BaseController
                 if(isset($data['id'])){
                     $dataArray = [
                         'id' => $data['id'],
-                        'kd_kat' => $data['kd_kat'],
                         'dlm_kota' => $data['dlm_kota'],
                         'dlm_prop' => $data['dlm_prop'],
                         'luar_batas' => isset($data['luar_batas']) ?? 0,
@@ -285,9 +280,9 @@ class Pengaturan extends BaseController
                         'hari_4' => $data['hari_4'],
                         'hari_5' => $data['hari_5'],
                         'hari_6' => $data['hari_6'],
-                        'ketr' => isset($data['ketr']) ?? ''
+                        'ketr' => $data['ketr']
                     ];
-                    echo json_encode($dataArray);
+                    // echo json_encode($dataArray);
                     $submitData = getCurl($dataArray, $this->ipAddress . 'update_wilayah_2.php');
                 } else {
                     $dataArray = [
