@@ -32,7 +32,7 @@
                         <?php endforeach ?>
                     </ul>
 
-                    <div class="table-responsive d-sm-none d-md-none d-lg-block d-xl-block mt-3">
+                    <div class="d-none table-responsive d-sm-none d-md-none d-lg-block d-xl-block mt-3">
                     <table class="table table-striped">
                         <thead>
                             <tr>

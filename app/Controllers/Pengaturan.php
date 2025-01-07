@@ -177,6 +177,7 @@ class Pengaturan extends BaseController
                     $this->session->setFlashdata('error', 'Data gagal disimpan');
                 }
             } else {
+                echo json_encode($validation->getErrors());
                 $this->session->setFlashdata('error', 'Data tidak valid');
             }
         }

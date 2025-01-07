@@ -1,6 +1,7 @@
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
+                <form action="<?= base_url('pengaturan/driver') ?>" method="POST">
                 <div class="modal-header">
                     <h5 class="modal-title" id="addModalLabel">Tambah Driver</h5>
                     <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
@@ -8,7 +9,6 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="<?= base_url('pengaturan/driver') ?>" method="POST">
                         <!-- kategory -->
                         <div class="form-group">
                             <label for="kd_kat">Kategori</label>
