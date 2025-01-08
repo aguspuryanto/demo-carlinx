@@ -11,17 +11,20 @@ class Rate extends BaseController
     protected $appKey = 'Cikgr94iiQ3Z3EwJG43WSoYhgBpyVw3XtHrI-CsM0Is';
     protected $apiUrl = 'https://autocomplete.search.hereapi.com/v1';
 
-    //https://api.geoapify.com/v1/geocode/autocomplete?text=Mosco&apiKey=b13dfbfe7b934de88fdf373de1f1c1c9
-    protected $geoapify; 
-    protected $geoapifyUrl;
+    protected $ipAddress;
+    protected $session;
         
     protected $helpers = ['url', 'form', 'my'];
 
     public function __construct()
     {
-        // $this->request = \Config\Services::request();
-        // $this->geoapify = $_ENV['API_KEY_GEOAPIFY'];
-        // $this->geoapifyUrl = $_ENV['API_BASEURL_GEOAPIFY'];
+        helper('my');
+        $this->ipAddress = $_ENV['API_BASEURL'];
+        $this->session = session();
+        // jika tidak ada session, redirect ke login
+        if (!$this->session->get('user') || !isset($this->session->get('user')['kode'])) {
+            return redirect()->to('/login');
+        }
 
         $this->appKey = $_ENV['API_KEY_HERE'];
         $this->apiUrl = $_ENV['API_BASEURL_HERE'];
@@ -51,6 +54,39 @@ class Rate extends BaseController
     public function hitung()
     {
         return view('pages/rate/hitung');
+    }
+
+    public function getUnit() 
+    {
+        /* params: 
+         * caller optional
+         * kd_member required
+         * kd_kota required
+         * search required
+         */
+
+        $listData   = [];
+        $curlOpt    = [
+            'caller' => 'MASTER',
+            'kd_member' => $this->session->get('user')['kode'],
+            'kd_kota' => ''
+            // 'search' => $this->request->getGet('q')
+        ];
+        // echo json_encode($curlOpt);
+
+        if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'select_unit.php');
+
+        if($this->request->getget('q')) {
+            // echo json_encode($listData);
+            $search = $this->request->getGet('q');
+            $listData = array_filter($listData['result_unit'], function($item) use ($search) {
+                return strpos($item['nama'], $search) !== false;
+            });
+            echo json_encode($listData);
+        }
+
+        echo json_encode($listData);
+
     }
 
     public function placeid()

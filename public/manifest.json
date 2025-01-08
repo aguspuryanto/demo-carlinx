@@ -19,5 +19,11 @@
         "src": "assets/img/favicon512.png",
         "type": "image/png", "sizes": "512x512"
       }
+    ],
+    "id": "partner.carlinx.id",
+    "description": "Sewa Mobil",
+    "lang": "id",
+    "categories": [
+      "business"
     ]
   }

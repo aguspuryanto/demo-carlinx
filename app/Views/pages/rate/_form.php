@@ -7,10 +7,10 @@ helper('form');
   <div class="form-group">
     <label for="unitName" class="form-label">Nama Unit</label>
     <select class="form-control" name="unit" id="unitName">
-      <option>Avanza 2017 (Test)</option>
+      <!-- <option>Avanza 2017 (Test)</option>
       <option>Avanza 2020 (Test)</option>
       <option>Avanza TSS (Test)</option>
-      <option>Big Bus (Test)</option>
+      <option>Big Bus (Test)</option> -->
     </select>
   </div> 
 
@@ -118,41 +118,30 @@ helper('form');
       method: 'GET',
     };
 
-    // $("#lokasiJemput").autocomplete({
-    //   source: function(request, response) {
-    //     $.ajax({
-    //       url: '/rate/placeid',
-    //       type: 'GET',
-    //       dataType: "json",
-    //       data: {
-    //         term: request.term,
-    //       },
-    //       success: function(data) {
-    //         // response(data);
-    //         console.log(data);                  
-    //         // looping data
-    //         // var data = result.items;
-    //         if(data.items) {
-    //           var selectOptions = '<select class="form-control">';
-    //           $.each(data.items, function (index, item) {
-    //             selectOptions += '<option value="' + item.address.label + '">' + item.address.label + '</option>';
-    //           });
-    //           selectOptions += '</select>';
-
-    //           $('#lokasiJemputList').html(selectOptions);
-    //           // $(this).html(selectOptions);
-    //         } else {
-    //           $('#lokasiJemputList').html('');
-    //         }
-    //       }
-    //     });
-    //   },
-    //   minLength: 3,
-    //   select: function(event, ui) {
-    //     // console.log(ui.item.value);
-    //     console.log(ui.item.address.label);
-    //   }
-    // });
+    $('#unitName').select2({
+      theme: 'bootstrap-5',
+      placeholder: 'Type to search...',
+      minimumInputLength: 2,
+      ajax: {
+        url: 'rate/get-unit',
+        dataType: 'json',
+        delay: 250,
+        data: function (params) {
+          return {
+            q: params.term, // Search term
+          };
+        },
+        processResults: function (data) {
+          return {
+            results: data.items.map(item => ({
+              id: item.id,
+              text: item.title
+            }))
+          };
+        },
+        cache: true
+      }
+    });
 
     // Initialize Select2
     $('#lokasiJemput, #lokasiTujuan').select2({
