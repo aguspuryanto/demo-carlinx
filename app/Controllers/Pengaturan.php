@@ -370,9 +370,25 @@ class Pengaturan extends BaseController
 
         return view('pengaturan/lokasi-garasi', [
             'title' => 'Lokasi Garasi',
-            'listData' => $listData['result_garasi'],
-            'listkota' => $listkota['result_kota']
+            'listData' => $listData,
+            'listkota' => $listkota
         ]);
+    }
+
+    // lokasiGarasiDelete
+    public function lokasiGarasiDelete()
+    {
+        /* params: 
+         * kd_site required
+         * kd_kota required
+         */
+        $data = $this->request->getPost();
+        $dataArray = [
+            'kd_site' => $data['kd_site'],
+            'kd_kota' => $data['kd_kota']
+        ];
+        $submitData = getCurl($dataArray, $this->ipAddress . 'delete_garasi.php');
+        echo json_encode($submitData);
     }
 
     public function unit()
@@ -393,11 +409,43 @@ class Pengaturan extends BaseController
         $listData = [];
         $listPaketDriver = [];
         $listPaketBbm    = [];
+        $listKategori = [];
 
         $curlOpt    = [
             'caller' => 'MASTER',
             'kd_member' => $this->session->get('user')['kode']
         ];
+
+        // handle POST
+        if ($this->request->getMethod() == 'POST') {
+            $data = $this->request->getPost();
+            echo json_encode($data);
+
+            // $kd_unit = $_POST['kd_unit'];
+            // $nama = $_POST['nama'];					
+            // $kat = SUBSTR($kd_unit,0,8).$_POST['kategori'];
+            // $bbm = $_POST['bbm'];
+            // $dlm_kota = $_POST['dlm_kota'];
+            // $dlm_prop = $_POST['dlm_prop'];
+            // $luar_prop = $_POST['luar_prop'];
+            // $lepas_kunci = $_POST['lepas_kunci'];
+            // $biaya_antar = $_POST['biaya_antar'];
+            // $biaya_ambil = $_POST['biaya_ambil'];
+            // $tuslah = $_POST['tuslah'];
+            // $is_tuslah = $_POST['is_tuslah'];
+            // $stat = $_POST['stat'];
+            // $kons_bbm = $_POST['kons_bbm'];
+            // $kursi = $_POST['kursi'];
+            // $tahun = $_POST['tahun'];		
+            // $transmisi = $_POST['transmisi'];
+            // $warna = $_POST['warna'];
+            // $drop_in = $_POST['drop_in'];
+            // $over_time = $_POST['over_time'];
+            // $fee = $_POST['fee'];
+            // $stgh_hr = $_POST['stgh_hr'];
+            // $bulanan = $_POST['bulanan'];
+            
+        }
 
         if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'select_unit_1.php');
         // echo json_encode($listData);
@@ -407,11 +455,14 @@ class Pengaturan extends BaseController
 
         if(empty($listPaketBbm)) $listPaketBbm = getCurl($curlOpt, $this->ipAddress . 'select_bbm.php');
 
+        if(empty($listKategori)) $listKategori = getCurl(['kd_member' => $this->session->get('user')['kode']], $this->ipAddress . 'select_kategori.php');
+
         return view('pengaturan/unit', [
             'title' => 'Unit',
-            'listData' => $listData['result_unit'],
-            'listPaketDriver' => $listPaketDriver['result_driver'],
-            'listPaketBbm'    => $listPaketBbm['result_bbm']
+            'listData' => $listData,
+            'listPaketDriver' => $listPaketDriver,
+            'listPaketBbm'    => $listPaketBbm,
+            'listKategori'    => $listKategori,
         ]);
     }
 

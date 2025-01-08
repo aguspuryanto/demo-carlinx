@@ -12,7 +12,7 @@
                     <div class="form-group">
                         <label for="kd_kota">Deskripsi</label>
                         <select name="kd_kota" id="kd_kota" class="form-control">
-                            <?php foreach ($listkota as $l) : ?>
+                            <?php foreach ($listkota['result_kota'] as $l) : ?>
                             <option value="<?= $l['kode'] ?>"><?= $l['nama'] ?></option>
                             <?php endforeach; ?>
                         </select>

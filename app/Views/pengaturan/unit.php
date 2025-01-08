@@ -16,36 +16,51 @@
                 </div>
                 <div class="card-body">
                     <?php 
-                    // include_once '_form_unit.php';
-                    // echo json_encode($listData);
+                    //include_once '_form.php';
+                    echo json_encode($listData['result_unit']);
                     ?>
+                    <ul class="list-group d-sm-block d-md-block d-lg-none d-xl-none">
+                        <?php foreach ($listData['result_unit'] as $item) : ?>
+                        <li class="list-group-item">
+                            <a href="#" class="list-group-item d-flex justify-content-start align-items-center" data-id="<?= $item['kode'] ?>" data-item="<?= esc(json_encode($item)) ?>" data-bs-toggle="modal" data-bs-target="#addModal">
+                                <img class="avatar avatar-lg" src="<?= $_ENV['API_BASEURL'] . 'images/' . $item['path_foto'] ?>" style="width: 64px; height: 64px;" />
+                                <div class="ms-3">
+                                    <!-- <h5 class="mb-1"><?= $item['nama'] ?></h5> -->
+                                    <p class="fw-bold mb-0"><?= $item['nama'] ?></p>
+                                    <p class="text-muted mb-0 fs-sm">Dalam Kota Rp. <?= number_format($item['dlm_kota'], 0, ',', '.') ?></p>
+                                    <p class="text-muted mb-0 fs-sm">Luar Kota Rp. <?= number_format($item['dlm_prop'], 0, ',', '.') ?></p>
+                                    <p class="text-muted mb-0 fs-sm">Luar Batas Rp. <?= number_format($item['luar_prop'], 0, ',', '.') ?></p>
+                                </div>
+                            </a>
+                        </li>
+                        <?php endforeach ?>
+                    </ul>
 
-                    <?php foreach ($listData as $item) : ?>
-                    <div class="media mb-3">
-                        <img class="mr-3" src="<?= $_ENV['API_BASEURL'] . 'images/' . $item['path_foto'] ?>" alt="Generic placeholder image" style="width: 64px; height: 64px;">
-                        <div class="media-body">
-                            <h5 class="mt-0"><?= $item['nama'] ?></h5>
-                            <div class="table-responsive d-sm-none d-md-none d-lg-block d-xl-block mt-3">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Dalam Kota</th>
-                                        <th scope="col">Luar Kota</th>
-                                        <th scope="col">Luar Batas</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Rp. <?= number_format($item['dlm_kota'], 0, ',', '.') ?></td>
-                                        <td>Rp. <?= number_format($item['dlm_prop'], 0, ',', '.') ?></td>
-                                        <td>Rp. <?= number_format($item['luar_prop'], 0, ',', '.') ?></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            </div>
-                        </div>
+                    <div class="d-none table-responsive d-sm-none d-md-none d-lg-block d-xl-block mt-3">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">Kategori</th>
+                                <th scope="col">Dalam Kota</th>
+                                <th scope="col">Luar Kota</th>
+                                <th scope="col">Luar Batas</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $no = 1; ?>
+                            <?php foreach ($listData['result_unit'] as $item) : ?>
+                                <tr>
+                                    <th scope="row"><?= $no++ ?></th>
+                                    <td><?= $item['nama'] ?></td>
+                                    <td>Rp. <?= number_format($item['dlm_kota'], 0, ',', '.') ?></td>
+                                    <td>Rp. <?= number_format($item['dlm_prop'], 0, ',', '.') ?></td>
+                                    <td>Rp. <?= number_format($item['luar_prop'], 0, ',', '.') ?></td>
+                                </tr>
+                            <?php endforeach ?>
+                        </tbody>
+                    </table>
                     </div>
-                    <?php endforeach; ?>
                 </div>
             </div>
         </div>
@@ -56,54 +71,39 @@
 
 <?= $this->endSection() ?>
 
-
+<?= $this->section('scripts') ?>
 <script>
-    $(document).ready(function () {
-        // Fungsi untuk preview gambar
-        $('#imageInput').on('change', function (event) {
-            const files = event.target.files; // Ambil file dari input
-            const previewContainer = $('#previewContainer');
+    $(document).ready(function() {
+        $('#addModal').on('show.bs.modal', function (event) {
+            console.log(event.relatedTarget.dataset.id);
 
-            // Kosongkan container sebelum menampilkan preview baru
-            previewContainer.empty();
+            if(event.relatedTarget.dataset.id){
+                // edit header modal
+                $('#addModalLabel').text('Edit Unit');
+                
+                // get data-item
+                var item = JSON.parse(event.relatedTarget.dataset.item);
+                console.log(item, 'item');
 
-            // Iterasi setiap file yang diunggah
-            Array.from(files).forEach(file => {
-                if (file.type.startsWith('image/')) {
-                    const reader = new FileReader();
+                // set value into form
+                $('#nama').val(item.nama);
+                $('#dlm_kota').val(item.dlm_kota);
+                $('#dlm_prop').val(item.dlm_prop);
+                $('#luar_prop').val(item.luar_prop);
+                // $('#makan').val(item.makan);
+                // $('#hotel').val(item.hotel);
+                // $('#fee').val(item.fee);
 
-                    // Ketika file berhasil dibaca
-                    reader.onload = function (e) {
-                        const img = $(
-                            `<div class="text-center">
-                                <img src="${e.target.result}" class="img-thumbnail" style="width: 100px; height: 100px;" alt="Preview">
-                                <p class="text-muted" style="font-size: 0.8rem;">${file.name}</p>
-                            </div>`
-                        );
-                        previewContainer.append(img);
-                    };
-
-                    // Mulai membaca file sebagai DataURL
-                    reader.readAsDataURL(file);
+                // append id into form class modal-body
+                // if name id is exist, then set value id
+                if($('.modal-body input[name="id"]').length > 0){
+                    $('.modal-body input[name="id"]').val(event.relatedTarget.dataset.id);
+                } else {
+                    // append id into form class modal-body
+                    $('.modal-body').append('<input type="hidden" name="id" value="' + event.relatedTarget.dataset.id + '">');
                 }
-            });
-        });
-
-        // Fungsi submit form
-        $('#imageForm').on('submit', function (e) {
-            e.preventDefault(); // Cegah reload halaman
-
-            const formData = new FormData();
-            const files = $('#imageInput')[0].files;
-
-            // Tambahkan file ke FormData
-            Array.from(files).forEach(file => {
-                formData.append('images[]', file);
-            });
-
-            // Simulasi proses upload
-            alert('Gambar berhasil dipilih, siap di-upload!');
-            // Anda bisa menambahkan kode AJAX untuk mengirim data ke server di sini
+            }
         });
     });
 </script>
+<?= $this->endSection() ?>

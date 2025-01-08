@@ -84,7 +84,8 @@ $routes->group('pengaturan', ['filter' => 'auth'], function($routes) {
     $routes->add('driver', 'Pengaturan::driver');
     $routes->add('batas-wilayah', 'Pengaturan::batasWilayah');
     $routes->add('lokasi-garasi', 'Pengaturan::lokasiGarasi');
-    $routes->get('unit', 'Pengaturan::unit');
+    $routes->post('delete-garasi', 'Pengaturan::lokasiGarasiDelete');
+    $routes->add('unit', 'Pengaturan::unit');
     $routes->add('pengguna', 'Pengaturan::pengguna');
     $routes->get('ganti-password', 'Pengaturan::gantiPassword');
 });
