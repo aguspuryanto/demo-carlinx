@@ -1,29 +1,25 @@
 ---
 deployment:
   tasks:
-    # - export DEPLOYPATH=/home/example/public_html/
-    # - /bin/cp index.html $DEPLOYPATH
-    # - /bin/cp style.css $DEPLOYPATH
-
     - export DEPLOYPATH=/home/carlinx/partner.carlinx.id
     # Copy main project files
     - /bin/cp -R app/* $DEPLOYPATH/app/
-    - /bin/cp -R public/* $DEPLOYPATH/public/
-    - /bin/cp -R system/* $DEPLOYPATH/system/
-    - /bin/cp -R writable/* $DEPLOYPATH/writable/
-    - /bin/cp -R vendor/* $DEPLOYPATH/vendor/
+    # - /bin/cp -R public/* $DEPLOYPATH/public/
+    # - /bin/cp -R system/* $DEPLOYPATH/system/
+    # - /bin/cp -R writable/* $DEPLOYPATH/writable/
+    # - /bin/cp -R vendor/* $DEPLOYPATH/vendor/
     
     # Copy configuration files
-    - /bin/cp .env $DEPLOYPATH/
-    - /bin/cp env $DEPLOYPATH/
-    - /bin/cp spark $DEPLOYPATH/
-    - /bin/cp composer.json $DEPLOYPATH/
-    - /bin/cp composer.lock $DEPLOYPATH/
+    # - /bin/cp .env $DEPLOYPATH/
+    # - /bin/cp env $DEPLOYPATH/
+    # - /bin/cp spark $DEPLOYPATH/
+    # - /bin/cp composer.json $DEPLOYPATH/
+    # - /bin/cp composer.lock $DEPLOYPATH/
     
     # Copy PWA files
-    - /bin/cp public/serviceWorker.js $DEPLOYPATH/public/
-    - /bin/cp public/manifest.json $DEPLOYPATH/public/
+    # - /bin/cp public/serviceWorker.js $DEPLOYPATH/public/
+    # - /bin/cp public/manifest.json $DEPLOYPATH/public/
     
     # Set proper permissions
-    - /bin/chmod 755 $DEPLOYPATH/writable/
-    - /bin/chmod 644 $DEPLOYPATH/.env
+    # - /bin/chmod 755 $DEPLOYPATH/writable/
+    # - /bin/chmod 644 $DEPLOYPATH/.env
