@@ -12779,6 +12779,11 @@ a.card {
   padding: var(--fimobile-padding);
 }
 
+.list-group .list-group-item a {
+  text-decoration: none !important;
+  color: #000;
+}
+
 .list-group.bg-none .list-group-item {
   background-color: transparent;
   border-color: var(--fimobile-theme-bordercolor);

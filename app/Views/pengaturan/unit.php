@@ -22,7 +22,7 @@
                     <ul class="list-group d-sm-block d-md-block d-lg-none d-xl-none">
                         <?php foreach ($listData['result_unit'] as $item) : ?>
                         <li class="list-group-item">
-                            <a href="#" class="list-group-item d-flex justify-content-start align-items-center" data-id="<?= $item['kode'] ?>" data-item="<?= esc(json_encode($item)) ?>" data-bs-toggle="modal" data-bs-target="#addModal">
+                            <a href="#" class="list-group-item-action d-flex justify-content-start align-items-center" data-id="<?= $item['kode'] ?>" data-item="<?= esc(json_encode($item)) ?>" data-bs-toggle="modal" data-bs-target="#addModal">
                                 <img class="avatar avatar-lg" src="<?= $_ENV['API_BASEURL'] . 'images/' . $item['path_foto'] ?>" style="width: 64px; height: 64px;" />
                                 <div class="ms-3">
                                     <!-- <h5 class="mb-1"><?= $item['nama'] ?></h5> -->

@@ -17,13 +17,15 @@
                 <div class="card-body">
                     <?php 
                     //include_once '_form.php';
-                    // echo json_encode($listData);
+                    echo json_encode($listData['result']);
                     ?>
                     <ul class="list-group">
-                        <?php foreach ($listData as $item) : ?>                 
+                        <?php foreach ($listData['result'] as $item) : ?>                 
                         <li class="list-group-item">
-                            <div class="fw-bold"><?= $item['nama'] ?></div>
-                            <?= $item['username'] ?>
+                            <a href="#" class="list-group-item-action" data-bs-target="#addModal" data-bs-toggle="modal" data-id="<?= $item['kode'] ?>" data-item="<?= esc(json_encode($item)) ?>">
+                                <div class="fw-bold mb-0"><?= $item['nama'] ?></div>
+                                <?= $item['username'] ?>
+                            </a>
                         </li>
                         <?php endforeach ?>
                     </ul>
@@ -35,4 +37,39 @@
      
     <?php include_once '_modal_pengguna.php'; ?>
 
+<?= $this->endSection() ?>
+
+<?= $this->section('scripts') ?>
+<script>
+    $(document).ready(function() {
+        $('#addModal').on('show.bs.modal', function (event) {
+            console.log(event.relatedTarget.dataset.id);
+
+            if(event.relatedTarget.dataset.id){
+                // edit header modal
+                $('#addModalLabel').text('Edit Pengguna');
+                
+                // get data-item
+                var item = JSON.parse(event.relatedTarget.dataset.item);
+                console.log(item, 'item');
+
+                // set data-item
+                $('#addModal').find('#nama').val(item.nama);
+                $('#addModal').find('#nohp').val(item.username);
+
+                // set stat
+                $('#addModal').find('#stat').val(item.stat);
+
+                // append id into form class modal-body
+                // if name id is exist, then set value id
+                if($('.modal-body input[name="id"]').length > 0){
+                    $('.modal-body input[name="id"]').val(event.relatedTarget.dataset.id);
+                } else {
+                    // append id into form class modal-body
+                    $('.modal-body').append('<input type="hidden" name="id" value="' + event.relatedTarget.dataset.id + '">');
+                }
+            }
+        });
+    });
+</script>
 <?= $this->endSection() ?>

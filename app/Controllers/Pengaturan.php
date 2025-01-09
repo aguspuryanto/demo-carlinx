@@ -493,11 +493,29 @@ class Pengaturan extends BaseController
 
             // jika data valid, maka submit
             if($isDataValid){
-                $submitData = getCurl([
-                    'nama' => $data['nama'],
-                    'nohp' => $data['nohp'],
-                ], $this->ipAddress . 'add_staf.php');
+                if(isset($data['id'])) {
+                    // $kd_member = $_POST['kd_member'];
+                    // $nama = $_POST['nama'];
+                    // $stat = $_POST['stat'];
+
+                    $curlOpt['nama'] = $data['nama'];
+                    $curlOpt['stat'] = $data['stat'];
+
+                    $submitData = getCurl($curlOpt, $this->ipAddress . 'update_staf.php');
+                } else {
+                    // $kd_member = $_POST['kd_member'];
+                    // $nama = $_POST['nama'];
+                    // $kd_site = $_POST['kd_site'];		
+                    // $nohp_0 = $_POST['nohp'];
+
+                    $curlOpt['nama'] = $data['nama'];
+                    $curlOpt['nohp'] = $data['nohp'];
+                    // $curlOpt['kd_site'] = $data['kd_site'];
+
+                    $submitData = getCurl($curlOpt, $this->ipAddress . 'add_staf.php');
+                }
                 // echo json_encode($submitData);
+
                 // jika berhasil, maka tampilkan pesan
                 if($submitData['success'] == '1'){
                     $this->session->setFlashdata('success', 'Data berhasil disimpan');
@@ -517,7 +535,7 @@ class Pengaturan extends BaseController
         
         return view('pengaturan/pengguna', [
             'title' => 'Pengguna',
-            'listData' => $listData['result']
+            'listData' => $listData
         ]);
     }
 
