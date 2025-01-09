@@ -88,7 +88,7 @@ $routes->group('pengaturan', ['filter' => 'auth'], function($routes) {
     $routes->post('delete-garasi', 'Pengaturan::lokasiGarasiDelete');
     $routes->add('unit', 'Pengaturan::unit');
     $routes->add('pengguna', 'Pengaturan::pengguna');
-    $routes->get('ganti-password', 'Pengaturan::gantiPassword');
+    $routes->add('ganti-password', 'Pengaturan::gantiPassword');
 });
 
 $routes->group('api', function($routes) {

@@ -541,7 +541,30 @@ class Pengaturan extends BaseController
 
     public function gantiPassword()
     {
-        //
-        return view('pengaturan/ganti-pwd', ['title' => 'Ganti Password']);
+        // echo json_encode($this->session->get('user'));
+        $sessionUser = $this->session->get('user');
+
+        // handle POST
+        if ($this->request->getMethod() == 'POST') {
+            $data = $this->request->getPost();
+            // echo json_encode($data);            
+            // $nohp_0 = $_POST['usernm'];
+            // $passwd_0 = $_POST['passwd'];
+            if($data) {
+                $curlOpt = [
+                    'usernm' => $data['usernm'],
+                    'passwd' => $data['passwd']
+                ];
+                $submitData = getCurl($curlOpt, $this->ipAddress . 'update_user_pass.php');
+                // echo json_encode($submitData);
+                if($submitData['success'] == '1'){
+                    $this->session->setFlashdata('success', 'Password berhasil diubah');
+                } else {
+                    $this->session->setFlashdata('error', 'Password gagal diubah');
+                }
+            }
+        }
+
+        return view('pengaturan/ganti-pwd', ['title' => 'Ganti Password', 'sessionUser' => $sessionUser]);
     }
 }
