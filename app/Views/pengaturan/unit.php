@@ -17,7 +17,7 @@
                 <div class="card-body">
                     <?php 
                     //include_once '_form.php';
-                    echo json_encode($listData['result_unit']);
+                    // echo json_encode($listData['result_unit']);
                     ?>
                     <ul class="list-group d-sm-block d-md-block d-lg-none d-xl-none">
                         <?php foreach ($listData['result_unit'] as $item) : ?>
