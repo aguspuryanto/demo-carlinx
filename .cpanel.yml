@@ -1,9 +1,25 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYMENT_SOURCE="repositories/carlinx/app"
-    - export DEPLOYMENT_TARGET="/home/carlinx/partner.carlinx.id/app"
-    # export DEPLOYPATH=/home/carlinx/partner.carlinx.id/
+    - export DEPLOYMENT_SOURCE="repositories/carlinx/"
+    - export DEPLOYMENT_TARGET="/home/carlinx/partner.carlinx.id/"
+    # Copy core application files
+    - /bin/cp -R $DEPLOYMENT_SOURCE/app/* $DEPLOYMENT_TARGET/app/
+    - /bin/cp -R $DEPLOYMENT_SOURCE/public/* $DEPLOYMENT_TARGET/public/
+    - /bin/cp -R $DEPLOYMENT_SOURCE/writable/* $DEPLOYMENT_TARGET/writable/
+    
+    # Copy specific directories
     - /bin/cp -R $DEPLOYMENT_SOURCE/Controllers/* $DEPLOYMENT_TARGET/Controllers/
     - /bin/cp -R $DEPLOYMENT_SOURCE/Views/* $DEPLOYMENT_TARGET/Views/
-    - echo "Deployment completed."
+    
+    # Copy PWA and configuration files
+    - /bin/cp $DEPLOYMENT_SOURCE/serviceWorker.js $DEPLOYMENT_TARGET/
+    - /bin/cp $DEPLOYMENT_SOURCE/manifest.json $DEPLOYMENT_TARGET/
+    - /bin/cp $DEPLOYMENT_SOURCE/.htaccess $DEPLOYMENT_TARGET/
+    - /bin/cp $DEPLOYMENT_SOURCE/robots.txt $DEPLOYMENT_TARGET/
+    
+    # Set permissions
+    - /bin/chmod 755 $DEPLOYMENT_TARGET/writable/
+    - /bin/chmod -R 755 $DEPLOYMENT_TARGET/public/
+    
+    - echo "Deployment completed successfully."

@@ -2,39 +2,48 @@
 
 // Fungsi untuk mendaftarkan service worker
 async function registerServiceWorker() {
-    if ('serviceWorker' in navigator) {
-        try {
-            const registration = await navigator.serviceWorker.register('./serviceWorker.js', {
-                scope: './'
-            });
-            console.log('Service worker berhasil didaftarkan:', registration);
-        } catch (error) {
-            console.error('Gagal mendaftarkan service worker:', error);
-        }
+    if (!('serviceWorker' in navigator)) {
+        console.log('Service Worker tidak didukung di browser ini');
+        return;
+    }
+
+    try {
+        const registration = await navigator.serviceWorker.register('/serviceWorker.js', {
+            scope: '/'
+        });
+        console.log('Service worker berhasil didaftarkan:', registration.scope);
+    } catch (error) {
+        console.error('Gagal mendaftarkan service worker:', error);
     }
 }
 
-// Daftarkan service worker saat halaman dimuat
-window.addEventListener('load', registerServiceWorker);
-
-// Handle event ketika app diinstall
-window.addEventListener('appinstalled', () => {
+// Fungsi untuk menangani toast install
+const handleInstallPrompt = () => {
     const toastInstall = document.getElementById('toastinstall');
-    if (toastInstall) {
-        toastInstall.style.display = 'none';
-    }
-});
+    if (!toastInstall) return;
 
-// Cek apakah app dalam mode fullscreen
-const checkDisplayMode = () => {
-    const toastInstall = $('#toastinstall');
-    if (window.matchMedia('(display-mode: fullscreen)').matches) {
-        toastInstall.fadeOut();
-    } else {
-        toastInstall.fadeIn();
-    }
+    // Cek mode tampilan
+    const isFullscreen = window.matchMedia('(display-mode: fullscreen)').matches;
+    $(toastInstall)[isFullscreen ? 'fadeOut' : 'fadeIn']();
 };
 
-// Monitor perubahan display mode
-window.matchMedia('(display-mode: fullscreen)').addEventListener('change', checkDisplayMode);
-checkDisplayMode(); // Cek status awal
+// Inisialisasi
+document.addEventListener('DOMContentLoaded', () => {
+    // Daftarkan service worker
+    registerServiceWorker();
+    
+    // Setup event listeners
+    window.addEventListener('appinstalled', () => {
+        const toastInstall = document.getElementById('toastinstall');
+        if (toastInstall) {
+            toastInstall.style.display = 'none';
+        }
+    });
+
+    // Monitor perubahan display mode
+    const displayModeMedia = window.matchMedia('(display-mode: fullscreen)');
+    displayModeMedia.addEventListener('change', handleInstallPrompt);
+    
+    // Cek status awal
+    handleInstallPrompt();
+});
