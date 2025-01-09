@@ -1,6 +1,10 @@
 ---
 deployment:
   tasks:
+    # - export DEPLOYPATH=/home/example/public_html/
+    # - /bin/cp index.html $DEPLOYPATH
+    # - /bin/cp style.css $DEPLOYPATH
+
     - export DEPLOYPATH=/home/carlinx/partner.carlinx.id
     # Copy main project files
     - /bin/cp -R app/* $DEPLOYPATH/app/
