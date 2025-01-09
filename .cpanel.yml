@@ -2,12 +2,24 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/carlinx/partner.carlinx.id
+    # Copy main project files
     - /bin/cp -R app/* $DEPLOYPATH/app/
     - /bin/cp -R public/* $DEPLOYPATH/public/
+    - /bin/cp -R system/* $DEPLOYPATH/system/
     - /bin/cp -R writable/* $DEPLOYPATH/writable/
-    - /bin/cp -R Controllers/* $DEPLOYPATH/Controllers/
-    - /bin/cp -R Views/* $DEPLOYPATH/Views/
-    - /bin/cp serviceWorker.js $DEPLOYPATH/
-    - /bin/cp manifest.json $DEPLOYPATH/
-    - /bin/cp .htaccess $DEPLOYPATH/
-    - /bin/cp robots.txt $DEPLOYPATH/
+    - /bin/cp -R vendor/* $DEPLOYPATH/vendor/
+    
+    # Copy configuration files
+    - /bin/cp .env $DEPLOYPATH/
+    - /bin/cp env $DEPLOYPATH/
+    - /bin/cp spark $DEPLOYPATH/
+    - /bin/cp composer.json $DEPLOYPATH/
+    - /bin/cp composer.lock $DEPLOYPATH/
+    
+    # Copy PWA files
+    - /bin/cp public/serviceWorker.js $DEPLOYPATH/public/
+    - /bin/cp public/manifest.json $DEPLOYPATH/public/
+    
+    # Set proper permissions
+    - /bin/chmod 755 $DEPLOYPATH/writable/
+    - /bin/chmod 644 $DEPLOYPATH/.env
