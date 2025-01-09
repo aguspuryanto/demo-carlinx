@@ -12,9 +12,30 @@ async function registerServiceWorker() {
             scope: '/'
         });
         console.log('Service worker berhasil didaftarkan:', registration.scope);
+        
+        // Menangani pembaruan service worker
+        registration.addEventListener('updatefound', () => {
+            const newWorker = registration.installing;
+            newWorker.addEventListener('statechange', () => {
+                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                    // Update tersedia
+                    showUpdateNotification();
+                }
+            });
+        });
     } catch (error) {
         console.error('Gagal mendaftarkan service worker:', error);
     }
+}
+
+// Fungsi untuk menampilkan notifikasi pembaruan
+function showUpdateNotification() {
+    const notification = document.createElement('div');
+    notification.className = 'update-notification';
+    notification.innerHTML = `
+        <p>Versi baru tersedia! <button onclick="window.location.reload()">Perbarui Sekarang</button></p>
+    `;
+    document.body.appendChild(notification);
 }
 
 // Fungsi untuk menangani toast install
