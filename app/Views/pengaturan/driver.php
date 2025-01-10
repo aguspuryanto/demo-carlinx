@@ -22,7 +22,7 @@
                     <ul class="list-group d-sm-block d-md-block d-lg-none d-xl-none">
                         <?php foreach ($listData['result_driver'] as $item) : ?>
                         <li class="list-group-item">
-                            <a href="#" class="list-group-item-action" data-bs-toggle="modal" data-bs-target="#addModal" data-id="<?= $item['id'] ?>" data-kd_kat="<?= $item['kd_kat'] ?>" data-descr="<?= $item['nm_kat'] ?>" data-dlm_kota="<?= $item['dlm_kota'] ?>" data-dlm_prop="<?= $item['dlm_prop'] ?>" data-luar_prop="<?= $item['luar_prop'] ?>" data-makan="<?= $item['makan'] ?>" data-hotel="<?= $item['hotel'] ?>" data-fee="<?= $item['fee'] ?>">
+                            <a href="#" class="list-group-item-action" data-bs-toggle="modal" data-bs-target="#addModal" data-id="<?= $item['id'] ?>" data-item="<?= esc(json_encode($item)) ?>">
                                 <h5 class="mb-1"><?= $item['nm_kat'] ?></h5>
                                 <p class="mb-0">Dalam Kota Rp. <?= number_format($item['dlm_kota'], 0, ',', '.') ?></p>
                                 <p class="mb-0">Luar Kota Rp. <?= number_format($item['dlm_prop'], 0, ',', '.') ?></p>
@@ -41,7 +41,7 @@
                                 <th scope="col">Dalam Kota</th>
                                 <th scope="col">Luar Kota</th>
                                 <th scope="col">Luar Batas</th>
-                                <th scope="col">#</th>
+                                <th scope="col">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -54,8 +54,11 @@
                                     <td>Rp. <?= number_format($item['dlm_prop'], 0, ',', '.') ?></td>
                                     <td>Rp. <?= number_format($item['luar_prop'], 0, ',', '.') ?></td>
                                     <td>
-                                        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal" data-id="<?= $item['id'] ?>" data-item="<?= esc(json_encode($item)) ?>">
+                                        <a href="#" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#addModal" data-id="<?= $item['id'] ?>" data-item="<?= esc(json_encode($item)) ?>">
                                             <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-danger btn-delete" data-id="<?= $item['id'] ?>">
+                                            <i class="fas fa-trash"></i>
                                         </a>
                                     </td>
                                 </tr>
@@ -82,17 +85,21 @@
             if(event.relatedTarget.dataset.id){
                 // edit header modal
                 $('#addModalLabel').text('Edit Driver');
+                
+                // get data-item
+                var item = JSON.parse(event.relatedTarget.dataset.item);
+                console.log(item, 'item');
 
                 // fix: use kdKat instead of kd_kat to match HTML data-kd-kat attribute
-                const kdKat = event.relatedTarget.dataset.kd_kat;
+                const kdKat = item.kd_kat;
                 const kdKatClean = kdKat ? kdKat.replace('22040001', '') : '';
                 $('#kd_kat').val(kdKatClean);
-                $('#dlm_kota').val(event.relatedTarget.dataset.dlm_kota);
-                $('#dlm_prop').val(event.relatedTarget.dataset.dlm_prop);
-                $('#luar_prop').val(event.relatedTarget.dataset.luar_prop);
-                $('#makan').val(event.relatedTarget.dataset.makan);
-                $('#hotel').val(event.relatedTarget.dataset.hotel);
-                $('#fee').val(event.relatedTarget.dataset.fee);
+                $('#dlm_kota').val(item.dlm_kota);
+                $('#dlm_prop').val(item.dlm_prop);
+                $('#luar_prop').val(item.luar_prop);
+                $('#makan').val(item.makan);
+                $('#hotel').val(item.hotel);
+                $('#fee').val(item.fee);
 
                 // append id into form class modal-body
                 // if name id is exist, then set value id
@@ -103,6 +110,11 @@
                     $('.modal-body').append('<input type="hidden" name="id" value="' + event.relatedTarget.dataset.id + '">');
                 }
             }
+        });
+
+        $('.btn-delete').on('click', function(event){
+            event.preventDefault();
+            console.log($(this).data('id'));
         });
     });
 </script>

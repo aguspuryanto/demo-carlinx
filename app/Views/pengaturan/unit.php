@@ -62,7 +62,7 @@
                                     <td>Rp. <?= number_format($item['luar_prop'], 0, ',', '.') ?></td>
                                     <td>
                                         <a href="#" class="btn btn-warning" data-id="<?= $item['kode'] ?>" data-item="<?= esc(json_encode($item)) ?>" data-bs-toggle="modal" data-bs-target="#addModal"><i class="fas fa-edit"></i></a>
-                                        <a href="#" class="btn btn-danger" data-id="<?= $item['kode'] ?>" data-item="<?= esc(json_encode($item)) ?>" data-bs-toggle="modal" data-bs-target="#addModal"><i class="fas fa-trash"></i></a>
+                                        <a href="#" class="btn btn-danger btn-delete" data-id="<?= $item['kode'] ?>"><i class="fas fa-trash"></i></a>
                                     </td>
                                 </tr>
                             <?php endforeach ?>
@@ -151,6 +151,11 @@
                 $('#addModal').find('textarea').val('');
                 $('#addModal').find('select').val('');
             }
+        });
+
+        $('.btn-delete').on('click', function(event){
+            event.preventDefault();
+            console.log($(this).data('id'));
         });
     });
 </script>
