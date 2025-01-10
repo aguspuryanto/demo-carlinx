@@ -97,29 +97,41 @@
 
             <div class="mb-4">
                 <h5>Foto Unit</h5>
-                <div class="d-flex justify-content-between">
-                    <div class="text-center">
-                        <label for="imageInput" class="form-label">Pilih Gambar</label>
+                <div class="grid gap-0 row-gap-3 d-flex justify-content-between">
+                    <div class="g-col-3 text-center">
+                        <label for="imageInput" class="form-label sr-only">Pilih Gambar</label>
                         <input type="file" class="form-control" id="imageInput" accept="image/*">
-                        <div id="previewContainer" class="d-flex flex-wrap gap-3 mb-3">
-                            <img src="placeholder.jpg" id="path_foto" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 1">
+                        <div id="previewContainer" class="d-flex flex-wrap gap-3 mb-3 justify-content-center">
+                            <img src="<?= $_ENV['API_BASEURL'] . 'images/car_75.png' ?>" id="path_foto" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 1">
                         </div>
                     </div>
-                    <div class="text-center">
-                        <img src="placeholder.jpg" id="path_foto_2" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 2">
+                    <div class="g-col-3 text-center">
+                        <label for="imageInput" class="form-label sr-only">Pilih Gambar</label>
+                        <input type="file" class="form-control" id="imageInput" accept="image/*">
+                        <div id="previewContainer" class="d-flex flex-wrap gap-3 mb-3 justify-content-center">
+                            <img src="<?= $_ENV['API_BASEURL'] . 'images/car_75.png' ?>" id="path_foto_2" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 2">
+                        </div>
                     </div>
-                    <div class="text-center">
-                        <img src="placeholder.jpg" id="path_foto_3" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 3">
+                    <div class="g-col-3 text-center">
+                        <label for="imageInput" class="form-label sr-only">Pilih Gambar</label>
+                        <input type="file" class="form-control" id="imageInput" accept="image/*">
+                        <div id="previewContainer" class="d-flex flex-wrap gap-3 mb-3 justify-content-center">
+                            <img src="<?= $_ENV['API_BASEURL'] . 'images/car_75.png' ?>" id="path_foto_3" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 3">
+                        </div>
                     </div>
-                    <div class="text-center">
-                        <img src="placeholder.jpg" id="path_foto_4" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 4">
+                    <div class="g-col-3 text-center">
+                        <label for="imageInput" class="form-label sr-only">Pilih Gambar</label>
+                        <input type="file" class="form-control" id="imageInput" accept="image/*">
+                        <div id="previewContainer" class="d-flex flex-wrap gap-3 mb-3 justify-content-center">
+                            <img src="<?= $_ENV['API_BASEURL'] . 'images/car_75.png' ?>" id="path_foto_4" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 4">
+                        </div>
                     </div>
                 </div>
                 <small class="form-text text-muted">*Unggah foto setelah data berhasil disimpan</small>
             </div>
 
             <div class="form-check mb-4">
-                <input type="checkbox" class="form-check-input" id="tersedia">
-                <label class="form-check-label text-primary" for="tersedia">Tersedia</label>
+                <input type="checkbox" class="form-check-input" id="stat" name="stat">
+                <label class="form-check-label text-primary" for="stat">Tersedia</label>
                 <a href="#" class="float-end text-decoration-underline">tanggal tidak tersedia</a>
             </div>
