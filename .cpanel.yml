@@ -1,7 +1,7 @@
 ---
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/carlinxi/partner.carlinx.id/
+    - export DEPLOYPATH=/home/carlinxi/partner.carlinx.id/ci4_core/
     # Copy main project files
     - /bin/cp -r . $DEPLOYPATH
     # - /bin/cp -R app/* $DEPLOYPATH/app/
