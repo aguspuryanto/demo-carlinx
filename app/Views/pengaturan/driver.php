@@ -41,6 +41,7 @@
                                 <th scope="col">Dalam Kota</th>
                                 <th scope="col">Luar Kota</th>
                                 <th scope="col">Luar Batas</th>
+                                <th scope="col">#</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -52,6 +53,11 @@
                                     <td>Rp. <?= number_format($item['dlm_kota'], 0, ',', '.') ?></td>
                                     <td>Rp. <?= number_format($item['dlm_prop'], 0, ',', '.') ?></td>
                                     <td>Rp. <?= number_format($item['luar_prop'], 0, ',', '.') ?></td>
+                                    <td>
+                                        <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal" data-id="<?= $item['id'] ?>" data-item="<?= esc(json_encode($item)) ?>">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                             <?php endforeach ?>
                         </tbody>

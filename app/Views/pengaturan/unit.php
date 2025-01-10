@@ -18,6 +18,7 @@
                     <?php 
                     //include_once '_form.php';
                     // echo json_encode($listData['result_unit']);
+                    // echo json_encode($listPaketBbm['result_bbm']);
                     ?>
                     <ul class="list-group d-sm-block d-md-block d-lg-none d-xl-none">
                         <?php foreach ($listData['result_unit'] as $item) : ?>
@@ -41,10 +42,12 @@
                         <thead>
                             <tr>
                                 <th scope="col">No</th>
+                                <th scope="col">Merk/Type</th>
                                 <th scope="col">Kategori</th>
                                 <th scope="col">Dalam Kota</th>
                                 <th scope="col">Luar Kota</th>
                                 <th scope="col">Luar Batas</th>
+                                <th scope="col">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -52,10 +55,15 @@
                             <?php foreach ($listData['result_unit'] as $item) : ?>
                                 <tr>
                                     <th scope="row"><?= $no++ ?></th>
+                                    <td><img class="avatar avatar-lg" src="<?= $_ENV['API_BASEURL'] . 'images/' . $item['path_foto'] ?>" style="width: 64px; height: 64px;" /></td>
                                     <td><?= $item['nama'] ?></td>
                                     <td>Rp. <?= number_format($item['dlm_kota'], 0, ',', '.') ?></td>
                                     <td>Rp. <?= number_format($item['dlm_prop'], 0, ',', '.') ?></td>
                                     <td>Rp. <?= number_format($item['luar_prop'], 0, ',', '.') ?></td>
+                                    <td>
+                                        <a href="#" class="btn btn-warning" data-id="<?= $item['kode'] ?>" data-item="<?= esc(json_encode($item)) ?>" data-bs-toggle="modal" data-bs-target="#addModal"><i class="fas fa-edit"></i></a>
+                                        <a href="#" class="btn btn-danger" data-id="<?= $item['kode'] ?>" data-item="<?= esc(json_encode($item)) ?>" data-bs-toggle="modal" data-bs-target="#addModal"><i class="fas fa-trash"></i></a>
+                                    </td>
                                 </tr>
                             <?php endforeach ?>
                         </tbody>
@@ -87,12 +95,27 @@
 
                 // set value into form
                 $('#nama').val(item.nama);
+                $('#kategori option').filter(function() {
+                    return $(this).text() == item.kategori;
+                }).prop("selected", true);
+                $("#bbm option").filter(function() {
+                    return $(this).text() == item.bbm;
+                }).prop("selected", true);
+
+                $('#kursi').val(item.kursi);
+                $('#tahun').val(item.tahun);
+                $('#transmisi').val(item.transmisi);
+                $('#warna').val(item.warna);
+                $('#jarak_tempuh').val(item.jarak_tempuh);
                 $('#dlm_kota').val(item.dlm_kota);
                 $('#dlm_prop').val(item.dlm_prop);
                 $('#luar_prop').val(item.luar_prop);
-                // $('#makan').val(item.makan);
-                // $('#hotel').val(item.hotel);
-                // $('#fee').val(item.fee);
+                $('#transfer').val(item.transfer);
+                $('#over_time').val(item.over_time);
+                $('#twelve_hours').val(item.twelve_hours);
+                $('#fee').val(item.fee);
+                $('#lepas_kunci').val(item.lepas_kunci);
+                $('#bulanan').val(item.bulanan);
 
                 // append id into form class modal-body
                 // if name id is exist, then set value id
@@ -102,6 +125,11 @@
                     // append id into form class modal-body
                     $('.modal-body').append('<input type="hidden" name="id" value="' + event.relatedTarget.dataset.id + '">');
                 }
+            } else {
+                // reset form
+                $('#addModal').find('input').val('');
+                $('#addModal').find('textarea').val('');
+                $('#addModal').find('select').val('');
             }
         });
     });

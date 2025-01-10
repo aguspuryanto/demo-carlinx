@@ -113,7 +113,7 @@
     <script src="<?= base_url(); ?>assets/js/moment.min.js"></script>
     <script src="<?= base_url(); ?>assets/js/daterangepicker.js"></script>
     <!-- page level custom script -->
-    <script src="<?= base_url(); ?>assets/js/app.js"></script>
+    <!-- <script src="<?= base_url(); ?>assets/js/app.js"></script> -->
 
     <script>
         function getPWADisplayMode() {

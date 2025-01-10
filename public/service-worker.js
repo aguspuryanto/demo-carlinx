@@ -19,27 +19,39 @@ if ('serviceWorker' in navigator) {
 }
 
 // install event for the service worker
-self.addEventListener('install', e => {
+// self.addEventListener('install', e => {
 
-    e.waitUntil(
-        caches.open('site-static').then(cache => {
-            cache.addAll(['/', 'https://partner.carlinx.id'])
-        })
-    )
+//     e.waitUntil(
+//         caches.open('site-static').then(cache => {
+//             cache.addAll(['/', 'https://partner.carlinx.id'])
+//         })
+//     )
 
-})
+// })
 
 
-self.addEventListener("fetch", function(event) {
-    event.respondWith(
-        fetch(event.request).catch(function() {
-            return caches.match(event.request).then(function(response) {
-                if (response) {
-                    return response;
-                } else if (event.request.headers.get("accept").includes("text/html")) {
-                    return caches.match("/index-offline.html");
-                }
-            });
-        })
-    );
+// self.addEventListener("fetch", function(event) {
+//     event.respondWith(
+//         fetch(event.request).catch(function() {
+//             return caches.match(event.request).then(function(response) {
+//                 if (response) {
+//                     return response;
+//                 } else if (event.request.headers.get("accept").includes("text/html")) {
+//                     return caches.match("/index-offline.html");
+//                 }
+//             });
+//         })
+//     );
+// });
+
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    fetch(event.request, { redirect: 'follow' })  // Ensure 'follow' is set
+      .then(response => {
+        return response;  // Handle the response
+      })
+      .catch(error => {
+        return new Response('Error', { status: 500 });
+      })
+  );
 });

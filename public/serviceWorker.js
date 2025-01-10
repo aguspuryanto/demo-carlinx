@@ -14,25 +14,13 @@ var cacheassets = [
   "/assets/js/pwa-services.js",
 ];
 
-self.addEventListener("install", function (event) {
-    console.log("Service Worker : Installed!")
-
+self.addEventListener("install", function (event) {    
     event.waitUntil(
-        // caches.open(static).then(function (cache) {
-        //     cache.addAll(cacheassets);
-        // }).then(function () {
-        //     return self.skipWaiting();
-        // })
-        (async() => {
-            try {
-                cache_obj = await caches.open(cache)
-                cache_obj.addAll(cacheassets)
-            }
-            catch{
-                console.log("error occured while caching...")
-                return self.skipWaiting();
-            }
-        })()
+        caches.open(static).then(function (cache) {
+            cache.addAll(cacheassets);
+        }).then(function () {
+            return self.skipWaiting();
+        })
     );
 });
 self.addEventListener("activate", function (event) {    
