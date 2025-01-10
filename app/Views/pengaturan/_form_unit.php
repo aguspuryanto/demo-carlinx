@@ -102,17 +102,17 @@
                         <label for="imageInput" class="form-label">Pilih Gambar</label>
                         <input type="file" class="form-control" id="imageInput" accept="image/*">
                         <div id="previewContainer" class="d-flex flex-wrap gap-3 mb-3">
-                            <img src="<?= $_ENV['API_BASEURL'] . 'images/placeholder.jpg' ?>" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 1">
+                            <img src="placeholder.jpg" id="path_foto" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 1">
                         </div>
                     </div>
                     <div class="text-center">
-                        <img src="<?= $_ENV['API_BASEURL'] . 'images/placeholder.jpg' ?>" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 2">
+                        <img src="placeholder.jpg" id="path_foto_2" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 2">
                     </div>
                     <div class="text-center">
-                        <img src="<?= $_ENV['API_BASEURL'] . 'images/placeholder.jpg' ?>" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 3">
+                        <img src="placeholder.jpg" id="path_foto_3" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 3">
                     </div>
                     <div class="text-center">
-                        <img src="<?= $_ENV['API_BASEURL'] . 'images/placeholder.jpg' ?>" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 4">
+                        <img src="placeholder.jpg" id="path_foto_4" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 4">
                     </div>
                 </div>
                 <small class="form-text text-muted">*Unggah foto setelah data berhasil disimpan</small>

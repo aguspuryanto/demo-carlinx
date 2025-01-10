@@ -82,6 +82,7 @@
 <?= $this->section('scripts') ?>
 <script>
     $(document).ready(function() {
+        const baseUrlImg = "<?= $_ENV['API_BASEURL'] ?>/images/";
         $('#addModal').on('show.bs.modal', function (event) {
             console.log(event.relatedTarget.dataset.id);
 
@@ -116,6 +117,11 @@
                 $('#fee').val(item.fee);
                 $('#lepas_kunci').val(item.lepas_kunci);
                 $('#bulanan').val(item.bulanan);
+
+                $("#path_foto").attr("src", baseUrlImg + item.path_foto);
+                $("#path_foto_2").attr("src", baseUrlImg + item.path_foto_2);
+                $("#path_foto_3").attr("src", baseUrlImg + item.path_foto_3);
+                $("#path_foto_4").attr("src", baseUrlImg + item.path_foto_4);
 
                 // append id into form class modal-body
                 // if name id is exist, then set value id
