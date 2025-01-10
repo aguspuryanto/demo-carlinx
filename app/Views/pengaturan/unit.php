@@ -110,9 +110,9 @@
                 $('#dlm_kota').val(item.dlm_kota);
                 $('#dlm_prop').val(item.dlm_prop);
                 $('#luar_prop').val(item.luar_prop);
-                $('#transfer').val(item.transfer);
+                $('#drop_in').val(item.drop_in);
                 $('#over_time').val(item.over_time);
-                $('#twelve_hours').val(item.twelve_hours);
+                $('#stgh_hr').val(item.stgh_hr);
                 $('#fee').val(item.fee);
                 $('#lepas_kunci').val(item.lepas_kunci);
                 $('#bulanan').val(item.bulanan);

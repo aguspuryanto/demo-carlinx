@@ -61,16 +61,16 @@
                         <input type="number" class="form-control" id="luar_prop" name="luar_prop" value="0">
                     </div>
                     <div class="col-md-4">
-                        <label for="transfer" class="form-label">Transfer (%)</label>
-                        <input type="number" class="form-control" id="transfer" name="transfer"  value="0">
+                        <label for="drop_in" class="form-label">Transfer (%)</label>
+                        <input type="number" class="form-control" id="drop_in" name="drop_in"  value="0">
                     </div>
                     <div class="col-md-4">
                         <label for="over_time" class="form-label">OverTime (%)</label>
                         <input type="number" class="form-control" id="over_time" name="over_time" value="0">
                     </div>
                     <div class="col-md-4">
-                        <label for="twelve_hours" class="form-label">12 Jam (%)</label>
-                        <input type="number" class="form-control" id="twelve_hours" name="twelve_hours" value="0">
+                        <label for="stgh_hr" class="form-label">12 Jam (%)</label>
+                        <input type="number" class="form-control" id="stgh_hr" name="stgh_hr" value="0">
                     </div>
                     <div class="col-md-4">
                         <label for="fee" class="form-label">Margin (Rp)</label>
@@ -102,17 +102,17 @@
                         <label for="imageInput" class="form-label">Pilih Gambar</label>
                         <input type="file" class="form-control" id="imageInput" accept="image/*">
                         <div id="previewContainer" class="d-flex flex-wrap gap-3 mb-3">
-                            <img src="placeholder.jpg" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 1">
+                            <img src="<?= $_ENV['API_BASEURL'] . 'images/placeholder.jpg' ?>" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 1">
                         </div>
                     </div>
                     <div class="text-center">
-                        <img src="placeholder.jpg" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 2">
+                        <img src="<?= $_ENV['API_BASEURL'] . 'images/placeholder.jpg' ?>" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 2">
                     </div>
                     <div class="text-center">
-                        <img src="placeholder.jpg" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 3">
+                        <img src="<?= $_ENV['API_BASEURL'] . 'images/placeholder.jpg' ?>" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 3">
                     </div>
                     <div class="text-center">
-                        <img src="placeholder.jpg" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 4">
+                        <img src="<?= $_ENV['API_BASEURL'] . 'images/placeholder.jpg' ?>" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 4">
                     </div>
                 </div>
                 <small class="form-text text-muted">*Unggah foto setelah data berhasil disimpan</small>
