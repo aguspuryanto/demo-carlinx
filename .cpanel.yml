@@ -18,3 +18,7 @@ deployment:
     - /bin/chmod 755 ${DEPLOYPATH}
     - /bin/find ${DEPLOYPATH} -type d -exec /bin/chmod 755 '{}' \;
     - /bin/find ${DEPLOYPATH} -type f -exec /bin/chmod 644 '{}' \;
+
+    # cp -R repositories/carlinx/app/Controllers/* partner.carlinx.id/ci4_core/app/Controllers/
+    # cp -R repositories/carlinx/app/Views/* partner.carlinx.id/ci4_core/app/Views/
+  
