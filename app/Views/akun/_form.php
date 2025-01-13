@@ -107,6 +107,4 @@ $hidden_input = ['usernm' => $userList[0]['username']];
             </div>
         </div>
         <button type="submit" class="btn btn-primary">Kirim</button>
-        
-        <input type="hidden" name="kd_kota" value="<?= $userList[0]['kd_kota']; ?>">
     <?php echo form_close(); ?>

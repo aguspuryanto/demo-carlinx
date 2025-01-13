@@ -79,7 +79,7 @@ class Akun extends BaseController
             'norek' => $req['norek'],
             'email_addr' => $req['email'],
             'layanan' => $req['is_layanan'],
-            'event' => $req['is_bulanan'],
+            'event' => $req['is_event'],
             'bulanan' => $req['is_bulanan'],
             'lepaskunci' => $req['is_lepaskunci'],
             'publish' => $req['is_publish'],
