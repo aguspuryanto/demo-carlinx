@@ -4,6 +4,8 @@
 
     <!-- main page content -->
     <div class="main-container container">
+        <?php include_once '_alert.php'; ?>
+        
         <div class="row">
             <div class="card">
                 <div class="card-header">
