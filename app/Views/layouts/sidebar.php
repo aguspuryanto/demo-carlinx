@@ -30,7 +30,7 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-12">
-                                        <h1 class="display-4">100</h1>
+                                        <h1 class="display-4">0</h1>
                                     </div>
                                     <div class="col-auto">
                                         <p class="text-muted">Point rewards</p>
