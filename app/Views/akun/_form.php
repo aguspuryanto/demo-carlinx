@@ -1,12 +1,12 @@
 <?php
 helper('form');
-echo json_encode($userList);
+// echo json_encode($userList);
 
 $attributes = [];
 $hidden_input = ['usernm' => $userList[0]['username']];
 ?>
         
-    <?= form_open('akun/update', $attributes, $hidden_input); ?>
+    <?= form_open_multipart('akun/update', $attributes, $hidden_input); ?>
         <div class="mb-3">
             <label for="namaLengkap" class="form-label">Nama Lengkap</label>
             <input type="text" class="form-control" id="namaLengkap" placeholder="Nama Lengkap" name="nama" value="<?= $userList[0]['nama']; ?>">
@@ -83,7 +83,9 @@ $hidden_input = ['usernm' => $userList[0]['username']];
                     if($userList[0]['foto_' . $j] == null) {
                         $path_images = '<div class="container d-flex justify-content-center">
                             <div class="row d-flex align-items-center">
-                            <button type="button" class="btn btn-primary btn-sm">Upload</button>
+                                <button type="button" class="btn btn-primary btn-sm">
+                                    <input type="file" class="form-control" name="uploaded_file[]" id="foto_' . $j . '">
+                                </button>
                             </div>
                         </div>';
                     } else {                        
