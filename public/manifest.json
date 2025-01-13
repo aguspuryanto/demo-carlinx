@@ -1,8 +1,9 @@
 {
     "name": "Carlinx",
     "short_name": "Carlinx",
+    "scope": "/",
     "start_url": "splash.html",
-    "display": "fullscreen",
+    "display": "standalone",
     "background_color": "#092C9F",
     "theme_color": "#092C9F",
     "orientation": "portrait-primary",
