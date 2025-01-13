@@ -21,4 +21,5 @@ deployment:
 
     # cp -R repositories/carlinx/app/Controllers/* partner.carlinx.id/ci4_core/app/Controllers/
     # cp -R repositories/carlinx/app/Views/* partner.carlinx.id/ci4_core/app/Views/
-  
+    # cp -R repositories/carlinx/app/Models/* partner.carlinx.id/ci4_core/app/Models/
+
