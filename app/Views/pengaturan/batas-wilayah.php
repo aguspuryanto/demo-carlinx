@@ -19,7 +19,7 @@
                     //include_once '_form.php';
                     // echo json_encode($listData);
                     ?>
-                    <ul class="list-group">
+                    <ul class="list-group d-sm-block d-md-block d-lg-none d-xl-none">
                         <?php foreach ($listData['result_wilayah'] as $item) : ?>
                         <li class="list-group-item">
                             <a href="#" class="list-group-item-action" data-bs-toggle="modal" data-bs-target="#addModal" data-id="<?= $item['id'] ?>" data-item="<?= esc(json_encode($item)) ?>">
@@ -30,6 +30,39 @@
                         </li>
                         <?php endforeach ?>
                     </ul>
+
+                    <div class="d-none table-responsive d-sm-none d-md-none d-lg-block d-xl-block mt-3">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">No</th>
+                                <th scope="col">Dalam Kota</th>
+                                <th scope="col">Luar Kota</th>
+                                <th scope="col">Luar Batas</th>
+                                <th scope="col">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $no = 1; ?>
+                            <?php foreach ($listData['result_wilayah'] as $item) : ?>
+                                <tr>
+                                    <th scope="row"><?= $no++ ?></th>
+                                    <td><?= ($item['dlm_kota']) ?> KM</td>
+                                    <td><?= ($item['dlm_prop']) ?> KM</td>
+                                    <td><?= ($item['luar_batas']) ?> KM</td>
+                                    <td>
+                                        <a href="#" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#addModal" data-id="<?= $item['id'] ?>" data-item="<?= esc(json_encode($item)) ?>">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a href="#" class="btn btn-danger btn-delete" data-id="<?= $item['id'] ?>">
+                                            <i class="fas fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            <?php endforeach ?>
+                        </tbody>
+                    </table>
+                    </div>
                 </div>
             </div>
         </div>
