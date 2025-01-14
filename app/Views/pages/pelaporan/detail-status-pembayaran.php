@@ -7,20 +7,24 @@
         <div class="row">
             <div class="card">
                 <div class="card-header">
-                    <h4><?= $title ?></h4>
+                    <h4>
+                        <a href="<?= base_url('pelaporan/status-pembayaran/?stat_ver=1') ?>" class="btn btn-sm btn-outline"><i class="fa fa-angle-left"></i></a>
+                        <?= $title ?>
+                    </h4>
                 </div>
                 <div class="card-body">
                     <?php
                     // echo json_encode($listData); die();
                     // $subTotal = 0;
                     ?>
+                    <p class="mb-3">Nama Rental: <?= $listData['result_stat_bayar'][0]['nama_site'] ?></p>
 
                     <table class="table table-striped">
-                        <thead>
+                        <thead> 
                             <tr>
                                 <th scope="col">Tanggal</th>
-                                <th scope="col">Nama Rental</th>
-                                <th scope="col">Status</th>
+                                <th scope="col">Nomer Order</th>
+                                <th scope="col">Nominal</th>
                             </tr>
                         </thead>
                         <tbody>

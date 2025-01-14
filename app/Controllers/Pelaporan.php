@@ -266,6 +266,27 @@ class Pelaporan extends BaseController
         ]);
     }
 
+    public function statusPembayaranDetail($no_tiket)
+    {
+        //
+        $listData   = [];
+        $curlOpt    = [
+            'kd_search' => $no_tiket,
+            'stat_ver' => isset($_GET['stat_ver']) ? $_GET['stat_ver'] : '1', // 1 = verifikasi, 2 = unverifikasi
+            'kd_member' => $this->session->get('user')['kode'],
+            'new_his' => '0',
+        ];
+
+        if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'select_status_pembayaran.php');
+        // echo json_encode($listData); die();
+
+        return view('pages/pelaporan/detail-status-pembayaran', [
+            'title' => 'Detail Pembayaran',
+            'curlOpt' => $curlOpt,
+            'listData' => $listData,
+        ]);
+    }
+
     public function verifikasiPembayaran()
     {
         /* params: 
@@ -305,8 +326,8 @@ class Pelaporan extends BaseController
         if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'select_status_pembayaran.php');
         // echo json_encode($listData); die();
 
-        return view('pages/pelaporan/verifikasi-pembayaran', [
-            'title' => 'Verifikasi Pembayaran',
+        return view('pages/pelaporan/detail-verifikasi-pembayaran', [
+            'title' => 'Detail Pembayaran',
             'curlOpt' => $curlOpt,
             'listData' => $listData,
         ]);
