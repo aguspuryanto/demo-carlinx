@@ -42,8 +42,8 @@ class Pelaporan extends BaseController
         $listData   = [];
         $curlOpt    = [
             'in_out' => '1', // 1 = in, 2 = out
-            'tgl_awal' => date('01-m-Y', strtotime('-1 month')),
-            'tgl_akhir' => date('t-m-Y', strtotime('-1 month')),
+            'tgl_awal' => date('01-m-Y'),
+            'tgl_akhir' => date('t-m-Y'),
             'grouped' => '0',
             'kd_member' => $this->session->get('user')['kode']
         ];
@@ -53,6 +53,7 @@ class Pelaporan extends BaseController
 
         return view('pages/pelaporan/order-masuk', [
             'title' => 'Order Masuk',
+            'curlOpt' => $curlOpt,
             'listData' => ($listData),
         ]);
     }
@@ -70,8 +71,8 @@ class Pelaporan extends BaseController
         $listData   = [];
         $curlOpt    = [
             'in_out' => '2', // 1 = in, 2 = out
-            'tgl_awal' => date('01-m-Y', strtotime('-1 month')),
-            'tgl_akhir' => date('t-m-Y', strtotime('-1 month')),
+            'tgl_awal' => date('01-m-Y'),
+            'tgl_akhir' => date('t-m-Y'),
             'grouped' => '0',
             'kd_member' => $this->session->get('user')['kode']
         ];
@@ -81,6 +82,7 @@ class Pelaporan extends BaseController
 
         return view('pages/pelaporan/order-keluar', [
             'title' => 'Order Keluar',
+            'curlOpt' => $curlOpt,
             'listData' => ($listData),
         ]);
     }
@@ -98,8 +100,8 @@ class Pelaporan extends BaseController
         $listData   = [];
         $curlOpt    = [
             'hut_piu' => '1', // 1 = hutang, 2 = piutang
-            'tgl_awal' => date('01-m-Y', strtotime('-1 month')),
-            'tgl_akhir' => date('t-m-Y', strtotime('-1 month')),
+            'tgl_awal' => date('01-m-Y'),
+            'tgl_akhir' => date('t-m-Y'),
             'grouped' => '0',
             'kd_member' => $this->session->get('user')['kode']
         ];
@@ -152,8 +154,8 @@ class Pelaporan extends BaseController
         $listData   = [];
         $curlOpt    = [
             'hut_piu' => '2', // 1 = hutang, 2 = piutang
-            'tgl_awal' => date('01-m-Y', strtotime('-1 month')),
-            'tgl_akhir' => date('t-m-Y', strtotime('-1 month')),
+            'tgl_awal' => date('01-m-Y'),
+            'tgl_akhir' => date('t-m-Y'),
             'grouped' => '0',
             'kd_member' => $this->session->get('user')['kode']
         ];
