@@ -34,15 +34,19 @@ class Home extends BaseController
     {
         
         $listData   = [];
+        $ListMenu   = [];
         $curlOpt    = [
             'id_member' => $this->session->get('user')['kode'],
         ];
 
         if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'select_statistik.php');
+        
+        if(empty($ListMenu)) $ListMenu = getCurl($curlOpt, $this->ipAddress . 'select_best_menu.php');
 
         return view('dashboard', [
             'title' => 'Dashboard',
-            'listData' => $listData
+            'listData' => $listData,
+            'ListMenu' => $ListMenu
         ]);
     }
 
