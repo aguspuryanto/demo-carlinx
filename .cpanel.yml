@@ -16,16 +16,17 @@ deployment:
     
     # Sync repository files to the deploy target path, excluding .git folder.
     # --delete-after will remove deleted files and folders after syncing.
-    # - /bin/rsync -aP --exclude '.git' --exclude '.well-known' ${REPOPATH}/ ${DEPLOYPATH} --delete-after
+    - /bin/rsync -aP --exclude '.git' --exclude '.well-known' ${REPOPATH}/app/ ${DEPLOYPATH}/ci4_core/app/ --delete-after
+    - /bin/rsync -aP --exclude '.git' --exclude '.well-known' ${REPOPATH}/public/ ${DEPLOYPATH}/ --delete-after
     
     # Set correct permissions.
     - /bin/chmod 755 ${DEPLOYPATH}
     - /bin/find ${DEPLOYPATH} -type d -exec /bin/chmod 755 '{}' \;
     - /bin/find ${DEPLOYPATH} -type f -exec /bin/chmod 644 '{}' \;
 
-    - /bin/cp -R ${REPOPATH}/app/Controllers/* ${DEPLOYPATH}/ci4_core/app/Controllers/
-    - /bin/cp -R ${REPOPATH}/app/Views/* ${DEPLOYPATH}/ci4_core/app/Views/
-    - /bin/cp -R ${REPOPATH}/app/Models/* ${DEPLOYPATH}/ci4_core/app/Models/
-    - /bin/cp -R ${REPOPATH}/public/* ${DEPLOYPATH}
+    # - /bin/cp -R ${REPOPATH}/app/Controllers/* ${DEPLOYPATH}/ci4_core/app/Controllers/
+    # - /bin/cp -R ${REPOPATH}/app/Views/* ${DEPLOYPATH}/ci4_core/app/Views/
+    # - /bin/cp -R ${REPOPATH}/app/Models/* ${DEPLOYPATH}/ci4_core/app/Models/
+    # - /bin/cp -R ${REPOPATH}/public/* ${DEPLOYPATH}
 
   
