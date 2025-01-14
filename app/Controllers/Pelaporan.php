@@ -184,22 +184,40 @@ class Pelaporan extends BaseController
         }
 
         if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'report_hutang.php');
-        // echo json_encode($listData);
+        // echo json_encode($listData); die();
 
         return view('pages/pelaporan/piutang', [
             'title' => 'Piutang',
             'curlOpt' => $curlOpt,
-            'listData' => ($listData['result_hutang']) ?? $listData,
+            'listData' => $listData,
         ]);
     }
 
     public function statusPembayaran()
     {
+        /* params: 
+         */
+
+        $listData   = [];
+        $curlOpt    = [];
+
+        if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'report_hutang.php');
+        // echo json_encode($listData); die();
+
         return view('pages/pelaporan/status-pembayaran', ['title' => 'Status Pembayaran']);
     }
 
     public function verifikasiPembayaran()
     {
+        /* params: 
+         */
+
+        $listData   = [];
+        $curlOpt    = [];
+
+        if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'report_hutang.php');
+        // echo json_encode($listData); die();
+        
         return view('pages/pelaporan/verifikasi-pembayaran', ['title' => 'Verifikasi Pembayaran']);
     }
 
