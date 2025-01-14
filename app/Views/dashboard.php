@@ -54,7 +54,6 @@
                 }]
             },
             options: {
-                indexAxis: 'y', // Mengatur chart menjadi horizontal
                 responsive: true,
                 plugins: {
                     legend: {
@@ -103,6 +102,7 @@
                 }]
             },
             options: {
+                indexAxis: 'y', // Mengatur chart menjadi horizontal
                 responsive: true,
                 plugins: {
                     legend: {
