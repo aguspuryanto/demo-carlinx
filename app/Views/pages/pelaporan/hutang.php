@@ -11,7 +11,7 @@
                 </div>
                 <div class="card-body">
                     <!-- <form action="" method="POST" class="row g-3"> -->
-                    <?= form_open('pelaporan/piutang', ['class' => 'row g-3']); ?>
+                    <?= form_open('pelaporan/hutang', ['class' => 'row g-3']); ?>
                         <div class="col-auto">
                             <label for="inputTglAwal" class="visually-hidden">Tgl Awal</label>
                             <input type="text" name="tgl_awal" class="form-control" id="inputTglAwal" placeholder="Tgl Awal" value="<?= ($curlOpt['tgl_awal']) ?? date('Y-m-d'); ?>">

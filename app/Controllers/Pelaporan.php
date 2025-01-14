@@ -251,7 +251,7 @@ class Pelaporan extends BaseController
 
         $listData   = [];
         $curlOpt    = [
-            'stat_ver' => '1', // 1 = verifikasi, 2 = unverifikasi
+            'stat_ver' => isset($_GET['stat_ver']) ? $_GET['stat_ver'] : '1', // 1 = verifikasi, 2 = unverifikasi
             'kd_member' => $this->session->get('user')['kode'],
             'new_his' => '0',
         ];
@@ -261,6 +261,7 @@ class Pelaporan extends BaseController
 
         return view('pages/pelaporan/status-pembayaran', [
             'title' => 'Status Pembayaran',
+            'curlOpt' => $curlOpt,
             'listData' => $listData,
         ]);
     }
@@ -275,7 +276,7 @@ class Pelaporan extends BaseController
 
         $listData   = [];
         $curlOpt    = [
-            'stat_ver' => '2', // 1 = verifikasi, 2 = unverifikasi
+            'stat_ver' => isset($_GET['stat_ver']) ? $_GET['stat_ver'] : '2', // 1 = verifikasi, 2 = unverifikasi
             'kd_member' => $this->session->get('user')['kode'],
             'new_his' => '0',
         ];
@@ -285,6 +286,28 @@ class Pelaporan extends BaseController
 
         return view('pages/pelaporan/verifikasi-pembayaran', [
             'title' => 'Verifikasi Pembayaran',
+            'curlOpt' => $curlOpt,
+            'listData' => $listData,
+        ]);
+    }
+
+    public function verifikasiPembayaranDetail($no_tiket)
+    {
+        //
+        $listData   = [];
+        $curlOpt    = [
+            'kd_search' => $no_tiket,
+            'stat_ver' => isset($_GET['stat_ver']) ? $_GET['stat_ver'] : '2', // 1 = verifikasi, 2 = unverifikasi
+            'kd_member' => $this->session->get('user')['kode'],
+            'new_his' => '0',
+        ];
+
+        if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'select_status_pembayaran.php');
+        // echo json_encode($listData); die();
+
+        return view('pages/pelaporan/verifikasi-pembayaran', [
+            'title' => 'Verifikasi Pembayaran',
+            'curlOpt' => $curlOpt,
             'listData' => $listData,
         ]);
     }

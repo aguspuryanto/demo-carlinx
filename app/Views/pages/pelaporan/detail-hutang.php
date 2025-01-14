@@ -7,7 +7,10 @@
         <div class="row">
             <div class="card">
                 <div class="card-header">
-                    <h4><?= $title ?></h4>
+                    <h4>
+                        <a href="<?= base_url('pelaporan/hutang') ?>" class="btn btn-sm btn-outline"><i class="fa fa-angle-left"></i></a>
+                        <?= $title ?>
+                    </h4>
                 </div>
                 <div class="card-body">
                     <?php

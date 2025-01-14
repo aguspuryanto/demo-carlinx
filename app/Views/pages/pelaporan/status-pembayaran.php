@@ -14,24 +14,23 @@
                     // echo json_encode($listData); die();
                     // $subTotal = 0;
                     ?>
-                    <div class="btn-group" role="group" aria-label="Basic example">
-                        <a href="<?= base_url('pelaporan/status-pembayaran/?stat_ver=1') ?>" class="btn btn-sm btn-primary">Baru</a>
-                        <a href="<?= base_url('pelaporan/status-pembayaran/?stat_ver=2') ?>" class="btn btn-sm btn-primary">Riwayat</a>
+                    <div class="btn-group d-flex mb-3" role="group" aria-label="Basic example">
+                        <a href="<?= base_url('pelaporan/status-pembayaran/?stat_ver=1') ?>" class="btn btn-sm w-100 <?= ($curlOpt['stat_ver'] == '1') ? 'btn-primary' : 'btn-outline-secondary' ?>">Baru</a>
+                        <a href="<?= base_url('pelaporan/status-pembayaran/?stat_ver=2') ?>" class="btn btn-sm w-100 <?= ($curlOpt['stat_ver'] == '2') ? 'btn-primary' : 'btn-outline-secondary' ?>">Riwayat</a>
                     </div>
 
                     <table class="table table-striped">
-                        <thead>
+                        <thead> 
                             <tr>
                                 <th scope="col">Tanggal</th>
                                 <th scope="col">Nama Rental</th>
                                 <th scope="col">Status</th>
-                                <th scope="col">#</th>
                             </tr>
                         </thead>
                         <tbody>
                         <?php if ($listData['success'] == '0'): ?>
                             <tr>
-                                <td colspan="4">
+                                <td colspan="3">
                                     <p class="text-center text-danger">Data tidak ditemukan</p>
                                 </td>
                             </div>
@@ -40,9 +39,9 @@
                             <tr>
                                 <td><?= date('d-m-Y', strtotime($item['tgl_jam'])) ?></td>
                                 <td><?= $item['nama_site'] ?></td>
-                                <td><?= ($item['stat'] == '3') ? 'Lunas' : 'Belum Lunas' ?></td>
                                 <td>
-                                    <a href="<?= base_url('pelaporan/verifikasi-pembayaran/detail/' . $item['no_tiket']) ?>" class="btn btn-sm btn-primary"><i class="fa fa-arrow-right"></i></a>
+                                    <?= ($item['stat'] == '3') ? 'Lunas' : 'Belum Lunas' ?>
+                                    <a href="<?= base_url('pelaporan/verifikasi-pembayaran/detail/' . $item['no_tiket']) ?>" class="btn btn-sm btn-outline"><i class="fa fa-angle-right"></i></a>
                                 </td>
                             </tr>
                             <?php endforeach;

@@ -77,6 +77,7 @@ $routes->group('pelaporan', ['filter' => 'auth'], function($routes) {
     $routes->get('piutang/detail/(:num)', 'Pelaporan::piutangDetail/$1');
     $routes->get('status-pembayaran', 'Pelaporan::statusPembayaran');
     $routes->get('verifikasi-pembayaran', 'Pelaporan::verifikasiPembayaran');
+    $routes->get('verifikasi-pembayaran/detail/(:num)', 'Pelaporan::verifikasiPembayaranDetail/$1');
 });
 
 // pengaturan: akun, bbm, driver, batas wilayah, lokasi garasi, unit, pengguna, ganti password
