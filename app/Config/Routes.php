@@ -72,7 +72,9 @@ $routes->group('pelaporan', ['filter' => 'auth'], function($routes) {
     $routes->get('order-masuk', 'Pelaporan::orderMasuk');
     $routes->get('order-keluar', 'Pelaporan::orderKeluar');
     $routes->get('hutang', 'Pelaporan::hutang');
+    $routes->get('hutang/detail/(:num)', 'Pelaporan::hutangDetail/$1');
     $routes->get('piutang', 'Pelaporan::piutang');
+    $routes->get('piutang/detail/(:num)', 'Pelaporan::piutangDetail/$1');
     $routes->get('status-pembayaran', 'Pelaporan::statusPembayaran');
     $routes->get('verifikasi-pembayaran', 'Pelaporan::verifikasiPembayaran');
 });

@@ -141,6 +141,28 @@ class Pelaporan extends BaseController
         ]);
     }
 
+    public function hutangDetail($id_order)
+    {
+        //
+        $listData   = [];
+        $curlOpt    = [
+            'hut_piu' => '1', // 1 = hutang, 2 = piutang
+            'tgl_awal' => date('01-m-Y'),
+            'tgl_akhir' => date('t-m-Y'),
+            'grouped' => '0',
+            'kd_member' => $this->session->get('user')['kode']
+        ];
+
+        if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'report_hutang.php');
+        // echo json_encode($listData);
+        
+        return view('pages/pelaporan/hutang', [
+            'title' => 'Hutang',
+            'curlOpt' => $curlOpt,
+            'listData' => ($listData['result_hutang']) ?? $listData,
+        ]);
+    }
+
     public function piutang()
     {
         /* params: 
@@ -184,6 +206,28 @@ class Pelaporan extends BaseController
                 $this->session->setFlashdata('error', 'Data tidak valid');
             }
         }
+
+        if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'report_hutang.php');
+        // echo json_encode($listData); die();
+
+        return view('pages/pelaporan/piutang', [
+            'title' => 'Piutang',
+            'curlOpt' => $curlOpt,
+            'listData' => $listData,
+        ]);
+    }
+
+    public function piutangDetail($id_order)
+    {
+        //
+        $listData   = [];
+        $curlOpt    = [
+            'hut_piu' => '2', // 1 = hutang, 2 = piutang
+            'tgl_awal' => date('01-m-Y'),
+            'tgl_akhir' => date('t-m-Y'),
+            'grouped' => '0',
+            'kd_member' => $this->session->get('user')['kode']
+        ];
 
         if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'report_hutang.php');
         // echo json_encode($listData); die();

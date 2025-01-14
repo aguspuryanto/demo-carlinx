@@ -14,6 +14,10 @@
                     // echo json_encode($listData); die();
                     // $subTotal = 0;
                     ?>
+                    <div class="btn-group" role="group" aria-label="Basic example">
+                        <a href="<?= base_url('pelaporan/status-pembayaran/?stat_ver=1') ?>" class="btn btn-sm btn-primary">Baru</a>
+                        <a href="<?= base_url('pelaporan/status-pembayaran/?stat_ver=2') ?>" class="btn btn-sm btn-primary">Riwayat</a>
+                    </div>
 
                     <table class="table table-striped">
                         <thead>

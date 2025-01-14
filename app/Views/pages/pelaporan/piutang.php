@@ -26,7 +26,7 @@
                     <?php echo form_close(); ?>
 
                     <?php
-                    echo json_encode($listData);
+                    // echo json_encode($listData);
                     // {"success":1,"result_hutang":[{"tgl_jam":"2024-12-05 14:03:55","kd_site":"23050001","kd_rental":"22040001","id_order":"241205000002","nominal":"0","due_date":"2024-12-12","sisa":"0","stat":"1","nama_site":"MCORNER SMSX","nama_rental":"GASIK TRANSXX"}]}
                     $subTotal = 0;
                     ?>
@@ -48,8 +48,11 @@
                         <?php else: 
                             foreach ($listData['result_hutang'] as $item): ?>
                             <tr>
-                                <td><?= $item['nama_rental'] ?></td>
-                                <td class="text-right"><?= format_rupiah($item['nominal']) ?></td>
+                                <td><?= $item['nama_site'] ?></td>
+                                <td class="text-right">
+                                    <?= format_rupiah($item['nominal']) ?>
+                                    <a href="<?= base_url('pelaporan/piutang/detail/' . $item['id_order']) ?>" class="btn btn-sm btn-outline"><i class="fa fa-angle-right"></i></a>
+                                </td>
                             </tr>
                             <?php $subTotal += $item['nominal'];
                         endforeach;
