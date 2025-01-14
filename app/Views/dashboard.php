@@ -7,13 +7,15 @@
         <div class="row">
             <?php
             // echo json_encode($listData);
-            echo json_encode($ListMenu);
+            // echo json_encode($ListMenu);
             ?>
-            <div style="width: 80%; margin: auto;">
+            <p>Statistik Pengguna</p>
+            <span>30 hari terakhir</span>
+            <div style="width: 100%; margin: auto;">
                 <canvas id="statistikChart"></canvas>
             </div>
 
-            <div style="width: 80%; margin: auto; margin-top: 50px;">
+            <div style="width: 100%; margin: auto; margin-top: 50px;">
                 <canvas id="bestMenuChart"></canvas>
             </div>
         </div>
@@ -23,20 +25,14 @@
 
 <?= $this->section('scripts') ?>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
 <script>
         // Data JSON dari server untuk Line Chart
         const jsonDataLine = <?= json_encode($listData) ?>;
 
-        // Data JSON dari server untuk Bar Chart
-        const jsonDataBar = <?= json_encode($ListMenu) ?>;
-
         // Ekstrak data untuk Line Chart
-        const labelsLine = jsonDataLine.result_statistik.map(item => item.tgl);
+        const labelsLine = jsonDataLine.result_statistik.map(item => item.tgl.slice(-2));
         const dataPointsLine = jsonDataLine.result_statistik.map(item => parseInt(item.jml));
-
-        // Ekstrak data untuk Bar Chart
-        const labelsBar = jsonDataBar.result_best_menu.map(item => item.nama);
-        const dataPointsBar = jsonDataBar.result_best_menu.map(item => parseInt(item.jml));
 
         // Konfigurasi Line Chart
         const ctxLine = document.getElementById('statistikChart').getContext('2d');
@@ -57,20 +53,20 @@
                 responsive: true,
                 plugins: {
                     legend: {
-                        display: true,
+                        display: false,
                         position: 'top'
                     },
                 },
                 scales: {
                     x: {
                         title: {
-                            display: true,
+                            display: false,
                             text: 'Tanggal'
                         }
                     },
                     y: {
                         title: {
-                            display: true,
+                            display: false,
                             text: 'Jumlah'
                         },
                         beginAtZero: true
@@ -78,6 +74,13 @@
                 }
             }
         });
+
+        // Data JSON dari server untuk Bar Chart
+        const jsonDataBar = <?= json_encode($ListMenu) ?>;
+
+        // Ekstrak data untuk Bar Chart
+        const labelsBar = jsonDataBar.result_best_menu.map(item => item.nama);
+        const dataPointsBar = jsonDataBar.result_best_menu.map(item => parseInt(item.jml));
 
         // Konfigurasi Bar Chart
         const ctxBar = document.getElementById('bestMenuChart').getContext('2d');
@@ -106,26 +109,52 @@
                 responsive: true,
                 plugins: {
                     legend: {
-                        display: true,
+                        display: false,
                         position: 'top'
                     },
+                    tooltip: {
+                        display: false,
+                        callbacks: {
+                            label: function(context) {
+                                return `${context.dataset.label}: ${context.raw}`;
+                            }
+                        }
+                    },
+                    datalabels: {
+                        color: '#000', // Warna label
+                        align: 'center', // Posisi horizontal
+                        anchor: 'center', // Posisi vertikal
+                        font: {
+                            size: 14, // Ukuran font
+                            weight: 'bold' // Ketebalan font
+                        },
+                        formatter: function (value, context) {
+                            // Mengambil label dari data.labels
+                            return context.chart.data.labels[context.dataIndex];
+                        }
+                    }
                 },
                 scales: {
                     x: {
                         title: {
-                            display: true,
+                            display: false,
                             text: 'Menu'
-                        }
+                        },
+                        beginAtZero: true
                     },
                     y: {
                         title: {
-                            display: true,
+                            display: false,
                             text: 'Jumlah'
+                        },
+                        ticks: {
+                            display: false
                         },
                         beginAtZero: true
                     }
                 }
-            }
+            },
+            plugins: [ChartDataLabels] // Tambahkan plugin datalabels
         });
     </script>
 <?= $this->endSection() ?>
