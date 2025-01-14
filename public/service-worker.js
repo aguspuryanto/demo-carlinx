@@ -19,15 +19,15 @@ if ('serviceWorker' in navigator) {
 }
 
 // install event for the service worker
-// self.addEventListener('install', e => {
+self.addEventListener('install', e => {
 
-//     e.waitUntil(
-//         caches.open('site-static').then(cache => {
-//             cache.addAll(['/', 'https://partner.carlinx.id'])
-//         })
-//     )
+    e.waitUntil(
+        caches.open('site-static').then(cache => {
+            cache.addAll(['/', 'https://partner.carlinx.id'])
+        })
+    )
 
-// })
+})
 
 
 // self.addEventListener("fetch", function(event) {

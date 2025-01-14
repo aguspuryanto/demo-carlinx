@@ -61,7 +61,7 @@ class Akun extends BaseController
     {
         //get data from form post
         $req = $this->request->getPost();
-        // echo json_encode($req); //{"usernm":"+62876543210","nama":"Foxie","nama_pt":"GASIK TRANSX","jabatan":"0","ijin_pt":"123.456.789.00","norek":"BCA 001.1234.5678a\/n Gemilang Kreasi Kami","alamat":"Tenggilis Mejoyo","kota":"KOTA SURABAYA","email":"april_id2000@yahoo.com","hp_perush":"+62818336745","hp_cs":"+6281131183229","is_layanan":"on","is_bulanan":"on","is_lepaskunci":"on"}
+        // echo json_encode($req); die(); //{"usernm":"+62876543210","nama":"Foxie","nama_pt":"GASIK TRANSX","jabatan":"0","ijin_pt":"123.456.789.00","norek":"BCA 001.1234.5678a\/n Gemilang Kreasi Kami","alamat":"Tenggilis Mejoyo","kota":"KOTA SURABAYA","email":"april_id2000@yahoo.com","hp_perush":"+62818336745","hp_cs":"+6281131183229","is_layanan":"on","is_bulanan":"on","is_lepaskunci":"on"}
 
         // $nohp_0 = $_POST['usernm'];
         // $nama = $_POST['nama'];
@@ -77,6 +77,11 @@ class Akun extends BaseController
         // $lepaskunci = $_POST['lepaskunci'];
         // $publish = $_POST['publish'];
         // $hp_perush_0 = $_POST['hp_perush'];
+
+        if(empty($req)) {
+            // return redirect()->back()->with('error', 'Data tidak boleh kosong');
+            $this->session->setFlashdata('error', 'Data tidak valid');
+        }
 
         $curlOptions = [
             'usernm' => $req['usernm'],
@@ -102,7 +107,7 @@ class Akun extends BaseController
             // upload file
             $data = [];
             
-            echo print_r($_FILES['uploaded_file']);
+            // echo print_r($_FILES['uploaded_file']);
             if(isset($_FILES['uploaded_file'])){
                 // $getCurl = getCurl($_FILES, $this->ipAddress . 'upload_profile.php');
                 // echo json_encode($getCurl);
@@ -132,7 +137,7 @@ class Akun extends BaseController
             // }
 
             // echo json_encode($data);
-            // return redirect()->back()->with('success', 'Data berhasil diubah');
+            return redirect()->back()->with('success', 'Data berhasil diubah');
         }
     }
 
