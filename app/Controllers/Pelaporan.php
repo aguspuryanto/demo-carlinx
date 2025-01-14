@@ -141,23 +141,24 @@ class Pelaporan extends BaseController
         ]);
     }
 
-    public function hutangDetail($id_order)
+    public function hutangDetail($kd_rental)
     {
         //
         $listData   = [];
         $curlOpt    = [
+            'kd_search' => $kd_rental,
             'hut_piu' => '1', // 1 = hutang, 2 = piutang
             'tgl_awal' => date('01-m-Y'),
             'tgl_akhir' => date('t-m-Y'),
-            'grouped' => '0',
+            // 'grouped' => '0',
             'kd_member' => $this->session->get('user')['kode']
         ];
 
-        if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'report_hutang.php');
+        if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'select_detail_hutang_1.php');
         // echo json_encode($listData);
         
-        return view('pages/pelaporan/hutang', [
-            'title' => 'Hutang',
+        return view('pages/pelaporan/detail-hutang', [
+            'title' => 'Detail Hutang',
             'curlOpt' => $curlOpt,
             'listData' => ($listData['result_hutang']) ?? $listData,
         ]);
@@ -217,23 +218,24 @@ class Pelaporan extends BaseController
         ]);
     }
 
-    public function piutangDetail($id_order)
+    public function piutangDetail($kd_site)
     {
         //
         $listData   = [];
         $curlOpt    = [
+            'kd_search' => $kd_site,
             'hut_piu' => '2', // 1 = hutang, 2 = piutang
             'tgl_awal' => date('01-m-Y'),
             'tgl_akhir' => date('t-m-Y'),
-            'grouped' => '0',
+            // 'grouped' => '0',
             'kd_member' => $this->session->get('user')['kode']
         ];
 
-        if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'report_hutang.php');
+        if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'select_detail_hutang_1.php');
         // echo json_encode($listData); die();
 
-        return view('pages/pelaporan/piutang', [
-            'title' => 'Piutang',
+        return view('pages/pelaporan/detail-piutang', [
+            'title' => 'Detail Piutang',
             'curlOpt' => $curlOpt,
             'listData' => $listData,
         ]);

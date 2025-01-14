@@ -51,7 +51,7 @@
                                 <td><?= $item['nama_site'] ?></td>
                                 <td class="text-right">
                                     <?= format_rupiah($item['nominal']) ?>
-                                    <a href="<?= base_url('pelaporan/piutang/detail/' . $item['id_order']) ?>" class="btn btn-sm btn-outline"><i class="fa fa-angle-right"></i></a>
+                                    <a href="<?= base_url('pelaporan/piutang/detail/' . $item['kd_site']) ?>" class="btn btn-sm btn-outline"><i class="fa fa-angle-right"></i></a>
                                 </td>
                             </tr>
                             <?php $subTotal += $item['nominal'];

@@ -10,31 +10,18 @@
                     <h4><?= $title ?></h4>
                 </div>
                 <div class="card-body">
-                    <!-- <form action="" method="POST" class="row g-3"> -->
-                    <?= form_open('pelaporan/piutang', ['class' => 'row g-3']); ?>
-                        <div class="col-auto">
-                            <label for="inputTglAwal" class="visually-hidden">Tgl Awal</label>
-                            <input type="text" name="tgl_awal" class="form-control" id="inputTglAwal" placeholder="Tgl Awal" value="<?= ($curlOpt['tgl_awal']) ?? date('Y-m-d'); ?>">
-                        </div>
-                        <div class="col-auto">
-                            <label for="inputTglAkhir" class="visually-hidden">Tgl Akhir</label>
-                            <input type="text" name="tgl_akhir" class="form-control" id="inputTglAkhir" placeholder="Tgl Akhir" value="<?= ($curlOpt['tgl_akhir']) ?? date('Y-m-d'); ?>">
-                        </div>
-                        <div class="col-auto">
-                            <button type="submit" class="btn btn-primary mb-3"><i class="bi bi-search"></i> Cari</button>
-                        </div>
-                    <?php echo form_close(); ?>
-
                     <?php
                     // echo json_encode($listData);
                     // {"success":1,"result_hutang":[{"tgl_jam":"2024-12-05 14:03:55","kd_site":"23050001","kd_rental":"22040001","id_order":"241205000002","nominal":"0","due_date":"2024-12-12","sisa":"0","stat":"1","nama_site":"MCORNER SMSX","nama_rental":"GASIK TRANSXX"}]}
                     $subTotal = 0;
                     ?>
+                    <p class="mb-3">Nama Rental : <?= $listData['result_hutang'][0]['nama_site'] ?></p>
 
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">Nama Rental</th>
+                                <th scope="col">Tanggal</th>
+                                <th scope="col">Nomor Order</th>
                                 <th scope="col" style="width: 150px;">Nominal</th>
                             </tr>
                         </thead>
@@ -48,10 +35,10 @@
                         <?php else: 
                             foreach ($listData['result_hutang'] as $item): ?>
                             <tr>
-                                <td><?= $item['nama_rental'] ?></td>
+                                <td><?= date('d-m-Y', strtotime($item['tgl_jam'])) ?></td>
+                                <td><?= $item['id_order'] ?></td>
                                 <td class="text-right">
                                     <?= format_rupiah($item['nominal']) ?>
-                                    <a href="<?= base_url('pelaporan/hutang/detail/' . $item['kd_rental']) ?>" class="btn btn-sm btn-outline"><i class="fa fa-angle-right"></i></a>
                                 </td>
                             </tr>
                             <?php $subTotal += $item['nominal'];
@@ -60,7 +47,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th scope="col" class="text-right">Sub Total</th>
+                                <th scope="col" colspan="2" class="text-right">Total</th>
                                 <th scope="col" class="text-right"><?= format_rupiah($subTotal) ?></th>
                             </tr>
                         </tfoot>
