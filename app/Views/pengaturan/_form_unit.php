@@ -40,8 +40,8 @@
                     <input type="text" class="form-control" id="warna" name="warna" placeholder="-">
                 </div>
                 <div class="mb-3">
-                    <label for="jarak_tempuh" class="form-label">Jarak Tempuh/Liter (km)</label>
-                    <input type="number" class="form-control" id="jarak_tempuh" name="jarak_tempuh" value="0">
+                    <label for="kons_bbm" class="form-label">Jarak Tempuh/Liter (km)</label>
+                    <input type="number" class="form-control" id="kons_bbm" name="kons_bbm" value="0">
                 </div>
             </div>
 
@@ -135,3 +135,10 @@
                 <label class="form-check-label text-primary" for="stat">Tersedia</label>
                 <a href="#" class="float-end text-decoration-underline">tanggal tidak tersedia</a>
             </div>
+
+            <input type="hidden" name="biaya_antar" value="0">
+            <input type="hidden" name="biaya_ambil" value="0">
+            <input type="hidden" name="tuslah" value="0">
+            <input type="hidden" name="is_tuslah" value="0">
+            <input type="hidden" name="kons_bbm" value="0">
+

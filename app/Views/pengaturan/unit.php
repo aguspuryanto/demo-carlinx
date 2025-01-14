@@ -137,6 +137,12 @@
                     $('#stat').val(item.stat).prop('checked', true);
                 }
 
+                $('#biaya_antar').val(item.biaya_antar);
+                $('#biaya_ambil').val(item.biaya_ambil);
+                $('#tuslah').val(item.tuslah);
+                $('#is_tuslah').val(item.is_tuslah);
+                $('#kons_bbm').val(item.kons_bbm);
+
                 // append id into form class modal-body
                 // if name id is exist, then set value id
                 if($('.modal-body input[name="id"]').length > 0){

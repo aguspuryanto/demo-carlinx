@@ -217,7 +217,7 @@ class Pengaturan extends BaseController
         // handle POST
         if ($this->request->getMethod() == 'POST') {
             $data = $this->request->getPost();
-            echo json_encode($data);
+            // echo json_encode($data);
             // step1: add_wilayah.php, step2: update_wilayah_2.php
 
             /* update_wilayah_2.php params
@@ -419,32 +419,66 @@ class Pengaturan extends BaseController
         // handle POST
         if ($this->request->getMethod() == 'POST') {
             $data = $this->request->getPost();
-            echo json_encode($data);
+            // echo json_encode($data); //{"nama":"AVANZA 2017 (TEST)","kategori":"1","bbm":"1","kursi":"7","tahun":"2017","transmisi":"manual\/matic","warna":"silver","jarak_tempuh":"","dlm_kota":"225000","dlm_prop":"250000","luar_prop":"300000","drop_in":"50","over_time":"10","stgh_hr":"75","fee":"100000","lepas_kunci":"750000","bulanan":"35000000","stat":"1","id":"22040001AV0002"}
 
-            // $kd_unit = $_POST['kd_unit'];
-            // $nama = $_POST['nama'];					
-            // $kat = SUBSTR($kd_unit,0,8).$_POST['kategori'];
-            // $bbm = $_POST['bbm'];
-            // $dlm_kota = $_POST['dlm_kota'];
-            // $dlm_prop = $_POST['dlm_prop'];
-            // $luar_prop = $_POST['luar_prop'];
-            // $lepas_kunci = $_POST['lepas_kunci'];
-            // $biaya_antar = $_POST['biaya_antar'];
-            // $biaya_ambil = $_POST['biaya_ambil'];
-            // $tuslah = $_POST['tuslah'];
-            // $is_tuslah = $_POST['is_tuslah'];
-            // $stat = $_POST['stat'];
-            // $kons_bbm = $_POST['kons_bbm'];
-            // $kursi = $_POST['kursi'];
-            // $tahun = $_POST['tahun'];		
-            // $transmisi = $_POST['transmisi'];
-            // $warna = $_POST['warna'];
-            // $drop_in = $_POST['drop_in'];
-            // $over_time = $_POST['over_time'];
-            // $fee = $_POST['fee'];
-            // $stgh_hr = $_POST['stgh_hr'];
-            // $bulanan = $_POST['bulanan'];
-            
+            /* $kd_unit = $_POST['kd_unit'];
+            $nama = $_POST['nama'];					
+            $kat = SUBSTR($kd_unit,0,8).$_POST['kategori'];
+            $bbm = $_POST['bbm'];
+            $dlm_kota = $_POST['dlm_kota'];
+            $dlm_prop = $_POST['dlm_prop'];
+            $luar_prop = $_POST['luar_prop'];
+            $lepas_kunci = $_POST['lepas_kunci'];
+            $biaya_antar = $_POST['biaya_antar'];
+            $biaya_ambil = $_POST['biaya_ambil'];
+            $tuslah = $_POST['tuslah'];
+            $is_tuslah = $_POST['is_tuslah'];
+            $stat = $_POST['stat'];
+            $kons_bbm = $_POST['kons_bbm'];
+            $kursi = $_POST['kursi'];
+            $tahun = $_POST['tahun'];		
+            $transmisi = $_POST['transmisi'];
+            $warna = $_POST['warna'];
+            $drop_in = $_POST['drop_in'];
+            $over_time = $_POST['over_time'];
+            $fee = $_POST['fee'];
+            $stgh_hr = $_POST['stgh_hr'];
+            $bulanan = $_POST['bulanan']; */
+
+            $updateData = [
+                'kd_unit' => $data['id'],
+                'nama' => $data['nama'],
+                'kategori' => SUBSTR($data['id'],0,8).$data['kategori'],
+                'bbm' => $data['bbm'],
+                'dlm_kota' => $data['dlm_kota'],
+                'dlm_prop' => $data['dlm_prop'],
+                'luar_prop' => $data['luar_prop'],
+                'lepas_kunci' => $data['lepas_kunci'],
+                'biaya_antar' => $data['biaya_antar'],
+                'biaya_ambil' => $data['biaya_ambil'],
+                'tuslah' => $data['tuslah'],
+                'is_tuslah' => $data['is_tuslah'],
+                'stat' => $data['stat'],
+                'kons_bbm' => $data['kons_bbm'],
+                'kursi' => $data['kursi'],
+                'tahun' => $data['tahun'],
+                'transmisi' => $data['transmisi'],
+                'warna' => $data['warna'],
+                'drop_in' => $data['drop_in'],
+                'over_time' => $data['over_time'],
+                'fee' => $data['fee'],
+                'stgh_hr' => $data['stgh_hr'],
+                'bulanan' => $data['bulanan']
+            ];
+
+            $resultData = getCurl($updateData, $this->ipAddress . 'update_unit_1.php');
+            // echo json_encode($resultData);
+            if($resultData['success'] == '1'){
+                $this->session->setFlashdata('success', 'Data berhasil diubah');
+            } else {
+                $this->session->setFlashdata('error', 'Data gagal diubah');
+            }
+            // return redirect()->back()->with('success', 'Data berhasil diubah');
         }
 
         if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'select_unit_1.php');
