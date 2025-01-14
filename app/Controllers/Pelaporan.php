@@ -196,29 +196,49 @@ class Pelaporan extends BaseController
     public function statusPembayaran()
     {
         /* params: 
+         * stat_ver required;
+         * kd_member required;
+         * new_his required;
          */
 
         $listData   = [];
-        $curlOpt    = [];
+        $curlOpt    = [
+            'stat_ver' => '1', // 1 = verifikasi, 2 = unverifikasi
+            'kd_member' => $this->session->get('user')['kode'],
+            'new_his' => '0',
+        ];
 
-        if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'report_hutang.php');
+        if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'select_status_pembayaran.php');
         // echo json_encode($listData); die();
 
-        return view('pages/pelaporan/status-pembayaran', ['title' => 'Status Pembayaran']);
+        return view('pages/pelaporan/status-pembayaran', [
+            'title' => 'Status Pembayaran',
+            'listData' => $listData,
+        ]);
     }
 
     public function verifikasiPembayaran()
     {
         /* params: 
+         * stat_ver required;
+         * kd_member required;
+         * new_his required;
          */
 
         $listData   = [];
-        $curlOpt    = [];
+        $curlOpt    = [
+            'stat_ver' => '2', // 1 = verifikasi, 2 = unverifikasi
+            'kd_member' => $this->session->get('user')['kode'],
+            'new_his' => '0',
+        ];
 
-        if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'report_hutang.php');
+        if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'select_status_pembayaran.php');
         // echo json_encode($listData); die();
-        
-        return view('pages/pelaporan/verifikasi-pembayaran', ['title' => 'Verifikasi Pembayaran']);
+
+        return view('pages/pelaporan/verifikasi-pembayaran', [
+            'title' => 'Verifikasi Pembayaran',
+            'listData' => $listData,
+        ]);
     }
 
     public function parseTgl($tgl_1)
