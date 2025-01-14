@@ -8,7 +8,7 @@
             <div class="card">
                 <div class="card-header">
                     <h4>
-                        <a href="<?= base_url('pelaporan/status-pembayaran/?stat_ver=1') ?>" class="btn btn-sm btn-outline"><i class="fa fa-angle-left"></i></a>
+                        <a href="<?= base_url('pelaporan/status-pembayaran') ?>" class="btn btn-sm btn-outline"><i class="fa fa-angle-left"></i></a>
                         <?= $title ?>
                     </h4>
                 </div>
