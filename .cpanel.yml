@@ -17,7 +17,7 @@ deployment:
     # Sync repository files to the deploy target path, excluding .git folder.
     # --delete-after will remove deleted files and folders after syncing.
     - /bin/rsync -aP --exclude '.git' --exclude '.well-known' ${REPOPATH}/app/ ${DEPLOYPATH}/ci4_core/app/
-    - /bin/rsync -aP --exclude '.git' --exclude '.well-known' ${REPOPATH}/public/ ${DEPLOYPATH}/
+    - /bin/rsync -aP --exclude '.git' --exclude '.well-known' --exclude 'index.php' ${REPOPATH}/public/ ${DEPLOYPATH}/
     
     # Set correct permissions.
     - /bin/chmod 755 ${DEPLOYPATH}
