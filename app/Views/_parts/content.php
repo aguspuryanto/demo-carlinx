@@ -4,7 +4,7 @@
         <div class="col-12 col-md-6">
             <div class="row">
                 <div class="col-4 col-md-6 col-lg-6">
-                    <a href="#" class="card shadow-sm mb-4">
+                    <a href="<?= base_url('dashboard'); ?>" class="card shadow-sm mb-4">
                         <div class="card-body px-1">
                             <div class="xrow">
                                 <div class="col-auto">

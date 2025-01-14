@@ -17,7 +17,9 @@
                     // echo json_encode($listData); die();
                     // $subTotal = 0;
                     ?>
-                    <p class="mb-3">Nama Rental: <?= $listData['result_stat_bayar'][0]['nama_site'] ?></p>
+                    <?php if ($listData['success'] == '1'): ?>
+                        <p class="mb-3">Nama Rental: <?= $listData['result_stat_bayar'][0]['nama_site'] ?></p>
+                    <?php endif; ?>
 
                     <table class="table table-striped">
                         <thead> 

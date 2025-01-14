@@ -39,9 +39,9 @@
                             <tr>
                                 <td><?= date('d-m-Y', strtotime($item['tgl_jam'])) ?></td>
                                 <td><?= $item['nama_site'] ?></td>
-                                <td>
+                                <td class="text-right">
                                     <?= ($item['stat'] == '3') ? 'Lunas' : 'Belum Lunas' ?>
-                                    <a href="<?= base_url('pelaporan/verifikasi-pembayaran/detail/' . $item['no_tiket']) ?>" class="btn btn-sm btn-outline"><i class="fa fa-angle-right"></i></a>
+                                    <a href="<?= base_url('pelaporan/status-pembayaran/detail/' . $item['kd_site']) ?>" class="btn btn-sm btn-outline"><i class="fa fa-angle-right"></i></a>
                                 </td>
                             </tr>
                             <?php endforeach;

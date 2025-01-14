@@ -266,12 +266,12 @@ class Pelaporan extends BaseController
         ]);
     }
 
-    public function statusPembayaranDetail($no_tiket)
+    public function statusPembayaranDetail($kd_site)
     {
         //
         $listData   = [];
         $curlOpt    = [
-            'kd_search' => $no_tiket,
+            'kd_search' => $kd_site,
             'stat_ver' => isset($_GET['stat_ver']) ? $_GET['stat_ver'] : '1', // 1 = verifikasi, 2 = unverifikasi
             'kd_member' => $this->session->get('user')['kode'],
             'new_his' => '0',

@@ -25,6 +25,8 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
     // akun
     $routes->get('akun', 'Akun::index');
 
+    $routes->get('dashboard', 'Home::dashboard');
+
     // history
     // $routes->get('history', 'History::index');
 
@@ -76,6 +78,7 @@ $routes->group('pelaporan', ['filter' => 'auth'], function($routes) {
     $routes->get('piutang', 'Pelaporan::piutang');
     $routes->get('piutang/detail/(:num)', 'Pelaporan::piutangDetail/$1');
     $routes->get('status-pembayaran', 'Pelaporan::statusPembayaran');
+    $routes->get('status-pembayaran/detail/(:num)', 'Pelaporan::statusPembayaranDetail/$1');
     $routes->get('verifikasi-pembayaran', 'Pelaporan::verifikasiPembayaran');
     $routes->get('verifikasi-pembayaran/detail/(:num)', 'Pelaporan::verifikasiPembayaranDetail/$1');
 });
