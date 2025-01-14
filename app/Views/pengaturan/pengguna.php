@@ -58,7 +58,8 @@
                 $('#addModal').find('#nohp').val(item.username);
 
                 // set stat
-                $('#addModal').find('#stat').val(item.stat);
+                // $('#addModal').find('#stat').val(item.stat);                
+                $('.modal-body').append('<input type="hidden" name="stat" value="' + item.stat + '">');
 
                 // append id into form class modal-body
                 // if name id is exist, then set value id

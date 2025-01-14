@@ -554,7 +554,7 @@ class Pengaturan extends BaseController
                 if($submitData['success'] == '1'){
                     $this->session->setFlashdata('success', 'Data berhasil disimpan');
                 } else {
-                    $this->session->setFlashdata('error', 'Data gagal disimpan');
+                    $this->session->setFlashdata('error', 'Data gagal disimpan. ' . json_encode($submitData));
                 }
 
             } else {
