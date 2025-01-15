@@ -61,7 +61,7 @@ class Akun extends BaseController
     {
         //get data from form post
         $req = $this->request->getPost();
-        echo json_encode($req); die(); //{"usernm":"+62876543210","nama":"Foxie","nama_pt":"GASIK TRANSX","jabatan":"0","ijin_pt":"123.456.789.00","norek":"BCA 001.1234.5678a\/n Gemilang Kreasi Kami","alamat":"Tenggilis Mejoyo","kota":"KOTA SURABAYA","email":"april_id2000@yahoo.com","hp_perush":"+62818336745","hp_cs":"+6281131183229","is_layanan":"on","is_bulanan":"on","is_lepaskunci":"on"}
+        // echo json_encode($req); die(); //{"usernm":"+62876543210","nama":"Foxie","nama_pt":"GASIK TRANSX","jabatan":"0","ijin_pt":"123.456.789.00","norek":"BCA 001.1234.5678a\/n Gemilang Kreasi Kami","alamat":"Tenggilis Mejoyo","kota":"KOTA SURABAYA","email":"april_id2000@yahoo.com","hp_perush":"+62818336745","hp_cs":"+6281131183229","is_layanan":"on","is_bulanan":"on","is_lepaskunci":"on"}
 
         // $nohp_0 = $_POST['usernm'];
         // $nama = $_POST['nama'];
@@ -125,7 +125,7 @@ class Akun extends BaseController
                 // );
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $_FILES['uploaded_file']); 
                 $response = curl_exec($ch);
-                // echo $response;
+                echo $response;
             }
 
             
