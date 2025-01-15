@@ -78,11 +78,11 @@
 <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
 <script>
     $('#inputTglAwal').datepicker({
-        uiLibrary: 'bootstrap5', format: 'yyyy-mm-dd'
+        uiLibrary: 'bootstrap5', format: 'dd-mm-yyyy'
     });
 
     $('#inputTglAkhir').datepicker({
-        uiLibrary: 'bootstrap5', format: 'yyyy-mm-dd'
+        uiLibrary: 'bootstrap5', format: 'dd-mm-yyyy'
     });
 </script>
 <?= $this->endSection() ?>
