@@ -71,8 +71,8 @@ $routes->group('history', ['filter' => 'auth'], function($routes) {
 // pelaporan: order masuk, order keluar, hutang, piutang, status pembayaran, verifikasi pembayaran
 $routes->group('pelaporan', ['filter' => 'auth'], function($routes) {
     $routes->get('/', 'Pelaporan::index');
-    $routes->get('order-masuk', 'Pelaporan::orderMasuk');
-    $routes->get('order-keluar', 'Pelaporan::orderKeluar');
+    $routes->add('order-masuk', 'Pelaporan::orderMasuk');
+    $routes->add('order-keluar', 'Pelaporan::orderKeluar');
     $routes->get('hutang', 'Pelaporan::hutang');
     $routes->get('hutang/detail/(:num)', 'Pelaporan::hutangDetail/$1');
     $routes->get('piutang', 'Pelaporan::piutang');
