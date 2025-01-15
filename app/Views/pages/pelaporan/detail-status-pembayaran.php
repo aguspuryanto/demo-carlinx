@@ -8,21 +8,18 @@
             <div class="card">
                 <div class="card-header">
                     <h4>
-                        <a href="<?= base_url('pelaporan/status-pembayaran') ?>" class="btn btn-sm btn-outline"><i class="fa fa-angle-left"></i></a>
+                        <a href="<?= base_url('pelaporan/verifikasi-pembayaran') ?>" class="btn btn-sm btn-outline"><i class="fa fa-angle-left"></i></a>
                         <?= $title ?>
                     </h4>
                 </div>
                 <div class="card-body">
                     <?php
-                    echo json_encode($listData); die();
+                    // echo json_encode($listData); die();
                     // $subTotal = 0;
                     ?>
-                    <?php if ($listData['success'] == '1'): ?>
-                        <p class="mb-3">Nama Rental: <?= $listData['result_stat_bayar'][0]['nama_site'] ?></p>
-                    <?php endif; ?>
 
                     <table class="table table-striped">
-                        <thead> 
+                        <thead>
                             <tr>
                                 <th scope="col">Tanggal</th>
                                 <th scope="col">Nomer Order</th>
@@ -40,11 +37,8 @@
                             foreach ($listData['result_stat_bayar'] as $item): ?>
                             <tr>
                                 <td><?= date('d-m-Y', strtotime($item['tgl_jam'])) ?></td>
-                                <td><?= $item['nama_site'] ?></td>
-                                <td>
-                                    <?= ($item['stat'] == '3') ? 'Lunas' : 'Belum Lunas' ?>
-                                    <a href="<?= base_url('pelaporan/verifikasi-pembayaran/detail/' . $item['no_tiket']) ?>" class="btn btn-sm btn-outline"><i class="fa fa-angle-right"></i></a>
-                                </td>
+                                <td><?= $item['no_tiket'] ?></td>
+                                <td><?= number_format($item['nominal'], 0, ',', '.') ?></td>
                             </tr>
                             <?php endforeach;
                         endif; ?>
