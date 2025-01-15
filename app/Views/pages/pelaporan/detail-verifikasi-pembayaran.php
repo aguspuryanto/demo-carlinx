@@ -38,7 +38,7 @@
                             <tr>
                                 <td><?= date('d-m-Y', strtotime($item['tgl_jam'])) ?></td>
                                 <td><?= $item['no_tiket'] ?></td>
-                                <td><?= number_format($item['nominal'], 0, ',', '.') ?></td>
+                                <td></td>
                             </tr>
                             <?php endforeach;
                         endif; ?>
