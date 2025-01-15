@@ -108,5 +108,5 @@ $hidden_input = ['usernm' => $userList[0]['username']];
                 <label class="form-check-label" for="fuel">Publikasikan</label>
             </div>
         </div>
-        <button type="submit" class="btn btn-primary">Kirim</button>
+        <button type="submit" class="btn btn-primary">Simpan</button>
     <?php echo form_close(); ?>
