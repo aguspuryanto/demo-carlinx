@@ -107,25 +107,25 @@ class Akun extends BaseController
             // upload file
             $data = [];
             
-            // echo print_r($_FILES['uploaded_file']);
+            echo print_r($_FILES['uploaded_file']);
             if(isset($_FILES['uploaded_file'])){
                 // $getCurl = getCurl($_FILES, $this->ipAddress . 'upload_profile.php');
                 // echo json_encode($getCurl);
 
-                $ch = curl_init();
-                curl_setopt($ch, CURLOPT_HEADER, 0);
-                curl_setopt($ch, CURLOPT_VERBOSE, 0);
-                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/4.0 (compatible;)");
-                curl_setopt($ch, CURLOPT_URL, $this->ipAddress . 'upload_profile.php');
-                curl_setopt($ch, CURLOPT_POST, true);
-                // same as <input type="file" name="file_box">
-                // $post = array(
-                //     "file_box"=>"@/path/to/myfile.jpg",
-                // );
-                curl_setopt($ch, CURLOPT_POSTFIELDS, $_FILES['uploaded_file']); 
-                $response = curl_exec($ch);
-                echo $response;
+                // $ch = curl_init();
+                // curl_setopt($ch, CURLOPT_HEADER, 0);
+                // curl_setopt($ch, CURLOPT_VERBOSE, 0);
+                // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                // curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/4.0 (compatible;)");
+                // curl_setopt($ch, CURLOPT_URL, $this->ipAddress . 'upload_profile.php');
+                // curl_setopt($ch, CURLOPT_POST, true);
+                // // same as <input type="file" name="file_box">
+                // // $post = array(
+                // //     "file_box"=>"@/path/to/myfile.jpg",
+                // // );
+                // curl_setopt($ch, CURLOPT_POSTFIELDS, $_FILES['uploaded_file']); 
+                // $response = curl_exec($ch);
+                // echo $response;
             }
 
             
