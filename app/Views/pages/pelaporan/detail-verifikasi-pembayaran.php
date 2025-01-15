@@ -14,7 +14,7 @@
                 </div>
                 <div class="card-body">
                     <?php
-                    echo json_encode($listData); die();
+                    // echo json_encode($listData); die();
                     // $subTotal = 0;
                     ?>
 
