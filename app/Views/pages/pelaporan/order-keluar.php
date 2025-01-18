@@ -11,15 +11,15 @@
                 </div>
                 <div class="card-body">
                     <?= form_open('pelaporan/order-keluar', ['class' => 'row g-3']); ?>
-                        <div class="col-auto">
+                        <div class="col-auto col-sm-4">
                             <label for="inputTglAwal" class="visually-hidden">Tgl Awal</label>
                             <input type="text" name="tgl_awal" class="form-control" id="inputTglAwal" placeholder="Tgl Awal" value="<?= ($curlOpt['tgl_awal']) ?? date('Y-m-d'); ?>">
                         </div>
-                        <div class="col-auto">
+                        <div class="col-auto col-sm-4">
                             <label for="inputTglAkhir" class="visually-hidden">Tgl Akhir</label>
                             <input type="text" name="tgl_akhir" class="form-control" id="inputTglAkhir" placeholder="Tgl Akhir" value="<?= ($curlOpt['tgl_akhir']) ?? date('Y-m-d'); ?>">
                         </div>
-                        <div class="col-auto">
+                        <div class="col-auto col-sm-4">
                             <button type="submit" class="btn btn-primary mb-3"><i class="bi bi-search"></i> Cari</button>
                         </div>
                     <?php echo form_close(); ?>
