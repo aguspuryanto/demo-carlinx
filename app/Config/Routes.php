@@ -37,7 +37,7 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
 // rate
 $routes->group('rate', function($routes) {
     $routes->get('index', 'Rate::index');
-    $routes->post('rate/hitung', 'Rate::hitung');
+    $routes->post('hitung', 'Rate::hitung');
     $routes->get('placeid', 'Rate::placeid');
     $routes->get('get-unit', 'Rate::getUnit');
 });
