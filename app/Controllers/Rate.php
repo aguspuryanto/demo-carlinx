@@ -157,15 +157,15 @@ class Rate extends BaseController
             $drop_akhir = $_POST['drop_akhir'];*/
 
             // lakukan validasi data
-            $validation =  \Config\Services::validation();
-            $validation->setRules([
-                'nama' => 'required',
-                'nohp' => 'required',
-            ]);
-            $isDataValid = $validation->withRequest($this->request)->run();
+            // $validation =  \Config\Services::validation();
+            // $validation->setRules([
+            //     'nama' => 'required',
+            //     'nohp' => 'required',
+            // ]);
+            // $isDataValid = $validation->withRequest($this->request)->run();
 
-            // jika data valid, maka submit
-            if($isDataValid){
+            // // jika data valid, maka submit
+            // if($isDataValid){
 
                 $data = [
                     'jns_order' => 1,
@@ -192,10 +192,11 @@ class Rate extends BaseController
                 if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'search_entry_order_tunggal_4.php');
     
                 echo json_encode($listData); //{"success":1,"result_unit_order":[{"koderental":"22040001","kode":"22040001AV0002","nama":"AVANZA 2017 (TES)","path_foto":"22040001AV0002.jpg","hrg_sewa":"537500","tgl_start":"2025-01-19 00:00:00","tgl_finish":"2025-01-22 00:00:00","lokasi_jemput":"here:af:street:Ytv1uykHYZJR7q1RySCNhB","lokasi_tujuan":"here:af:street:CoYF2Nk.rFCjgz.qUMWNxC","ketr":"","hrg_unit":"225000","rating":"5.0","terjual":"51","total_hrg_sewa":"2375000"}]}
-            } else {
-                // $error['error'] = $validation->getErrors();
-                $this->session->setFlashdata('error', 'Data tidak valid');
-            }
+                
+            // } else {
+            //     // $error['error'] = $validation->getErrors();
+            //     $this->session->setFlashdata('error', 'Data tidak valid');
+            // }
         }
 
         // return view('pages/rate/hitung');

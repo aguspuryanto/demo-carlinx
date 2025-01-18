@@ -62,7 +62,7 @@
   <div class="mb-3">
     <label class="form-label d-block">Biaya Tambahan</label>
     <div class="form-check form-check-inline">
-      <input type="checkbox" class="form-check-input" name="is_bbm" id="fuel">
+      <input type="checkbox" class="form-check-input" name="is_bbm" id="fuel" checked>
       <label class="form-check-label" for="fuel">BBM</label>
     </div>
     <div class="form-check form-check-inline">
@@ -137,6 +137,8 @@
     var today = new Date(); // - 1 day
     today.setDate(today.getDate() - 1);
 
+    const isvalid = false
+
     $('#unitName').select2({
       theme: 'bootstrap-5',
       placeholder: 'Type to search...',
@@ -194,6 +196,37 @@
       e.preventDefault();
       var form = $('#formHitung')[0];
       var data = new FormData(form);
+
+      // validation, kd_unit
+      if (!$('#unitName').val()) {
+        alert('Mohon pilih unit');
+        return;
+      }
+
+      // validation, pickupDate
+      if (!$('#pickupDate').val()) {
+        alert('Mohon pilih tanggal jemput');
+        return;
+      }
+
+      // validation, returnDate
+      if (!$('#returnDate').val()) {
+        alert('Mohon pilih tanggal kembali');
+        return;
+      }
+
+      // validation, lokasiJemput
+      if (!$('#lokasiJemput').val()) {
+        alert('Mohon pilih lokasi jemput');
+        return;
+      }
+
+      // validation, lokasiTujuan
+      if (!$('#lokasiTujuan').val()) {
+        alert('Mohon pilih lokasi tujuan');
+        return;
+      }
+
       $.ajax({
         url: 'rate/hitung',
         type: 'POST',
@@ -203,6 +236,36 @@
         processData: false,
         success: function (response) {
           console.log(response.result_unit_order[0], 'response');
+          if (response.success && response.result_unit_order && response.result_unit_order.length > 0) {
+            const result = response.result_unit_order[0];
+            $('#totalCost').val(convertRupiah(result.total_hrg_sewa));
+            // hide #btnHItung
+            $('#btnHitung').hide();
+            // show #btnKonfirm
+            $('#btnKonfirm').show().removeClass('d-none');
+          } else {
+            console.error("Data tidak ditemukan atau tidak valid.");
+          }
+        },
+        error: function (xhr, status, error) {
+          console.error(error);
+        }
+      });
+    });
+
+    $('#btnKonfirm').on('click', function (e) {
+      e.preventDefault();
+      var form = $('#formHitung')[0];
+      var data = new FormData(form);
+      $.ajax({
+        url: 'rate/konfirm',
+        type: 'POST',
+        data: data,
+        dataType: 'json',
+        contentType: false,
+        processData: false,
+        success: function (response) {
+          console.log(response);
           if (response.success && response.result_unit_order && response.result_unit_order.length > 0) {
             const result = response.result_unit_order[0];
             $('#totalCost').val(convertRupiah(result.total_hrg_sewa));

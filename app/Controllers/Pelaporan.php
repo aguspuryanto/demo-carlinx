@@ -48,6 +48,14 @@ class Pelaporan extends BaseController
             'kd_member' => $this->session->get('user')['kode']
         ];
 
+        // handle POST
+        if ($this->request->getMethod() == 'POST') {
+            $data = $this->request->getPost();
+            // echo json_encode($data);
+            $curlOpt['tgl_awal'] = $data['tgl_awal'];
+            $curlOpt['tgl_akhir'] = $data['tgl_akhir'];
+        }
+
         if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'report_order_1.php');
         // echo json_encode($listData);
 
@@ -76,6 +84,14 @@ class Pelaporan extends BaseController
             'grouped' => '0',
             'kd_member' => $this->session->get('user')['kode']
         ];
+
+        // handle POST
+        if ($this->request->getMethod() == 'POST') {
+            $data = $this->request->getPost();
+            // echo json_encode($data);
+            $curlOpt['tgl_awal'] = $data['tgl_awal'];
+            $curlOpt['tgl_akhir'] = $data['tgl_akhir'];
+        }
 
         if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'report_order_1.php');
         // echo json_encode($listData);
