@@ -142,13 +142,17 @@ $(window).on('load', function () {
             });
 
             /* app install toast message */
-            var toastElList = document.getElementById('toastinstall');
-            var toastElinit = new bootstrap.Toast(toastElList, {
-                // autohide: "!1",
-                autohide: true,
-                delay: 5000,
-            });
-            toastElinit.show();
+            // var toastElList = document.getElementById('toastinstall');
+            // var toastElinit = new bootstrap.Toast(toastElList, {
+            //     // autohide: "!1",
+            //     autohide: true,
+            //     delay: 5000,
+            // });
+            // toastElinit.show();
+            const toastTrigger = document.getElementById('toastinstall')
+            const toast = new bootstrap.Toast(toastTrigger)
+
+            toast.show()
 
             /* PWA add to phone Install ap button */
             var btnAdd = document.getElementById('addtohome');
