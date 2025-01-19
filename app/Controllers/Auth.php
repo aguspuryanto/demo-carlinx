@@ -49,7 +49,7 @@ class Auth extends BaseController
         // Cari pengguna berdasarkan email
         // $user = $userModel->getUserByEmail($email);
 
-        $userData = getCurl(['usernm' => $username], $this->ipAddress . 'select_user.php');
+        $userData = getCurl(['usernm' => $username], $this->ipAddress . 'select_user.php'); //curl -m 15 -X POST -d "usernm=0876543210" http://103.178.174.7/foxrent/select_user.php
         // echo json_encode($userData); die();
         if($userData){
             $userData['password'] = password_hash($password, PASSWORD_BCRYPT);

@@ -29,6 +29,8 @@ function getCurl($data, $url){
 	curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
 	curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+	// set timeout
+	curl_setopt($curl, CURLOPT_TIMEOUT, 60);
 	$result = curl_exec($curl);
 	curl_close($curl);
 	
