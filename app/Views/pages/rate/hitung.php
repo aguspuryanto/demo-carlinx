@@ -171,7 +171,7 @@
             $('#formSendWhatsapp').find('#include').val(result.include);
             $('#formSendWhatsapp').find('#total_hrg_sewa').val(result.total_hrg_sewa);
             // $('#formSendWhatsapp').find('#nama_pelanggan').val(result.nama_pelanggan);
-            $('#formSendWhatsapp').find('#no_hp').val('+62');
+            $('#formSendWhatsapp').find('#no_hp').attr('placeholder', '+62');
 
             // hide #btnHItung
             // $('#btnHitung').attr('disabled', true);
