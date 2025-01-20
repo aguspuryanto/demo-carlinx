@@ -192,8 +192,22 @@ class Rate extends BaseController
                 // echo json_encode($curlOpt); die();
     
                 if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'search_entry_order_tunggal_4.php');
+
+                // include
+                $include = 'Mobil, Driver, ';
+                if($data['is_bbm']) $include .= 'BBM, ';
+                if($data['is_makan']) $include .= 'Makan, ';
+                if($data['is_hotel']) $include .= 'Hotel, ';
+                if($data['drop_awal']) $include .= 'Drop Awal, ';
+                if($data['drop_akhir']) $include .= 'Drop Akhir, ';
+                $include = rtrim($include, ', ');
+                $listData['result_unit_order'][0]['include'] = $include;
+                
+                // set data pelanggan
+                $listData['result_unit_order'][0]['nama_pelanggan'] = $this->session->get('user')['nama'];
+                $listData['result_unit_order'][0]['no_hp'] = $this->session->get('user')['username'];
     
-                echo json_encode($listData); //{"success":1,"result_unit_order":[{"koderental":"22040001","kode":"22040001AV0002","nama":"AVANZA 2017 (TES)","path_foto":"22040001AV0002.jpg","hrg_sewa":"537500","tgl_start":"2025-01-19 00:00:00","tgl_finish":"2025-01-22 00:00:00","lokasi_jemput":"here:af:street:Ytv1uykHYZJR7q1RySCNhB","lokasi_tujuan":"here:af:street:CoYF2Nk.rFCjgz.qUMWNxC","ketr":"","hrg_unit":"225000","rating":"5.0","terjual":"51","total_hrg_sewa":"2375000"}]}
+                echo json_encode($listData); //{"success":1,"result_unit_order":[{"koderental":"22040001","kode":"22040001AV0002","nama":"AVANZA 2017 (TES)","path_foto":"22040001AV0002.jpg","hrg_sewa":"537500","tgl_start":"2025-01-19 00:00:00","tgl_finish":"2025-01-22 00:00:00","lokasi_jemput":"here:af:street:Ytv1uykHYZJR7q1RySCNhB","lokasi_tujuan":"here:af:street:CoYF2Nk.rFCjgz.qUMWNxC","ketr":"","hrg_unit":"225000","rating":"5.0","terjual":"51","total_hrg_sewa":"2375000","nama_pelanggan":"Mas Agus","no_hp":"0876543210"}]}
                 
             // } else {
             //     // $error['error'] = $validation->getErrors();
@@ -204,57 +218,49 @@ class Rate extends BaseController
         // return view('pages/rate/hitung');
     }
 
-    public function sendWhatsapp($data)
+    public function sendWhatsapp()
     {
-        $phone = '6281234567890';
-        $message = 'Yth. Bpk/Ibu Mas Agus,<br>
-        Berikut kami sampaikan penawaran harga sewa mobil yang Bpk/Ibu butuhkan: <br>
-        <br>
-        Tanggal : 20-01-2025 06:00 s/d 20-01-2025 23:59<br>
-        <br>
-        Tujuan : Surabaya - Malang<br>
-        <br>
-        Mobil AVANZA 2017 (TES)<br>
-        <br>
-        Include : Mobil, Driver, BBM
-        <br>
-        Harga : Rp. 535,000<br>
-        <br>
-        Total : Rp. 535,000<br>
-        <br>
-        Pelayanan pertanggal dimulai pukul 06.00-23.00 (mobil sdh ada di garasi)<br>
-        <br>
-        Best Regard,<br>
-        Foxie';
-        
-        $url = sendWhatsapp($phone, $message);
-        echo $url;
+        $data = $this->request->getPost();
+        // echo json_encode($data); die(); // {tgl_start: '2025-01-20 11:43:00', jam_start: '', tgl_finish: '2025-01-21 11:43:00', jam_end: '', lokasi_tujuan: 'Indonesia, Gresik, Jalan Raya Putat Lor', …}
+        if($data['nama_pelanggan'] == '' || $data['no_hp'] == '') {
+            echo json_encode(['success' => 0, 'message' => 'Nama pelanggan atau no hp tidak boleh kosong']);
+            return;
+        } else {
+            // include
+            $include = 'Mobil, Driver';
+            if($data['include']) $include = $data['include'];
 
-        // $curl = curl_init();
-        // curl_setopt_array($curl, [
-        //     CURLOPT_URL => "https://api.whatsapp.com/send",
-        //     CURLOPT_RETURNTRANSFER => true,
-        //     CURLOPT_ENCODING => "",
-        //     CURLOPT_MAXREDIRS => 10,
-        //     CURLOPT_TIMEOUT => 30,
-        //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-        //     CURLOPT_CUSTOMREQUEST => "POST",
-        //     CURLOPT_POSTFIELDS => json_encode([
-        //         "phone" => $phone,
-        //         "text" => $message
-        //     ])
-        // ]);
+            $phone = '082244492100';//$data['no_hp'];
+            // remove 0 at first of phone, then replace +62
+            $phone = ltrim($phone, '0');
+            $phone = '+62' . $phone;
 
-        // $response = curl_exec($curl);
-        // $err = curl_error($curl);
+            $message = 'Yth. ' . $data['nama_pelanggan'] . ',<br>
+            Berikut kami sampaikan penawaran harga sewa mobil yang Bpk/Ibu butuhkan: <br>
+            <br>
+            Tanggal : ' . date('d-m-Y H:i', strtotime($data['tgl_start'])) . ' s/d ' . date('d-m-Y H:i', strtotime($data['tgl_finish'])) . '<br>
+            <br>
+            Tujuan : ' . $data['lokasi_tujuan'] . '<br>
+            <br>
+            Mobil ' . $data['nama_unit'] . '<br>
+            <br>
+            Include : ' . $data['include'] . '<br>
+            <br>
+            Harga : Rp. ' . format_rupiah($data['total_hrg_sewa']) . '<br>
+            <br>
+            Total : Rp. ' . $data['total_hrg_sewa'] . '<br>
+            <br>
+            Pelayanan pertanggal dimulai pukul 06.00-23.00 (mobil sdh ada di garasi)<br>
+            <br>
+            Best Regard,<br>
+            Foxie';
 
-        // curl_close($curl);
+            $url = sendWhatsapp($phone, urlencode($message));
+            echo json_encode(['success' => 1, 'message' => $message, 'url' => $url]);
 
-        // if ($err) {
-        //     echo "cURL Error #:" . $err;
-        // } else {
-        //     echo "Response: " . $response;
-        // }
+            // $url = sendWhatsapp($phone, $message);
+            // echo $url;
+        }
     }
 
     public function getUnit() 

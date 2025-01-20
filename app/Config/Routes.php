@@ -44,6 +44,9 @@ $routes->group('rate', function($routes) {
     $routes->get('lepaskunci', 'Rate::lepasKunci');
 
     $routes->get('bulanan', 'Rate::orderBulanan');
+
+    // send whatsapp
+    $routes->add('send-whatsapp', 'Rate::sendWhatsapp');
 });
 
 // pelayanan
