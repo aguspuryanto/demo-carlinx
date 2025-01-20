@@ -121,6 +121,11 @@
         // });
     });
 
+    // https://route.ls.hereapi.com/routing/7.2/calculateroute.xml
+    // ?apiKey={YOUR_API_KEY}
+    // &waypoint0=geo!52.5,13.4
+    // &waypoint1=geo!52.5,13.45
+    // &mode=fastest;car;traffic:disabled
     // curl -X GET 'https://router.hereapi.com/v8/routes?transportMode=car&origin=52.5308,13.3847&destination=52.5323,13.3789&return=summary&apikey={YOUR_API_KEY}'
   });
 </script>
