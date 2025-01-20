@@ -126,3 +126,6 @@ nb-configuration.xml
 /phpunit*.xml
 
 # public/
+public/uploads/*
+!public/uploads/index.html
+
