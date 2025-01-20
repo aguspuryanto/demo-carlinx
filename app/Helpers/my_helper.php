@@ -42,3 +42,8 @@ function format_rupiah($angka){
 	$rupiah=number_format($angka,0,',','.');
 	return $rupiah;
 }
+
+function sendWhatsapp($phone, $message) {
+	$url = "https://api.whatsapp.com/send?phone={$phone}&text={$message}";
+    return $url;
+}

@@ -5,7 +5,7 @@
     <!-- main page content -->
     <div class="main-container container">
         <div class="row">
-            <div class="card">
+            <div class="card mb-3">
                 <div class="card-header">
                     <h4>Hitung Tarif</h4>
                 </div>
@@ -15,7 +15,7 @@
             </div>           
 
             <!-- konfirmasi order -->
-            <div class="card">
+            <div class="card d-none" id="cardKonfirm">
                 <div class="card-header">
                     <h4>Konfirmasi Order</h4>
                 </div>

@@ -204,6 +204,59 @@ class Rate extends BaseController
         // return view('pages/rate/hitung');
     }
 
+    public function sendWhatsapp($data)
+    {
+        $phone = '6281234567890';
+        $message = 'Yth. Bpk/Ibu Mas Agus,<br>
+        Berikut kami sampaikan penawaran harga sewa mobil yang Bpk/Ibu butuhkan: <br>
+        <br>
+        Tanggal : 20-01-2025 06:00 s/d 20-01-2025 23:59<br>
+        <br>
+        Tujuan : Surabaya - Malang<br>
+        <br>
+        Mobil AVANZA 2017 (TES)<br>
+        <br>
+        Include : Mobil, Driver, BBM
+        <br>
+        Harga : Rp. 535,000<br>
+        <br>
+        Total : Rp. 535,000<br>
+        <br>
+        Pelayanan pertanggal dimulai pukul 06.00-23.00 (mobil sdh ada di garasi)<br>
+        <br>
+        Best Regard,<br>
+        Foxie';
+        
+        // $url = sendWhatsapp($phone, $message);
+        // echo $url;
+
+        $curl = curl_init();
+        curl_setopt_array($curl, [
+            CURLOPT_URL => "https://api.whatsapp.com/send",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => json_encode([
+                "phone" => $phone,
+                "text" => $message
+            ])
+        ]);
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            echo "Response: " . $response;
+        }
+    }
+
     public function getUnit() 
     {
         /* params: 
