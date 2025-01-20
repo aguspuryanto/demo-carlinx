@@ -260,7 +260,7 @@ Berikut kami sampaikan penawaran harga sewa mobil yang Bpk/Ibu butuhkan:
 
 Tanggal : ' . date('d-m-Y H:i', strtotime($data['tgl_start'])) . ' s/d ' . date('d-m-Y H:i', strtotime($data['tgl_finish'])) . '
 
-Tujuan : ' . $data['lokasi_tujuan'] . '
+Tujuan : ' . str_replace('Indonesia, ', '', $data['lokasi_jemput']) . ' - ' . str_replace('Indonesia, ', '', $data['lokasi_tujuan']) . '
 
 Mobil ' . $data['nama_unit'] . '
 
