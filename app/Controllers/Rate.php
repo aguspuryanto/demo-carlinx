@@ -116,11 +116,13 @@ class Rate extends BaseController
 
     public function lepasKunci() 
     {    
-        return view('pages/rate/hitung', ['title' => 'Lepaskunci']);
+        echo 'Lepas Kunci';
+        // return view('pages/rate/hitung', ['title' => 'Lepaskunci']);
     }
 
     public function orderBulanan()
     {
+        echo 'Order Bulanan';
         return view('pages/order/orderbulanan', ['title' => 'Order Bulanan']);
     }
 

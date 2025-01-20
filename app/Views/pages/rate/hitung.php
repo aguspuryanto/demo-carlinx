@@ -12,6 +12,16 @@
                 <div class="card-body">
                     <?php include_once '_form.php'; ?>
                 </div>
+            </div>           
+
+            <!-- konfirmasi order -->
+            <div class="card">
+                <div class="card-header">
+                    <h4>Konfirmasi Order</h4>
+                </div>
+                <div class="card-body">
+                    <?php include_once '_form_konfirmasi.php'; ?>
+                </div>
             </div>
         </div>
     </div>

@@ -40,6 +40,10 @@ $routes->group('rate', function($routes) {
     $routes->post('hitung', 'Rate::hitung');
     $routes->get('placeid', 'Rate::placeid');
     $routes->get('get-unit', 'Rate::getUnit');
+
+    $routes->get('lepaskunci', 'Rate::lepasKunci');
+
+    $routes->get('bulanan', 'Rate::orderBulanan');
 });
 
 // pelayanan
@@ -47,7 +51,7 @@ $routes->group('order', function($routes) {
     $routes->get('orderlayanan', 'Rate::orderLayanan');
 
     // lepas-kunci
-    $routes->get('lepas-kunci', 'Rate::lepasKunci');
+    // $routes->get('lepas-kunci', 'Rate::lepasKunci');
 
     // bulanan
     $routes->get('bulanan', 'Rate::orderBulanan');
