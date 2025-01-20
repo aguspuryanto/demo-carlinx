@@ -167,7 +167,7 @@ class Rate extends BaseController
                 'jns_order' => 1,
                 'kd_member' => $this->session->get('user')['kode'],
                 'kd_kota' => $data['kd_kota'],
-                'search' => $data['search'],
+                'search' => '%' . $data['search'] . '%',
                 'tgl_1' => $data['tgl_start'],
                 'tgl_2' => $data['tgl_finish'],
                 'lokasi_jemput' => $data['lokasi_jemput'],

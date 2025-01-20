@@ -94,6 +94,34 @@
             cache: true
         }
     });
+
+    // $('#lokasiJemput').on('change', function() {
+    //   console.log($('#lokasiJemput').val());
+    // });
+
+    $('#lokasiTujuan').on('change', function() {
+        // console.log($('#lokasiTujuan').val());
+        var origin = $('#lokasiJemput').val();
+        var destination = $('#lokasiTujuan').val();
+        console.log(origin, destination);
+
+        // $.ajax({
+        //     url: '<?= $_ENV['API_BASEURL_HERE'] ?>/routes',
+        //     type: 'GET',
+        //     data: {
+        //         transportMode: 'car',
+        //         origin: origin,
+        //         destination: destination,
+        //         return: 'summary',
+        //         apiKey: '<?= $_ENV['API_KEY_HERE'] ?>'
+        //     },
+        //     success: function(response) {
+        //         console.log(response);
+        //     }
+        // });
+    });
+
+    // curl -X GET 'https://router.hereapi.com/v8/routes?transportMode=car&origin=52.5308,13.3847&destination=52.5323,13.3789&return=summary&apikey={YOUR_API_KEY}'
   });
 </script>
 <?= $this->endSection() ?>
