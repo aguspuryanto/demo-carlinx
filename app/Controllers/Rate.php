@@ -235,25 +235,24 @@ class Rate extends BaseController
             $phone = ltrim($phone, '0');
             $phone = '+62' . $phone;
 
-            $message = 'Yth. ' . $data['nama_pelanggan'] . ',
-            Berikut kami sampaikan penawaran harga sewa mobil yang Bpk/Ibu butuhkan: 
-            
-            Tanggal : ' . date('d-m-Y H:i', strtotime($data['tgl_start'])) . ' s/d ' . date('d-m-Y H:i', strtotime($data['tgl_finish'])) . '
-            
-            Tujuan : ' . $data['lokasi_tujuan'] . '
-            
-            Mobil ' . $data['nama_unit'] . '
-            
-            Include : ' . $data['include'] . '
-            
-            Harga : Rp. ' . format_rupiah($data['total_hrg_sewa']) . '
-            
-            Total : Rp. ' . $data['total_hrg_sewa'] . '
-            
-            Pelayanan pertanggal dimulai pukul 06.00-23.00 (mobil sdh ada di garasi)
-            
-            Best Regard,
-            Foxie';
+            $message = 'Yth. Bpk/Ibu ' . $data['nama_pelanggan'] . ',
+Berikut kami sampaikan penawaran harga sewa mobil yang Bpk/Ibu butuhkan: 
+
+Tanggal : ' . date('d-m-Y H:i', strtotime($data['tgl_start'])) . ' s/d ' . date('d-m-Y H:i', strtotime($data['tgl_finish'])) . '
+
+Tujuan : ' . $data['lokasi_tujuan'] . '
+
+Mobil ' . $data['nama_unit'] . '
+
+Include : ' . $data['include'] . '
+
+Harga : Rp. ' . format_rupiah($data['total_hrg_sewa']) . '
+Total : Rp. ' . format_rupiah($data['total_hrg_sewa']) . '
+
+Pelayanan pertanggal dimulai pukul 06.00-23.00 (mobil sdh ada di garasi)
+
+Best Regard,
+Foxie';
 
             $url = sendWhatsapp($phone, ($message), 'wa');
             echo json_encode(['success' => 1, 'message' => $message, 'url' => $url]);
