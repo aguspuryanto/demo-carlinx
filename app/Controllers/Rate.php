@@ -52,7 +52,7 @@ class Rate extends BaseController
         if(empty($listUnit)) $listUnit = getCurl($curlOpt, $this->ipAddress . 'select_unit_1.php');
 
         return view('pages/rate/hitung', [
-            'title' => 'PenawaranQ',
+            'title' => 'Hitung Tarif',
             'listUnit' => $listUnit
         ]);
     }
@@ -124,6 +124,78 @@ class Rate extends BaseController
     {
         echo 'Order Bulanan';
         return view('pages/order/orderbulanan', ['title' => 'Order Bulanan']);
+    }
+
+    public function searchOrder()
+    {
+        // echo 'Search Order';
+        $listData = [];
+
+        $curlOpt    = [
+            // 'caller' => 'MASTER',
+            'kd_member' => $this->session->get('user')['kode'],
+        ];
+
+        // handle POST
+        if ($this->request->getMethod() == 'POST') {
+            $data = $this->request->getPost();
+            // echo json_encode($data); //{"kd_kota":"3578","tgl_start":"21-01-2025","jam_start":"14:16","tgl_finish":"22-01-2025","jam_finish":"14:16","lokasi_jemput":"Indonesia, Surabaya, Jalan Semolowaru","lokasi_tujuan":"Indonesia, Gresik, Jalan Raya Putat Lor","is_bbm":"on","kd_unit":"Avanza"}
+
+            /**
+             * $jns_order = $_POST['jns_order'];
+             * $kd_member = $_POST['kd_member'];
+             * $kd_kota = $_POST['kd_kota'];
+             * $search = $_POST['search'];
+             * $tgl_1 = $_POST['tgl_start'];
+             * $tgl_2 = $_POST['tgl_finish'];
+             * $lokasi_jemput = $_POST['lokasi_jemput'];
+             * $lokasi_tujuan = $_POST['lokasi_tujuan'];
+             * $jarak_tempuh = $_POST['jarak'];
+             * $is_bbm = $_POST['is_bbm'];
+             * $is_makan = $_POST['is_makan'];
+             * $is_hotel = $_POST['is_hotel'];
+             * $ketr = $_POST['ketr'];
+             * $is_antar = $_POST['is_antar'];
+             * $is_ambil = $_POST['is_ambil'];
+             * $drop_awal = $_POST['drop_awal'];
+             * $drop_akhir = $_POST['drop_akhir'];
+             * $tg_jwb = $_POST['tg_jwb'];
+             * $jml_bln = $_POST['jml_bln'];
+             */
+
+            $data = [
+                'jns_order' => 1,
+                'kd_member' => $this->session->get('user')['kode'],
+                'kd_kota' => $data['kd_kota'],
+                'search' => $data['search'],
+                'tgl_1' => $data['tgl_start'],
+                'tgl_2' => $data['tgl_finish'],
+                'lokasi_jemput' => $data['lokasi_jemput'],
+                'lokasi_tujuan' => $data['lokasi_tujuan'],
+                'jarak_tempuh' => isset($data['jarak']) ? $data['jarak'] : 0,
+                'is_bbm' => isset($data['is_bbm']) ? 1 : 0,
+                'is_makan' => isset($data['is_makan']) ? 1 : 0,
+                'is_hotel' => isset($data['is_hotel']) ? 1 : 0,
+                'ketr' => isset($data['ketr']) ? $data['ketr'] : '',
+                'is_antar' => isset($data['is_antar']) ? 1 : 0,
+                'is_ambil' => isset($data['is_ambil']) ? 1 : 0,
+                'drop_awal' => isset($data['drop_awal']) ? 1 : 0,
+                'drop_akhir' => isset($data['drop_akhir']) ? 1 : 0,
+                'tg_jwb' => isset($data['tg_jwb']) ? $data['tg_jwb'] : '',
+                'jml_bln' => isset($data['jml_bln']) ? $data['jml_bln'] : 0
+            ];
+
+            // echo json_encode($data); die();
+
+            $curlOpt = array_merge($curlOpt, $data);
+            if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'search_entry_order_7.php');
+            // echo json_encode($listData);
+        }
+
+        return view('pages/order/searchorder', [
+            'title' => 'Order Pelayanan',
+            'listData' => $listData
+        ]);
     }
 
     public function hitung()

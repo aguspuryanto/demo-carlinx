@@ -7,7 +7,7 @@
         <div class="row">
             <div class="card mb-3">
                 <div class="card-header">
-                    <h4>Hitung Tarif</h4>
+                    <h4><?= $title ?></h4>
                 </div>
                 <div class="card-body">
                     <?php include_once '_form.php'; ?>
