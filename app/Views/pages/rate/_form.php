@@ -102,9 +102,11 @@
   <input type="hidden" name="ketr" id="ketr">
   <input type="hidden" name="fee" id="fee">
 
+  <!-- konfirmasi order -->
+  <?php include_once '_form_konfirmasi.php'; ?>
+
   <!-- Tombol -->
   <button type="submit" class="btn btn-primary w-100" id="btnHitung">Mulai Perhitungan</button>
-  <button type="submit" class="btn btn-primary w-100 d-none" id="btnKonfirm">Konfirmasi Order</button>
 <?php echo form_close(); ?>
 
 <?= $this->section('styles') ?>
@@ -240,9 +242,9 @@
             const result = response.result_unit_order[0];
             $('#totalCost').val(convertRupiah(result.total_hrg_sewa));
             // hide #btnHItung
-            // $('#btnHitung').hide();
+            $('#btnHitung').attr('disabled', true);
             // show #btnKonfirm
-            $('#cardKonfirm').show().removeClass('d-none');
+            $('#cardKonfirm, #cardPelanggan').show().removeClass('d-none');
           } else {
             console.error("Data tidak ditemukan atau tidak valid.");
           }
