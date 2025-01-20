@@ -205,6 +205,18 @@
         return;
       }
 
+      // check country code
+      if(!$('#no_hp').val().startsWith('+62')) {
+        alert('Mohon isi no hp dengan benar');
+        return;
+      }
+
+      // check phone number
+      if($('#no_hp').val().length < 10) {
+        alert('Mohon isi no hp dengan benar');
+        return;
+      }
+
       $.ajax({
         url: 'rate/send-whatsapp',
         type: 'POST',

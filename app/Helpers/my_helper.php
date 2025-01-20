@@ -50,3 +50,23 @@ function sendWhatsapp($phone, $message) {
 	$url = "https://api.whatsapp.com/send?phone={$phone}&text={$message}";
     return $url;
 }
+
+function sendWhatsappApi($phone, $message) {
+	// $phone_number = "whatsapp_number"; // The phone number of the recipient in international format
+	// $message_text = "Hello, this is a test message from the WhatsApp Business API!"; // The message text
+
+	$api_endpoint = 'https://graph.facebook.com/v18.0/<WHATSAPP_BUSINESS_ACCOUNT_ID>/messages';
+	// for more details https://developers.facebook.com/docs/whatsapp/business-management-api/get-started/
+
+	$api_token = "YOUR_API_TOKEN"; // Replace with your own API token
+	$data = [
+		'phone' => $phone,
+		'body' => $message
+	];
+	$ch = curl_init($api_endpoint);
+	curl_setopt($ch, CURLOPT_POST, 1);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data));
+	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json', "Authorization: Bearer $api_token"));
+	$result = curl_exec($ch);
+	curl_close($ch);
+}
