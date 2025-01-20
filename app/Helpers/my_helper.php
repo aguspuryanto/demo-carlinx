@@ -43,11 +43,16 @@ function format_rupiah($angka){
 	return $rupiah;
 }
 
-function sendWhatsapp($phone, $message) {
+function sendWhatsapp($phone, $message, $type = 'link') {
 	// <a href=\"whatsapp://send?phone=--your phone--&text=--your text--\">
 	// <a href=\"https://api.whatsapp.com/send?phone=--your phone--&text=--your text--\">
+	$message = urlencode($message);
 	
-	$url = "https://api.whatsapp.com/send?phone={$phone}&text={$message}";
+	if($type == 'link') {
+		$url = "https://api.whatsapp.com/send?phone={$phone}&text={$message}";
+	} else {
+		$url = "whatsapp://send?phone={$phone}&text={$message}";
+	}
     return $url;
 }
 

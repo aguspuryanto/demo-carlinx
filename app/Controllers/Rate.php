@@ -230,32 +230,32 @@ class Rate extends BaseController
             $include = 'Mobil, Driver';
             if($data['include']) $include = $data['include'];
 
-            $phone = '082244492100';//$data['no_hp'];
+            $phone = '0818336745';//$data['no_hp'];
             // remove 0 at first of phone, then replace +62
             $phone = ltrim($phone, '0');
             $phone = '+62' . $phone;
 
-            $message = 'Yth. ' . $data['nama_pelanggan'] . ',<br>
-            Berikut kami sampaikan penawaran harga sewa mobil yang Bpk/Ibu butuhkan: <br>
-            <br>
-            Tanggal : ' . date('d-m-Y H:i', strtotime($data['tgl_start'])) . ' s/d ' . date('d-m-Y H:i', strtotime($data['tgl_finish'])) . '<br>
-            <br>
-            Tujuan : ' . $data['lokasi_tujuan'] . '<br>
-            <br>
-            Mobil ' . $data['nama_unit'] . '<br>
-            <br>
-            Include : ' . $data['include'] . '<br>
-            <br>
-            Harga : Rp. ' . format_rupiah($data['total_hrg_sewa']) . '<br>
-            <br>
-            Total : Rp. ' . $data['total_hrg_sewa'] . '<br>
-            <br>
-            Pelayanan pertanggal dimulai pukul 06.00-23.00 (mobil sdh ada di garasi)<br>
-            <br>
-            Best Regard,<br>
+            $message = 'Yth. ' . $data['nama_pelanggan'] . ',
+            Berikut kami sampaikan penawaran harga sewa mobil yang Bpk/Ibu butuhkan: 
+            
+            Tanggal : ' . date('d-m-Y H:i', strtotime($data['tgl_start'])) . ' s/d ' . date('d-m-Y H:i', strtotime($data['tgl_finish'])) . '
+            
+            Tujuan : ' . $data['lokasi_tujuan'] . '
+            
+            Mobil ' . $data['nama_unit'] . '
+            
+            Include : ' . $data['include'] . '
+            
+            Harga : Rp. ' . format_rupiah($data['total_hrg_sewa']) . '
+            
+            Total : Rp. ' . $data['total_hrg_sewa'] . '
+            
+            Pelayanan pertanggal dimulai pukul 06.00-23.00 (mobil sdh ada di garasi)
+            
+            Best Regard,
             Foxie';
 
-            $url = sendWhatsapp($phone, urlencode($message));
+            $url = sendWhatsapp($phone, ($message), 'wa');
             echo json_encode(['success' => 1, 'message' => $message, 'url' => $url]);
 
             // $url = sendWhatsapp($phone, $message);

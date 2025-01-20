@@ -170,8 +170,8 @@
             $('#formSendWhatsapp').find('#nama_unit').val(result.nama);
             $('#formSendWhatsapp').find('#include').val(result.include);
             $('#formSendWhatsapp').find('#total_hrg_sewa').val(result.total_hrg_sewa);
-            $('#formSendWhatsapp').find('#nama_pelanggan').val(result.nama_pelanggan);
-            $('#formSendWhatsapp').find('#no_hp').val(result.no_hp);
+            // $('#formSendWhatsapp').find('#nama_pelanggan').val(result.nama_pelanggan);
+            // $('#formSendWhatsapp').find('#no_hp').val(result.no_hp);
 
             // hide #btnHItung
             // $('#btnHitung').attr('disabled', true);
