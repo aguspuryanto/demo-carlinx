@@ -79,6 +79,7 @@
               return {
                 q: params.term, // Search term
                 limit: 5,      // Limit results
+                in: 'countryCode:IDN',
                 apiKey: '<?= $_ENV['API_KEY_HERE'] ?>'
               };
             },
@@ -121,12 +122,8 @@
         // });
     });
 
-    // https://route.ls.hereapi.com/routing/7.2/calculateroute.xml
-    // ?apiKey={YOUR_API_KEY}
-    // &waypoint0=geo!52.5,13.4
-    // &waypoint1=geo!52.5,13.45
-    // &mode=fastest;car;traffic:disabled
-    // curl -X GET 'https://router.hereapi.com/v8/routes?transportMode=car&origin=52.5308,13.3847&destination=52.5323,13.3789&return=summary&apikey={YOUR_API_KEY}'
+    // curl -gX GET 'https://router.hereapi.com/v8/routes?transportMode=car&origin=Indonesia, Surabaya, Jalan Nginden Semolo&destination=Indonesia, Gresik, Jalan Raya Putat Lor;course=90&return=polyline,summary&apiKey=Cikgr94iiQ3Z3EwJG43WSoYhgBpyVw3XtHrI-CsM0Is'
+
   });
 </script>
 <?= $this->endSection() ?>
