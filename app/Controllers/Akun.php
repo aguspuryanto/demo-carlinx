@@ -30,15 +30,8 @@ class Akun extends BaseController
         $userList = [];
         $cityList = [];
 
-        // $client = new Client();
-        // $response = $client->request('POST', $this->ipAddress . 'select_user.php', [
-        //     'form_params' => [
-        //         'usernm' => '0876543210'
-        //     ]
-        // ]);
-        // $data = json_decode($response->getBody()->getContents(), true);
-
-        if(empty($userList)) $client = getCurl(['usernm' => '0876543210'], $this->ipAddress . 'select_user.php');
+        $usernm = ($this->session->get('user')['username']) ?? '0876543210';
+        if(empty($userList)) $client = getCurl(['usernm' => $usernm], $this->ipAddress . 'select_user.php');
         // echo json_encode($client);
         if($client['success']){
             $userList = $client['result'];

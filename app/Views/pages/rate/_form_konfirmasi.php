@@ -1,6 +1,6 @@
 
 <!-- konfirmasi order -->
-<div class="card mb-3" id="cardKonfirm">
+<div class="card mb-3 d-none" id="cardKonfirm">
     <div class="card-header">
         <h4>Detail Pesanan</h4>
     </div>
@@ -15,7 +15,7 @@
     </div>
 </div>
 
-<div class="card mb-3" id="cardPelanggan">
+<div class="card mb-3 d-none" id="cardPelanggan">
     <div class="card-header">
         <h4>Pelanggan</h4>
     </div>
