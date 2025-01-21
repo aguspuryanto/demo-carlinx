@@ -85,6 +85,9 @@ helper('form');
     <input type="text" class="form-control" name="search" id="unitName" placeholder="Nama Unit">
   </div>
 
+  <!-- Jarak Tempuh -->
+  <input type="hidden" name="jarak" id="jarak">
+
   <!-- Tombol -->
   <button type="submit" class="btn btn-primary w-100">Mulai Pencarian</button>
 <?php echo form_close(); ?>

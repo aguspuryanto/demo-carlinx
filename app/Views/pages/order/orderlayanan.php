@@ -37,7 +37,11 @@
 <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-clustering.js"></script>
 <script>
   $(function () {
-    // $('#unitName').select2();
+    // Initialize the platform object:
+    const platform = new H.service.Platform({
+      apikey: "<?= $_ENV['API_KEY_HERE'] ?>"
+    });
+
     var listKota = '<?= json_encode($listKota) ?>';
     var today = new Date(); // - 1 day
     today.setDate(today.getDate() - 1);
@@ -92,37 +96,46 @@
                 }))
               };
             },
-            cache: true
+            cache: false
+        }
+    }).on('change', function() {
+      console.log($('#lokasiJemput').val());
+    });
+
+    $('#lokasiTujuan').on('change', async function() {
+        const origin = $('#lokasiJemput').val();
+        const destination = $('#lokasiTujuan').val();
+        
+        if (!origin || !destination) return;
+
+        try {
+            // Get coordinates for origin
+            const originResponse = await fetch(`https://geocode.search.hereapi.com/v1/geocode?q=${encodeURIComponent(origin)}&apiKey=<?= $_ENV['API_KEY_HERE'] ?>`);
+            const originData = await originResponse.json();
+            
+            // Get coordinates for destination
+            const destResponse = await fetch(`https://geocode.search.hereapi.com/v1/geocode?q=${encodeURIComponent(destination)}&apiKey=<?= $_ENV['API_KEY_HERE'] ?>`);
+            const destData = await destResponse.json();
+
+            if (!originData.items.length || !destData.items.length) {
+                console.error('Location not found');
+                return;
+            }
+
+            const originCoords = `${originData.items[0].position.lat},${originData.items[0].position.lng}`;
+            const destCoords = `${destData.items[0].position.lat},${destData.items[0].position.lng}`;
+
+            // Calculate route
+            const routeResponse = await fetch(`https://router.hereapi.com/v8/routes?transportMode=car&origin=${originCoords}&destination=${destCoords}&return=summary&apikey=<?= $_ENV['API_KEY_HERE'] ?>`);
+            const routeData = await routeResponse.json();
+
+            const distance = routeData.routes[0].sections[0].summary.length;
+            $('#jarak').val(distance / 1000); // Convert to kilometers
+            
+        } catch (error) {
+            console.error('Error calculating route:', error);
         }
     });
-
-    // $('#lokasiJemput').on('change', function() {
-    //   console.log($('#lokasiJemput').val());
-    // });
-
-    $('#lokasiTujuan').on('change', function() {
-        // console.log($('#lokasiTujuan').val());
-        var origin = $('#lokasiJemput').val();
-        var destination = $('#lokasiTujuan').val();
-        console.log(origin, destination);
-
-        // $.ajax({
-        //     url: '<?= $_ENV['API_BASEURL_HERE'] ?>/routes',
-        //     type: 'GET',
-        //     data: {
-        //         transportMode: 'car',
-        //         origin: origin,
-        //         destination: destination,
-        //         return: 'summary',
-        //         apiKey: '<?= $_ENV['API_KEY_HERE'] ?>'
-        //     },
-        //     success: function(response) {
-        //         console.log(response);
-        //     }
-        // });
-    });
-
-    // curl -gX GET 'https://router.hereapi.com/v8/routes?transportMode=car&origin=Indonesia, Surabaya, Jalan Nginden Semolo&destination=Indonesia, Gresik, Jalan Raya Putat Lor;course=90&return=polyline,summary&apiKey=Cikgr94iiQ3Z3EwJG43WSoYhgBpyVw3XtHrI-CsM0Is'
 
   });
 </script>
