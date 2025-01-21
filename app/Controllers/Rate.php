@@ -172,7 +172,7 @@ class Rate extends BaseController
                 'tgl_2' => $data['tgl_finish'],
                 'lokasi_jemput' => $data['lokasi_jemput'],
                 'lokasi_tujuan' => $data['lokasi_tujuan'],
-                'jarak_tempuh' => isset($data['jarak']) ? str_replace('.', '', $data['jarak']) : 0, //40.165 meter
+                'jarak' => isset($data['jarak']) ? $this->convertToKM($data['jarak']) : 0, //40.165 meter
                 'is_bbm' => isset($data['is_bbm']) ? 1 : 0,
                 'is_makan' => isset($data['is_makan']) ? 1 : 0,
                 'is_hotel' => isset($data['is_hotel']) ? 1 : 0,
@@ -185,7 +185,7 @@ class Rate extends BaseController
                 'jml_bln' => isset($data['jml_bln']) ? $data['jml_bln'] : 0
             ];
 
-            // echo json_encode($data); die();
+            // echo json_encode($data); //die();
 
             $curlOpt = array_merge($curlOpt, $data);
             if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'search_entry_order_7.php');
@@ -196,6 +196,16 @@ class Rate extends BaseController
             'title' => 'Order Pelayanan',
             'listData' => $listData
         ]);
+    }
+
+    public function searchOrderDetail($id)
+    {
+        echo $id;
+    }
+
+    public function convertToKM($jarak)
+    {
+        return round(str_replace('.', '', $jarak) / 1000, 0);
     }
 
     public function hitung()

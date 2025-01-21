@@ -53,6 +53,7 @@ $routes->group('rate', function($routes) {
 $routes->group('order', function($routes) {
     $routes->get('orderlayanan', 'Rate::orderLayanan');
     $routes->post('search-order', 'Rate::searchOrder');
+    $routes->get('search-order/(:num)', 'Rate::searchOrderDetail/$1');
 
     // lepas-kunci
     // $routes->get('lepas-kunci', 'Rate::lepasKunci');

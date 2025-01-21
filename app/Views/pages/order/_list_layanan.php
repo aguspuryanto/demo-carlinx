@@ -1,9 +1,9 @@
-<?php echo json_encode($listData['result_unit_order']); ?>
+<?php //echo json_encode($listData['result_unit_order']); ?>
 <ul class="list-group d-sm-block d-md-block d-lg-none d-xl-none">
     <li class="list-group-item active" aria-current="true">Hasil Pencarian <?= count($listData['result_unit_order']) ?></li>
     <?php foreach ($listData['result_unit_order'] as $item) : ?>
     <li class="list-group-item">
-        <a href="#" class="list-group-item-action d-flex" data-id="<?= $item['kode'] ?>" data-item="<?= esc(json_encode($item)) ?>" data-bs-toggle="modal" data-bs-target="#addModal">
+        <a href="<?= base_url('order/search-order/' . $item['kode']) ?>" class="list-group-item-action d-flex">
             <div class="p-2 flex-shrink-1">
                 <img class="avatar avatar-lg" src="<?= $_ENV['API_BASEURL'] . 'images/' . $item['path_foto'] ?>" style="width: 64px; height: 64px;" />
             </div>
