@@ -114,18 +114,6 @@ class Rate extends BaseController
         ]);
     }
 
-    public function lepasKunci() 
-    {    
-        echo 'Lepas Kunci';
-        // return view('pages/rate/hitung', ['title' => 'Lepaskunci']);
-    }
-
-    public function orderBulanan()
-    {
-        echo 'Order Bulanan';
-        return view('pages/order/orderbulanan', ['title' => 'Order Bulanan']);
-    }
-
     public function searchOrder()
     {
         // echo 'Search Order';
@@ -200,7 +188,37 @@ class Rate extends BaseController
 
     public function searchOrderDetail($id)
     {
-        echo $id;
+        // echo $id;
+        // $id_order = $_POST['id_order'];
+        // select_detail_order_1.php
+        $listData = [];
+
+        $curlOpt = [
+            'id_order' => $id
+        ];
+
+        $listData = getCurl($curlOpt, $this->ipAddress . 'select_detail_order_1.php');
+        echo json_encode($listData);
+    }
+
+    public function lepasKunci() 
+    {    
+        // echo 'Lepas Kunci';
+        // search_entry_order_7.php (jns_order: 2)
+        $listData = [];
+        $curlOpt = [
+            'kd_member' => $this->session->get('user')['kode'],
+        ];
+
+        if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'search_entry_order_7.php');
+        echo json_encode($listData);
+        // return view('pages/rate/hitung', ['title' => 'Lepaskunci']);
+    }
+
+    public function orderBulanan()
+    {
+        echo 'Order Bulanan';
+        return view('pages/order/orderbulanan', ['title' => 'Order Bulanan']);
     }
 
     public function convertToKM($jarak)
