@@ -44,12 +44,16 @@ helper('form');
     <label class="form-label">Rute Perjalanan</label>
     <div class="row">
       <div class="col-6">
-        <input type="text" class="form-control" name="lokasi_jemput" id="lokasiJemput" placeholder="Lokasi Jemput" autocomplete="on">
-        <div id="lokasiJemputList"></div>
+        <select class="form-control" name="lokasi_jemput" id="lokasiJemput">
+          <option value="">Pilih Lokasi Jemput</option>
+        </select>
+        <div id="lokasiJemputList" class="mt-2"></div>
       </div>
       <div class="col-6">
-        <input type="text" class="form-control" name="lokasi_tujuan" id="lokasiTujuan" placeholder="Lokasi Tujuan">
-        <div id="lokasiTujuanList"></div>
+        <select class="form-control" name="lokasi_tujuan" id="lokasiTujuan">
+          <option value="">Pilih Lokasi Tujuan</option>
+        </select>
+        <div id="lokasiTujuanList" class="mt-2"></div>
       </div>
     </div>
   </div>
@@ -82,7 +86,7 @@ helper('form');
   <!-- Hasil Perhitungan -->
   <div class="mb-3">
     <label for="unitName" class="form-label">Nama Unit</label>
-    <input type="text" class="form-control" name="search" id="unitName" placeholder="Nama Unit">
+    <input type="text" class="form-control" name="search" id="unitName" placeholder="Nama Unit" style="text-transform: uppercase">
   </div>
 
   <!-- Jarak Tempuh -->

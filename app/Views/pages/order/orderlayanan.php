@@ -70,36 +70,53 @@
       }
     });
 
+    var listTujuan = [];
     // Initialize Select2
     $('#lokasiJemput, #lokasiTujuan').select2({
         theme: 'bootstrap-5',
         placeholder: 'Type to search...',
-        minimumInputLength: 2,
+        minimumInputLength: 3,
         ajax: {
-            url: '<?= $_ENV['API_BASEURL_HERE'] ?>/autocomplete',
-            dataType: 'json',
-            delay: 250,
-            data: function (params) {
-              return {
-                q: params.term, // Search term
-                limit: 5,      // Limit results
-                in: 'countryCode:IDN',
-                apiKey: '<?= $_ENV['API_KEY_HERE'] ?>'
-              };
-            },
-            processResults: function (data) {
-              console.log(data.items);
-              return {
-                results: data.items.map(item => ({
-                  id: item.title,
-                  text: item.title
-                }))
-              };
-            },
-            cache: false
-        }
+          url: '<?= $_ENV['API_BASEURL_HERE'] ?>/autocomplete',
+          dataType: 'json',
+          delay: 250,
+          data: function (params) {
+            return {
+              q: params.term, // Search term
+              limit: 5,      // Limit results
+              in: 'countryCode:IDN',
+              apiKey: '<?= $_ENV['API_KEY_HERE'] ?>'
+            };
+          },
+          processResults: function (data) {
+            console.log(data.items);
+            listTujuan = data.items.map(item => ({
+              id: item.title,
+              text: item.title
+            }));
+
+            return {
+              more: false,
+              results: listTujuan
+            };
+          },
+          cache: true
+        }, 
+        onSelect: function(e) {
+          console.log(e);
+        }, 
+        data: listTujuan
     }).on('change', function() {
       console.log($('#lokasiJemput').val());
+      // append to div#lokasiJemputList
+      if($('#lokasiJemput').val() != '') {
+        $('#lokasiJemputList').html('<ul class="list-group"></ul>');
+        $('#lokasiJemputList ul').html('<li class="list-group-item">' + $('#lokasiJemput').val() + '</li>');
+      }
+      if($('#lokasiTujuan').val() != '') {
+        $('#lokasiTujuanList').html('<ul class="list-group"></ul>');
+        $('#lokasiTujuanList ul').html('<li class="list-group-item">' + $('#lokasiTujuan').val() + '</li>');
+      }
     });
 
     $('#lokasiTujuan').on('change', async function() {

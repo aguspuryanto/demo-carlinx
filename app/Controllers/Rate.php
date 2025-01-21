@@ -172,7 +172,7 @@ class Rate extends BaseController
                 'tgl_2' => $data['tgl_finish'],
                 'lokasi_jemput' => $data['lokasi_jemput'],
                 'lokasi_tujuan' => $data['lokasi_tujuan'],
-                'jarak_tempuh' => isset($data['jarak']) ? $data['jarak'] : 0, //40.165 meter
+                'jarak_tempuh' => isset($data['jarak']) ? str_replace('.', '', $data['jarak']) : 0, //40.165 meter
                 'is_bbm' => isset($data['is_bbm']) ? 1 : 0,
                 'is_makan' => isset($data['is_makan']) ? 1 : 0,
                 'is_hotel' => isset($data['is_hotel']) ? 1 : 0,
