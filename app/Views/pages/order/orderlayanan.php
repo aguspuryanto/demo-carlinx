@@ -156,6 +156,51 @@
         }
     });
 
+    // formSearchOrder
+    $('#formSearchOrder').on('submit', function(e) {
+      e.preventDefault();
+      
+      // Define validation rules
+      const validationRules = [
+        {
+          field: 'kotaTujuan',
+          message: 'Kota Tujuan harus dipilih'
+        },
+        {
+          field: 'pickupDate',
+          message: 'Tanggal/Jam Sewa harus dipilih'
+        },
+        {
+          field: 'returnDate',
+          message: 'Tanggal/Jam Sewa harus dipilih'
+        },
+        {
+          field: 'lokasiJemput',
+          message: 'Lokasi Jemput harus dipilih'
+        },
+        {
+          field: 'lokasiTujuan',
+          message: 'Lokasi Tujuan harus dipilih'
+        },
+        {
+          field: 'is_bbm',
+          message: 'Is BBm harus dipilih'
+        }
+      ];
+
+      // Validate all fields
+      for (const rule of validationRules) {
+        if ($(`#${rule.field}`).val() === '') {
+          // alert(rule.message);
+          // append '<div class="invalid-feedback">' + rule.message + '</div> to the field
+          $(`#${rule.field}`).parent().append('<div class="invalid-feedback">' + rule.message + '</div>');
+          return false;
+        }
+      }
+
+      return true;
+    });
+
   });
 </script>
 <?= $this->endSection() ?>

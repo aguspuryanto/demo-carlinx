@@ -2,7 +2,7 @@
 helper('form');
 ?>
 
-<?= form_open('order/search-order', []); ?>
+<?= form_open('order/search-order', ['id' => 'formSearchOrder', 'class' => 'row g-3 needs-validation', 'novalidate' => '']); ?>
   <!-- Nama Unit -->
   <div class="form-group">
     <label for="kotaTujuan" class="form-label">Kota Tujuan</label>

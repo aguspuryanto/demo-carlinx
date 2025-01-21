@@ -1,4 +1,4 @@
-<?php echo json_encode($listData['result_unit_order']); ?>
+<?php //echo json_encode($listData['result_unit_order']); ?>
 <ul class="list-group d-sm-block d-md-block d-lg-none d-xl-none">
     <li class="list-group-item active" aria-current="true">Hasil Pencarian <?= count($listData['result_unit_order']) ?></li>
     <?php foreach ($listData['result_unit_order'] as $item) : ?>
