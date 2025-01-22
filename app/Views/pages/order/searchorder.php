@@ -9,7 +9,7 @@
                 <div class="card-header">
                     <h4><?= $title ?></h4>
                 </div>
-                <div class="card-body">
+                <div class="card-body p-0">
                     <?php //echo json_encode($listData); ?>
                     <?php include_once '_list_layanan.php'; ?>
                 </div>

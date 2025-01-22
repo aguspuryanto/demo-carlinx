@@ -51,9 +51,9 @@ $routes->group('order', function($routes) {
     $routes->post('search-order', 'Order::searchOrder');
     $routes->get('search-order/(:num)', 'Order::searchOrderDetail/$1');
 
-    $routes->get('lepaskunci', 'Order::lepasKunci');
+    $routes->add('lepaskunci', 'Order::lepasKunci');
 
-    $routes->get('bulanan', 'Order::orderBulanan');
+    $routes->add('bulanan', 'Order::orderBulanan');
 });
 
 // event

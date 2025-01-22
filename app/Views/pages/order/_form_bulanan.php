@@ -27,16 +27,6 @@ helper('form');
         <input type="time" class="form-control" name="jam_start" id="pickupTime">
       </div>
     </div>
-    <div class="row mt-2">
-      <div class="col-6">
-        <label for="returnDate" class="form-label">Tgl Selesai</label>
-        <input type="text" class="form-control" name="tgl_finish" id="returnDate" autocomplete="off" required>
-      </div>
-      <div class="col-6">
-        <label for="returnTime" class="form-label">Jam</label>
-        <input type="time" class="form-control" name="jam_finish" id="returnTime">
-      </div>
-    </div>
   </div>
 
   <!-- Penanggung Jawab -->

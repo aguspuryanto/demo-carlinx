@@ -71,48 +71,36 @@
     });
 
     // formSearchOrder
-    $('#formSearchOrder').on('submit', function(e) {
-      e.preventDefault();
+    // $('#formSearchOrder').on('submit', function(e) {
+    //   e.preventDefault();
       
-      // Define validation rules
-      const validationRules = [
-        {
-          field: 'kotaTujuan',
-          message: 'Kota Tujuan harus dipilih'
-        },
-        {
-          field: 'pickupDate',
-          message: 'Tanggal/Jam Sewa harus dipilih'
-        },
-        {
-          field: 'returnDate',
-          message: 'Tanggal/Jam Sewa harus dipilih'
-        },
-        {
-          field: 'lokasiJemput',
-          message: 'Lokasi Jemput harus dipilih'
-        },
-        {
-          field: 'lokasiTujuan',
-          message: 'Lokasi Tujuan harus dipilih'
-        },
-        {
-          field: 'is_bbm',
-          message: 'Is BBm harus dipilih'
-        }
-      ];
+    //   // Define validation rules
+    //   const validationRules = [
+    //     {
+    //       field: 'kotaTujuan',
+    //       message: 'Kota Tujuan harus dipilih'
+    //     },
+    //     {
+    //       field: 'pickupDate',
+    //       message: 'Tanggal/Jam Sewa harus dipilih'
+    //     },
+    //     {
+    //       field: 'returnDate',
+    //       message: 'Tanggal/Jam Sewa harus dipilih'
+    //     }
+    //   ];
 
-      // Validate all fields
-      for (const rule of validationRules) {
-        if ($(`#${rule.field}`).val() === '') {
-          alert(rule.message);
-          $(`#${rule.field}`).parent().append('<div class="invalid-feedback">' + rule.message + '</div>');
-          return false;
-        }
-      }
+    //   // Validate all fields
+    //   for (const rule of validationRules) {
+    //     if ($(`#${rule.field}`).val() === '') {
+    //       alert(rule.message);
+    //       $(`#${rule.field}`).parent().append('<div class="invalid-feedback">' + rule.message + '</div>');
+    //       return false;
+    //     }
+    //   }
 
-      return true;
-    });
+    //   return true;
+    // });
 
   });
 </script>
