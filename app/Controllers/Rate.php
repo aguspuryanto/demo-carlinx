@@ -69,7 +69,7 @@ class Rate extends BaseController
         // handle POST
         if ($this->request->getMethod() == 'POST') {
             $data = $this->request->getPost();
-            // echo json_encode($data);
+            // echo json_encode($data); //{"kd_unit":"22040001AV0002","tgl_start":"19-01-2025","jam_start":"00:00","tgl_finish":"22-01-2025","jam_end":"00:00","lokasi_jemput":"here:af:street:Ytv1uykHYZJR7q1RySCNhB","lokasi_tujuan":"here:af:street:CoYF2Nk.rFCjgz.qUMWNxC","is_bbm":"on","is_makan":"on","is_hotel":"on","drop_awal":"on","drop_akhir":"on","tolparkir":"80000","lainlain":"130000","jarak":"","ketr":"","fee":""}
 
             /*$jns_order = $_POST['jns_order'];
             $kd_member = $_POST['kd_member'];
@@ -105,8 +105,8 @@ class Rate extends BaseController
                     'kd_unit' => $data['kd_unit'],
                     'tgl_start' => date('Y-m-d H:i:s', strtotime($data['tgl_start'] . ' ' . $data['jam_start'])), //$data['tgl_start'] . ' ' . $data['jam_start'],
                     'tgl_finish' => date('Y-m-d H:i:s', strtotime($data['tgl_finish'] . ' ' . $data['jam_end'])), //$data['tgl_finish'] . ' ' . $data['jam_end'],
-                    'lokasi_jemput' => end(explode(',', $data['lokasi_jemput'])),
-                    'lokasi_tujuan' => end(explode(',', $data['lokasi_tujuan'])),
+                    'lokasi_jemput' => $data['lokasi_jemput'],
+                    'lokasi_tujuan' => $data['lokasi_tujuan'],
                     'jarak_tempuh' => ($data['jarak']) ? $data['jarak'] : 0,
                     'is_bbm' => isset($data['is_bbm']) ? 1 : 0,
                     'is_makan' => isset($data['is_makan']) ? 1 : 0,
@@ -120,7 +120,7 @@ class Rate extends BaseController
                 ];
     
                 $curlOpt = array_merge($curlOpt, $data);
-                echo json_encode($curlOpt); //die();
+                // echo json_encode($curlOpt); //die();
     
                 if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'search_entry_order_tunggal_4.php');
 

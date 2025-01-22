@@ -196,8 +196,8 @@ class Order extends BaseController
                 'search' => '%' . $data['search'] . '%',
                 'tgl_1' => $data['tgl_start'],
                 'tgl_2' => $data['tgl_finish'],
-                'lokasi_jemput' => isset($data['lokasi_jemput']) ? end(explode(',', $data['lokasi_jemput'])) : '',
-                'lokasi_tujuan' => isset($data['lokasi_tujuan']) ? end(explode(',', $data['lokasi_tujuan'])) : '',
+                'lokasi_jemput' => isset($data['lokasi_jemput']) ? $data['lokasi_jemput'] : '',
+                'lokasi_tujuan' => isset($data['lokasi_tujuan']) ? $data['lokasi_tujuan'] : '',
                 'jarak' => isset($data['jarak']) ? $this->convertToKM($data['jarak']) : 0, //40.165 meter
                 'is_bbm' => isset($data['is_bbm']) ? 1 : 0,
                 'is_makan' => isset($data['is_makan']) ? 1 : 0,
@@ -249,8 +249,8 @@ class Order extends BaseController
                 'search' => '%' . $data['search'] . '%',
                 'tgl_1' => $data['tgl_start'],
                 'tgl_2' => $data['tgl_finish'],
-                'lokasi_jemput' => isset($data['lokasi_jemput']) ? end(explode(',', $data['lokasi_jemput'])) : '',
-                'lokasi_tujuan' => isset($data['lokasi_tujuan']) ? end(explode(',', $data['lokasi_tujuan'])) : '',
+                'lokasi_jemput' => isset($data['lokasi_jemput']) ? $data['lokasi_jemput'] : '',
+                'lokasi_tujuan' => isset($data['lokasi_tujuan']) ? $data['lokasi_tujuan'] : '',
                 'jarak' => isset($data['jarak']) ? $this->convertToKM($data['jarak']) : 0, //40.165 meter
                 'is_bbm' => isset($data['is_bbm']) ? 1 : 0,
                 'is_makan' => isset($data['is_makan']) ? 1 : 0,
