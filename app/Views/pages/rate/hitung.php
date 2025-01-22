@@ -99,7 +99,7 @@
             console.log(data.items);
             listTujuan = data.items.map(item => ({
               id: item.title,
-              text: item.title
+              text: item.title.substr(item.title.lastIndexOf(",") + 1)
             }));
 
             return {
