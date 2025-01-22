@@ -38,60 +38,25 @@ helper('form');
       </div>
     </div>
   </div>
-
-  <!-- Rute Perjalanan -->
+  
+  <!-- Syarat & Ketentuan -->
   <div class="mb-3">
-    <label class="form-label">Rute Perjalanan</label>
-    <div class="row">
-      <div class="col-6">
-        <select class="form-control" name="lokasi_jemput" id="lokasiJemput">
-          <option value="">Pilih Lokasi Jemput</option>
-        </select>
-        <div id="lokasiJemputList" class="mt-2"></div>
-      </div>
-      <div class="col-6">
-        <select class="form-control" name="lokasi_tujuan" id="lokasiTujuan">
-          <option value="">Pilih Lokasi Tujuan</option>
-        </select>
-        <div id="lokasiTujuanList" class="mt-2"></div>
-      </div>
-    </div>
+    <p class="fw-bold">Syarat dan Ketentuan</p>
+    <ol style="list-style-type: decimal; font-size: 12px;">
+      <li>Lengkapi syarat/dokumen yang dibutuhkan</li>
+      <li>Periksa kondisi unit saat penerimaan dan pengembalian.</li>
+      <li>Kembalikan posisi jarum BBM sama dengan saat penerimaan.</li>
+      <li>Keterlambatan pengembalian akan dikenakan biaya keterlambatan.</li>
+      <li>Segala risiko yang terjadi selama waktu peminjaman, menjadi tanggung jawab Rental Pemesan/Pelanggan.</li>
+    </ol>
   </div>
 
-  <!-- Biaya Tambahan -->
-  <div class="mb-3">
-    <label class="form-label d-block">Biaya Tambahan</label>
-    <div class="form-check form-check-inline">
-      <input type="checkbox" class="form-check-input" name="is_bbm" id="fuel">
-      <label class="form-check-label" for="fuel">BBM</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input type="checkbox" class="form-check-input" name="is_makan" id="driverMeal">
-      <label class="form-check-label" for="driverMeal">Makan Driver</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input type="checkbox" class="form-check-input" name="is_hotel" id="driverStay">
-      <label class="form-check-label" for="driverStay">Inap Driver</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input type="checkbox" class="form-check-input" name="drop_awal" id="transferIn">
-      <label class="form-check-label" for="transferIn">Transfer In</label>
-    </div>
-    <div class="form-check form-check-inline">
-      <input type="checkbox" class="form-check-input" name="drop_akhir" id="transferOut">
-      <label class="form-check-label" for="transferOut">Transfer Out</label>
-    </div>
-  </div>
-
-  <!-- Hasil Perhitungan -->
+  <!-- Nama Unit -->
   <div class="mb-3">
     <label for="unitName" class="form-label">Nama Unit</label>
     <input type="text" class="form-control" name="search" id="unitName" placeholder="Nama Unit" style="text-transform: uppercase">
   </div>
 
-  <!-- Jarak Tempuh -->
-  <input type="hidden" name="jarak" id="jarak">
-
   <!-- Tombol -->
-  <button type="submit" class="btn btn-primary w-100">Mulai Pencarian</button>
+  <button type="submit" class="btn btn-primary w-100">MULAI PENCARIAn</button>
 <?php echo form_close(); ?>

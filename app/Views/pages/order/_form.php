@@ -93,5 +93,5 @@ helper('form');
   <input type="hidden" name="jarak" id="jarak">
 
   <!-- Tombol -->
-  <button type="submit" class="btn btn-primary w-100">Mulai Pencarian</button>
+  <button type="submit" class="btn btn-primary w-100">MULAI PENCARIAn</button>
 <?php echo form_close(); ?>

@@ -177,8 +177,9 @@ class Order extends BaseController
     {    
         // echo 'Lepas Kunci';
         $view_page = 'pages/order/lepaskunci';
-        $listData = [];
-        $curlOpt = [
+        $listData   = [];
+        $listKota   = [];
+        $curlOpt    = [
             'kd_member' => $this->session->get('user')['kode'],
         ];
 
@@ -217,9 +218,12 @@ class Order extends BaseController
             $view_page = 'pages/order/searchorder';
         }
 
+        if(empty($listKota)) $listKota = getCurl($curlOpt, $this->ipAddress . 'select_kota_1.php');
+
         return view($view_page, [
             'title' => 'Order Lepas Kunci',
-            'listData' => $listData
+            'listData' => $listData,
+            'listKota' => $listKota
         ]);
     }
 
