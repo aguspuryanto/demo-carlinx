@@ -57,26 +57,6 @@ class Rate extends BaseController
         ]);
     }
 
-    public function lepasKunci() 
-    {    
-        // echo 'Lepas Kunci';
-        // search_entry_order_7.php (jns_order: 2)
-        $listData = [];
-        $curlOpt = [
-            'kd_member' => $this->session->get('user')['kode'],
-        ];
-
-        if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'search_entry_order_7.php');
-        echo json_encode($listData);
-        // return view('pages/rate/hitung', ['title' => 'Lepaskunci']);
-    }
-
-    public function orderBulanan()
-    {
-        echo 'Order Bulanan';
-        return view('pages/order/orderbulanan', ['title' => 'Order Bulanan']);
-    }
-
     public function hitung()
     {
         $listData = [];

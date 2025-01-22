@@ -173,6 +173,62 @@ class Order extends BaseController
         echo json_encode($listData);
     }
 
+    public function lepasKunci() 
+    {    
+        // echo 'Lepas Kunci';
+        $view_page = 'pages/order/lepaskunci';
+        $listData = [];
+        $curlOpt = [
+            'kd_member' => $this->session->get('user')['kode'],
+        ];
+
+        // handle POST
+        if ($this->request->getMethod() == 'POST') {
+            $data = $this->request->getPost();
+            echo json_encode($data); die();
+
+            // search_entry_order_7.php (jns_order: 2)
+            $data = [
+                'jns_order' => 2,
+                'kd_member' => $this->session->get('user')['kode'],
+                'kd_kota' => $data['kd_kota'],
+                'search' => '%' . $data['search'] . '%',
+                'tgl_1' => $data['tgl_start'],
+                'tgl_2' => $data['tgl_finish'],
+                'lokasi_jemput' => $data['lokasi_jemput'],
+                'lokasi_tujuan' => $data['lokasi_tujuan'],
+                'jarak' => isset($data['jarak']) ? $this->convertToKM($data['jarak']) : 0, //40.165 meter
+                'is_bbm' => isset($data['is_bbm']) ? 1 : 0,
+                'is_makan' => isset($data['is_makan']) ? 1 : 0,
+                'is_hotel' => isset($data['is_hotel']) ? 1 : 0,
+                'ketr' => isset($data['ketr']) ? $data['ketr'] : '',
+                'is_antar' => isset($data['is_antar']) ? 1 : 0,
+                'is_ambil' => isset($data['is_ambil']) ? 1 : 0,
+                'drop_awal' => isset($data['drop_awal']) ? 1 : 0,
+                'drop_akhir' => isset($data['drop_akhir']) ? 1 : 0,
+                'tg_jwb' => isset($data['tg_jwb']) ? $data['tg_jwb'] : '',
+                'jml_bln' => isset($data['jml_bln']) ? $data['jml_bln'] : 0
+            ];
+
+            // echo json_encode($data); //die();
+            // if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'search_entry_order_7.php');
+            // echo json_encode($listData);
+
+            $view_page = 'pages/order/searchorder';
+        }
+
+        return view($view_page, [
+            'title' => 'Order Lepas Kunci',
+            'listData' => $listData
+        ]);
+    }
+
+    public function orderBulanan()
+    {
+        echo 'Order Bulanan';
+        return view('pages/order/orderbulanan', ['title' => 'Order Bulanan']);
+    }
+
     public function convertToKM($jarak)
     {
         return round(str_replace('.', '', $jarak) / 1000, 0);
