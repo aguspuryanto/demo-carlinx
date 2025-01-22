@@ -213,7 +213,7 @@
 
             // set konfirmasi
             $('#tanggal').text(result.tgl_start + ' s/d ' + result.tgl_finish); // 20-01-2025 06:00 s/d 20-01-2025 23:59
-            $('#tujuan').text(result.lokasi_tujuan + ' - ' + result.lokasi_jemput); // Surabaya - Malang
+            $('#tujuan').text(result.lokasi_tujuan.substr(result.lokasi_tujuan.lastIndexOf(",") + 1) + ' - ' + result.lokasi_jemput.substr(result.lokasi_jemput.lastIndexOf(",") + 1)); // Surabaya - Malang
             $('#namaUnit').text(result.nama); // AVANZA 2017 (TES)
             $('#include').text(result.include); // Mobil, Driver, BBM
             $('#totalBiaya').text(convertRupiah(result.total_hrg_sewa)); // 2375000
@@ -223,7 +223,7 @@
             // $('#jam_start').val(result.jam_start);
             $('#formSendWhatsapp').find('#tgl_finish').val(result.tgl_finish);
             // $('#jam_end').val(result.jam_end);
-            $('#formSendWhatsapp').find('#lokasi_tujuan').val(result.lokasi_tujuan);
+            $('#formSendWhatsapp').find('#lokasi_tujuan').val(result.lokasi_tujuan.substr(result.lokasi_tujuan.lastIndexOf(",") + 1));
             $('#formSendWhatsapp').find('#nama_unit').val(result.nama);
             $('#formSendWhatsapp').find('#include').val(result.include);
             $('#formSendWhatsapp').find('#total_hrg_sewa').val(result.total_hrg_sewa);
