@@ -120,11 +120,11 @@
       // append to div#lokasiJemputList
       if(lokasiJemput != '') {
         $('#lokasiJemputList').html('<ul class="list-group"></ul>');
-        $('#lokasiJemputList ul').html('<li class="list-group-item">' + lokasiJemput.substr(lastIndexOf(",") + 1) + '</li>');
+        $('#lokasiJemputList ul').html('<li class="list-group-item">' + lokasiJemput.substr(lokasiJemput.lastIndexOf(",") + 1) + '</li>');
       }
       if(lokasiTujuan != '') {
         $('#lokasiTujuanList').html('<ul class="list-group"></ul>');
-        $('#lokasiTujuanList ul').html('<li class="list-group-item">' + lokasiTujuan.substr(lastIndexOf(",") + 1) + '</li>');
+        $('#lokasiTujuanList ul').html('<li class="list-group-item">' + lokasiTujuan.substr(lokasiTujuan.lastIndexOf(",") + 1) + '</li>');
       }
     });
 
