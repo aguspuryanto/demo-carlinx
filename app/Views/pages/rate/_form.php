@@ -44,16 +44,16 @@
     <label class="form-label">Rute Perjalanan</label>
     <div class="row">
       <div class="col-6">
-        <!-- <input type="text" class="form-control" id="lokasiJemput" placeholder="Lokasi Jemput" autocomplete="on">
-        <div id="lokasiJemputList"></div> -->
-        <!-- <label for="lokasiJemput" class="form-label">Search Location</label> -->
-        <select id="lokasiJemput" name="lokasi_jemput" class="form-select" aria-placeholder="Lokasi Jemput" style="width: 100%;"></select>
+        <select class="form-control" name="lokasi_jemput" id="lokasiJemput">
+          <option value="">Pilih Lokasi Jemput</option>
+        </select>
+        <div id="lokasiJemputList" class="mt-2"></div>
       </div>
       <div class="col-6">
-        <!-- <input type="text" class="form-control" id="lokasiTujuan" placeholder="Lokasi Tujuan">
-        <div id="lokasiTujuanList"></div> -->
-        <!-- <label for="lokasiTujuan" class="form-label">Search Location</label> -->
-        <select id="lokasiTujuan" name="lokasi_tujuan" class="form-select" style="width: 100%;"></select>
+        <select class="form-control" name="lokasi_tujuan" id="lokasiTujuan">
+          <option value="">Pilih Lokasi Tujuan</option>
+        </select>
+        <div id="lokasiTujuanList" class="mt-2"></div>
       </div>
     </div>
   </div>
