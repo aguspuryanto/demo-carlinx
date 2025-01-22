@@ -41,25 +41,19 @@ $routes->group('rate', function($routes) {
     $routes->get('placeid', 'Rate::placeid');
     $routes->get('get-unit', 'Rate::getUnit');
 
-    $routes->get('lepaskunci', 'Rate::lepasKunci');
-
-    $routes->get('bulanan', 'Rate::orderBulanan');
-
     // send whatsapp
     $routes->add('send-whatsapp', 'Rate::sendWhatsapp');
 });
 
 // pelayanan
 $routes->group('order', function($routes) {
-    $routes->get('orderlayanan', 'Rate::orderLayanan');
-    $routes->post('search-order', 'Rate::searchOrder');
-    $routes->get('search-order/(:num)', 'Rate::searchOrderDetail/$1');
+    $routes->get('orderlayanan', 'Order::orderLayanan');
+    $routes->post('search-order', 'Order::searchOrder');
+    $routes->get('search-order/(:num)', 'Order::searchOrderDetail/$1');
 
-    // lepas-kunci
-    // $routes->get('lepas-kunci', 'Rate::lepasKunci');
+    $routes->get('lepaskunci', 'Order::lepasKunci');
 
-    // bulanan
-    $routes->get('bulanan', 'Rate::orderBulanan');
+    $routes->get('bulanan', 'Order::orderBulanan');
 });
 
 // event

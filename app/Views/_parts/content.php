@@ -38,7 +38,7 @@
                 </div>
 
                 <div class="col-4 col-md-6 col-lg-6">
-                    <a href="<?= base_url('rate/orderlayanan'); ?>" class="card shadow-sm mb-4">
+                    <a href="<?= base_url('order/orderlayanan'); ?>" class="card shadow-sm mb-4">
                         <div class="card-body px-1">
                             <div class="xrow">
                                 <div class="col-auto">
@@ -55,7 +55,7 @@
                 </div>
 
                 <div class="col-4 col-md-6 col-lg-6">
-                    <a href="<?= base_url('rate/lepaskunci'); ?>" class="card shadow-sm mb-4">
+                    <a href="<?= base_url('order/lepaskunci'); ?>" class="card shadow-sm mb-4">
                         <div class="card-body px-1">
                             <div class="xrow">
                                 <div class="col-auto">
@@ -72,7 +72,7 @@
                 </div>
 
                 <div class="col-4 col-md-6 col-lg-6">
-                    <a href="<?= base_url('rate/orderbulanan'); ?>" class="card shadow-sm mb-4">
+                    <a href="<?= base_url('order/orderbulanan'); ?>" class="card shadow-sm mb-4">
                         <div class="card-body px-1">
                             <div class="xrow">
                                 <div class="col-auto">
