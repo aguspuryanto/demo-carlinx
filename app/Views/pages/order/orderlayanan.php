@@ -108,15 +108,15 @@
         data: listTujuan
     }).on('change', function() {
       console.log($('#lokasiJemput').val());
+      const lokasiJemput = $('#lokasiJemput').val();
+      const lokasiTujuan = $('#lokasiTujuan').val();
       // append to div#lokasiJemputList
-      if($('#lokasiJemput').val() != '') {
+      if(lokasiJemput != '') {
         $('#lokasiJemputList').html('<ul class="list-group"></ul>');
-        const lokasiJemput = $('#lokasiJemput').val();
         $('#lokasiJemputList ul').html('<li class="list-group-item">' + lokasiJemput + '</li>');
       }
-      if($('#lokasiTujuan').val() != '') {
+      if(lokasiTujuan != '') {
         $('#lokasiTujuanList').html('<ul class="list-group"></ul>');
-        const lokasiTujuan = $('#lokasiTujuan').val();
         $('#lokasiTujuanList ul').html('<li class="list-group-item">' + lokasiTujuan + '</li>');
       }
     });
@@ -192,7 +192,6 @@
       for (const rule of validationRules) {
         if ($(`#${rule.field}`).val() === '') {
           // alert(rule.message);
-          // append '<div class="invalid-feedback">' + rule.message + '</div> to the field
           $(`#${rule.field}`).parent().append('<div class="invalid-feedback">' + rule.message + '</div>');
           return false;
         }
