@@ -115,16 +115,16 @@
         data: listTujuan
     }).on('change', function() {
       console.log($('#lokasiJemput').val());
-      const lokasiJemput = $('#lokasiJemput').val();
+      const lokasiJemput = $('#lokasiJemput').val(); //Indonesia, 60261, Surabaya
       const lokasiTujuan = $('#lokasiTujuan').val();
       // append to div#lokasiJemputList
       if(lokasiJemput != '') {
         $('#lokasiJemputList').html('<ul class="list-group"></ul>');
-        $('#lokasiJemputList ul').html('<li class="list-group-item">' + lokasiJemput + '</li>');
+        $('#lokasiJemputList ul').html('<li class="list-group-item">' + lokasiJemput.substr(lastIndexOf(",") + 1) + '</li>');
       }
       if(lokasiTujuan != '') {
         $('#lokasiTujuanList').html('<ul class="list-group"></ul>');
-        $('#lokasiTujuanList ul').html('<li class="list-group-item">' + lokasiTujuan + '</li>');
+        $('#lokasiTujuanList ul').html('<li class="list-group-item">' + lokasiTujuan.substr(lastIndexOf(",") + 1) + '</li>');
       }
     });
 
