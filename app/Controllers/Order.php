@@ -172,4 +172,9 @@ class Order extends BaseController
         $listData = getCurl($curlOpt, $this->ipAddress . 'select_detail_order_1.php');
         echo json_encode($listData);
     }
+
+    public function convertToKM($jarak)
+    {
+        return round(str_replace('.', '', $jarak) / 1000, 0);
+    }
 }

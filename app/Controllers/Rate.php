@@ -77,11 +77,6 @@ class Rate extends BaseController
         return view('pages/order/orderbulanan', ['title' => 'Order Bulanan']);
     }
 
-    public function convertToKM($jarak)
-    {
-        return round(str_replace('.', '', $jarak) / 1000, 0);
-    }
-
     public function hitung()
     {
         $listData = [];
