@@ -77,32 +77,89 @@
       }
     });
 
+    var listTujuan = [];
     // Initialize Select2
     $('#lokasiJemput, #lokasiTujuan').select2({
         theme: 'bootstrap-5',
         placeholder: 'Type to search...',
-        minimumInputLength: 2,
+        minimumInputLength: 3,
         ajax: {
-            url: '<?= $_ENV['API_BASEURL_HERE'] ?>/autocomplete',
-            dataType: 'json',
-            delay: 250,
-            data: function (params) {
-              return {
-                q: params.term, // Search term
-                limit: 5,      // Limit results
-                apiKey: '<?= $_ENV['API_KEY_HERE'] ?>'
-              };
-            },
-            processResults: function (data) {
-              console.log(data.items);
-              return {
-                results: data.items.map(item => ({
-                  id: item.title,
-                  text: item.title
-                }))
-              };
-            },
-            cache: true
+          url: '<?= $_ENV['API_BASEURL_HERE'] ?>/autocomplete',
+          dataType: 'json',
+          delay: 250,
+          data: function (params) {
+            return {
+              q: params.term, // Search term
+              limit: 5,      // Limit results
+              in: 'countryCode:IDN',
+              apiKey: '<?= $_ENV['API_KEY_HERE'] ?>'
+            };
+          },
+          processResults: function (data) {
+            console.log(data.items);
+            listTujuan = data.items.map(item => ({
+              id: item.title,
+              text: item.title
+            }));
+
+            return {
+              more: false,
+              results: listTujuan
+            };
+          },
+          cache: true
+        }, 
+        onSelect: function(e) {
+          console.log(e);
+        }, 
+        data: listTujuan
+    }).on('change', function() {
+      console.log($('#lokasiJemput').val());
+      const lokasiJemput = $('#lokasiJemput').val();
+      const lokasiTujuan = $('#lokasiTujuan').val();
+      // append to div#lokasiJemputList
+      if(lokasiJemput != '') {
+        $('#lokasiJemputList').html('<ul class="list-group"></ul>');
+        $('#lokasiJemputList ul').html('<li class="list-group-item">' + lokasiJemput + '</li>');
+      }
+      if(lokasiTujuan != '') {
+        $('#lokasiTujuanList').html('<ul class="list-group"></ul>');
+        $('#lokasiTujuanList ul').html('<li class="list-group-item">' + lokasiTujuan + '</li>');
+      }
+    });
+
+    $('#lokasiTujuan').on('change', async function() {
+        const origin = $('#lokasiJemput').val();
+        const destination = $('#lokasiTujuan').val();
+        
+        if (!origin || !destination) return;
+
+        try {
+            // Get coordinates for origin
+            const originResponse = await fetch(`https://geocode.search.hereapi.com/v1/geocode?q=${encodeURIComponent(origin)}&apiKey=<?= $_ENV['API_KEY_HERE'] ?>`);
+            const originData = await originResponse.json();
+            
+            // Get coordinates for destination
+            const destResponse = await fetch(`https://geocode.search.hereapi.com/v1/geocode?q=${encodeURIComponent(destination)}&apiKey=<?= $_ENV['API_KEY_HERE'] ?>`);
+            const destData = await destResponse.json();
+
+            if (!originData.items.length || !destData.items.length) {
+                console.error('Location not found');
+                return;
+            }
+
+            const originCoords = `${originData.items[0].position.lat},${originData.items[0].position.lng}`;
+            const destCoords = `${destData.items[0].position.lat},${destData.items[0].position.lng}`;
+
+            // Calculate route
+            const routeResponse = await fetch(`https://router.hereapi.com/v8/routes?transportMode=car&origin=${originCoords}&destination=${destCoords}&return=summary&apikey=<?= $_ENV['API_KEY_HERE'] ?>`);
+            const routeData = await routeResponse.json();
+
+            const distance = routeData.routes[0].sections[0].summary.length;
+            $('#jarak').val(distance / 1000); // Convert to kilometers
+            
+        } catch (error) {
+            console.error('Error calculating route:', error);
         }
     });
 
