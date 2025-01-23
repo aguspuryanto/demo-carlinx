@@ -82,7 +82,7 @@
 <?= $this->section('scripts') ?>
 <script>
     $(document).ready(function() {
-        const baseUrlImg = "<?= $_ENV['API_BASEURL'] ?>/images/";
+        const baseUrlImg = "<?= $_ENV['API_BASEURL'] ?>images/";
         $('#addModal').on('show.bs.modal', function (event) {
             console.log(event.relatedTarget.dataset.id);
 
@@ -119,16 +119,16 @@
                 $('#bulanan').val(item.bulanan);
 
                 if(item.path_foto.length > 0){
-                    $("#path_foto").attr("src", baseUrlImg + item.path_foto);
+                    $("#path_foto").attr("src", getImage(baseUrlImg + item.path_foto));
                 }
                 if(item.path_foto_2.length > 0){
-                    $("#path_foto_2").attr("src", baseUrlImg + item.path_foto_2);
+                    $("#path_foto_2").attr("src", getImage(baseUrlImg + item.path_foto_2));
                 }
                 if(item.path_foto_3.length > 0){
-                    $("#path_foto_3").attr("src", baseUrlImg + item.path_foto_3);
+                    $("#path_foto_3").attr("src", getImage(baseUrlImg + item.path_foto_3)   );
                 }
                 if(item.path_foto_4.length > 0){
-                    $("#path_foto_4").attr("src", baseUrlImg + item.path_foto_4);
+                    $("#path_foto_4").attr("src", getImage(baseUrlImg + item.path_foto_4));
                 }
 
                 if(item.stat == 0){
