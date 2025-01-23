@@ -448,7 +448,7 @@ class Pengaturan extends BaseController
             $updateData = [
                 'kd_unit' => $data['id'],
                 'nama' => $data['nama'],
-                'kategori' => $data['kategori'],
+                'kategori' => SUBSTR($data['id'],0,8).$data['kategori'],
                 'bbm' => $data['bbm'],
                 'dlm_kota' => $data['dlm_kota'],
                 'dlm_prop' => $data['dlm_prop'],
@@ -470,6 +470,7 @@ class Pengaturan extends BaseController
                 'stgh_hr' => $data['stgh_hr'],
                 'bulanan' => $data['bulanan']
             ];
+            // echo json_encode($updateData);
 
             $resultData = getCurl($updateData, $this->ipAddress . 'update_unit_1.php');
             // echo json_encode($resultData);
