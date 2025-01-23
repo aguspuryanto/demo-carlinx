@@ -470,7 +470,7 @@ class Pengaturan extends BaseController
                 'stgh_hr' => $data['stgh_hr'],
                 'bulanan' => $data['bulanan']
             ];
-            // echo json_encode($updateData);
+            echo json_encode($updateData);
 
             $resultData = getCurl($updateData, $this->ipAddress . 'update_unit_1.php');
             // echo json_encode($resultData);
@@ -492,6 +492,7 @@ class Pengaturan extends BaseController
         // echo json_encode($listPaketBbm);
 
         if(empty($listKategori)) $listKategori = getCurl(['kd_member' => $this->session->get('user')['kode']], $this->ipAddress . 'select_kategori.php');
+        echo json_encode($listKategori);
 
         return view('pengaturan/unit', [
             'title' => 'Unit',

@@ -9,8 +9,8 @@
                     <label for="kategori" class="form-label">Kategori</label>
                     <select class="form-select" id="kategori" name="kategori">
                         <option value="">Pilih Kategori</option>
-                        <?php foreach ($listPaketDriver['result_driver'] as $driver_it) : ?>
-                        <option value="<?= $driver_it['id'] ?>" selected><?= $driver_it['nm_kat'] ?></option>
+                        <?php foreach ($listKategori['result_kategori'] as $kategori_it) : ?>
+                        <option value="<?= $kategori_it['kode'] ?>" selected><?= $kategori_it['descr'] ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -19,7 +19,7 @@
                     <select class="form-select" id="bbm" name="bbm">
                         <option value="">Pilih BBM</option>
                         <?php foreach ($listPaketBbm['result_bbm'] as $bbm_it) : ?>
-                        <option value="<?= $bbm_it['id'] ?>" selected><?= $bbm_it['descr'] ?></option>
+                        <option value="<?= $bbm_it['kode'] ?>" selected><?= $bbm_it['descr'] ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
