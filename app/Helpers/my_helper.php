@@ -79,3 +79,9 @@ function sendWhatsappApi($phone, $message) {
 	$result = curl_exec($ch);
 	curl_close($ch);
 }
+
+function getImage($url) {
+    // return "http://localhost/proxy.php?url=" . urlencode($url);
+	return base_url() . 'proxy.php?url=' . urlencode($url);
+}
+

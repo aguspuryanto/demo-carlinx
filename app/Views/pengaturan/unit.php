@@ -55,7 +55,7 @@
                             <?php foreach ($listData['result_unit'] as $item) : ?>
                                 <tr>
                                     <th scope="row"><?= $no++ ?></th>
-                                    <td><img class="avatar avatar-lg" src="<?= $_ENV['API_BASEURL'] . 'images/' . $item['path_foto'] ?>" style="width: 64px; height: 64px;" /></td>
+                                    <td><img class="avatar avatar-lg" src="<?= getImage($_ENV['API_BASEURL'] . 'images/' . $item['path_foto']) ?>" style="width: 64px; height: 64px;" /></td>
                                     <td><?= $item['nama'] ?></td>
                                     <td>Rp. <?= number_format($item['dlm_kota'], 0, ',', '.') ?></td>
                                     <td>Rp. <?= number_format($item['dlm_prop'], 0, ',', '.') ?></td>
