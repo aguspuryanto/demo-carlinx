@@ -82,7 +82,7 @@
 <?= $this->section('scripts') ?>
 <script>
     $(document).ready(function() {
-        const baseUrlImg = "proxy.php?url=<?= $_ENV['API_BASEURL'] ?>/images/";
+        const baseUrlImg = "<?= base_url('proxy.php?url=') . $_ENV['API_BASEURL'] ?>images/";
         $('#addModal').on('show.bs.modal', function (event) {
             console.log(event.relatedTarget.dataset.id);
 
