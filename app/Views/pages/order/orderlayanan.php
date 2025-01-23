@@ -189,15 +189,25 @@
       ];
 
       // Validate all fields
+      let isValid = true;
       for (const rule of validationRules) {
         if ($(`#${rule.field}`).val() === '') {
-          alert(rule.message);
-          $(`#${rule.field}`).parent().append('<div class="invalid-feedback">' + rule.message + '</div>');
-          return false;
+          if($(`#${rule.field}`).parent().hasClass('invalid-feedback')) {
+            $(`#${rule.field}`).parent().removeClass('invalid-feedback');
+          } else {
+            $(`#${rule.field}`).parent().append('<div class="invalid-feedback">' + rule.message + '</div>');
+          }
+          $(`#${rule.field}`).addClass('is-invalid');
+          isValid = false;
+        } else {
+          $(`#${rule.field}`).removeClass('is-invalid');
         }
       }
 
-      return true;
+      // If validation passes, submit the form
+      if (isValid) {
+        this.submit();
+      }
     });
 
   });

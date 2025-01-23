@@ -71,36 +71,46 @@
     });
 
     // formSearchOrder
-    // $('#formSearchOrder').on('submit', function(e) {
-    //   e.preventDefault();
+    $('#formSearchOrder').on('submit', function(e) {
+      e.preventDefault();
       
-    //   // Define validation rules
-    //   const validationRules = [
-    //     {
-    //       field: 'kotaTujuan',
-    //       message: 'Kota Tujuan harus dipilih'
-    //     },
-    //     {
-    //       field: 'pickupDate',
-    //       message: 'Tanggal/Jam Sewa harus dipilih'
-    //     },
-    //     {
-    //       field: 'returnDate',
-    //       message: 'Tanggal/Jam Sewa harus dipilih'
-    //     }
-    //   ];
+      // Define validation rules
+      const validationRules = [
+        {
+          field: 'kotaTujuan',
+          message: 'Kota Tujuan harus dipilih'
+        },
+        {
+          field: 'pickupDate',
+          message: 'Tanggal/Jam Sewa harus dipilih'
+        },
+        {
+          field: 'returnDate',
+          message: 'Tanggal/Jam Sewa harus dipilih'
+        }
+      ];
 
-    //   // Validate all fields
-    //   for (const rule of validationRules) {
-    //     if ($(`#${rule.field}`).val() === '') {
-    //       alert(rule.message);
-    //       $(`#${rule.field}`).parent().append('<div class="invalid-feedback">' + rule.message + '</div>');
-    //       return false;
-    //     }
-    //   }
+      // Validate all fields
+      let isValid = true;
+      for (const rule of validationRules) {
+        if ($(`#${rule.field}`).val() === '') {
+          if($(`#${rule.field}`).parent().hasClass('invalid-feedback')) {
+            $(`#${rule.field}`).parent().removeClass('invalid-feedback');
+          } else {
+            $(`#${rule.field}`).parent().append('<div class="invalid-feedback">' + rule.message + '</div>');
+          }
+          $(`#${rule.field}`).addClass('is-invalid');
+          isValid = false;
+        } else {
+          $(`#${rule.field}`).removeClass('is-invalid');
+        }
+      }
 
-    //   return true;
-    // });
+      // If validation passes, submit the form
+      if (isValid) {
+        this.submit();
+      }
+    });
 
   });
 </script>

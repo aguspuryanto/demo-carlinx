@@ -6,7 +6,7 @@ helper('form');
   <!-- Nama Unit -->
   <div class="form-group">
     <label for="kotaTujuan" class="form-label">Kota Tujuan</label>
-    <select class="form-control" name="kd_kota" id="kotaTujuan">
+    <select class="form-control" name="kd_kota" id="kotaTujuan" required>
       <option value="">Pilih Kota Tujuan</option>
       <?php foreach ($listKota['result_kota'] as $kota) : ?>
         <option value="<?= $kota['kode']; ?>"><?= $kota['nama']; ?></option>
