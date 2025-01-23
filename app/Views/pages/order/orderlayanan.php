@@ -191,8 +191,7 @@
       // Validate all fields
       for (const rule of validationRules) {
         if ($(`#${rule.field}`).val() === '') {
-          // alert(rule.message);
-          console.log(rule.message);
+          alert(rule.message);
           $(`#${rule.field}`).parent().append('<div class="invalid-feedback">' + rule.message + '</div>');
           return false;
         }
