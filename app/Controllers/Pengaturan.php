@@ -492,7 +492,7 @@ class Pengaturan extends BaseController
         // echo json_encode($listPaketBbm);
 
         if(empty($listKategori)) $listKategori = getCurl(['kd_member' => $this->session->get('user')['kode']], $this->ipAddress . 'select_kategori.php');
-        echo json_encode($listKategori);
+        // echo json_encode($listKategori);
 
         return view('pengaturan/unit', [
             'title' => 'Unit',
