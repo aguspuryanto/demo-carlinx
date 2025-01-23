@@ -470,7 +470,7 @@ class Pengaturan extends BaseController
                 'stgh_hr' => $data['stgh_hr'],
                 'bulanan' => $data['bulanan']
             ];
-            echo json_encode($updateData);
+            // echo json_encode($updateData);
 
             $resultData = getCurl($updateData, $this->ipAddress . 'update_unit_1.php');
             // echo json_encode($resultData);
