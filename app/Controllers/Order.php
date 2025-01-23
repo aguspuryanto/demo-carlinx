@@ -179,6 +179,7 @@ class Order extends BaseController
         $view_page = 'pages/order/lepaskunci';
         $listData   = [];
         $listKota   = [];
+        $listUnit   = [];
         $curlOpt    = [
             'kd_member' => $this->session->get('user')['kode'],
         ];
@@ -212,9 +213,24 @@ class Order extends BaseController
             ];
 
             // echo json_encode($data); //die();
-            $curlOpt = array_merge($curlOpt, $data);
-            if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'search_entry_order_7.php');
+            $curlOpt1 = array_merge($curlOpt, $data);
+            if(empty($listData)) $listData = getCurl($curlOpt1, $this->ipAddress . 'search_entry_order_7.php');
             // echo json_encode($listData); die();
+
+            $curlOpt2 = array_merge($curlOpt, [
+                'caller' => 'MASTER',
+                'kd_kota' => $data['kd_kota']
+            ]);
+            // if(empty($listUnit)) $listUnit = getCurl($curlOpt2, $this->ipAddress . 'select_unit_1.php');
+            // echo json_encode($listUnit);
+
+            $curlOpt3 = array_merge($curlOpt, [
+                'caller' => 'MASTER', // MASTER, HITUNG
+                'kd_kota' => $data['kd_kota'],
+                'search' => '%' . $data['search'] . '%'
+            ]);
+            // if(empty($listUnit)) $listUnit = getCurl($curlOpt3, $this->ipAddress . 'select_unit_by_name_1.php');
+            // echo json_encode($listUnit);
 
             $view_page = 'pages/order/searchorder';
         }
@@ -224,7 +240,8 @@ class Order extends BaseController
         return view($view_page, [
             'title' => 'Order Lepas Kunci',
             'listData' => $listData,
-            'listKota' => $listKota
+            'listKota' => $listKota,
+            'listUnit' => $listUnit
         ]);
     }
 
