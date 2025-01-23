@@ -43,6 +43,10 @@ function format_rupiah($angka){
 	return $rupiah;
 }
 
+function format_km($angka){
+	return round(str_replace('.', '', $angka) / 1000, 0);
+}
+
 function sendWhatsapp($phone, $message, $type = 'link') {
 	// <a href=\"whatsapp://send?phone=--your phone--&text=--your text--\">
 	// <a href=\"https://api.whatsapp.com/send?phone=--your phone--&text=--your text--\">
