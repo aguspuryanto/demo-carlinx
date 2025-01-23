@@ -45,10 +45,10 @@ class Proses extends BaseController
             '3' => 'Data Plgn',
             '4' => 'Data Driver + Invoice',
             '5' => 'Konfirmasi Bayar',
-            '6' => 'Tolak By Rental',
+            '6' => 'Ditolak', //'Tolak By Rental',
             '7' => 'Batal By Rental',
-            '8' => 'Batal By Pemesan',
-            '9' => 'Pembayaran Diterima'
+            '8' => 'Pemesan Batal', //'Batal By Pemesan',
+            '9' => 'Selesai', //'Pembayaran Diterima'
         ];
 
         // grp_penyewa

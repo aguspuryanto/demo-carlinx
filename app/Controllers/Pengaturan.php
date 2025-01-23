@@ -419,7 +419,7 @@ class Pengaturan extends BaseController
         // handle POST
         if ($this->request->getMethod() == 'POST') {
             $data = $this->request->getPost();
-            // echo json_encode($data); //{"nama":"AVANZA 2017 (TEST)","kategori":"1","bbm":"1","kursi":"7","tahun":"2017","transmisi":"manual\/matic","warna":"silver","jarak_tempuh":"","dlm_kota":"225000","dlm_prop":"250000","luar_prop":"300000","drop_in":"50","over_time":"10","stgh_hr":"75","fee":"100000","lepas_kunci":"750000","bulanan":"35000000","stat":"1","id":"22040001AV0002"}
+            // echo json_encode($data);
 
             /* $kd_unit = $_POST['kd_unit'];
             $nama = $_POST['nama'];					
@@ -448,7 +448,7 @@ class Pengaturan extends BaseController
             $updateData = [
                 'kd_unit' => $data['id'],
                 'nama' => $data['nama'],
-                'kategori' => SUBSTR($data['id'],0,8).$data['kategori'],
+                'kategori' => $data['kategori'],
                 'bbm' => $data['bbm'],
                 'dlm_kota' => $data['dlm_kota'],
                 'dlm_prop' => $data['dlm_prop'],
@@ -470,7 +470,7 @@ class Pengaturan extends BaseController
                 'stgh_hr' => $data['stgh_hr'],
                 'bulanan' => $data['bulanan']
             ];
-            // echo json_encode($updateData);
+            echo json_encode($updateData);
 
             $resultData = getCurl($updateData, $this->ipAddress . 'update_unit_1.php');
             // echo json_encode($resultData);
@@ -486,9 +486,10 @@ class Pengaturan extends BaseController
         // echo json_encode($listData);
 
         if(empty($listPaketDriver)) $listPaketDriver = getCurl($curlOpt, $this->ipAddress . 'select_driver.php');
-        // echo json_encode($listDriver);
+        // echo json_encode($listPaketDriver);
 
         if(empty($listPaketBbm)) $listPaketBbm = getCurl($curlOpt, $this->ipAddress . 'select_bbm.php');
+        // echo json_encode($listPaketBbm);
 
         if(empty($listKategori)) $listKategori = getCurl(['kd_member' => $this->session->get('user')['kode']], $this->ipAddress . 'select_kategori.php');
 

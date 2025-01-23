@@ -35,14 +35,15 @@ class Inbox extends BaseController
         ];
 
         if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'select_order_5.php');
-        echo json_encode($listData); die();
+        echo json_encode($listData);
+
         if($listData['success']){
             $listData = $listData;
         }
 
         return view('inbox/index', [
             'title' => 'Inbox',
-            'listData' => ($listData['result_list_order']) ?? $listData
+            'listData' => $listData
         ]);
     }
 }

@@ -15,7 +15,7 @@
                     // echo json_encode($listData);
                     ?>
                     <!-- jika $listData kosong, tampilkan data tidak ditemukan else looping -->
-                    <?php if (empty($listData)) : ?>
+                    <?php if (empty($listData['result_list_order'])) : ?>
                         <p>Data tidak ditemukan</p>
                     <?php else : ?>
                         <table class="table table-striped">
@@ -28,7 +28,7 @@
                             </thead>
                             <tbody>
                                 <?php $no = 1; ?>
-                                <?php foreach ($listData as $data) : ?>
+                                <?php foreach ($listData['result_list_order'] as $data) : ?>
                                     <tr>
                                         <td><?= $no++ ?></td>
                                         <td></td>

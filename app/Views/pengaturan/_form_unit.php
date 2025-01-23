@@ -41,7 +41,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="kons_bbm" class="form-label">Jarak Tempuh/Liter (km)</label>
-                    <input type="number" class="form-control" id="kons_bbm" name="kons_bbm" value="0">
+                    <input type="text" class="form-control" id="kons_bbm" name="kons_bbm" value="0">
                 </div>
             </div>
 
@@ -140,5 +140,4 @@
             <input type="hidden" name="biaya_ambil" value="0">
             <input type="hidden" name="tuslah" value="0">
             <input type="hidden" name="is_tuslah" value="0">
-            <input type="hidden" name="kons_bbm" value="0">
 
