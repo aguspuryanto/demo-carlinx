@@ -5,7 +5,7 @@
     <li class="list-group-item">
         <a href="<?= base_url('order/search-order/' . $item['koderental']) ?>" class="list-group-item-action d-flex">
             <div class="p-2 flex-shrink-1">
-                <img class="avatar avatar-lg" src="<?= $_ENV['API_BASEURL'] . 'images/' . $item['path_foto'] ?>" style="width: 64px; height: 64px;" />
+                <img class="avatar avatar-lg" src="<?= getImage($_ENV['API_BASEURL'] . 'images/' . $item['path_foto']) ?>" style="width: 64px; height: 64px;" />
             </div>
             <div class="p-2 w-100">
                 <p class="fw-bold mb-0"><?= $item['nama'] ?></p>

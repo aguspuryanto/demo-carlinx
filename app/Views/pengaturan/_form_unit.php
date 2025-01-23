@@ -102,28 +102,28 @@
                         <label for="imageInput" class="form-label sr-only">Pilih Gambar</label>
                         <input type="file" class="form-control" id="imageInput" accept="image/*">
                         <div id="previewContainer" class="d-flex flex-wrap gap-3 mb-3 justify-content-center">
-                            <img src="<?= $_ENV['API_BASEURL'] . 'images/car_75.png' ?>" id="path_foto" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 1">
+                            <img src="<?= getImage($_ENV['API_BASEURL'] . 'images/car_75.png') ?>" id="path_foto" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 1">
                         </div>
                     </div>
                     <div class="g-col-3 text-center">
                         <label for="imageInput" class="form-label sr-only">Pilih Gambar</label>
                         <input type="file" class="form-control" id="imageInput" accept="image/*">
                         <div id="previewContainer" class="d-flex flex-wrap gap-3 mb-3 justify-content-center">
-                            <img src="<?= $_ENV['API_BASEURL'] . 'images/car_75.png' ?>" id="path_foto_2" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 2">
+                            <img src="<?= getImage($_ENV['API_BASEURL'] . 'images/car_75.png') ?>" id="path_foto_2" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 2">
                         </div>
                     </div>
                     <div class="g-col-3 text-center">
                         <label for="imageInput" class="form-label sr-only">Pilih Gambar</label>
                         <input type="file" class="form-control" id="imageInput" accept="image/*">
                         <div id="previewContainer" class="d-flex flex-wrap gap-3 mb-3 justify-content-center">
-                            <img src="<?= $_ENV['API_BASEURL'] . 'images/car_75.png' ?>" id="path_foto_3" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 3">
+                            <img src="<?= getImage($_ENV['API_BASEURL'] . 'images/car_75.png') ?>" id="path_foto_3" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 3">
                         </div>
                     </div>
                     <div class="g-col-3 text-center">
                         <label for="imageInput" class="form-label sr-only">Pilih Gambar</label>
                         <input type="file" class="form-control" id="imageInput" accept="image/*">
                         <div id="previewContainer" class="d-flex flex-wrap gap-3 mb-3 justify-content-center">
-                            <img src="<?= $_ENV['API_BASEURL'] . 'images/car_75.png' ?>" id="path_foto_4" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 4">
+                            <img src="<?= getImage($_ENV['API_BASEURL'] . 'images/car_75.png') ?>" id="path_foto_4" class="img-thumbnail" style="width: 80px; height: 80px;" alt="Foto 4">
                         </div>
                     </div>
                 </div>

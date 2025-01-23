@@ -89,7 +89,7 @@ $hidden_input = ['usernm' => $userList[0]['username']];
                             </div>
                         </div>';
                     } else {                        
-                        $path_images = '<img class="mr-3 img-thumbnail" src="' . $_ENV['API_BASEURL'] . 'images_profile/' . $userList[0]['foto_' . $j] . '" alt="Generic placeholder image">';
+                        $path_images = '<img class="mr-3 img-thumbnail" src="' . getImage($_ENV['API_BASEURL'] . 'images_profile/' . $userList[0]['foto_' . $j]) . '" alt="Generic placeholder image">';
                     }
                     
                     echo '<div class="col-sm-3">
