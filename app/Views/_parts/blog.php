@@ -14,7 +14,7 @@
             <?php foreach($listBerita['result_news'] as $berita): ?>
             <li class="list-group-item">    
                 <a href="/#" data-bs-toggle="modal" data-bs-target="#exampleModal" data-item="<?= esc(json_encode($berita)) ?>">
-                    <p><strong><?= $berita['tgl'] . ' ' . $berita['header'] ?></strong></p>
+                    <p><strong><?= date('d-m-Y', strtotime($berita['tgl'])) . ' ' . $berita['header'] ?></strong></p>
                     <span><?= substr($berita['detail'], 0, 40) . '...' ?></span>
                 </a>
             </li>
@@ -44,8 +44,20 @@
             console.log(item, 'item');
             // Update the modal's content. We'll use jQuery here, but it's not required.
             var modal = $(this)
-            modal.find('.modal-title').text(item.tgl + ' ' + item.header)
+            // var dateIndo = new Date(item.tgl).toLocaleString().split(',')[0] // format dd-mm-yyyy
+            // Format the date as dd-mm-yyyy
+            var formattedDate = formatDateIndo(item.tgl);
+
+            modal.find('.modal-title').text(formattedDate + ' ' + item.header)
             modal.find('.modal-body').html(item.detail)
         })
+
+        function formatDateIndo(date) {
+            var date = new Date(date);
+            var day = String(date.getDate()).padStart(2, '0'); // Ensure two digits
+            var month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+            var year = date.getFullYear();
+            return `${day}-${month}-${year}`;
+        }
     </script>
     <?= $this->endSection() ?>
