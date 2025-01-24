@@ -14,7 +14,7 @@
             <?php foreach($listBerita['result_news'] as $berita): ?>
             <li class="list-group-item">    
                 <a href="/#" data-bs-toggle="modal" data-bs-target="#exampleModal" data-item="<?= esc(json_encode($berita)) ?>">
-                    <p><?= $berita['tgl'] . ' ' . $berita['header'] ?></p>
+                    <p><strong><?= $berita['tgl'] . ' ' . $berita['header'] ?></strong></p>
                     <span><?= substr($berita['detail'], 0, 40) . '...' ?></span>
                 </a>
             </li>
