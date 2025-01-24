@@ -53,7 +53,7 @@ $routes->group('order', function($routes) {
 
     $routes->add('lepaskunci', 'Order::lepasKunci');
 
-    $routes->add('bulanan', 'Order::orderBulanan');
+    $routes->add('orderbulanan', 'Order::orderBulanan');
 });
 
 // event

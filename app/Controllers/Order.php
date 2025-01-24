@@ -248,7 +248,7 @@ class Order extends BaseController
     public function orderBulanan()
     {
         // echo 'Order Bulanan';
-        $view_page = 'pages/order/lepaskunci';
+        $view_page = 'pages/order/orderbulanan';
         $listData   = [];
         $listKota   = [];
         $curlOpt    = [
@@ -292,7 +292,7 @@ class Order extends BaseController
         if(empty($listKota)) $listKota = getCurl($curlOpt, $this->ipAddress . 'select_kota_1.php');
 
         return view($view_page, [
-            'title' => 'Order Lepas Kunci',
+            'title' => 'Order Bulanan',
             'listData' => $listData,
             'listKota' => $listKota
         ]);
