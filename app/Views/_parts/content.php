@@ -1,7 +1,7 @@
      
     <!-- chart js areachart-->
     <div class="row justify-content-md-center text-center mb-4">
-        <div class="col-12 col-md-6">
+        <div class="col-12">
             <div class="row">
                 <div class="col-4 col-md-6 col-lg-6">
                     <a href="<?= base_url('dashboard'); ?>" class="card shadow-sm mb-4">
@@ -209,10 +209,9 @@
             </div>
         </div>
 
-        <div class="col-12 col-md-6 d-none">
+        <!-- <div class="col-12 col-md-6 d-none">
             <div class="card mb-4" style="height: 100%;">
                 <div class="card-header border-0">
-                    <!-- calendar -->
                     <div class="row">
                         <div class="col position-relative align-self-center">
                             <input type="text" placeholder="Select date range" readonly="readonly" id="daterange" class="calendar-daterange">
@@ -230,6 +229,6 @@
                     <canvas id="areachart"></canvas>
                 </div>
             </div>
-        </div>
+        </div> -->
         
     </div>
