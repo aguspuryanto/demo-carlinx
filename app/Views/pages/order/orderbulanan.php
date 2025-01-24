@@ -88,11 +88,13 @@
 
     $('.input-group').on('click', '.button-plus', function(e) {
         e.preventDefault();
+        console.log('plus');
         incrementValue(e);
     });
 
     $('.input-group').on('click', '.button-minus', function(e) {
         e.preventDefault();
+        console.log('minus');
         decrementValue(e);
     });
 

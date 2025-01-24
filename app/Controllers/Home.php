@@ -25,9 +25,18 @@ class Home extends BaseController
             return redirect()->to('/login')->with('error', 'Silakan login terlebih dahulu.');
         }
 
-        // return view('welcome_message');
-        // Jika sudah login, tampilkan halaman Home
-        return view('home', ['title' => 'Home']);
+        // Jika sudah login, tampilkan halaman Home        
+        $listBerita = [];
+        $curlOpt = [
+            'id_member' => $this->session->get('user')['kode'],
+        ];
+
+        if(empty($listBerita)) $listBerita = getCurl($curlOpt, $this->ipAddress . 'select_news.php');
+        
+        return view('home', [
+            'title' => 'Home',
+            'listBerita' => $listBerita
+        ]);
     }
 
     public function dashboard()
@@ -35,6 +44,7 @@ class Home extends BaseController
         
         $listData   = [];
         $ListMenu   = [];
+        // $listBerita = [];
         $curlOpt    = [
             'id_member' => $this->session->get('user')['kode'],
         ];
@@ -43,10 +53,13 @@ class Home extends BaseController
         
         if(empty($ListMenu)) $ListMenu = getCurl($curlOpt, $this->ipAddress . 'select_best_menu.php');
 
+        // if(empty($listBerita)) $listBerita = getCurl($curlOpt, $this->ipAddress . 'select_news.php');
+
         return view('dashboard', [
             'title' => 'Dashboard',
             'listData' => $listData,
-            'ListMenu' => $ListMenu
+            'ListMenu' => $ListMenu,
+            // 'listBerita' => $listBerita
         ]);
     }
 

@@ -208,7 +208,8 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-md-6">
+
+        <div class="col-12 col-md-6 d-none">
             <div class="card mb-4" style="height: 100%;">
                 <div class="card-header border-0">
                     <!-- calendar -->

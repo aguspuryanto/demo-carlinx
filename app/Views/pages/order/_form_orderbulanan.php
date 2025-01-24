@@ -29,23 +29,10 @@ helper('form');
     </div>
     <div class="row g-3 mt-2">
         <div class="col-6">
-            <label for="lamaSewa" class="visually-hidden">Lama Sewa</label>
-            <input type="text" readonly class="form-control-plaintext" id="lamaSewa" value="Lama Sewa (Bulan)">
+            <label class="visually-hidden">Lama Sewa</label>
+            <input type="text" readonly class="form-control-plaintext" value="Lama Sewa (Bulan)">
         </div>
         <div class="col-6">
-            <!-- <label for="lamaSewa" class="visually-hidden">Lama Sewa</label>
-            <select class="form-select" name="lama_sewa" id="lamaSewa">
-                <option value="1">1 Bulan</option>
-                <option value="2">2 Bulan</option>
-                <option value="3">3 Bulan</option>
-                <option value="4">4 Bulan</option>
-                <option value="5">5 Bulan</option>
-                <option value="6">6 Bulan</option>
-                <option value="7">7 Bulan</option>
-                <option value="8">8 Bulan</option>
-                <option value="9">9 Bulan</option>
-                <option value="10">10 Bulan</option>
-            </select> -->
             <div class="input-group w-auto justify-content-end align-items-center">
                 <button type="button" class="button-minus border rounded-circle  icon-shape icon-sm mx-1 " data-field="lama_sewa">
                     <i class="fa fa-minus"></i>
