@@ -30,11 +30,11 @@ helper('form');
     <div class="row mt-2">
       <div class="col-6">
         <label for="returnDate" class="form-label">Tgl Selesai</label>
-        <input type="text" class="form-control" name="tgl_finish" id="returnDate" autocomplete="off">
+        <input type="text" class="form-control" name="tgl_finish" id="returnDate" autocomplete="off" value="<?= date('d-m-Y') ?>">
       </div>
       <div class="col-6">
         <label for="returnTime" class="form-label">Jam</label>
-        <input type="time" class="form-control" name="jam_finish" id="returnTime">
+        <input type="time" class="form-control" name="jam_finish" id="returnTime" value="<?= date('23:59') ?>">
       </div>
     </div>
   </div>
