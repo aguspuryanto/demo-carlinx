@@ -107,7 +107,7 @@
         }, 
         data: listTujuan
     }).on('change', function() {
-      console.log($('#lokasiJemput').val());
+      // console.log($('#lokasiJemput').val());
       const lokasiJemput = $('#lokasiJemput').val();
       const lokasiTujuan = $('#lokasiTujuan').val();
       // append to div#lokasiJemputList
@@ -120,10 +120,12 @@
       //   $('#lokasiTujuanList ul').html('<li class="list-group-item">' + lokasiTujuan.substr(lokasiTujuan.lastIndexOf(",") + 1) + '</li>');
       // }
 
-      if(lokasiTujuan != '' && lokasiTujuan.length > 0) {
-        $('#ruteList ul').append('<li class="list-group-item">' + lokasiJemput.substr(lokasiJemput.lastIndexOf(",") + 1) + ' - ' + lokasiTujuan.substr(lokasiTujuan.lastIndexOf(",") + 1) + '</li>');
-        $('#ruteList').parent().removeClass('d-none');
-      }
+      // if(lokasiJemput=='') return false;
+
+      // if(lokasiJemput != '' && lokasiTujuan != '' && lokasiTujuan.length > 0) {
+      //   $('#ruteList ul').append('<li class="list-group-item">' + lokasiJemput.substr(lokasiJemput.lastIndexOf(",") + 1) + ' - ' + lokasiTujuan.substr(lokasiTujuan.lastIndexOf(",") + 1) + '</li>');
+      //   $('#ruteList').parent().removeClass('d-none');
+      // }
     });
 
     // Event handler untuk tombol Tambah Rute
@@ -134,8 +136,49 @@
       console.log('lokasiJemput:' + lokasiJemput + '; lokasiTujuan:' + lokasiTujuan);
 
       // Tukar nilai antara lokasiJemput dan lokasiTujuan
-      // $('#lokasiJemput').select2('val', lokasiTujuan).trigger('change');
-      // $('#lokasiTujuan').select2('val', lokasiJemput).trigger('change');
+      $('#lokasiJemput').val(lokasiTujuan).trigger('change.select2');
+      $('#lokasiTujuan').val(lokasiJemput).trigger('change.select2');
+    });
+
+    // Event listener untuk tombol Tambah Rute
+    $('#tambahRute').click(function() {
+        const lokasiJemput = $('#lokasiJemput').val();
+        const lokasiTujuan = $('#lokasiTujuan').val();
+
+        // Validasi input
+        if (lokasiJemput === lokasiTujuan) {
+            alert('Lokasi Jemput dan Tujuan tidak boleh sama.');
+            return;
+        }
+
+        // Format rute
+        const rute = `${lokasiJemput} - ${lokasiTujuan}`;
+
+        // Cek apakah rute sudah ada di daftar
+        let ruteSudahAda = false;
+        $('#listRute li').each(function() {
+            if ($(this).text() === rute) {
+                ruteSudahAda = true;
+                return false; // Hentikan iterasi
+            }
+        });
+
+        if (ruteSudahAda) {
+            alert('Rute sudah ada di daftar.');
+        } else {
+            // Tambahkan rute ke daftar
+            $('#listRute').append(`<li class="list-group-item">${rute}</li>`);
+        }
+    });
+
+    // Event listener untuk tombol Switch
+    $('#switchButton').click(function() {
+        const lokasiJemput = $('#lokasiJemput').val();
+        const lokasiTujuan = $('#lokasiTujuan').val();
+
+        // Tukar nilai lokasi
+        $('#lokasiJemput').val(lokasiTujuan).trigger('change');
+        $('#lokasiTujuan').val(lokasiJemput).trigger('change');
     });
 
     $('#lokasiTujuan').on('change', async function() {
