@@ -20,11 +20,11 @@ helper('form');
     <div class="row">
       <div class="col-6">
         <label for="pickupDate" class="form-label">Tgl Jemput</label>
-        <input type="text" class="form-control" name="tgl_start" id="pickupDate" autocomplete="off" required>
+        <input type="text" class="form-control" name="tgl_start" id="pickupDate" autocomplete="off" value="<?= date('d-m-Y') ?>" required>
       </div>
       <div class="col-6">
         <label for="pickupTime" class="form-label">Jam</label>
-        <input type="time" class="form-control" name="jam_start" id="pickupTime">
+        <input type="time" class="form-control" name="jam_start" id="pickupTime" value="<?= date('06:00') ?>">
       </div>
     </div>
   </div>
