@@ -111,14 +111,31 @@
       const lokasiJemput = $('#lokasiJemput').val();
       const lokasiTujuan = $('#lokasiTujuan').val();
       // append to div#lokasiJemputList
-      if(lokasiJemput != '') {
-        $('#lokasiJemputList').html('<ul class="list-group"></ul>');
-        $('#lokasiJemputList ul').html('<li class="list-group-item">' + lokasiJemput.substr(lokasiJemput.lastIndexOf(",") + 1) + '</li>');
+      // if(lokasiJemput != '') {
+      //   $('#lokasiJemputList').html('<ul class="list-group"></ul>');
+      //   $('#lokasiJemputList ul').html('<li class="list-group-item">' + lokasiJemput.substr(lokasiJemput.lastIndexOf(",") + 1) + '</li>');
+      // }
+      // if(lokasiTujuan != '') {
+      //   $('#lokasiTujuanList').html('<ul class="list-group"></ul>');
+      //   $('#lokasiTujuanList ul').html('<li class="list-group-item">' + lokasiTujuan.substr(lokasiTujuan.lastIndexOf(",") + 1) + '</li>');
+      // }
+
+      if(lokasiTujuan != '' && lokasiTujuan.length > 0) {
+        $('#ruteList ul').append('<li class="list-group-item">' + lokasiJemput.substr(lokasiJemput.lastIndexOf(",") + 1) + ' - ' + lokasiTujuan.substr(lokasiTujuan.lastIndexOf(",") + 1) + '</li>');
+        $('#ruteList').parent().removeClass('d-none');
       }
-      if(lokasiTujuan != '') {
-        $('#lokasiTujuanList').html('<ul class="list-group"></ul>');
-        $('#lokasiTujuanList ul').html('<li class="list-group-item">' + lokasiTujuan.substr(lokasiTujuan.lastIndexOf(",") + 1) + '</li>');
-      }
+    });
+
+    // Event handler untuk tombol Tambah Rute
+    $('#addRute').on('click', function() {
+      // Ambil nilai saat ini dari lokasiJemput dan lokasiTujuan
+      const lokasiJemput = $('#lokasiJemput').val();
+      const lokasiTujuan = $('#lokasiTujuan').val();
+      console.log('lokasiJemput:' + lokasiJemput + '; lokasiTujuan:' + lokasiTujuan);
+
+      // Tukar nilai antara lokasiJemput dan lokasiTujuan
+      // $('#lokasiJemput').select2('val', lokasiTujuan).trigger('change');
+      // $('#lokasiTujuan').select2('val', lokasiJemput).trigger('change');
     });
 
     $('#lokasiTujuan').on('change', async function() {

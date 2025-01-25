@@ -55,6 +55,14 @@ helper('form');
         </select>
         <div id="lokasiTujuanList" class="mt-2"></div>
       </div>
+      <div class="col-12 text-start d-none">
+        <div id="ruteList">
+          <ul class="list-group"></ul>
+        </div>
+        <div class="text-end mt-2">
+          <a href="#" class="link-primary" id="addRute">+ Tambah Rute</a>
+        </div>
+      </div>
     </div>
   </div>
 
