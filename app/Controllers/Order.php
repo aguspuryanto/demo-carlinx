@@ -99,7 +99,7 @@ class Order extends BaseController
         // handle POST
         if ($this->request->getMethod() == 'POST') {
             $data = $this->request->getPost();
-            // echo json_encode($data); //{"kd_kota":"3578","tgl_start":"21-01-2025","jam_start":"14:16","tgl_finish":"22-01-2025","jam_finish":"14:16","lokasi_jemput":"Indonesia, Surabaya, Jalan Semolowaru","lokasi_tujuan":"Indonesia, Gresik, Jalan Raya Putat Lor","is_bbm":"on","kd_unit":"Avanza"}
+            // echo json_encode($data);
 
             /**
              * $jns_order = $_POST['jns_order'];
@@ -145,7 +145,7 @@ class Order extends BaseController
                 'jml_bln' => isset($data['jml_bln']) ? $data['jml_bln'] : 0
             ];
 
-            // echo json_encode($data); //die();
+            // echo json_encode($data);
 
             $curlOpt = array_merge($curlOpt, $data);
             if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'search_entry_order_7.php');
@@ -154,6 +154,7 @@ class Order extends BaseController
 
         return view('pages/order/searchorder', [
             'title' => 'Order Pelayanan',
+            'jns_order' => 1,
             'listData' => $listData
         ]);
     }
