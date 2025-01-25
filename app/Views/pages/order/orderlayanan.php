@@ -5,7 +5,7 @@
     <!-- main page content -->
     <div class="main-container container">
         <div class="row">
-            <div class="card">
+            <div class="card p-0">
                 <div class="card-header">
                     <h4><?= $title ?></h4>
                 </div>

@@ -35,7 +35,7 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
 });
 
 // rate
-$routes->group('rate', function($routes) {
+$routes->group('rate', ['filter' => 'auth'], function($routes) {
     $routes->get('index', 'Rate::index');
     $routes->post('hitung', 'Rate::hitung');
     $routes->get('placeid', 'Rate::placeid');
@@ -46,10 +46,11 @@ $routes->group('rate', function($routes) {
 });
 
 // pelayanan
-$routes->group('order', function($routes) {
+$routes->group('order', ['filter' => 'auth'], function($routes) {
     $routes->get('orderlayanan', 'Order::orderLayanan');
     $routes->post('search-order', 'Order::searchOrder');
-    $routes->get('search-order/(:num)', 'Order::searchOrderDetail/$1');
+    // $routes->get('search-order/(:num)', 'Order::searchOrderDetail/$1');
+    $routes->get('select-order/(:num)', 'Order::selectOrder/$1');
 
     $routes->add('lepaskunci', 'Order::lepasKunci');
 

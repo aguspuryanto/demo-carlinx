@@ -158,7 +158,7 @@ class Order extends BaseController
         ]);
     }
 
-    public function searchOrderDetail($id)
+    public function selectOrder($id)
     {
         // echo $id;
         // $id_order = $_POST['id_order'];
@@ -169,8 +169,24 @@ class Order extends BaseController
             'id_order' => $id
         ];
 
-        $listData = getCurl($curlOpt, $this->ipAddress . 'select_detail_order_1.php');
-        echo json_encode($listData);
+        // $caller = $_POST['caller'];
+        // $kd_member = $_POST['kd_member'];
+        // $kd_kota = $_POST['kd_kota'];
+        // select_unit_1.php
+
+        // $caller = $_POST['caller'];
+        // $kd_member = $_POST['kd_member'];
+        // $kd_kota = $_POST['kd_kota'];
+        // $search = $_POST['search'];
+        // select_unit_by_name_1.php
+
+        // $listData = getCurl($curlOpt, $this->ipAddress . 'select_detail_order_1.php');
+        // echo json_encode($listData);
+
+        return view('pages/order/selectorder', [
+            'title' => 'Order Pelayanan',
+            'listData' => $listData
+        ]);
     }
 
     public function lepasKunci() 
@@ -212,10 +228,10 @@ class Order extends BaseController
                 'jml_bln' => isset($data['jml_bln']) ? $data['jml_bln'] : 0
             ];
 
-            // echo json_encode($data); //die();
+            // echo json_encode($data);
             $curlOpt1 = array_merge($curlOpt, $data);
             if(empty($listData)) $listData = getCurl($curlOpt1, $this->ipAddress . 'search_entry_order_7.php');
-            // echo json_encode($listData); die();
+            // echo json_encode($listData);
 
             $curlOpt2 = array_merge($curlOpt, [
                 'caller' => 'MASTER',
@@ -239,6 +255,7 @@ class Order extends BaseController
 
         return view($view_page, [
             'title' => 'Order Lepas Kunci',
+            'jns_order' => 2,
             'listData' => $listData,
             'listKota' => $listKota,
             'listUnit' => $listUnit

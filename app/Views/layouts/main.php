@@ -31,9 +31,9 @@
     <link rel="stylesheet" href="<?= base_url(); ?>assets/css/swiper-bundle.min.css">
 
     <!-- style css for this template -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.6.0/css/all.min.css">
-    <link href="<?= base_url(); ?>assets/css/style.css" rel="stylesheet" id="style">
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/font-awesome/all.min.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/style.css">
 
     <?= $this->renderSection('styles') ?>
 </head>

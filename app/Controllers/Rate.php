@@ -45,11 +45,12 @@ class Rate extends BaseController
         // handle POST
         if ($this->request->getMethod() == 'POST') {
             $data = $this->request->getPost();
-            echo json_encode($data);
+            // echo json_encode($data);
 
         }
 
         if(empty($listUnit)) $listUnit = getCurl($curlOpt, $this->ipAddress . 'select_unit_1.php');
+        // echo json_encode($listUnit);
 
         return view('pages/rate/hitung', [
             'title' => 'Hitung Tarif',

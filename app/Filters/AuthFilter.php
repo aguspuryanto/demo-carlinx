@@ -8,6 +8,8 @@ use CodeIgniter\HTTP\ResponseInterface;
 
 class AuthFilter implements FilterInterface
 {
+    protected $session;
+
     public function before(RequestInterface $request, $arguments = null)
     {
         // Cek apakah session 'isLoggedIn' ada dan true
@@ -17,7 +19,7 @@ class AuthFilter implements FilterInterface
 
         $session = session();
         if(!$session->has('user')) {
-            // return redirect()->to('/login'); 
+            // return redirect()->to('/login');
         }
     }
 
