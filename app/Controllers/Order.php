@@ -145,7 +145,7 @@ class Order extends BaseController
                 'jml_bln' => isset($data['jml_bln']) ? $data['jml_bln'] : 0
             ];
 
-            echo json_encode($data);
+            // echo json_encode($data);
 
             $curlOpt = array_merge($curlOpt, $data);
             if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'search_entry_order_7.php');
