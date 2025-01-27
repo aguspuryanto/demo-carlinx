@@ -176,6 +176,12 @@
         } else {
             // Tambahkan rute ke daftar
             $('#listRute').append(`<li class="list-group-item">${rute}</li>`);
+
+            // hitung jarak
+            hitungJarak(lokasiJemput, lokasiTujuan).then(jarak => {
+                console.log(jarak, '182_jarak');
+                $('#jarak').val(jarak / 1000); // Convert to kilometers
+            });
         }
     });
 
@@ -199,51 +205,17 @@
         console.log('lokasiTujuan:', $('#lokasiTujuan').val());
     });
 
-    $('#lokasiTujuan').on('change', async function() {
-        const origin = $('#lokasiJemput').val();
-        const destination = $('#lokasiTujuan').val();
-        let totJarak = 0;
+    // $('#lokasiTujuan').on('change', async function() {
+    //     const origin = $('#lokasiJemput').val();
+    //     const destination = $('#lokasiTujuan').val();
+    //     let totJarak = 0;
         
-        if (!origin || !destination) return;
-
-        try {
-            // Get coordinates for origin
-            const originResponse = await fetch(`https://geocode.search.hereapi.com/v1/geocode?q=${encodeURIComponent(origin)}&apiKey=<?= $_ENV['API_KEY_HERE'] ?>`);
-            const originData = await originResponse.json();
-            
-            // Get coordinates for destination
-            const destResponse = await fetch(`https://geocode.search.hereapi.com/v1/geocode?q=${encodeURIComponent(destination)}&apiKey=<?= $_ENV['API_KEY_HERE'] ?>`);
-            const destData = await destResponse.json();
-
-            if (!originData.items.length || !destData.items.length) {
-                console.error('Location not found');
-                return;
-            }
-
-            const originCoords = `${originData.items[0].position.lat},${originData.items[0].position.lng}`;
-            const destCoords = `${destData.items[0].position.lat},${destData.items[0].position.lng}`;
-
-            // Calculate route 1 way
-            const routeResponse = await fetch(`https://router.hereapi.com/v8/routes?transportMode=car&origin=${originCoords}&destination=${destCoords}&return=summary&apikey=<?= $_ENV['API_KEY_HERE'] ?>`);
-            const routeData = await routeResponse.json();
-
-            // const distance = routeData.routes[0].sections[0].summary.length;
-            totJarak += routeData.routes[0].sections[0].summary.length;
-
-            // Calculate route 2 way
-            const routeResponse2 = await fetch(`https://router.hereapi.com/v8/routes?transportMode=car&origin=${destCoords}&destination=${originCoords}&return=summary&apikey=<?= $_ENV['API_KEY_HERE'] ?>`);
-            const routeData2 = await routeResponse2.json();
-
-            // const distance = routeData.routes[0].sections[0].summary.length;
-            totJarak += routeData2.routes[0].sections[0].summary.length;
-
-            console.log(totJarak, 'jarak');
-            $('#jarak').val(totJarak / 1000); // Convert to kilometers
-            
-        } catch (error) {
-            console.error('Error calculating route:', error);
-        }
-    });
+    //     hitungJarak(origin, destination).then(jarak => {
+    //         totJarak += jarak;
+    //         console.log(totJarak, 'jarak');
+    //         $('#jarak').val(totJarak / 1000); // Convert to kilometers
+    //     });
+    // });
 
     // formSearchOrder
     $('#formSearchOrder').on('submit', function(e) {
@@ -295,9 +267,70 @@
 
       // If validation passes, submit the form
       if (isValid) {
+        const origin = $('#lokasiJemput').val();
+        const destination = $('#lokasiTujuan').val();
+        let totJarak = 0;
+        
+        hitungJarak(origin, destination).then(jarak => {
+            totJarak += jarak;
+            console.log(totJarak, '276_jarak');
+            $('#jarak').val(totJarak / 1000); // Convert to kilometers
+        });
+
         this.submit();
       }
     });
+
+    async function hitungJarak(origin, destination) {
+        let totJarak = 0;
+        
+        if (!origin || !destination) return;
+
+        try {
+            // Get coordinates for origin
+            const originResponse = await fetch(`https://geocode.search.hereapi.com/v1/geocode?q=${encodeURIComponent(origin)}&apiKey=<?= $_ENV['API_KEY_HERE'] ?>`);
+            const originData = await originResponse.json();
+            
+            // Get coordinates for destination
+            const destResponse = await fetch(`https://geocode.search.hereapi.com/v1/geocode?q=${encodeURIComponent(destination)}&apiKey=<?= $_ENV['API_KEY_HERE'] ?>`);
+            const destData = await destResponse.json();
+
+            if (!originData.items.length || !destData.items.length) {
+                console.error('Location not found');
+                return;
+            }
+
+            const originCoords = `${originData.items[0].position.lat},${originData.items[0].position.lng}`;
+            const destCoords = `${destData.items[0].position.lat},${destData.items[0].position.lng}`;
+
+            // cek listRute
+            let listRute = [];
+            $('#listRute li').each(function() {
+                listRute.push($(this).text());
+            });
+            console.log(listRute, 'listRute');
+            // console.log(listRute.length, 'listRute.length');
+
+            // Calculate route 1 way
+            const routeResponse = await fetch(`https://router.hereapi.com/v8/routes?transportMode=car&origin=${originCoords}&destination=${destCoords}&return=summary&apikey=<?= $_ENV['API_KEY_HERE'] ?>`);
+            const routeData = await routeResponse.json();
+
+            // const distance = routeData.routes[0].sections[0].summary.length;
+            totJarak += routeData.routes[0].sections[0].summary.length;
+
+            // Calculate route 2 way
+            const routeResponse2 = await fetch(`https://router.hereapi.com/v8/routes?transportMode=car&origin=${destCoords}&destination=${originCoords}&return=summary&apikey=<?= $_ENV['API_KEY_HERE'] ?>`);
+            const routeData2 = await routeResponse2.json();
+
+            // const distance = routeData.routes[0].sections[0].summary.length;
+            totJarak += routeData2.routes[0].sections[0].summary.length;
+
+            return totJarak;
+            
+        } catch (error) {
+            console.error('Error calculating route:', error);
+        }
+    }
 
   });
 </script>
