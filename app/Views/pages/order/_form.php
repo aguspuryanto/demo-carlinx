@@ -69,25 +69,21 @@ helper('form');
   <div class="mb-3">
     <label class="form-label">Rute Perjalanan</label>
     <div class="row g-0">
-      <div class="col-md-4">
-          <select id="lokasiJemput" class="form-select select2 w-100">
-              <option value="Kediri Kota">Kediri Kota</option>
-              <option value="Surabaya">Surabaya</option>
-              <option value="Malang Kota">Malang Kota</option>
+      <div class="col-md-6">
+        <div class="input-group">
+          <select id="lokasiJemput" class="form-select select2">
+            <option value="">Pilih Lokasi Jemput</option>
           </select>
+          <button class="btn btn-outline-secondary" type="button" id="switchButton"><i class="fa fa-exchange"></i></button>
+        </div>
       </div>
-      <div class="col-md-2 d-flex align-items-end justify-content-center">
-          <button id="switchButton" class="btn btn-secondary"><i class="fa fa-exchange"></i></button>
-      </div>
-      <div class="col-md-4">
-          <select id="lokasiTujuan" class="form-select select2 w-100">
-              <option value="Kediri Kota">Kediri Kota</option>
-              <option value="Surabaya">Surabaya</option>
-              <option value="Malang Kota">Malang Kota</option>
+      <div class="col-md-6">
+        <div class="input-group">
+          <select id="lokasiTujuan" class="form-select select2">
+            <option value="">Pilih Lokasi Tujuan</option>
           </select>
-      </div>
-      <div class="col-md-2 d-flex align-items-end">
-          <button id="tambahRute" class="btn btn-primary w-100"><i class="fa fa-plus-square"></i></button>
+          <button class="btn btn-outline-primary" type="button" id="tambahRute"><i class="fa fa-plus-square"></i></button>
+        </div>
       </div>
     </div>
 

@@ -103,7 +103,9 @@
           cache: true
         }, 
         onSelect: function(e) {
-          console.log(e);
+          // console.log(e);
+          var data = e.params.data;
+          console.log(data);
         }, 
         data: listTujuan
     }).on('change', function() {
@@ -152,6 +154,8 @@
         }
 
         // Format rute
+        lokasiJemput = lokasiJemput.substr(lokasiJemput.lastIndexOf(",") + 1);
+        lokasiTujuan = lokasiTujuan.substr(lokasiTujuan.lastIndexOf(",") + 1);
         const rute = `${lokasiJemput} - ${lokasiTujuan}`;
 
         // Cek apakah rute sudah ada di daftar
@@ -173,12 +177,22 @@
 
     // Event listener untuk tombol Switch
     $('#switchButton').click(function() {
-        const lokasiJemput = $('#lokasiJemput').val();
-        const lokasiTujuan = $('#lokasiTujuan').val();
+        // Simpan nilai lokasiJemput ke variabel sementara
+        const temp = $('#lokasiJemput').val();
+
+        // Debug untuk memastikan nilai awal
+        console.log('Before Switch:');
+        console.log('lokasiJemput:', temp);
+        console.log('lokasiTujuan:', $('#lokasiTujuan').val());
 
         // Tukar nilai lokasi
-        $('#lokasiJemput').val(lokasiTujuan).trigger('change');
-        $('#lokasiTujuan').val(lokasiJemput).trigger('change');
+        $('#lokasiJemput').val($('#lokasiTujuan').val()).trigger('change.select2');
+        $('#lokasiTujuan').val(temp).trigger('change.select2');
+
+        // Debug untuk memastikan nilai setelah switch
+        console.log('After Switch:');
+        console.log('lokasiJemput:', $('#lokasiJemput').val());
+        console.log('lokasiTujuan:', $('#lokasiTujuan').val());
     });
 
     $('#lokasiTujuan').on('change', async function() {
