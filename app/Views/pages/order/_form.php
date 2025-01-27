@@ -71,15 +71,15 @@ helper('form');
     <div class="row g-0">
       <div class="col-md-6">
         <div class="input-group">
-          <select id="lokasiJemput" class="form-select select2">
+          <select id="lokasiJemput" name="lokasi_jemput" class="form-select select2">
             <option value="">Pilih Lokasi Jemput</option>
           </select>
-          <button class="btn btn-outline-secondary" type="button" id="switchButton"><i class="fa fa-exchange"></i></button>
+          <button class="btn btn-outline-primary" type="button" id="switchButton"><i class="fa fa-exchange"></i></button>
         </div>
       </div>
       <div class="col-md-6">
         <div class="input-group">
-          <select id="lokasiTujuan" class="form-select select2">
+          <select id="lokasiTujuan" name="lokasi_tujuan" class="form-select select2">
             <option value="">Pilih Lokasi Tujuan</option>
           </select>
           <button class="btn btn-outline-primary" type="button" id="tambahRute"><i class="fa fa-plus-square"></i></button>

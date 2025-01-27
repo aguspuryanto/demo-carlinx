@@ -42,8 +42,8 @@
       apikey: "<?= $_ENV['API_KEY_HERE'] ?>"
     });
 
-    var listKota = '<?= json_encode($listKota) ?>';
-    var today = new Date(); // - 1 day
+    const listKota = '<?= json_encode($listKota) ?>';
+    let today = new Date(); // - 1 day
     today.setDate(today.getDate() - 1);
 
     $('#kotaTujuan').select2({
@@ -144,8 +144,8 @@
 
     // Event listener untuk tombol Tambah Rute
     $('#tambahRute').click(function() {
-        const lokasiJemput = $('#lokasiJemput').val();
-        const lokasiTujuan = $('#lokasiTujuan').val();
+        let lokasiJemput = $('#lokasiJemput').val();
+        let lokasiTujuan = $('#lokasiTujuan').val();
 
         // Validasi input
         if (lokasiJemput === lokasiTujuan) {
@@ -154,8 +154,12 @@
         }
 
         // Format rute
-        lokasiJemput = lokasiJemput.substr(lokasiJemput.lastIndexOf(",") + 1);
-        lokasiTujuan = lokasiTujuan.substr(lokasiTujuan.lastIndexOf(",") + 1);
+        if(lokasiJemput!='') {
+          lokasiJemput = lokasiJemput.substr(lokasiJemput.lastIndexOf(",") + 1);          
+        }
+        if(lokasiTujuan!='') {
+          lokasiTujuan = lokasiTujuan.substr(lokasiTujuan.lastIndexOf(",") + 1);          
+        }
         const rute = `${lokasiJemput} - ${lokasiTujuan}`;
 
         // Cek apakah rute sudah ada di daftar
@@ -198,6 +202,7 @@
     $('#lokasiTujuan').on('change', async function() {
         const origin = $('#lokasiJemput').val();
         const destination = $('#lokasiTujuan').val();
+        let totJarak = 0;
         
         if (!origin || !destination) return;
 
@@ -218,12 +223,22 @@
             const originCoords = `${originData.items[0].position.lat},${originData.items[0].position.lng}`;
             const destCoords = `${destData.items[0].position.lat},${destData.items[0].position.lng}`;
 
-            // Calculate route
+            // Calculate route 1 way
             const routeResponse = await fetch(`https://router.hereapi.com/v8/routes?transportMode=car&origin=${originCoords}&destination=${destCoords}&return=summary&apikey=<?= $_ENV['API_KEY_HERE'] ?>`);
             const routeData = await routeResponse.json();
 
-            const distance = routeData.routes[0].sections[0].summary.length;
-            $('#jarak').val(distance / 1000); // Convert to kilometers
+            // const distance = routeData.routes[0].sections[0].summary.length;
+            totJarak += routeData.routes[0].sections[0].summary.length;
+
+            // Calculate route 2 way
+            const routeResponse2 = await fetch(`https://router.hereapi.com/v8/routes?transportMode=car&origin=${destCoords}&destination=${originCoords}&return=summary&apikey=<?= $_ENV['API_KEY_HERE'] ?>`);
+            const routeData2 = await routeResponse2.json();
+
+            // const distance = routeData.routes[0].sections[0].summary.length;
+            totJarak += routeData2.routes[0].sections[0].summary.length;
+
+            console.log(totJarak, 'jarak');
+            $('#jarak').val(totJarak / 1000); // Convert to kilometers
             
         } catch (error) {
             console.error('Error calculating route:', error);
