@@ -40,14 +40,15 @@
 
                 </div>
                 <hr>
+                <?= form_open('order/select-order', ['id' => 'formSearchOrder'], ['kode' => '']) ?>
                 <div class="mb-0 jenis_transmisi">
                     <div class="mb-3">
                         <label for="jenis_transmisi" class="form-label">Jenis Transmisi</label>
-                        <input type="text" class="form-control" id="jenis_transmisi" placeholder="Masukkan jenis transmisi">
+                        <input type="text" name="jenis_transmisi" class="form-control" id="jenis_transmisi" placeholder="Masukkan jenis transmisi">
                     </div>
                     <div class="mb-3">
                         <label for="warna" class="form-label">Warna</label>
-                        <input type="text" class="form-control" id="warna" placeholder="Masukkan warna">
+                        <input type="text" name="warna" class="form-control" id="warna" placeholder="Masukkan warna">
                     </div>
                     <span>* Jika tidak diisi, akan diplih sesuai ketersediaan unit</span>
                 </div>
@@ -62,7 +63,7 @@
                             <label for="jumlah" class="visually-hidden">Password</label>
                             <div class="input-group">
                                 <button class="btn btn-outline-secondary" type="button" id="decrement">-</button>
-                                <input type="text" class="form-control" id="jumlah" value="1">
+                                <input type="text" name="jumlah" class="form-control" id="jumlah" value="1">
                                 <button class="btn btn-outline-secondary" type="button" id="increment">+</button>
                             </div>
                         </div>
@@ -73,33 +74,34 @@
                     <p class="lead">Data Pemesanan</p>
                     <div class="mb-3">
                         <label for="nama" class="form-label">Nama</label>
-                        <input type="text" class="form-control" id="nama" placeholder="Masukkan nama">
+                        <input type="text" name="nama" class="form-control" id="nama" placeholder="Masukkan nama" required>
                     </div>
                     <div class="mb-3">
                         <label for="no_hp" class="form-label">No HP</label>
-                        <input type="text" class="form-control" id="no_hp" placeholder="Masukkan no. hp">
+                        <input type="text" name="no_hp" class="form-control" id="no_hp" placeholder="Masukkan no. hp" required>
                     </div>
                     <div class="mb-3">
                         <label for="nik" class="form-label">NIK</label>
-                        <input type="text" class="form-control" id="nik" placeholder="Masukkan NIK">
+                        <input type="text" name="nik" class="form-control" id="nik" placeholder="Masukkan NIK" required>
                     </div>
                     <div class="mb-3">
                         <label for="note" class="form-label">Note</label>
-                        <input type="text" class="form-control" id="note" placeholder="Masukkan note">
+                        <input type="text" name="note" class="form-control" id="note" placeholder="Masukkan note">
                     </div>
                 </div>
                 <hr>
                 <div id="pembayaran" class="mb-0">
                     <p class="lead">Jenis Pembayaran</p>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                        <input class="form-check-input" type="radio" name="jenis_pembayaran" id="inlineRadio1" value="1" checked required>
                         <label class="form-check-label" for="inlineRadio1">Lunas</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                        <input class="form-check-input" type="radio" name="jenis_pembayaran" id="inlineRadio2" value="2" required>
                         <label class="form-check-label" for="inlineRadio2">Mundur</label>
                     </div>
                 </div>
+                <?= form_close() ?>
             </div>
             <div class="modal-footer d-flex justify-content-between align-items-center">
                 <div id="total_biaya">
@@ -107,8 +109,9 @@
                     <p class="fw-bold mb-0" id="total">Rp 615.000</p>
                 </div>
                 <div>
-                    <button type="submit" class="btn btn-primary">LANJUT</button>
+                    <button type="button" class="btn btn-primary btnSubmit">LANJUT</button>
                 </div>
+            </div>
             </div>
         </div>
     </div>

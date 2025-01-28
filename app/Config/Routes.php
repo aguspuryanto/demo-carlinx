@@ -50,7 +50,7 @@ $routes->group('order', ['filter' => 'auth'], function($routes) {
     $routes->get('orderlayanan', 'Order::orderLayanan');
     $routes->post('search-order', 'Order::searchOrder');
     // $routes->get('search-order/(:num)', 'Order::searchOrderDetail/$1');
-    $routes->get('select-order/(:num)', 'Order::selectOrder/$1');
+    $routes->post('select-order', 'Order::selectOrder');
 
     $routes->add('lepaskunci', 'Order::lepasKunci');
 

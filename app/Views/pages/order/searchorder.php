@@ -66,6 +66,13 @@
 
         $(this).find('.modal-body .penyedia_layanan').html(penyedia_layanan);
 
+        // kode
+        $(this).find('.modal-body input[name="kode"]').val(item.kode);
+
+        // form jenis transmisi dan warna
+        $(this).find('.modal-body input#jenis_transmisi').val(item.transmisi);
+        $(this).find('.modal-body input#warna').val(item.warna);
+
         // total
         const formatRupiah = new Intl.NumberFormat('id-ID', {
             style: 'currency',
@@ -87,6 +94,21 @@
         if(item.path_foto4){
             $('#path_foto4').attr('src', baseUrlImg + item.path_foto4);
         }
+    });
+
+    // formSearchOrder
+    $('.btnSubmit').on('click', function(e) {
+      e.preventDefault();
+
+      const form = $('#formSearchOrder')[0];
+      form.classList.remove('was-validated');
+
+      // Validate the form
+      if (!form.checkValidity()) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      form.classList.add('was-validated');
     });
   });
 </script>

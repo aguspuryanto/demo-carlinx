@@ -128,6 +128,12 @@
         let lokasiJemput = $('#lokasiJemput').val();
         let lokasiTujuan = $('#lokasiTujuan').val();
 
+        // Validasi input, tidak boleh kosong
+        if (lokasiJemput=='' || lokasiTujuan=='') {
+            alert('Lokasi Jemput dan Tujuan tidak boleh kosong.');
+            return;
+        }
+
         // if not exists, then push to lokasiJemputArr
         if(!lokasiJemputArr.includes(lokasiJemput)) {
           lokasiJemputArr.push(lokasiJemput);
@@ -139,12 +145,6 @@
           lokasiTujuanArr.push(lokasiTujuan);
         }
         console.log(lokasiTujuanArr, 'lokasiTujuanArr');
-
-        // Validasi input
-        if (lokasiJemput === lokasiTujuan) {
-            alert('Lokasi Jemput dan Tujuan tidak boleh sama.');
-            return;
-        }
         
         const rute = `${lokasiJemput.substr(lokasiJemput.lastIndexOf(",") + 1)} - ${lokasiTujuan.substr(lokasiTujuan.lastIndexOf(",") + 1)}`;
 
@@ -307,7 +307,7 @@
             // cek listRute
             let listRute = [];
             $('#listRute li').each(function() {
-                listRute.push($(this).text());
+                listRute.push($(this).text().trim());
             });
             console.log(listRute, 'listRute');
             console.log(listRute.length, 'jumlah listRute');

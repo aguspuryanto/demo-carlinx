@@ -159,16 +159,18 @@ class Order extends BaseController
         ]);
     }
 
-    public function selectOrder($id)
+    public function selectOrder()
     {
         // echo $id;
         // $id_order = $_POST['id_order'];
         // select_detail_order_1.php
         $listData = [];
 
-        $curlOpt = [
-            'id_order' => $id
-        ];
+        // handle POST
+        if($this->request->getMethod() == 'POST') {
+            $data = $this->request->getPost();
+            echo json_encode($data);
+        }
 
         // $caller = $_POST['caller'];
         // $kd_member = $_POST['kd_member'];
