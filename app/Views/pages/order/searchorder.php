@@ -49,9 +49,43 @@
         // get data-item
         var item = JSON.parse(e.relatedTarget.dataset.item);
         console.log(item, 'item');
+
+        // nama
+        $(this).find('.modal-body h2').text(item.nama);
+
+        // table detail
+        $(this).find('.modal-body table tbody tr td.detail_kursi').text(item.kursi);
+        $(this).find('.modal-body table tbody tr td.detail_tahun').text(item.tahun);
+        $(this).find('.modal-body table tbody tr td.detail_transmisi').text(item.transmisi);
+        $(this).find('.modal-body table tbody tr td.detail_bbm').text(item.bbm);
+        $(this).find('.modal-body table tbody tr td.detail_warna').text(item.warna);
+
+        // penyedia layanan
+        let penyedia_layanan = '<div class="mb-3"><p class="lead h6">Penyedia Layanan</p>' + item.nama_rental + '<br />' + item.kota_rental + '<br /><i class="fa fa-star text-warning"></i> ' + item.rating + ' | Terlayani: ' + item.terjual + '</div>';
+        penyedia_layanan += '<div class="mb-3"><p class="h6 lead">Catatan</p>' + (item.ketr ?? '-') + '</div>';
+
+        $(this).find('.modal-body .penyedia_layanan').html(penyedia_layanan);
+
+        // total
+        const formatRupiah = new Intl.NumberFormat('id-ID', {
+            style: 'currency',
+            currency: 'IDR',
+            minimumFractionDigits: 0
+        }).format(item.hrg_sewa).replace('Rp', 'Rp ');
         
+        $(this).find('.modal-footer p#total').text(formatRupiah);
+
         if(item.path_foto.length > 0){
             $('#path_foto').attr('src', baseUrlImg + item.path_foto);
+        }
+        if(item.path_foto2){
+            $('#path_foto2').attr('src', baseUrlImg + item.path_foto2);
+        }
+        if(item.path_foto3){
+            $('#path_foto3').attr('src', baseUrlImg + item.path_foto3);
+        }
+        if(item.path_foto4){
+            $('#path_foto4').attr('src', baseUrlImg + item.path_foto4);
         }
     });
   });

@@ -46,6 +46,10 @@
     let today = new Date(); // - 1 day
     today.setDate(today.getDate() - 1);
 
+    // let totJarak = 0;
+    let lokasiJemputArr = [];
+    let lokasiTujuanArr = [];
+
     $('#kotaTujuan').select2({
       theme: 'bootstrap-5',
       placeholder: 'Type to search...',
@@ -110,36 +114,13 @@
         data: listTujuan
     }).on('change', function() {
       // console.log($('#lokasiJemput').val());
-      const lokasiJemput = $('#lokasiJemput').val();
-      const lokasiTujuan = $('#lokasiTujuan').val();
-      // append to div#lokasiJemputList
-      // if(lokasiJemput != '') {
-      //   $('#lokasiJemputList').html('<ul class="list-group"></ul>');
-      //   $('#lokasiJemputList ul').html('<li class="list-group-item">' + lokasiJemput.substr(lokasiJemput.lastIndexOf(",") + 1) + '</li>');
+      // const lokasiJemput = $('#lokasiJemput').val();
+      // // const lokasiTujuan = $('#lokasiTujuan').val();
+
+      // // if not exists, then push to lokasiJemputArr
+      // if(!lokasiJemputArr.includes(lokasiJemput)) {
+      //   lokasiJemputArr.push(lokasiJemput);
       // }
-      // if(lokasiTujuan != '') {
-      //   $('#lokasiTujuanList').html('<ul class="list-group"></ul>');
-      //   $('#lokasiTujuanList ul').html('<li class="list-group-item">' + lokasiTujuan.substr(lokasiTujuan.lastIndexOf(",") + 1) + '</li>');
-      // }
-
-      // if(lokasiJemput=='') return false;
-
-      // if(lokasiJemput != '' && lokasiTujuan != '' && lokasiTujuan.length > 0) {
-      //   $('#ruteList ul').append('<li class="list-group-item">' + lokasiJemput.substr(lokasiJemput.lastIndexOf(",") + 1) + ' - ' + lokasiTujuan.substr(lokasiTujuan.lastIndexOf(",") + 1) + '</li>');
-      //   $('#ruteList').parent().removeClass('d-none');
-      // }
-    });
-
-    // Event handler untuk tombol Tambah Rute
-    $('#addRute').on('click', function() {
-      // Ambil nilai saat ini dari lokasiJemput dan lokasiTujuan
-      const lokasiJemput = $('#lokasiJemput').val();
-      const lokasiTujuan = $('#lokasiTujuan').val();
-      console.log('lokasiJemput:' + lokasiJemput + '; lokasiTujuan:' + lokasiTujuan);
-
-      // Tukar nilai antara lokasiJemput dan lokasiTujuan
-      $('#lokasiJemput').val(lokasiTujuan).trigger('change.select2');
-      $('#lokasiTujuan').val(lokasiJemput).trigger('change.select2');
     });
 
     // Event listener untuk tombol Tambah Rute
@@ -147,20 +128,25 @@
         let lokasiJemput = $('#lokasiJemput').val();
         let lokasiTujuan = $('#lokasiTujuan').val();
 
+        // if not exists, then push to lokasiJemputArr
+        if(!lokasiJemputArr.includes(lokasiJemput)) {
+          lokasiJemputArr.push(lokasiJemput);
+        }
+        console.log(lokasiJemputArr, 'lokasiJemputArr');
+
+        // if not exists, then push to lokasiTujuanArr
+        if(!lokasiTujuanArr.includes(lokasiTujuan)) {
+          lokasiTujuanArr.push(lokasiTujuan);
+        }
+        console.log(lokasiTujuanArr, 'lokasiTujuanArr');
+
         // Validasi input
         if (lokasiJemput === lokasiTujuan) {
             alert('Lokasi Jemput dan Tujuan tidak boleh sama.');
             return;
         }
-
-        // Format rute
-        if(lokasiJemput!='') {
-          lokasiJemput = lokasiJemput.substr(lokasiJemput.lastIndexOf(",") + 1);          
-        }
-        if(lokasiTujuan!='') {
-          lokasiTujuan = lokasiTujuan.substr(lokasiTujuan.lastIndexOf(",") + 1);          
-        }
-        const rute = `${lokasiJemput} - ${lokasiTujuan}`;
+        
+        const rute = `${lokasiJemput.substr(lokasiJemput.lastIndexOf(",") + 1)} - ${lokasiTujuan.substr(lokasiTujuan.lastIndexOf(",") + 1)}`;
 
         // Cek apakah rute sudah ada di daftar
         let ruteSudahAda = false;
@@ -172,8 +158,18 @@
         });
 
         if (ruteSudahAda) {
-            alert('Rute sudah ada di daftar.');
+            console.log('Rute sudah ada di daftar.');
+            // set lokasi jemput with tujuan
+            $('#lokasiJemput').select2("trigger", "select", {
+              data: { id: lokasiTujuan, text: lokasiTujuan.substr(lokasiTujuan.lastIndexOf(",") + 1) }
+            });
+            // reset lokasi tujuan
+            $('#lokasiTujuan').select2("trigger", "select", {
+              data: { id: '', text: '' }
+            });
         } else {
+            if(lokasiJemput=='' || lokasiTujuan=='') return false;
+
             // Tambahkan rute ke daftar
             $('#listRute').append(`<li class="list-group-item">${rute}</li>`);
 
@@ -187,35 +183,40 @@
 
     // Event listener untuk tombol Switch
     $('#switchButton').click(function() {
-        // Simpan nilai lokasiJemput ke variabel sementara
-        const temp = $('#lokasiJemput').val();
+        // Simpan nilai lokasi ke variabel sementara
+        const tempLocJemput = $('#lokasiJemput').val();
+        const tempLocTujuan = $('#lokasiTujuan').val();
+        console.log('tempLocJemput:' + tempLocJemput + ', tempLocTujuan:' + tempLocTujuan);
 
-        // Debug untuk memastikan nilai awal
-        console.log('Before Switch:');
-        console.log('lokasiJemput:', temp);
-        console.log('lokasiTujuan:', $('#lokasiTujuan').val());
+        // Pastikan kedua lokasi telah dipilih
+        if (!tempLocJemput || !tempLocTujuan) {
+            alert('Silakan pilih lokasi jemput dan tujuan terlebih dahulu');
+            return;
+        }
 
         // Tukar nilai lokasi
-        $('#lokasiJemput').val($('#lokasiTujuan').val()).trigger('change.select2');
-        $('#lokasiTujuan').val(temp).trigger('change.select2');
+        $('#lokasiJemput').select2("trigger", "select", {
+          data: { id: tempLocTujuan, text: tempLocTujuan.substr(tempLocTujuan.lastIndexOf(",") + 1) }
+        });
 
-        // Debug untuk memastikan nilai setelah switch
-        console.log('After Switch:');
-        console.log('lokasiJemput:', $('#lokasiJemput').val());
-        console.log('lokasiTujuan:', $('#lokasiTujuan').val());
+        $('#lokasiTujuan').select2("trigger", "select", {
+          data: { id: tempLocJemput, text: tempLocJemput.substr(tempLocJemput.lastIndexOf(",") + 1) }
+        });
     });
 
-    // $('#lokasiTujuan').on('change', async function() {
-    //     const origin = $('#lokasiJemput').val();
-    //     const destination = $('#lokasiTujuan').val();
-    //     let totJarak = 0;
+    $('#lokasiTujuan').on('change', async function() {
+        // const origin = $('#lokasiJemput').val();
+        // const destination = $('#lokasiTujuan').val();
+        // let totJarak = 0;
+
+        $('#tambahRute').trigger('click');
         
-    //     hitungJarak(origin, destination).then(jarak => {
-    //         totJarak += jarak;
-    //         console.log(totJarak, 'jarak');
-    //         $('#jarak').val(totJarak / 1000); // Convert to kilometers
-    //     });
-    // });
+        // hitungJarak(origin, destination).then(jarak => {
+        //     totJarak += jarak;
+        //     console.log(totJarak, '215_jarak');
+        //     $('#jarak').val(totJarak / 1000); // Convert to kilometers
+        // });
+    });
 
     // formSearchOrder
     $('#formSearchOrder').on('submit', function(e) {
@@ -309,8 +310,8 @@
                 listRute.push($(this).text());
             });
             console.log(listRute, 'listRute');
-            // console.log(listRute.length, 'listRute.length');
-
+            console.log(listRute.length, 'jumlah listRute');
+            
             // Calculate route 1 way
             const routeResponse = await fetch(`https://router.hereapi.com/v8/routes?transportMode=car&origin=${originCoords}&destination=${destCoords}&return=summary&apikey=<?= $_ENV['API_KEY_HERE'] ?>`);
             const routeData = await routeResponse.json();
@@ -318,12 +319,32 @@
             // const distance = routeData.routes[0].sections[0].summary.length;
             totJarak += routeData.routes[0].sections[0].summary.length;
 
-            // Calculate route 2 way
-            const routeResponse2 = await fetch(`https://router.hereapi.com/v8/routes?transportMode=car&origin=${destCoords}&destination=${originCoords}&return=summary&apikey=<?= $_ENV['API_KEY_HERE'] ?>`);
-            const routeData2 = await routeResponse2.json();
+            if(listRute.length == 1) {
+                // Calculate route 2 way
+                const routeResponse2 = await fetch(`https://router.hereapi.com/v8/routes?transportMode=car&origin=${destCoords}&destination=${originCoords}&return=summary&apikey=<?= $_ENV['API_KEY_HERE'] ?>`);
+                const routeData2 = await routeResponse2.json();
 
-            // const distance = routeData.routes[0].sections[0].summary.length;
-            totJarak += routeData2.routes[0].sections[0].summary.length;
+                const distance = routeData.routes[0].sections[0].summary.length;
+                totJarak += routeData2.routes[0].sections[0].summary.length;
+            } else if(listRute.length > 1) {
+              // lokasiJemputArr = ['Indonesia, 60261, Surabaya', 'Indonesia, 65119, Malang Kota', 'Indonesia, 64126, Kediri Kota']
+              // remove firt element
+              lokasiJemputArr.shift();
+
+              // re-calculate
+              for (let i = 0; i < lokasiJemputArr.length; i++) {
+                const origin = lokasiJemputArr[i];
+                const destination = lokasiTujuanArr[i];
+                console.log('origin:' + origin + ', destination:' + destination);
+
+                // Calculate route 2 way
+                // const routeResponse2 = await fetch(`https://router.hereapi.com/v8/routes?transportMode=car&origin=${destination}&destination=${origin}&return=summary&apikey=<?= $_ENV['API_KEY_HERE'] ?>`);
+                // const routeData2 = await routeResponse2.json();
+
+                // const distance = routeData.routes[0].sections[0].summary.length;
+                // totJarak += routeData2.routes[0].sections[0].summary.length;
+              }
+            }
 
             return totJarak;
             

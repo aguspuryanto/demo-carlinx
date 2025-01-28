@@ -39,33 +39,6 @@ helper('form');
     </div>
   </div>
 
-  <!-- Rute Perjalanan -->
-  <!-- <div class="mb-3" id="rutePerjalanan">
-    <label class="form-label">Rute Perjalanan</label>
-    <div class="row">
-      <div class="col-6">
-        <select class="form-control" name="lokasi_jemput" id="lokasiJemput">
-          <option value="">Pilih Lokasi Jemput</option>
-        </select>
-        <div id="lokasiJemputList" class="mt-2"></div>
-      </div>
-      <div class="col-6">
-        <select class="form-control" name="lokasi_tujuan" id="lokasiTujuan">
-          <option value="">Pilih Lokasi Tujuan</option>
-        </select>
-        <div id="lokasiTujuanList" class="mt-2"></div>
-      </div>
-      <div class="col-12 text-start d-none">
-        <div id="ruteList">
-          <ul class="list-group"></ul>
-        </div>
-        <div class="text-end mt-2">
-          <a href="#rutePerjalanan" class="link-primary" id="addRute">+ Tambah Rute</a>
-        </div>
-      </div>
-    </div>
-  </div> -->
-
   <div class="mb-3">
     <label class="form-label">Rute Perjalanan</label>
     <div class="row g-0">

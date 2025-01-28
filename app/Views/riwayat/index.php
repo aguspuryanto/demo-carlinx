@@ -34,5 +34,36 @@
         </div>
     </div>
     <!-- end main page content -->
+     
+    <?php include_once '_modal_order.php'; ?>
 
+<?= $this->endSection() ?>
+
+<?= $this->section('scripts') ?>
+<script>
+    $(document).ready(function() {
+        $('#addModal').on('show.bs.modal', function (e) {
+            // console.log(e.relatedTarget.dataset.id);
+            let idOrder = e.relatedTarget.dataset.id;
+            if(idOrder){
+                // get data-item
+                // var item = JSON.parse(e.relatedTarget.dataset.item);
+                // console.log(item, 'item');                
+                $.ajax({
+                    url: '<?= base_url('riwayat/') ?>' + idOrder,
+                    type: 'POST',
+                    data: {
+                        kd_site: kd_site,
+                        kd_kota: kd_kota
+                    },
+                    success: function(data) {
+                        console.log(data);
+                        location.reload();
+                    }
+                }); 
+            }
+
+        });
+    });
+</script>
 <?= $this->endSection() ?>
