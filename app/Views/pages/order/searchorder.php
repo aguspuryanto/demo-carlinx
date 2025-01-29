@@ -115,41 +115,55 @@
       var item = JSON.parse(form.item.value);
       console.log(item, '117_item');
 
-      $.ajax({
-        url: '<?= base_url('order/select-order') ?>',
-        type: 'POST',
-        data: $('#formSearchOrder').serialize(),
-        success: function(response) {
-          console.log(response.jenis_transmisi, 'response');
-          var html = '<div class="table-responsive">';
-          html += '<table class="table table-bordered">';
-          html += '<tbody>';
-          html += '<tr><th width="150">Tgl.Mulai</th><td>' + item.tgl_start + '</td></tr>';
-          html += '<tr><th>Tgl.Selesai</th><td>' + item.tgl_finish + '</td></tr>';
-          html += '<tr><th>Tujuan</th><td>' + item.lokasi_tujuan + '</td></tr>';
-          html += '<tr><th>Unit</th><td>' + item.nama + '</td></tr>';
-          html += '<tr><th>Tahun</th><td>' + item.tahun + '</td></tr>';
-          html += '<tr><th>BBM</th><td>' + item.bbm + '</td></tr>';
-          html += '<tr><th>Transmisi</th><td>' + (response.jenis_transmisi) + '</td></tr>';
-          html += '<tr><th>Warna</th><td>' + (response.warna) + '</td></tr>';
-          html += '<tr><th>Jml.Order</th><td>' + (response.jumlah) + '</td></tr>';
-          html += '<tr><th>Include</th><td>' + (response.include ?? '-') + '</td></tr>';
-          html += '<tr><th>Biaya</th><td>Rp. ' + numberFormat(item.hrg_sewa) + '</td></tr>';
-          html += '<tr><th>Pembayaran</th><td>' + (response.jenis_pembayaran == '1' ? 'Tunai' : 'Mundur') + '</td></tr>';
-          html += '<tr><th>Catatan</th><td>' + (response.catatan ?? '-') + '</td></tr>';
-          html += '<tr><th>Voucher</th><td>' + (response.voucher ?? '-') + '</td></tr>';
-          html += '</tbody>';
-          html += '</table>';
-          html += '</div>';
-          
-          $('#confirmModal .modal-body').html(html);
-          $('#confirmModal').modal('show');
-        },
-        error: function(xhr, status, error) {
-          console.error('Error:', error);
-          alert('Terjadi kesalahan saat memuat data order');
-        }
-      });
+      // if pass validation
+      if(form.checkValidity()){
+        $.ajax({
+          url: '<?= base_url('order/select-order') ?>',
+          type: 'POST',
+          data: $('#formSearchOrder').serialize(),
+          success: function(response) {
+            console.log(response, 'response');
+            const parseResponse = JSON.parse(response);
+            console.log(parseResponse.jenis_pembayaran, '_jenis_pembayaran');
+
+            var html = '<div class="table-responsive">';
+            html += '<table class="table table-bordered">';
+            html += '<tbody>';
+            html += '<tr><th width="150">Tgl.Mulai</th><td>' + item.tgl_start + '</td></tr>';
+            html += '<tr><th>Tgl.Selesai</th><td>' + item.tgl_finish + '</td></tr>';
+            html += '<tr><th>Tujuan</th><td>' + item.lokasi_tujuan + '</td></tr>';
+            html += '<tr><th>Unit</th><td>' + item.nama + '</td></tr>';
+            html += '<tr><th>Tahun</th><td>' + item.tahun + '</td></tr>';
+            html += '<tr><th>BBM</th><td>' + item.bbm + '</td></tr>';
+            html += '<tr><th>Transmisi</th><td>' + (parseResponse.jenis_transmisi) + '</td></tr>';
+            html += '<tr><th>Warna</th><td>' + (parseResponse.warna) + '</td></tr>';
+            html += '<tr><th>Jml.Order</th><td>' + (parseResponse.jumlah) + '</td></tr>';
+            html += '<tr><th>Include</th><td>' + (parseResponse.include ?? '-') + '</td></tr>';
+            html += '<tr><th>Biaya</th><td>Rp. ' + numberFormat(item.hrg_sewa) + '</td></tr>';
+            html += '<tr><th>Pembayaran</th><td>' + (parseResponse.jenis_pembayaran == '1' ? 'Tunai' : 'Mundur') + '</td></tr>';
+            html += '<tr><th>Catatan</th><td>' + (parseResponse.catatan ?? '-') + '</td></tr>';
+            html += '<tr><th>Voucher</th><td>' + (parseResponse.voucher ?? '-') + '</td></tr>';
+            html += '</tbody>';
+            html += '</table>';
+            html += '</div>';
+
+            // append form hidden
+            const newForm = document.createElement('form'); // Create a new form
+            newForm.method = 'POST';
+            newForm.action = '<?= base_url('order/select-order') ?>';
+            
+            newForm.innerHTML = '<input type="hidden" name="item" value="' + JSON.stringify(parseResponse) + '">'; // Add the hidden input
+            // $('#formSearchOrder').append(newForm);
+            
+            $('#confirmModal .modal-body').html(html).append(newForm);
+            $('#confirmModal').modal('show');
+          },
+          error: function(xhr, status, error) {
+            console.error('Error:', error);
+            alert('Terjadi kesalahan saat memuat data order');
+          }
+        });        
+      }
     });
 
     // Helper function for number formatting
