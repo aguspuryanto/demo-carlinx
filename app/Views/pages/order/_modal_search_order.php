@@ -1,11 +1,11 @@
 
     <!-- Modal -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false" aria-modal="true">
         <div class="modal-dialog modal-fullscreen">
             <div class="modal-content">
             <div class="modal-header">
-                <a href="#" class="btn btn-outline-secondary" data-bs-dismiss="modal" aria-label="Close">
-                    <i class="fa fa-arrow-left"></i> Kembali
+                <a href="#" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                    <i class="fa fa-arrow-left"></i>
                 </a>
             </div>
             <div class="modal-body">
@@ -40,7 +40,7 @@
 
                 </div>
                 <hr>
-                <?= form_open('order/select-order', ['id' => 'formSearchOrder'], ['kode' => '']) ?>
+                <?= form_open('order/select-order', ['id' => 'formSearchOrder'], ['kode' => '', 'item' => '']) ?>
                 <div class="mb-0 jenis_transmisi">
                     <div class="mb-3">
                         <label for="jenis_transmisi" class="form-label">Jenis Transmisi</label>
@@ -90,7 +90,7 @@
                     </div>
                 </div>
                 <hr>
-                <div id="pembayaran" class="mb-0">
+                <div id="pembayaran" class="mb-3">
                     <p class="lead">Jenis Pembayaran</p>
                     <div class="form-check form-check-inline">
                         <input class="form-check-input" type="radio" name="jenis_pembayaran" id="inlineRadio1" value="1" checked required>
@@ -100,6 +100,14 @@
                         <input class="form-check-input" type="radio" name="jenis_pembayaran" id="inlineRadio2" value="2" required>
                         <label class="form-check-label" for="inlineRadio2">Mundur</label>
                     </div>
+                </div>
+                <div class="mb-3">
+                    <label for="catatan" class="form-label">Catatan</label>
+                    <input type="text" name="catatan" class="form-control" id="catatan" placeholder="Masukkan catatan">
+                </div>
+                <div class="mb-3">
+                    <label for="voucher" class="form-label">Voucher</label>
+                    <input type="text" name="voucher" class="form-control" id="voucher" placeholder="Masukkan voucher">
                 </div>
                 <?= form_close() ?>
             </div>

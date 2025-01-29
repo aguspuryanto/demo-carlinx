@@ -169,7 +169,17 @@ class Order extends BaseController
         // handle POST
         if($this->request->getMethod() == 'POST') {
             $data = $this->request->getPost();
-            echo json_encode($data);
+            /** Form Input Data Order
+             *  - Jenis Transmisi
+             *  - Warna Unit
+             *  - Jml Order Unit
+             *  - Data Pelanggan (sesuai dgn jml unit)
+             *  - Jenis Bayar (1: lunas, 2: DP, 3: mundur)
+             *  - Catatan
+             *  - Voucher
+             */           
+
+            echo json_encode($data); //{"kode":"23050001AV0001","jenis_transmisi":"Manual","warna":"Hitam","jumlah":"1","nama":"Galih Pratama","no_hp":"0876543210","nik":"1234567","note":"ini note","jenis_pembayaran":"1","catatan":"ini catatan","voucher":"ini voucher"}
         }
 
         // $caller = $_POST['caller'];
@@ -186,10 +196,10 @@ class Order extends BaseController
         // $listData = getCurl($curlOpt, $this->ipAddress . 'select_detail_order_1.php');
         // echo json_encode($listData);
 
-        return view('pages/order/selectorder', [
-            'title' => 'Order Pelayanan',
-            'listData' => $listData
-        ]);
+        // return view('pages/order/selectorder', [
+        //     'title' => 'Order Pelayanan',
+        //     'listData' => $listData
+        // ]);
     }
 
     public function lepasKunci() 
