@@ -210,8 +210,8 @@ class Order extends BaseController
                     'kd_unit' => $respItem['kode'],
                     'hrg_unit' => $respItem['hrg_unit'],
                     'hrg_sewa' => $respItem['hrg_sewa'],
-                    'tgl_1' => $respItem['tgl_start'],
-                    'tgl_2' => $respItem['tgl_finish'],
+                    'tgl_start' => $respItem['tgl_start'],
+                    'tgl_finish' => $respItem['tgl_finish'],
                     'jemput' => $respItem['lokasi_jemput'],
                     'tujuan' => $respItem['lokasi_tujuan'],
                     'ketr' => $respItem['ketr'],
@@ -224,7 +224,7 @@ class Order extends BaseController
                     'tempo_bayar' => $array_data['tempo_bayar'],
                     'catatan_bayar' => $array_data['catatan'],
                     'voucher' => substr($array_data['voucher'], 0, 10), //limit 10 karakter
-                    'list_plgn' => ($jsonString),
+                    'list_plgn' => json_encode($jsonString),
                 ];
                 // echo json_encode($respItemArr);
 
