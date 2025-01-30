@@ -228,7 +228,7 @@ class Order extends BaseController
                     'voucher' => $array_data['voucher'],
                     'list_plgn' => $array_data['list_plgn'],
                 ];
-                // echo json_encode($respItemArr);
+                echo json_encode($respItemArr);
 
                 $curlOpt = array_merge($curlOpt, $respItemArr);
                 if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'submit_order_2b.php');
