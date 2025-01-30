@@ -217,7 +217,7 @@ class Order extends BaseController
                     'jemput' => $respItem['lokasi_jemput'],
                     'tujuan' => $respItem['lokasi_tujuan'],
                     'ketr' => $respItem['ketr'],
-                    'jns_order' => $array_data['jns_order'],
+                    'jns_order' => (string)$array_data['jns_order'],
                     'jml_order' => $array_data['jumlah'],
                     'transmisi' => $array_data['jenis_transmisi'],
                     'warna' => $array_data['warna'],
