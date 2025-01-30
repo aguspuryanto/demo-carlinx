@@ -166,6 +166,11 @@ class Order extends BaseController
         // select_detail_order_1.php
         $listData = [];
 
+        $curlOpt    = [
+            // 'caller' => 'MASTER',
+            'kd_member' => $this->session->get('user')['kode'],
+        ];
+
         // handle POST
         if($this->request->getMethod() == 'POST') {
             $data = $this->request->getPost();
@@ -177,9 +182,63 @@ class Order extends BaseController
              *  - Jenis Bayar (1: lunas, 2: DP, 3: mundur)
              *  - Catatan
              *  - Voucher
-             */           
+             */
+            
+            if(isset($data['form_step']) && $data['form_step'] == '2') {
+                
+                $decoded = rawurldecode($data['item']);
+                $array_data = json_decode($decoded, true);
+                // $resp = json_encode($array_data);
 
-            echo json_encode($data); //{"kode":"23050001AV0001","jenis_transmisi":"Manual","warna":"Hitam","jumlah":"1","nama":"Galih Pratama","no_hp":"0876543210","nik":"1234567","note":"ini note","jenis_pembayaran":"1","catatan":"ini catatan","voucher":"ini voucher"}
+                $array_data['jns_order'] = 1;
+                $array_data['tempo_bayar'] = 0;
+
+                $jsonString['values'] = [
+                    'nama' => $array_data['nama'],
+                    'no_hp' => $array_data['no_hp'],
+                    'nik' => $array_data['nik'],
+                    'note' => $array_data['note']
+                ];
+
+                $array_data['list_plgn'] = json_encode($jsonString);
+                // $resp = json_encode($array_data);
+
+                // Parsing ulang bagian "item" yang masih dalam format JSON string
+                $respItem = json_decode($array_data['item'], true);
+                // $respItem = json_encode($respItem);
+
+                $respItemArr = [
+                    'kd_rental' => $respItem['koderental'],
+                    'kd_unit' => $respItem['kode'],
+                    'hrg_unit' => $respItem['hrg_unit'],
+                    'hrg_sewa' => $respItem['hrg_sewa'],
+                    'tgl_1' => $respItem['tgl_start'],
+                    'tgl_2' => $respItem['tgl_finish'],
+                    'jemput' => $respItem['lokasi_jemput'],
+                    'tujuan' => $respItem['lokasi_tujuan'],
+                    'ketr' => $respItem['ketr'],
+                    'jns_order' => $array_data['jns_order'],
+                    'jml_order' => $array_data['jumlah'],
+                    'transmisi' => $array_data['jenis_transmisi'],
+                    'warna' => $array_data['warna'],
+                    'hrg_sewa_total' => $respItem['total_hrg_sewa'],
+                    'jns_byr' => $array_data['jenis_pembayaran'],
+                    'tempo_byr' => $array_data['tempo_bayar'],
+                    'catatan_byr' => $array_data['catatan'],
+                    'voucher' => $array_data['voucher'],
+                    'jsonString' => $array_data['list_plgn'],
+                ];
+                // echo json_encode($respItemArr);
+                
+                $curlOpt = array_merge($curlOpt, $data);
+                if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'submit_order_2b.php');
+            
+            } else {
+
+                echo json_encode($data); //{"kode":"23050001AV0001","jenis_transmisi":"Manual","warna":"Hitam","jumlah":"1","nama":"Galih Pratama","no_hp":"0876543210","nik":"1234567","note":"ini note","jenis_pembayaran":"1","catatan":"ini catatan","voucher":"ini voucher"}
+                
+            }
+
         }
 
         // $caller = $_POST['caller'];

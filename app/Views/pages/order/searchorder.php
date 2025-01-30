@@ -44,8 +44,7 @@
   $(function () {
     const baseUrlImg = "<?= base_url('proxy.php?url=' . $_ENV['API_BASEURL'] . 'images/') ?>";
     $('#exampleModal').on('show.bs.modal', function (e) {
-        console.log(e.relatedTarget.dataset.item);
-                
+        // console.log(e.relatedTarget.dataset.item);                
         // get data-item
         var item = JSON.parse(e.relatedTarget.dataset.item);
         console.log(item, '52_item');
@@ -126,7 +125,7 @@
             const parseResponse = JSON.parse(response);
             console.log(parseResponse.jenis_pembayaran, '_jenis_pembayaran');
 
-            var html = '<div class="table-responsive">';
+            var html = '<div class="table-responsive mb-3">';
             html += '<table class="table table-bordered">';
             html += '<tbody>';
             html += '<tr><th width="150">Tgl.Mulai</th><td>' + item.tgl_start + '</td></tr>';
@@ -146,13 +145,16 @@
             html += '</tbody>';
             html += '</table>';
             html += '</div>';
+            html += '<div class="mb-3"><p class="h6 lead">* Pastikan data order sudah benar</p></div>';
 
             // append form hidden
             const newForm = document.createElement('form'); // Create a new form
             newForm.method = 'POST';
             newForm.action = '<?= base_url('order/select-order') ?>';
             
-            newForm.innerHTML = '<input type="hidden" name="item" value="' + JSON.stringify(parseResponse) + '">'; // Add the hidden input
+            newForm.innerHTML = '<input type="hidden" name="item" value="' + encodeURIComponent(JSON.stringify(parseResponse)) + '">'; // Add the hidden input
+            newForm.innerHTML += '<input type="hidden" name="form_step" value="2">'; // Add the hidden input
+            newForm.innerHTML += '<div class="mb-3 align-items-center"><button type="submit" class="btn btn-primary btnConfirmOrder">Submit</button></div>'; // Add the hidden input
             // $('#formSearchOrder').append(newForm);
             
             $('#confirmModal .modal-body').html(html).append(newForm);
