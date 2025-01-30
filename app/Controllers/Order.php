@@ -223,20 +223,21 @@ class Order extends BaseController
                     'jns_bayar' => (string)$array_data['jenis_pembayaran'],
                     'tempo_bayar' => $array_data['tempo_bayar'],
                     'catatan_bayar' => $array_data['catatan'],
-                    'voucher' => $array_data['voucher'],
+                    'voucher' => substr($array_data['voucher'], 0, 10), //limit 10 karakter
                     'list_plgn' => json_encode($jsonString),
                 ];
                 // echo json_encode($respItemArr);
 
                 $curlOpt = array_merge($curlOpt, $respItemArr);
                 if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'submit_order_2b.php');
-                // echo json_encode($listData);
+                
                 if($listData['success'] == '1') {
                     // redirect to home
                     return redirect()->to('/')->with('success', 'Order berhasil dibuat');
                 } else {
                     // show error
-                    return redirect()->to('order/orderlayanan')->with('error', $listData['message']);                    
+                    echo json_encode($listData);
+                    // return redirect()->to('order/orderlayanan')->with('error', $listData['message']);
                 }
             
             } else {
