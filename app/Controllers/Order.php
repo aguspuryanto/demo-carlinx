@@ -229,9 +229,10 @@ class Order extends BaseController
                     'jsonString' => $array_data['list_plgn'],
                 ];
                 // echo json_encode($respItemArr);
-                
+
                 $curlOpt = array_merge($curlOpt, $data);
                 if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'submit_order_2b.php');
+                echo json_encode($listData); die();
             
             } else {
 
