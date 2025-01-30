@@ -230,7 +230,14 @@ class Order extends BaseController
 
                 $curlOpt = array_merge($curlOpt, $respItemArr);
                 if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'submit_order_2b.php');
-                echo json_encode($listData);
+                // echo json_encode($listData);
+                if($listData['success'] == '1') {
+                    // redirect to home
+                    return redirect()->to('/')->with('success', 'Order berhasil dibuat');
+                } else {
+                    // show error
+                    return redirect()->to('order/orderlayanan')->with('error', $listData['message']);                    
+                }
             
             } else {
 

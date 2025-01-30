@@ -2,6 +2,9 @@
     <!-- chart js areachart-->
     <div class="row justify-content-md-center text-center mb-4">
         <div class="col-12">
+            <!-- app\Views\pengaturan\_alert.php -->
+            <?php  $file = __DIR__ . '/../_alert.php'; include($file); ?>
+
             <div class="row">
                 <div class="col-4 col-md-4 col-lg-4">
                     <a href="<?= base_url('dashboard'); ?>" class="card shadow-sm mb-4">
