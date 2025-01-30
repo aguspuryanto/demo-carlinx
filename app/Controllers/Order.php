@@ -221,7 +221,7 @@ class Order extends BaseController
                     'warna' => $array_data['warna'],
                     'hrg_sewa_total' => $respItem['total_hrg_sewa'],
                     'jns_bayar' => (string)$array_data['jenis_pembayaran'],
-                    'tempo_byr' => $array_data['tempo_bayar'],
+                    'tempo_bayar' => $array_data['tempo_bayar'],
                     'catatan_byr' => $array_data['catatan'],
                     'voucher' => $array_data['voucher'],
                     'list_plgn' => json_encode($jsonString),
