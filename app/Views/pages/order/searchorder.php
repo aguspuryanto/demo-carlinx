@@ -154,7 +154,7 @@
             
             newForm.innerHTML = '<input type="hidden" name="item" value="' + encodeURIComponent(JSON.stringify(parseResponse)) + '">'; // Add the hidden input
             newForm.innerHTML += '<input type="hidden" name="form_step" value="2">'; // Add the hidden input
-            newForm.innerHTML += '<div class="mb-3 align-items-center"><button type="submit" class="btn btn-primary btnConfirmOrder">Submit</button></div>'; // Add the hidden input
+            newForm.innerHTML += '<div class="mb-3 align-items-center"><button type="submit" class="btn btn-primary w-100 btnConfirmOrder">Submit</button></div>'; // Add the hidden input
             // $('#formSearchOrder').append(newForm);
             
             $('#confirmModal .modal-body').html(html).append(newForm);

@@ -128,8 +128,8 @@ class Order extends BaseController
                 'kd_member' => $this->session->get('user')['kode'],
                 'kd_kota' => $data['kd_kota'],
                 'search' => '%' . $data['search'] . '%',
-                'tgl_start' => $data['tgl_start'],
-                'tgl_finish' => $data['tgl_finish'],
+                'tgl_start' => date('Y-m-d H:i', strtotime($data['tgl_start'] . ' ' . $data['jam_start'])),
+                'tgl_finish' => date('Y-m-d H:i', strtotime($data['tgl_finish'] . ' ' . $data['jam_finish'])),
                 'lokasi_jemput' => isset($data['lokasi_jemput']) ? $data['lokasi_jemput'] : '',
                 'lokasi_tujuan' => isset($data['lokasi_tujuan']) ? $data['lokasi_tujuan'] : '',
                 'jarak' => isset($data['jarak']) ? ($data['jarak']) : 0, //40.165 meter
