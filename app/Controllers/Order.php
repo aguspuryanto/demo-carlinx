@@ -217,7 +217,7 @@ class Order extends BaseController
                     'jemput' => $respItem['lokasi_jemput'],
                     'tujuan' => $respItem['lokasi_tujuan'],
                     'ketr' => $respItem['ketr'],
-                    'jns_order' => (int)$array_data['jns_order'],
+                    'jns_order' => (string)$array_data['jns_order'],
                     'jml_order' => $array_data['jumlah'],
                     'transmisi' => $array_data['jenis_transmisi'],
                     'warna' => $array_data['warna'],
@@ -230,7 +230,7 @@ class Order extends BaseController
                 ];
                 // echo json_encode($respItemArr);
 
-                $curlOpt = array_merge($curlOpt, $data);
+                $curlOpt = array_merge($curlOpt, $respItemArr);
                 if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'submit_order_2b.php');
                 echo json_encode($listData);
             
