@@ -232,7 +232,7 @@ class Order extends BaseController
 
                 $curlOpt = array_merge($curlOpt, $data);
                 if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'submit_order_2b.php');
-                echo json_encode($listData); die();
+                echo json_encode($listData);
             
             } else {
 
