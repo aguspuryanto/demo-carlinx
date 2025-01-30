@@ -21,3 +21,48 @@
     </li>
     <?php endforeach ?>
 </ul>
+
+<div class="d-none table-responsive d-sm-none d-md-none d-lg-block d-xl-block mt-3">
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">No</th>
+            <th scope="col">Images</th>
+            <th scope="col">Rental</th>
+            <th scope="col">Harga</th>
+            <th scope="col">Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php $no = 1; ?>
+        <?php foreach ($listData['result_unit_order'] as $item) : ?>
+            <tr>
+                <th scope="row"><?= $no++ ?></th>
+                <td>
+                    <img class="avatar avatar-lg" src="<?= getImage($_ENV['API_BASEURL'] . 'images/' . $item['path_foto']) ?>" style="width: 64px; height: 64px;" />
+                </td>
+                <td>
+                    <p class="fw-bold mb-0"><?= $item['nama'] ?></p>
+                    <p class="text-muted mb-0 fs-sm">Tahun <?= $item['tahun'] ?></p>
+                    <p class="text-muted mb-0 fs-sm"><?= $item['nama_rental'] ?></p>
+                    <p class="text-muted mb-0 fs-sm"><?= $item['kota_rental'] ?></p>
+                    <div class="d-flex">
+                        <span class="p-0 flex-fill"><i class="fa fa-star text-warning"></i> <?= $item['rating'] ?> | <?= $item['terjual'] ?> Terlayani</span>
+                    </div>
+                </td>
+                <td>
+                    <p class="mb-0 fs-sm">Rp <?= number_format($item['hrg_sewa'], 0, ',', '.') ?></p>
+                </td>
+                <td>
+                    <a href="#" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" data-item="<?= esc(json_encode($item)) ?>">
+                        <i class="fas fa-eye"></i>
+                    </a>
+                    <a href="#" class="btn btn-danger btn-delete">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                </td>
+            </tr>
+        <?php endforeach ?>
+    </tbody>
+</table>
+</div>

@@ -7,7 +7,7 @@
         <?php  $file = __DIR__ . '/../../_alert.php'; include($file); ?>
         
         <div class="row">
-            <div class="card p-0">
+            <div class="card">
                 <div class="card-header">
                     <h4><?= $title ?></h4>
                 </div>
