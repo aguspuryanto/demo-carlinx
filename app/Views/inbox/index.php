@@ -47,27 +47,59 @@
 <script>
     $(document).ready(function() {
         $('#addModal').on('show.bs.modal', function (e) {
-            // console.log(e.relatedTarget.dataset.id);
-            let idOrder = e.relatedTarget.dataset.id;
-            if(idOrder){
-                // get data-item
-                // var item = JSON.parse(e.relatedTarget.dataset.item);
-                // console.log(item, 'item');                
-                $.ajax({
-                    url: '<?= base_url('riwayat/') ?>' + idOrder,
-                    type: 'POST',
-                    data: {
-                        kd_site: kd_site,
-                        kd_kota: kd_kota
-                    },
-                    success: function(data) {
-                        console.log(data);
-                        location.reload();
-                    }
-                }); 
-            }
+            // Accessing the target element that triggered the modal
+            let triggerElement = e.relatedTarget;
+            if (triggerElement) {
+                // Accessing data-id and data-item
+                let idOrder = triggerElement.dataset.id;
+                let itemData = JSON.parse(triggerElement.dataset.item); // Decoding JSON
 
+                console.log('ID Order:', idOrder);
+                console.log('Item Data:', itemData);
+
+                var html = '<div class="table-responsive mb-3">';
+                html += '<p class="h6 lead p-2">Pesanan</p><table class="table table-borderless">';
+                html += '<tbody>';
+                html += '<tr><td width="150">Tgl.Mulai</td><td>' + itemData.tgl_start + '</td></tr>';
+                html += '<tr><td>Tgl.Selesai</td><td>' + itemData.tgl_finish + '</td></tr>';
+                html += '<tr><td>Tujuan</td><td>' + itemData.lokasi_tujuan + '</td></tr>';
+                html += '<tr><td>Unit</td><td>' + itemData.nama + '</td></tr>';
+                html += '<tr><td>Tahun</td><td>' + itemData.tahun + '</td></tr>';
+                html += '<tr><td>BBM</td><td>' + itemData.bbm + '</td></tr>';
+                html += '<tr><td>Transmisi</td><td>' + itemData.jenis_transmisi + '</td></tr>';
+                html += '<tr><td>Warna</td><td>' + itemData.warna + '</td></tr>';
+                html += '<tr><td>Jml.Order</td><td>' + itemData.jumlah + '</td></tr>';
+                html += '<tr><td>Include</td><td>' + (itemData.include ?? '-') + '</td></tr>';
+                html += '<tr><td>Biaya</td><td>Rp. ' + numberFormat(itemData.hrg_sewa) + '</td></tr>';
+                html += '<tr><td>Pembayaran</td><td>' + (itemData.jenis_pembayaran == '1' ? 'Tunai' : 'Mundur') + '</td></tr>';
+                html += '<tr><td>Catatan</td><td>' + (itemData.catatan ?? '-') + '</td></tr>';
+                html += '<tr><td>Voucher</td><td>' + (itemData.voucher ?? '-') + '</td></tr>';
+                html += '</tbody>';
+                html += '</table>';
+                html += '</div>';
+                html += '<div class="mb-3"><p class="h6 lead">* Pastikan data order sudah benar</p></div>';                
+
+                // append form hidden
+                const newForm = document.createElement('form'); // Create a new form
+                newForm.method = 'POST';
+                newForm.action = '#';
+                newForm.id = 'formInbox';
+                
+                newForm.innerHTML = '<div class="mb-3 align-items-center"><label class="form-label">Pelanggan</label><input type="text" name="pelanggan" class="form-control" id="pelanggan"></div>'; // Add the hidden input
+                // newForm.innerHTML += '<div class="mb-3 align-items-center"><button type="submit" class="btn btn-primary btnConfirmOrder">Submit</button></div>'; // Add the hidden input
+                
+                $('#addModal .modal-body').html(html).append(newForm);
+                $('#addModal').modal('show');
+            } else {
+                console.warn("Modal triggered without related target!");
+            }
         });
+
     });
+
+    // Helper function for number formatting
+    function numberFormat(number) {
+      return new Intl.NumberFormat('id-ID').format(number);
+    }
 </script>
 <?= $this->endSection() ?>
