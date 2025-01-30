@@ -193,15 +193,13 @@ class Order extends BaseController
                 $array_data['jns_order'] = 1;
                 $array_data['tempo_bayar'] = 0;
 
+                // list_plgn
                 $jsonString['values'] = [
                     'nama' => $array_data['nama'],
                     'no_hp' => $array_data['no_hp'],
                     'nik' => $array_data['nik'],
                     'note' => $array_data['note']
                 ];
-
-                $array_data['list_plgn'] = json_encode($jsonString);
-                // $resp = json_encode($array_data);
 
                 // Parsing ulang bagian "item" yang masih dalam format JSON string
                 $respItem = json_decode($array_data['item'], true);
@@ -226,13 +224,13 @@ class Order extends BaseController
                     'tempo_byr' => $array_data['tempo_bayar'],
                     'catatan_byr' => $array_data['catatan'],
                     'voucher' => $array_data['voucher'],
-                    'list_plgn' => $array_data['list_plgn'],
+                    'list_plgn' => json_encode($jsonString),
                 ];
                 echo json_encode($respItemArr);
 
                 $curlOpt = array_merge($curlOpt, $respItemArr);
-                if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'submit_order_2b.php');
-                echo json_encode($listData);
+                // if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'submit_order_2b.php');
+                // echo json_encode($listData);
             
             } else {
 
