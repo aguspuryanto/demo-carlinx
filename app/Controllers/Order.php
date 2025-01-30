@@ -196,7 +196,7 @@ class Order extends BaseController
                 // list_plgn
                 $jsonString['values'] = [
                     'nama' => $array_data['nama'],
-                    'no_hp' => $array_data['no_hp'],
+                    'nohp' => $array_data['no_hp'],
                     'nik' => $array_data['nik'],
                     'note' => $array_data['note']
                 ];

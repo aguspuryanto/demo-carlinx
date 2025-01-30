@@ -77,7 +77,7 @@ class Riwayat extends BaseController
             'listStatus' => $listStatus,
             'listGroup' => $listGroup,
             'listOrder' => $listOrder,
-            'listData' => ($listData['result_list_order']) ?? $listData
+            'listData' => $listData
         ]);
     }
 }

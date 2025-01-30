@@ -30,7 +30,7 @@ class Proses extends BaseController
 
         $listData   = [];
         $curlOpt    = [
-            'caller' => 'RIWAYAT', // default. INBOX, AKTIF, RIWAYAT
+            'caller' => 'AKTIF', // default. INBOX, AKTIF, RIWAYAT
             'kd_member' => $this->session->get('user')['kode']
         ];
 
@@ -68,8 +68,9 @@ class Proses extends BaseController
 
         if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'select_order_5.php');
         // echo json_encode($listData); die();
+
+        $newlistData = [];
         if($listData['success']=='1'){
-            $newlistData = [];
             foreach ($listData['result_list_order'] as $item) {
                 // echo $item['stat'];
                 if($item['stat']=='9') $newlistData[] = $item;
@@ -84,7 +85,7 @@ class Proses extends BaseController
             'listGroup' => $listGroup,
             'listOrder' => $listOrder,
             'newlistData' => $newlistData,
-            'listData' => ($listData['result_list_order']) ?? $listData
+            'listData' => $listData
         ]);
     }
 }
