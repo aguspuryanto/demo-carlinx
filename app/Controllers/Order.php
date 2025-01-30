@@ -241,25 +241,6 @@ class Order extends BaseController
             }
 
         }
-
-        // $caller = $_POST['caller'];
-        // $kd_member = $_POST['kd_member'];
-        // $kd_kota = $_POST['kd_kota'];
-        // select_unit_1.php
-
-        // $caller = $_POST['caller'];
-        // $kd_member = $_POST['kd_member'];
-        // $kd_kota = $_POST['kd_kota'];
-        // $search = $_POST['search'];
-        // select_unit_by_name_1.php
-
-        // $listData = getCurl($curlOpt, $this->ipAddress . 'select_detail_order_1.php');
-        // echo json_encode($listData);
-
-        // return view('pages/order/selectorder', [
-        //     'title' => 'Order Pelayanan',
-        //     'listData' => $listData
-        // ]);
     }
 
     public function lepasKunci() 
