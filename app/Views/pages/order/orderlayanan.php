@@ -4,7 +4,7 @@
 
     <!-- main page content -->
     <div class="main-container container">
-        <?php  //$file = __DIR__ . '/../../_alert.php'; include($file); ?>
+        <?php  $file = __DIR__ . '/../../_alert.php'; include($file); ?>
         
         <div class="row">
             <div class="card p-0">
