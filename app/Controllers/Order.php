@@ -224,7 +224,7 @@ class Order extends BaseController
                     'tempo_bayar' => $array_data['tempo_bayar'],
                     'catatan_bayar' => $array_data['catatan'],
                     'voucher' => substr($array_data['voucher'], 0, 10), //limit 10 karakter
-                    'list_plgn' => json_encode($jsonString),
+                    'list_plgn' => ($jsonString),
                 ];
                 // echo json_encode($respItemArr);
 
