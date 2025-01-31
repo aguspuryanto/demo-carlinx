@@ -1,6 +1,6 @@
 
     <!-- Modal -->
-    <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="false">
+    <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="false" aria-modal="true">
     <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-header">
@@ -10,9 +10,6 @@
         </div>
         <div class="modal-body">
             ...
-        </div>
-        <div class="modal-footer justify-content-between">
-            <button type="button" class="btn btn-primary">Save changes</button>
         </div>
         </div>
     </div>
