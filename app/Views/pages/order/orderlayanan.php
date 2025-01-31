@@ -348,7 +348,7 @@
               }
             }
 
-            let roundedDown = Math.floor(parseFloat(totJarak));
+            let roundedDown = Math.round(parseFloat(totJarak));
             return roundedDown; // return in kilometers
             
         } catch (error) {
