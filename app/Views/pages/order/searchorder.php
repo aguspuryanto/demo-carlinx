@@ -78,7 +78,7 @@
             style: 'currency',
             currency: 'IDR',
             minimumFractionDigits: 0
-        }).format(item.hrg_sewa).replace('Rp', 'Rp ');
+        }).format(item.total_hrg_sewa).replace('Rp', 'Rp ');
         
         $(this).find('.modal-footer p#total').text(formatRupiah);
 

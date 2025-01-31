@@ -70,7 +70,7 @@
                 html += '<tr><td>Warna</td><td>' + itemData.warna + '</td></tr>';
                 html += '<tr><td>Jml.Order</td><td>' + itemData.jml_order + '</td></tr>';
                 html += '<tr><td>Include</td><td>' + (itemData.include ?? '-') + '</td></tr>';
-                html += '<tr><td>Biaya</td><td>Rp. ' + numberFormat(itemData.hrg_sewa) + '</td></tr>';
+                html += '<tr><td>Biaya</td><td>Rp. ' + numberFormat(itemData.hrg_sewa_total) + '</td></tr>';
                 html += '<tr><td>Pembayaran</td><td>' + (itemData.jenis_pembayaran == '1' ? 'Tunai' : 'Mundur') + '</td></tr>';
                 html += '<tr><td>Catatan</td><td>' + (itemData.catatan_byr ?? '-') + '</td></tr>';
                 html += '<tr><td>Voucher</td><td>' + (itemData.voucher ?? '-') + '</td></tr>';
