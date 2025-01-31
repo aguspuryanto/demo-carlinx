@@ -348,7 +348,7 @@
               }
             }
 
-            return totJarak;
+            return Math.floor(parseFloat(totJarak)); // return in kilometers
             
         } catch (error) {
             console.error('Error calculating route:', error);
