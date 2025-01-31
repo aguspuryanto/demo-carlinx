@@ -85,7 +85,7 @@
                 // newForm.action = '';
                 
                 newForm.innerHTML = '<div class="mb-3 align-items-center"><label class="form-label">Pelanggan</label><input type="text" name="pelanggan" class="form-control" id="pelanggan"></div>'; // Add the hidden input
-                newForm.innerHTML += '<div class="mb-3 align-items-center"><button type="submit" class="btn btn-primary btnConfirmOrder">Submit</button></div>'; // Add the hidden input
+                newForm.innerHTML += '<div class="mb-3 align-items-center"><button type="submit" class="btn btn-primary w-100 btnConfirmOrder">Submit</button></div>'; // Add the hidden input
                 
                 $('#addModal .modal-body').html(html).append(newForm);
                 $('#addModal').modal('show');

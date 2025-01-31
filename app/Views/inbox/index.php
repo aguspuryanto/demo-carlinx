@@ -70,7 +70,7 @@
                 html += '<tr><td>Warna</td><td>' + itemData.warna + '</td></tr>';
                 html += '<tr><td>Jml.Order</td><td>' + itemData.jml_order + '</td></tr>';
                 html += '<tr><td>Include</td><td>' + (itemData.include ?? '-') + '</td></tr>';
-                html += '<tr><td>Biaya</td><td>Rp. ' + numberFormat(itemData.hrg_sewa_total) + '</td></tr>';
+                html += '<tr><td>Biaya</td><td>Rp. ' + numberFormat(itemData.hrg_sewa) + '</td></tr>';
                 html += '<tr><td>Pembayaran</td><td>' + (itemData.jenis_pembayaran == '1' ? 'Tunai' : 'Mundur') + '</td></tr>';
                 html += '<tr><td>Catatan</td><td>' + (itemData.catatan_byr ?? '-') + '</td></tr>';
                 html += '<tr><td>Voucher</td><td>' + (itemData.voucher ?? '-') + '</td></tr>';
@@ -82,11 +82,10 @@
                 // append form hidden
                 const newForm = document.createElement('form'); // Create a new form
                 newForm.method = 'POST';
-                newForm.action = '#';
-                newForm.id = 'formInbox';
+                // newForm.action = '';
                 
                 newForm.innerHTML = '<div class="mb-3 align-items-center"><label class="form-label">Pelanggan</label><input type="text" name="pelanggan" class="form-control" id="pelanggan"></div>'; // Add the hidden input
-                // newForm.innerHTML += '<div class="mb-3 align-items-center"><button type="submit" class="btn btn-primary btnConfirmOrder">Submit</button></div>'; // Add the hidden input
+                newForm.innerHTML += '<div class="mb-3 align-items-center"><button type="submit" class="btn btn-primary w-100 btnConfirmOrder">Batal</button></div>'; // Add the hidden input
                 
                 $('#addModal .modal-body').html(html).append(newForm);
                 $('#addModal').modal('show');
