@@ -145,9 +145,9 @@ class Order extends BaseController
                 'jml_bln' => isset($data['jml_bln']) ? $data['jml_bln'] : 0
             ];
 
-            // echo json_encode($data); //{"jns_order":1,"kd_member":"ADM00001","kd_kota":"3578","search":"%avanza%","tgl_1":"28-01-2025","tgl_2":"28-01-2025","lokasi_jemput":"Indonesia, 60261, Surabaya","lokasi_tujuan":"Indonesia, 65119, Malang Kota","jarak":"193.999","is_bbm":1,"is_makan":0,"is_hotel":0,"ketr":"","is_antar":0,"is_ambil":0,"drop_awal":0,"drop_akhir":0,"tg_jwb":"","jml_bln":0}
-
             $curlOpt = array_merge($curlOpt, $data);
+            // echo json_encode($curlOpt); die();
+
             if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'search_entry_order_7.php');
             // echo json_encode($listData);
         }
