@@ -61,7 +61,7 @@
                 var html = '<div class="table-responsive mb-3">';
                 // tgl order, jika stat=9 selesai
                 if(itemData.stat=='9') {
-                    html += '<div class="mb-3"><p class="h6 lead p-2">Tgl Order</p><div class="d-flex justify-content-between"><span>' + itemData.tgl_order + '</span><span>Lihat bukti pesanan</span></div></div>';
+                    html += '<div class="mb-3"><p class="h6 lead p-2">Tgl Order</p><div class="d-flex justify-content-between"><span>' + itemData.tgl_order + '</span><span><a href="#">Lihat bukti pesanan</a></span></div></div>';
                 }
 
                 html += '<p class="h6 lead p-2">Pesanan</p><table class="table table-borderless">';
@@ -116,6 +116,7 @@
                     html += '<div class="mb-3"><p class="h6 lead">Dokumen Serah Terima</p>';
                     html += '<div class="row"><div class="col"><img src="' + baseUrlImg + itemData.foto_serah + '" alt="Foto Serah Terima"></div><div class="col"><img src="' + baseUrlImg + itemData.foto_terima + '" alt="Foto Terima"></div></div>';
                     html += '</div>';
+                    html += '<div class="mb-3"><input type="checkbox" id="setuju" checked> Pihak Rental telah menyetuji dan menerima pengembalian Unit</div>';
                 } else {
                     html += '<div class="mb-3"><p class="h6 lead">Alasan Pembatalan</p><span>' + (itemData.alasan_batal ?? '-') + '</span></div>';
                 }
