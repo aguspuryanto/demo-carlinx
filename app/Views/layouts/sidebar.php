@@ -65,7 +65,7 @@
                                 <div class="arrow"><i class="bi bi-plus plus"></i> <i class="bi bi-dash minus"></i>
                                 </div>
                             </a>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu <?= uri_string() == 'akun' || uri_string() == 'pengaturan' ? 'show' : '' ?>">
                                 <li>
                                     <a class="dropdown-item nav-link <?= uri_string() == 'akun' ? 'active' : '' ?>" href="<?= base_url('akun') ?>">
                                         <div class="avatar avatar-40 rounded icon"><i class="bi bi-calendar2"></i></div>
