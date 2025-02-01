@@ -65,8 +65,8 @@ class Riwayat extends BaseController
 
         // grp_penyewa
         $listGroup = [
-            '2' => 'In',
-            '1' => 'Out',
+            '2' => 'In', //vendor
+            '1' => 'Out', //pemesan
         ];
 
         // jns_order
