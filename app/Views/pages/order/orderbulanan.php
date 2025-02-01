@@ -37,11 +37,6 @@
 <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-clustering.js"></script>
 <script>
   $(function () {
-    // Initialize the platform object:
-    const platform = new H.service.Platform({
-      apikey: "<?= $_ENV['API_KEY_HERE'] ?>"
-    });
-
     var listKota = '<?= json_encode($listKota) ?>';
     var today = new Date(); // - 1 day
     today.setDate(today.getDate() - 1);

@@ -62,9 +62,9 @@
                         <div class="col-auto">
                             <label for="jumlah" class="visually-hidden">Password</label>
                             <div class="input-group">
-                                <button class="btn btn-outline-secondary" type="button" id="decrement">-</button>
+                                <button class="btn btn-outline-secondary button-minus" type="button">-</button>
                                 <input type="text" name="jumlah" class="form-control" id="jumlah" value="1">
-                                <button class="btn btn-outline-secondary" type="button" id="increment">+</button>
+                                <button class="btn btn-outline-secondary button-plus" type="button">+</button>
                             </div>
                         </div>
                     </div>
@@ -72,22 +72,34 @@
                 <hr>
                 <div class="mb-0 data_order">
                     <p class="lead">Data Pemesanan</p>
-                    <div class="mb-3">
-                        <label for="nama" class="form-label">Nama</label>
-                        <input type="text" name="nama" class="form-control" id="nama" placeholder="Masukkan nama" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="no_hp" class="form-label">No HP</label>
-                        <input type="text" name="no_hp" class="form-control" id="no_hp" placeholder="Masukkan no. hp" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="nik" class="form-label">NIK</label>
-                        <input type="text" name="nik" class="form-control" id="nik" placeholder="Masukkan NIK" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="note" class="form-label">Note</label>
-                        <input type="text" name="note" class="form-control" id="note" placeholder="Masukkan note">
-                    </div>
+                    <ul class="list-group" id="data_pemesanan">
+                    <li class="list-group-item">
+                        <div class="mb-3 row">
+                            <label for="nama" class="col-sm-2 col-form-label">Nama</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="nama[]" class="form-control" id="nama" placeholder="Masukkan nama" required>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="no_hp" class="col-sm-2 col-form-label">No HP</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="no_hp[]" class="form-control" id="no_hp" placeholder="Masukkan no. hp" required>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="nik" class="col-sm-2 col-form-label">NIK</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="nik[]" class="form-control" id="nik" placeholder="Masukkan NIK" required>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <label for="note" class="col-sm-2 col-form-label">Note</label>
+                            <div class="col-sm-10">
+                                <input type="text" name="note[]" class="form-control" id="note" placeholder="Masukkan note">
+                            </div>
+                        </div>
+                    </li>
+                    </ul>
                 </div>
                 <hr>
                 <div id="pembayaran" class="mb-3">

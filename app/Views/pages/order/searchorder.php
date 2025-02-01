@@ -97,6 +97,52 @@
         }
     });
 
+    function incrementValue(e) {
+        e.preventDefault();
+        var currentVal = parseInt($('#jumlah').val(), 10);
+        if (!isNaN(currentVal)) {
+            $('#jumlah').val(currentVal + 1);
+        }
+    }
+
+    function decrementValue(e) {
+        e.preventDefault();
+        var currentVal = parseInt($('#jumlah').val(), 10);
+        if (!isNaN(currentVal) && currentVal > 1) {
+            $('#jumlah').val(currentVal - 1);
+        }
+    }
+
+    $('.input-group').on('click', '.button-plus', function(e) {
+        e.preventDefault();
+        console.log('plus');
+        incrementValue(e);
+
+        // clone <li class="list-group-item">
+        const listGroup = document.querySelector("#data_pemesanan");
+        const lastItem = listGroup.lastElementChild;
+        // console.log(lastItem, '124_lastItem');
+        if (lastItem) {
+            const newItem = lastItem.cloneNode(true);
+            listGroup.appendChild(newItem);
+        }
+    });
+
+    $('.input-group').on('click', '.button-minus', function(e) {
+        e.preventDefault();
+        console.log('minus');
+        decrementValue(e);
+
+        // remove <li class="list-group-item">
+        const listGroup = document.querySelector("#data_pemesanan");
+        const lastItem = listGroup.lastElementChild;
+        // console.log(lastItem, '139_lastItem');
+        // Only remove if there's more than one item in the list
+        if (lastItem && listGroup.children.length > 1) {
+            listGroup.removeChild(lastItem);
+        }
+    });
+
     // formSearchOrder
     $('.btnSubmit').on('click', function(e) {
       e.preventDefault();

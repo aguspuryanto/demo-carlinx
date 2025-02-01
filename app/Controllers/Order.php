@@ -254,6 +254,8 @@ class Order extends BaseController
     {    
         // echo 'Lepas Kunci';
         $view_page = 'pages/order/lepaskunci';
+        $jns_order = 2;
+
         $listData   = [];
         $listKota   = [];
         $listUnit   = [];
@@ -268,7 +270,7 @@ class Order extends BaseController
 
             // search_entry_order_7.php (jns_order: 2)
             $data = [
-                'jns_order' => isset($data['jns_order']) ? $data['jns_order'] : 2,
+                'jns_order' => isset($data['jns_order']) ? $data['jns_order'] : $jns_order,
                 'kd_member' => $this->session->get('user')['kode'],
                 'kd_kota' => $data['kd_kota'],
                 'search' => '%' . $data['search'] . '%',
@@ -316,7 +318,7 @@ class Order extends BaseController
 
         return view($view_page, [
             'title' => 'Order Lepas Kunci',
-            'jns_order' => 2,
+            'jns_order' => $jns_order,
             'listData' => $listData,
             'listKota' => $listKota,
             'listUnit' => $listUnit
@@ -327,6 +329,8 @@ class Order extends BaseController
     {
         // echo 'Order Bulanan';
         $view_page = 'pages/order/orderbulanan';
+        $jns_order = 4;
+
         $listData   = [];
         $listKota   = [];
         $curlOpt    = [
@@ -338,12 +342,12 @@ class Order extends BaseController
             $data = $this->request->getPost();
             // echo json_encode($data); die();
             $data = [
-                'jns_order' => isset($data['jns_order']) ? $data['jns_order'] : 3,
+                'jns_order' => isset($data['jns_order']) ? $data['jns_order'] : $jns_order,
                 'kd_member' => $this->session->get('user')['kode'],
                 'kd_kota' => $data['kd_kota'],
                 'search' => '%' . $data['search'] . '%',
-                'tgl_1' => $data['tgl_start'],
-                'tgl_2' => $data['tgl_finish'],
+                'tgl_start' => date('Y-m-d H:i', strtotime($data['tgl_start'] . ' ' . $data['jam_start'])),
+                // 'tgl_finish' => date('Y-m-d H:i', strtotime($data['tgl_finish'] . ' ' . $data['jam_finish'])),
                 'lokasi_jemput' => isset($data['lokasi_jemput']) ? $data['lokasi_jemput'] : '',
                 'lokasi_tujuan' => isset($data['lokasi_tujuan']) ? $data['lokasi_tujuan'] : '',
                 'jarak' => isset($data['jarak']) ? format_km($data['jarak']) : 0, //40.165 meter
@@ -361,6 +365,8 @@ class Order extends BaseController
 
             // echo json_encode($data); //die();
             $curlOpt = array_merge($curlOpt, $data);
+            // echo json_encode($curlOpt); die();
+
             if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'search_entry_order_7.php');
             // echo json_encode($listData); die();
 
@@ -371,6 +377,7 @@ class Order extends BaseController
 
         return view($view_page, [
             'title' => 'Order Bulanan',
+            'jns_order' => $jns_order,
             'listData' => $listData,
             'listKota' => $listKota
         ]);

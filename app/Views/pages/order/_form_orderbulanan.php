@@ -77,7 +77,7 @@ helper('form');
     <input type="text" class="form-control" name="search" id="unitName" placeholder="Nama Unit" style="text-transform: uppercase">
   </div>
 
-  <input type="hidden" name="jns_order" value="2">
+  <input type="hidden" name="jns_order" value="<?=$jns_order ?>">
 
   <!-- Tombol -->
   <button type="submit" class="btn btn-primary w-100">MULAI PENCARIAn</button>

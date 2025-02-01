@@ -81,7 +81,15 @@ function sendWhatsappApi($phone, $message) {
 }
 
 function getImage($url) {
-    // return "http://localhost/proxy.php?url=" . urlencode($url);
-	return base_url() . 'proxy.php?url=' . urlencode($url);
-}
+    if (empty($url)) {
+        return false;
+    }
 
+    // Check if image exists using get_headers
+    $headers = @get_headers($url);
+    if (!$headers || strpos($headers[0], '200') === false) {
+        return false;
+    }
+
+    return base_url() . 'proxy.php?url=' . urlencode($url);
+}
