@@ -59,7 +59,7 @@
                         </li>
 
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle <?= uri_string() == 'akun' || uri_string() == 'pengaturan' ? 'show' : '' ?>" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle <?= uri_string() == 'akun' || uri_string() == 'pengaturan' ? 'show' : '' ?>" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="<?= uri_string() == 'akun' || uri_string() == 'pengaturan' ? 'true' : 'false' ?>">
                                 <div class="avatar avatar-40 rounded icon"><i class="bi bi-person"></i></div>
                                 <div class="col">Akun</div>
                                 <div class="arrow"><i class="bi bi-plus plus"></i> <i class="bi bi-dash minus"></i>
