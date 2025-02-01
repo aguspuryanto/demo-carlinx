@@ -66,17 +66,21 @@
                                 </div>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item nav-link" href="<?= base_url('akun') ?>">
+                                <li>
+                                    <a class="dropdown-item nav-link <?= uri_string() == 'akun' ? 'active' : '' ?>" href="<?= base_url('akun') ?>">
                                         <div class="avatar avatar-40 rounded icon"><i class="bi bi-calendar2"></i></div>
                                         <div class="col">Profile</div>
                                         <div class="arrow"><i class="bi bi-chevron-right"></i></div>
-                                    </a></li>
-                                <li><a class="dropdown-item nav-link" href="<?= base_url('pengaturan') ?>">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item nav-link <?= uri_string() == 'pengaturan' ? 'active' : '' ?>" href="<?= base_url('pengaturan') ?>">
                                         <div class="avatar avatar-40 rounded icon"><i class="bi bi-gear"></i>
                                         </div>
                                         <div class="col">Settings</div>
                                         <div class="arrow"><i class="bi bi-chevron-right"></i></div>
-                                    </a></li>
+                                    </a>
+                                </li>
                             </ul>
                         </li>
                         <li class="nav-item">
