@@ -11,9 +11,6 @@
         <div class="modal-body">
             ...
         </div>
-        <div class="modal-footer justify-content-between">
-            <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
         </div>
     </div>
     </div>

@@ -21,13 +21,13 @@
                         <?php foreach ($listData['result_list_order'] as $item) : ?>
                             <li class="list-group-item">
                             <a href="#" class="list-group-item-action" data-bs-toggle="modal" data-bs-target="#addModal" data-id="<?= $item['id_order'] ?>" data-item="<?= esc(json_encode($item)) ?>">
-                                <h6 class="mb-2"><span class="badge <?=($item['grp_penyewa']=='1') ? 'bg-danger' : 'bg-info';?>"><?= $listGroup[$item['grp_penyewa']] ?></span> <span class="badge bg-secondary"><?= $listOrder[$item['jns_order']] ?></span> <small><?= date('d-m-Y', strtotime($item['tgl_order'])) ?></small></h6>
+                                <div class="mb-2"><span class="badge <?=($item['grp_penyewa']=='1') ? 'bg-danger' : 'bg-info';?>"><?= $listGroup[$item['grp_penyewa']] ?></span> <span class="badge bg-secondary"><?= $listOrder[$item['jns_order']] ?></span> <small><?= date('d-m-Y', strtotime($item['tgl_order'])) ?></small> <small class="<?=($item['stat']=='9') ? 'text-success' : 'text-danger'; ?> pull-right"><?= $listStatus[$item['stat']]; ?></small></div>
                                 <div class="d-flex w-100 justify-content-between">
                                     <h6 class="mb-0"><?= $item['nama_unit'] ?></h6>
-                                    <small class="<?=($item['stat']=='9') ? 'text-success' : 'text-danger'; ?> text-right"><?= $listStatus[$item['stat']] . $item['stat']; ?> <br>cs: <?= $item['nama_cs'] ?></small>
+                                    <small class="<?=($item['stat']=='9') ? 'text-success' : 'text-danger'; ?> text-right">cs: <?= $item['nama_member'] ?></small>
                                 </div>
                                 <p class="mb-0">Rp. <?= number_format($item['hrg_sewa_total'], 0, ',', '.') ?></p>
-                                <small>*dipesan oleh: <?= $item['rental_penyewa'] ?></small>
+                                <small><span class="badge <?=$item['liq'] == '2' ? 'bg-warning text-warning' : 'bg-success text-success'?>">*</span> vendor: <?= $item['rental_tujuan'] ?></small>
                             </a>
                             </li>
                         <?php endforeach; ?>

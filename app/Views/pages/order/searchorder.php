@@ -43,6 +43,7 @@
 <script>
   $(function () {
     const baseUrlImg = "<?= base_url('proxy.php?url=' . $_ENV['API_BASEURL'] . 'images/') ?>";
+    const jns_order = '<?= $jns_order ?>';  
     $('#exampleModal').on('show.bs.modal', function (e) {
         // console.log(e.relatedTarget.dataset.item);                
         // get data-item
@@ -78,7 +79,7 @@
             style: 'currency',
             currency: 'IDR',
             minimumFractionDigits: 0
-        }).format(item.total_hrg_sewa).replace('Rp', 'Rp ');
+        }).format(jns_order == '2' ? item.hrg_sewa : item.total_hrg_sewa).replace('Rp', 'Rp ');
         
         $(this).find('.modal-footer p#total').text(formatRupiah);
 
