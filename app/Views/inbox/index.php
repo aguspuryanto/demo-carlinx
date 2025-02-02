@@ -57,27 +57,63 @@
                 console.log('ID Order:', idOrder);
                 console.log('Item Data:', itemData);
 
-                var html = '<div class="table-responsive mb-3">';
-                html += '<p class="h6 lead p-2">Pesanan</p><table class="table table-borderless">';
+                // var html = '<div class="table-responsive mb-3">';
+                // html += '<p class="h6 lead p-2">Pesanan</p><table class="table table-borderless">';
+                // html += '<tbody>';
+                // html += '<tr><td width="150">Tgl.Mulai</td><td>' + itemData.tgl_start + '</td></tr>';
+                // html += '<tr><td>Tgl.Selesai</td><td>' + itemData.tgl_finish + '</td></tr>';
+                // html += '<tr><td>Tujuan</td><td>' + itemData.tujuan + '</td></tr>';
+                // html += '<tr><td>Unit</td><td>' + itemData.nama_unit + '</td></tr>';
+                // html += '<tr><td>Tahun</td><td>' + itemData.tahun + '</td></tr>';
+                // html += '<tr><td>BBM</td><td>' + itemData.bbm + '</td></tr>';
+                // html += '<tr><td>Transmisi</td><td>' + itemData.transmisi + '</td></tr>';
+                // html += '<tr><td>Warna</td><td>' + itemData.warna + '</td></tr>';
+                // html += '<tr><td>Jml.Order</td><td>' + itemData.jml_order + '</td></tr>';
+                // html += '<tr><td>Include</td><td>' + (itemData.include ?? '-') + '</td></tr>';
+                // html += '<tr><td>Biaya</td><td>Rp. ' + numberFormat(itemData.hrg_sewa) + '</td></tr>';
+                // html += '<tr><td>Pembayaran</td><td>' + (itemData.jenis_pembayaran == '1' ? 'Tunai' : 'Mundur') + '</td></tr>';
+                // html += '<tr><td>Catatan</td><td>' + (itemData.catatan_byr ?? '-') + '</td></tr>';
+                // html += '<tr><td>Voucher</td><td>' + (itemData.voucher ?? '-') + '</td></tr>';
+                // html += '</tbody>';
+                // html += '</table>';
+                // html += '</div>';
+                // html += '<div class="mb-3"><p class="h6 lead">* Pastikan data order sudah benar</p></div>';
+
+                var textNote = '';
+                if(itemData.stat == '1'){
+                    textNote = 'Menunggu respon dari rental';
+                } else if(itemData.stat == '2'){
+                    textNote = 'Pastikan data order sudah benar';
+                }
+
+                var html = '<div class="table-responsive mb-0">';
+                html += '<table class="table table-bordered">';
                 html += '<tbody>';
-                html += '<tr><td width="150">Tgl.Mulai</td><td>' + itemData.tgl_start + '</td></tr>';
-                html += '<tr><td>Tgl.Selesai</td><td>' + itemData.tgl_finish + '</td></tr>';
-                html += '<tr><td>Tujuan</td><td>' + itemData.tujuan + '</td></tr>';
-                html += '<tr><td>Unit</td><td>' + itemData.nama_unit + '</td></tr>';
-                html += '<tr><td>Tahun</td><td>' + itemData.tahun + '</td></tr>';
-                html += '<tr><td>BBM</td><td>' + itemData.bbm + '</td></tr>';
-                html += '<tr><td>Transmisi</td><td>' + itemData.transmisi + '</td></tr>';
-                html += '<tr><td>Warna</td><td>' + itemData.warna + '</td></tr>';
-                html += '<tr><td>Jml.Order</td><td>' + itemData.jml_order + '</td></tr>';
-                html += '<tr><td>Include</td><td>' + (itemData.include ?? '-') + '</td></tr>';
-                html += '<tr><td>Biaya</td><td>Rp. ' + numberFormat(itemData.hrg_sewa) + '</td></tr>';
-                html += '<tr><td>Pembayaran</td><td>' + (itemData.jenis_pembayaran == '1' ? 'Tunai' : 'Mundur') + '</td></tr>';
-                html += '<tr><td>Catatan</td><td>' + (itemData.catatan_byr ?? '-') + '</td></tr>';
-                html += '<tr><td>Voucher</td><td>' + (itemData.voucher ?? '-') + '</td></tr>';
+                html += '<tr><th width="150">Tgl.Mulai</th><td>' + itemData.tgl_start + '</td></tr>';
+                html += '<tr><th>Tgl.Selesai</th><td>' + itemData.tgl_finish + '</td></tr>';
+                if(itemData.jns_order == '4'){
+                    html += '<tr><th>Jumlah Bulan</th><td>' + (itemData.jml_bln) + '</td></tr>';
+                } else {
+                    html += '<tr><th>Tujuan</th><td>' + itemData.lokasi_tujuan + '</td></tr>';
+                }
+                html += '<tr><th>Unit</th><td>' + itemData.nama_unit + '</td></tr>';
+                html += '<tr><th>Tahun</th><td>' + itemData.tahun + '</td></tr>';
+                html += '<tr><th>BBM</th><td>' + itemData.bbm + '</td></tr>';
+                html += '<tr><th>Transmisi</th><td>' + (itemData.transmisi) + '</td></tr>';
+                html += '<tr><th>Warna</th><td>' + (itemData.warna) + '</td></tr>';
+                html += '<tr><th>Jml.Order</th><td>' + (itemData.jml_order) + '</td></tr>';
+                html += '<tr><th>Include</th><td>' + (itemData.ketr ?? '-') + '</td></tr>';
+                html += '<tr><th>Biaya</th><td>Rp. ' + numberFormat(itemData.hrg_sewa) + '</td></tr>';
+                html += '<tr><th>Pembayaran</th><td>' + (itemData.jns_byr == '1' ? 'Lunas' : 'Mundur') + '</td></tr>';
+                html += '<tr><th>Catatan</th><td>' + (itemData.catatan_byr ?? '-') + '</td></tr>';
+                html += '<tr><th>Voucher</th><td>' + (itemData.voucher ?? '-') + '</td></tr>';
+                if(itemData.jns_order == '4'){
+                    html += '<tr><th>Penanggung Jawab</th><td>' + (itemData.tg_jwb == '1' ? 'Rental Pemesan' : 'Pelanggan') + '</td></tr>';
+                }
                 html += '</tbody>';
                 html += '</table>';
                 html += '</div>';
-                html += '<div class="mb-3"><p class="h6 lead">* Pastikan data order sudah benar</p></div>';                
+                html += '<div class="mb-3"><p class="h6">* ' + textNote + '</p></div>';
 
                 // append form hidden
                 const newForm = document.createElement('form'); // Create a new form
@@ -88,7 +124,7 @@
                 newForm.innerHTML = '<div class="mb-3 align-items-center"><input type="hidden" name="id_order" class="form-control" id="id_order" value="' + idOrder + '"></div>'; // Add the hidden input with value
                 newForm.innerHTML += '<div class="mb-3 align-items-center"><input type="hidden" name="stat_ori" class="form-control" id="stat_ori" value="' + itemData.stat + '"></div>'; // Add the hidden input with value
                 newForm.innerHTML += '<div class="mb-3 align-items-center"><label class="form-label">Pelanggan</label><input type="text" name="nama_penyewa" class="form-control" id="nama_penyewa" value="' + (itemData.nama_penyewa || '') + '"></div>'; // Add input with value
-                newForm.innerHTML += '<div class="mb-3 align-items-center"><button type="submit" class="btn btn-primary w-100 btnConfirmOrder">Konfirmasi Order</button></div>'; // Changed button text
+                newForm.innerHTML += '<div class="mb-3 align-items-center"><button type="submit" class="btn btn-primary w-100 btnConfirmOrder">Batal</button></div>'; // Changed button text
                 
                 $('#addModal .modal-body').html(html).append(newForm);
                 $('#addModal').modal('show');

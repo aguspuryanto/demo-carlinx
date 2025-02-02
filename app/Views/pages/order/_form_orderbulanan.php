@@ -34,11 +34,11 @@ helper('form');
         </div>
         <div class="col-6">
             <div class="input-group w-auto justify-content-end align-items-center">
-                <button type="button" class="button-minus border rounded-circle  icon-shape icon-sm mx-1 " data-field="lama_sewa">
+                <button type="button" class="button-minus border rounded-circle  icon-shape icon-sm mx-1 " data-field="jml_bln">
                     <i class="fa fa-minus"></i>
                 </button>
-                <input type="number" step="1" max="10" value="1" name="lama_sewa" class="quantity-field border-0 text-center w-25" id="lamaSewa">
-                <button type="button" class="button-plus border rounded-circle  icon-shape icon-sm mx-1 " data-field="lama_sewa">
+                <input type="number" step="1" max="10" value="1" name="jml_bln" class="quantity-field border-0 text-center w-25" id="jmlBulan">
+                <button type="button" class="button-plus border rounded-circle  icon-shape icon-sm mx-1 " data-field="jml_bln">
                     <i class="fa fa-plus"></i>
                 </button>
             </div>
@@ -50,11 +50,11 @@ helper('form');
   <div class="mb-3">
     <label class="form-label d-block">Penanggung Jawab</label>
     <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="penanggung_jawab" id="inlineRadio1" value="1" checked>
+      <input class="form-check-input" type="radio" name="tg_jwb" id="inlineRadio1" value="1" checked>
       <label class="form-check-label" for="inlineRadio1">Rental Pemesan</label>
     </div>
     <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="penanggung_jawab" id="inlineRadio2" value="2">
+      <input class="form-check-input" type="radio" name="tg_jwb" id="inlineRadio2" value="2">
       <label class="form-check-label" for="inlineRadio2">Pelanggan</label>
     </div>
   </div>

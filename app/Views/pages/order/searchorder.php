@@ -177,18 +177,25 @@
             html += '<tbody>';
             html += '<tr><th width="150">Tgl.Mulai</th><td>' + item.tgl_start + '</td></tr>';
             html += '<tr><th>Tgl.Selesai</th><td>' + item.tgl_finish + '</td></tr>';
-            html += '<tr><th>Tujuan</th><td>' + item.lokasi_tujuan + '</td></tr>';
+            if(jns_order == '4'){
+                html += '<tr><th>Jumlah Bulan</th><td>' + (item.jml_bln) + '</td></tr>';
+            } else {
+                html += '<tr><th>Tujuan</th><td>' + item.lokasi_tujuan + '</td></tr>';
+            }
             html += '<tr><th>Unit</th><td>' + item.nama + '</td></tr>';
             html += '<tr><th>Tahun</th><td>' + item.tahun + '</td></tr>';
             html += '<tr><th>BBM</th><td>' + item.bbm + '</td></tr>';
             html += '<tr><th>Transmisi</th><td>' + (parseResponse.jenis_transmisi) + '</td></tr>';
             html += '<tr><th>Warna</th><td>' + (parseResponse.warna) + '</td></tr>';
             html += '<tr><th>Jml.Order</th><td>' + (parseResponse.jumlah) + '</td></tr>';
-            html += '<tr><th>Include</th><td>' + (parseResponse.include ?? '-') + '</td></tr>';
+            html += '<tr><th>Include</th><td>' + (item.ketr ?? '-') + '</td></tr>';
             html += '<tr><th>Biaya</th><td>Rp. ' + numberFormat(item.hrg_sewa) + '</td></tr>';
             html += '<tr><th>Pembayaran</th><td>' + (parseResponse.jenis_pembayaran == '1' ? 'Tunai' : 'Mundur') + '</td></tr>';
             html += '<tr><th>Catatan</th><td>' + (parseResponse.catatan ?? '-') + '</td></tr>';
             html += '<tr><th>Voucher</th><td>' + (parseResponse.voucher ?? '-') + '</td></tr>';
+            if(jns_order == '4'){
+                html += '<tr><th>Penanggung Jawab</th><td>' + (item.tg_jwb == '1' ? 'Rental Pemesan' : 'Pelanggan') + '</td></tr>';
+            }
             html += '</tbody>';
             html += '</table>';
             html += '</div>';
@@ -200,6 +207,7 @@
             newForm.action = '<?= base_url('order/select-order') ?>';
             
             newForm.innerHTML = '<input type="hidden" name="item" value="' + encodeURIComponent(JSON.stringify(parseResponse)) + '">'; // Add the hidden input
+            newForm.innerHTML += '<input type="hidden" name="jns_order" value="' + jns_order + '">'; // Add the hidden input
             newForm.innerHTML += '<input type="hidden" name="form_step" value="2">'; // Add the hidden input
             newForm.innerHTML += '<div class="mb-3 align-items-center"><button type="submit" class="btn btn-primary w-100 btnConfirmOrder">Submit</button></div>'; // Add the hidden input
             // $('#formSearchOrder').append(newForm);

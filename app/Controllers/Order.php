@@ -189,16 +189,18 @@ class Order extends BaseController
                 $array_data = json_decode($decoded, true);
                 // $resp = json_encode($array_data);
 
-                $array_data['jns_order'] = 1;
+                $array_data['jns_order'] = $data['jns_order'] ?? 1;
                 $array_data['tempo_bayar'] = 0;
 
-                // list_plgn
-                $jsonString['values'] = [
-                    'nama' => $array_data['nama'],
-                    'nohp' => $array_data['no_hp'],
-                    'nik' => $array_data['nik'],
-                    'note' => $array_data['note']
-                ];
+                // list_plgn, nama:["Satrio", "Satrio2"]
+                for ($i = 0; $i < ($array_data['jumlah']); $i++) {
+                    $jsonString['values'][] = [
+                        'nama' => $array_data['nama'][$i],
+                        'no' => $array_data['no_hp'][$i],
+                        'nik' => $array_data['nik'][$i],
+                        'note' => $array_data['note'][$i]
+                    ];
+                }
 
                 // Parsing ulang bagian "item" yang masih dalam format JSON string
                 $respItem = json_decode($array_data['item'], true);
@@ -237,8 +239,8 @@ class Order extends BaseController
                     return redirect()->to('/')->with('success', 'Order berhasil dibuat');
                 } else {
                     // show error
-                    // echo json_encode($listData);
-                    return redirect()->to('order/orderlayanan')->with('error', $listData['message']);
+                    echo json_encode($listData);
+                    // return redirect()->to('order/orderlayanan')->with('error', $listData['message']);
                 }
             
             } else {
@@ -362,6 +364,12 @@ class Order extends BaseController
                 'tg_jwb' => isset($data['tg_jwb']) ? $data['tg_jwb'] : '',
                 'jml_bln' => isset($data['jml_bln']) ? $data['jml_bln'] : 0
             ];
+
+            // jika jns_order = 4
+            if($jns_order == 4) {
+                $data['tgl_finish'] = date('Y-m-d 23:59', strtotime($data['tgl_start'] . ' + ' . $data['jml_bln'] . ' month'));
+                $data['ketr'] = 'Mobil Bulanan';
+            }
 
             // echo json_encode($data); //die();
             $curlOpt = array_merge($curlOpt, $data);
