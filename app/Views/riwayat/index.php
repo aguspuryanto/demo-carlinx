@@ -68,18 +68,25 @@
                 html += '<tbody>';
                 html += '<tr><td width="150">Tgl.Mulai</td><td>' + itemData.tgl_start + '</td></tr>';
                 html += '<tr><td>Tgl.Selesai</td><td>' + itemData.tgl_finish + '</td></tr>';
-                html += '<tr><td>Tujuan</td><td>' + itemData.tujuan + '</td></tr>';
+                if(itemData.jns_order == '4'){
+                    html += '<tr><td>Jumlah Bulan</td><td>' + (itemData.jml_bln) + '</td></tr>';
+                } else {
+                    html += '<tr><td>Tujuan</td><td>' + itemData.lokasi_tujuan + '</td></tr>';
+                }
                 html += '<tr><td>Unit</td><td>' + itemData.nama_unit + '</td></tr>';
                 html += '<tr><td>Tahun</td><td>' + itemData.tahun + '</td></tr>';
                 html += '<tr><td>BBM</td><td>' + itemData.bbm + '</td></tr>';
                 html += '<tr><td>Transmisi</td><td>' + itemData.transmisi + '</td></tr>';
                 html += '<tr><td>Warna</td><td>' + itemData.warna + '</td></tr>';
                 html += '<tr><td>Jml.Order</td><td>' + itemData.jml_order + '</td></tr>';
-                html += '<tr><td>Include</td><td>' + (itemData.include ?? '-') + '</td></tr>';
+                html += '<tr><td>Include</td><td>' + (itemData.ketr ?? '-') + '</td></tr>';
                 html += '<tr><td>Biaya</td><td>Rp. ' + numberFormat(itemData.hrg_sewa) + '</td></tr>';
-                html += '<tr><td>Pembayaran</td><td>' + (itemData.jenis_pembayaran == '1' ? 'Tunai' : 'Mundur') + '</td></tr>';
+                html += '<tr><td>Pembayaran</td><td>' + (itemData.jns_byr == '1' ? 'Lunas' : 'Mundur') + '</td></tr>';
                 html += '<tr><td>Catatan</td><td>' + (itemData.catatan_byr ?? '-') + '</td></tr>';
                 html += '<tr><td>Voucher</td><td>' + (itemData.voucher ?? '-') + '</td></tr>';
+                if(itemData.jns_order == '4'){
+                    html += '<tr><td>Penanggung Jawab</td><td>' + (itemData.tg_jwb == '1' ? 'Rental Pemesan' : 'Pelanggan') + '</td></tr>';
+                }
 
                 if(itemData.stat=='9') {
                     html += '<tr><td>Penangung Jawab</td><td>' + (itemData.tg_jwb == '1' ? 'Pemilik' : 'Penyewa') + '</td></tr>';
