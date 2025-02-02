@@ -57,27 +57,19 @@
                 console.log('ID Order:', idOrder);
                 console.log('Item Data:', itemData);
 
-                // var html = '<div class="table-responsive mb-3">';
-                // html += '<p class="h6 lead p-2">Pesanan</p><table class="table table-borderless">';
-                // html += '<tbody>';
-                // html += '<tr><td width="150">Tgl.Mulai</td><td>' + itemData.tgl_start + '</td></tr>';
-                // html += '<tr><td>Tgl.Selesai</td><td>' + itemData.tgl_finish + '</td></tr>';
-                // html += '<tr><td>Tujuan</td><td>' + itemData.tujuan + '</td></tr>';
-                // html += '<tr><td>Unit</td><td>' + itemData.nama_unit + '</td></tr>';
-                // html += '<tr><td>Tahun</td><td>' + itemData.tahun + '</td></tr>';
-                // html += '<tr><td>BBM</td><td>' + itemData.bbm + '</td></tr>';
-                // html += '<tr><td>Transmisi</td><td>' + itemData.transmisi + '</td></tr>';
-                // html += '<tr><td>Warna</td><td>' + itemData.warna + '</td></tr>';
-                // html += '<tr><td>Jml.Order</td><td>' + itemData.jml_order + '</td></tr>';
-                // html += '<tr><td>Include</td><td>' + (itemData.include ?? '-') + '</td></tr>';
-                // html += '<tr><td>Biaya</td><td>Rp. ' + numberFormat(itemData.hrg_sewa) + '</td></tr>';
-                // html += '<tr><td>Pembayaran</td><td>' + (itemData.jenis_pembayaran == '1' ? 'Tunai' : 'Mundur') + '</td></tr>';
-                // html += '<tr><td>Catatan</td><td>' + (itemData.catatan_byr ?? '-') + '</td></tr>';
-                // html += '<tr><td>Voucher</td><td>' + (itemData.voucher ?? '-') + '</td></tr>';
-                // html += '</tbody>';
-                // html += '</table>';
-                // html += '</div>';
-                // html += '<div class="mb-3"><p class="h6 lead">* Pastikan data order sudah benar</p></div>';
+                // load
+                let resultPlgn = [];
+                $.get('<?= base_url('order/detail-order') ?>/' + idOrder, function(data) {
+                    let jsonData = JSON.parse(data);
+                    resultPlgn = jsonData.result_plgn[0];
+                    console.log(resultPlgn, 'resultPlgn');
+                });
+
+                // Panggil fungsi
+                // let resultPlgn = [];
+                loadDetailOrder(idOrder).then(resp => {
+                    console.log('Data pelanggan:', resp);
+                });
 
                 var textNote = '';
                 if(itemData.stat == '1'){
@@ -123,7 +115,10 @@
                 
                 newForm.innerHTML = '<div class="mb-3 align-items-center"><input type="hidden" name="id_order" class="form-control" id="id_order" value="' + idOrder + '"></div>'; // Add the hidden input with value
                 newForm.innerHTML += '<div class="mb-3 align-items-center"><input type="hidden" name="stat_ori" class="form-control" id="stat_ori" value="' + itemData.stat + '"></div>'; // Add the hidden input with value
-                newForm.innerHTML += '<div class="mb-3 align-items-center"><label class="form-label">Pelanggan</label><input type="text" name="nama_penyewa" class="form-control" id="nama_penyewa" value="' + (itemData.nama_penyewa || '') + '"></div>'; // Add input with value
+                newForm.innerHTML += '<div class="mb-3 align-items-center"><label class="form-label">Pelanggan</label><input type="text" name="nama_plgn" class="form-control" id="nama_plgn" value="' + (resultPlgn.nama_plgn || '') + '"></div>'; // Add input with value
+                newForm.innerHTML += '<div class="mb-3 align-items-center"><label class="form-label">No HP</label><input type="text" name="no_hp" class="form-control" id="no_hp" value="' + (resultPlgn.no_hp || '') + '"></div>'; // Add input with value
+                newForm.innerHTML += '<div class="mb-3 align-items-center"><label class="form-label">No KTP</label><input type="text" name="ktp_plgn" class="form-control" id="ktp_plgn" value="' + (resultPlgn.ktp_plgn || '') + '"></div>'; // Add input with value
+                newForm.innerHTML += '<div class="mb-3 align-items-center"><label class="form-label">Note</label><input type="text" name="note" class="form-control" id="note" value="' + (resultPlgn.note || '') + '"></div>'; // Add input with value
                 newForm.innerHTML += '<div class="mb-3 align-items-center"><button type="submit" class="btn btn-primary w-100 btnConfirmOrder">Batal</button></div>'; // Changed button text
                 
                 $('#addModal .modal-body').html(html).append(newForm);
@@ -177,6 +172,17 @@
         });
 
     });
+
+    async function loadDetailOrder(idOrder) {
+        try {
+            let response = await fetch('<?= base_url('order/detail-order') ?>/' + idOrder);
+            let data = await response.json(); // Parse JSON langsung
+            console.log(data.result_plgn);
+            return data.result_plgn; // Mengembalikan data jika diperlukan
+        } catch (error) {
+            console.error('Gagal mengambil data:', error);
+        }
+    }
 
     // Helper function for number formatting
     function numberFormat(number) {

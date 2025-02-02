@@ -37,6 +37,11 @@
     <link rel="stylesheet" href="<?= base_url(); ?>assets/css/style.css">
 
     <?= $this->renderSection('styles') ?>
+    <style>
+        .body-scroll {
+            overflow: auto !important;
+        }
+    </style>
 </head>
 
 <body class="body-scroll" data-page="index">

@@ -55,6 +55,7 @@ $routes->group('order', ['filter' => 'auth'], function($routes) {
     $routes->add('lepaskunci', 'Order::lepasKunci');
 
     $routes->add('orderbulanan', 'Order::orderBulanan');
+    $routes->get('detail-order/(:num)', 'Order::detailOrder/$1');
 });
 
 // event

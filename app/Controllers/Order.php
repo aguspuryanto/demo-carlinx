@@ -391,4 +391,17 @@ class Order extends BaseController
         ]);
     }
 
+    public function detailOrder($id)
+    {
+        // echo 'Detail Order ' . $id;
+
+        $curlOpt = [
+            'kd_member' => $this->session->get('user')['kode'],
+            'id_order' => $id
+        ];
+
+        if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'select_detail_order_1.php');
+        echo json_encode($listData);
+    }
+
 }
