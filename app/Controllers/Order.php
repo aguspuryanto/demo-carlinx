@@ -144,14 +144,6 @@ class Order extends BaseController
                 'jml_bln' => isset($data['jml_bln']) ? $data['jml_bln'] : 0
             ];
 
-            // include
-            $include = 'Mobil, Driver, ';
-            if($data['is_bbm']) $include .= 'BBM, ';
-            if($data['is_makan']) $include .= 'Makan, ';
-            if($data['is_hotel']) $include .= 'Hotel, ';
-            $include = rtrim($include, ', ');
-            $data['include'] = $include;
-
             $curlOpt = array_merge($curlOpt, $data);
             // echo json_encode($curlOpt); die();
 
@@ -236,6 +228,14 @@ class Order extends BaseController
                     'list_plgn' => json_encode($jsonString),
                 ];
                 // echo json_encode($respItemArr); die();
+
+                // include
+                $include = 'Mobil, Driver, ';
+                if($data['is_bbm']) $include .= 'BBM, ';
+                if($data['is_makan']) $include .= 'Makan, ';
+                if($data['is_hotel']) $include .= 'Hotel, ';
+                $include = rtrim($include, ', ');
+                $respItemArr['include'] = $include;
 
                 $curlOpt = array_merge($curlOpt, $respItemArr);
                 // echo json_encode($curlOpt); die();
