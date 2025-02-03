@@ -1,5 +1,5 @@
 <?php //echo json_encode($listData['result_unit_order']); ?>
-<ul class="list-group d-sm-block d-md-block d-lg-none d-xl-none">
+<ul class="list-group">
     <li class="list-group-item active" aria-current="true">Hasil Pencarian <?= count($listData['result_unit_order']) ?></li>
     <?php foreach ($listData['result_unit_order'] as $item) : ?>
     <li class="list-group-item">
@@ -22,7 +22,7 @@
     <?php endforeach ?>
 </ul>
 
-<div class="d-none table-responsive d-sm-none d-md-none d-lg-block d-xl-block mt-3">
+<div class="d-none table-responsive">
 <table class="table table-striped">
     <thead>
         <tr>
