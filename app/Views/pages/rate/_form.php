@@ -81,6 +81,8 @@
       <input type="checkbox" class="form-check-input" name="drop_akhir" id="transferOut">
       <label class="form-check-label" for="transferOut">Transfer Out</label>
     </div>
+  </div>
+  <div class="mb-3">
     <div class="row mt-2">
       <div class="col-6">
         <input type="number" class="form-control" name="tolparkir" placeholder="Tol/Parkir">
@@ -92,18 +94,16 @@
   </div>
 
   <!-- Hasil Perhitungan -->
-  <div class="row mb-3">
-    <div class="col-6">
-      <label for="totalCost" class="form-label">Hasil Perhitungan</label>
-      <input type="text" class="form-control" id="totalCost" placeholder="Total Biaya" readonly>
-    </div>
-    <div class="col-6 mt-4 pt-2">
-      <button type="submit" class="btn btn-primary w-100" id="btnHitung">Mulai Perhitungan</button>
-    </div>
+  <div class="mb-3">
+    <label for="totalCost" class="form-label">Hasil Perhitungan</label>
+    <input type="text" class="form-control" id="totalCost" placeholder="Total Biaya" readonly>
   </div>
 
   <!-- hidden -->
   <input type="hidden" name="jarak" id="jarak">
   <input type="hidden" name="ketr" id="ketr">
   <input type="hidden" name="fee" id="fee">
+
+  <!-- Tombol -->
+  <button type="submit" class="btn btn-primary w-100" id="btnHitung">Mulai Perhitungan</button>
 <?php echo form_close(); ?>
