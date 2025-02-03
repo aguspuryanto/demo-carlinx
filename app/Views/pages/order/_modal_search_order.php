@@ -1,7 +1,7 @@
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false" aria-modal="true">
-        <div class="modal-dialog modal-fullscreen">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
             <div class="modal-header">
                 <a href="#" class="btn" data-bs-dismiss="modal" aria-label="Close">
@@ -63,7 +63,7 @@
                             <label for="jumlah" class="visually-hidden">Password</label>
                             <div class="input-group">
                                 <button class="btn btn-outline-secondary button-minus" type="button">-</button>
-                                <input type="text" name="jumlah" class="form-control" id="jumlah" value="1">
+                                <input type="text" name="jumlah" class="form-control text-center" id="jumlah" value="1" readonly>
                                 <button class="btn btn-outline-secondary button-plus" type="button">+</button>
                             </div>
                         </div>
