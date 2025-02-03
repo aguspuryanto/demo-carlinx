@@ -49,7 +49,7 @@
             var formattedDate = formatDateIndo(item.tgl);
 
             modal.find('.modal-title').text(formattedDate + ' ' + item.header)
-            modal.find('.modal-body').html(item.detail)
+            modal.find('.modal-body').html(nl2br(item.detail))
         })
 
         function formatDateIndo(date) {
@@ -58,6 +58,14 @@
             var month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
             var year = date.getFullYear();
             return `${day}-${month}-${year}`;
+        }
+
+        function nl2br (str, is_xhtml) {
+            if (typeof str === 'undefined' || str === null) {
+                return '';
+            }
+            var breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';
+            return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
         }
     </script>
     <?= $this->endSection() ?>
