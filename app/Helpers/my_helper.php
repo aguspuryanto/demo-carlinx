@@ -47,6 +47,11 @@ function format_km($angka){
 	return round(str_replace('.', '', $angka) / 1000, 0);
 }
 
+function getHourAndMinute($date) {
+	$date = new DateTime($date);
+	return $date->format('H:i');
+}
+
 function sendWhatsapp($phone, $message, $type = 'link') {
 	// <a href=\"whatsapp://send?phone=--your phone--&text=--your text--\">
 	// <a href=\"https://api.whatsapp.com/send?phone=--your phone--&text=--your text--\">
