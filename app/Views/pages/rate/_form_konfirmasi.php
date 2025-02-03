@@ -31,7 +31,7 @@
             <input type="hidden" name="total_hrg_sewa" id="total_hrg_sewa">
             <div class="mb-3">
                 <label for="nama_pelanggan" class="form-label">Nama Pelanggan</label>
-                <input type="text" class="form-control" id="nama_pelanggan" name="nama_pelanggan" placeholder="Nama Pelanggan">
+                <input type="text" class="form-control" id="nama_pelanggan" name="nama_pelanggan" placeholder="Nama Pelanggan" required>
             </div>
             <div class="mb-3">
                 <label for="no_hp" class="form-label">No. HP</label>

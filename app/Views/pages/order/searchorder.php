@@ -213,6 +213,7 @@
             // $('#formSearchOrder').append(newForm);
             
             $('#confirmModal .modal-body').html(html).append(newForm);
+            $('#exampleModal').modal('hide');
             $('#confirmModal').modal('show');
           },
           error: function(xhr, status, error) {
