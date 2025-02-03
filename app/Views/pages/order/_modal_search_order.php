@@ -55,11 +55,11 @@
                 <hr>
                 <div class="mb-0 jumlah_order">
                     <div class="row g-3">
-                        <div class="col-6">
+                        <div class="col-md-6 col-lg-8">
                             <label for="staticEmail2" class="visually-hidden">Jumlah Order (Unit)</label>
                             <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Jumlah Order (Unit)">
                         </div>
-                        <div class="col-6">
+                        <div class="col-md-6 col-lg-4">
                             <label for="jumlah" class="visually-hidden">Password</label>
                             <div class="input-group">
                                 <button class="btn btn-outline-secondary button-minus" type="button">-</button>
