@@ -111,13 +111,6 @@
         data: listTujuan
     }).on('change', function() {
       // console.log($('#lokasiJemput').val());
-      // const lokasiJemput = $('#lokasiJemput').val();
-      // // const lokasiTujuan = $('#lokasiTujuan').val();
-
-      // // if not exists, then push to lokasiJemputArr
-      // if(!lokasiJemputArr.includes(lokasiJemput)) {
-      //   lokasiJemputArr.push(lokasiJemput);
-      // }
     });
 
     // Event listener untuk tombol Tambah Rute

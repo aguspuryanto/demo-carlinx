@@ -25,6 +25,7 @@
             <input type="hidden" name="jam_start" id="jam_start">
             <input type="hidden" name="tgl_finish" id="tgl_finish">
             <input type="hidden" name="jam_end" id="jam_end">
+            <input type="hidden" name="lokasi_jemput" id="lokasi_jemput">
             <input type="hidden" name="lokasi_tujuan" id="lokasi_tujuan">
             <input type="hidden" name="nama_unit" id="nama_unit">
             <input type="hidden" name="include" id="include">

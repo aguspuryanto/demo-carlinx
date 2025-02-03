@@ -42,24 +42,32 @@
   <!-- Rute Perjalanan -->
   <div class="mb-3">
     <label class="form-label">Rute Perjalanan</label>
-    <div class="row">
-      <div class="col-6">
-        <select class="form-control" name="lokasi_jemput" id="lokasiJemput">
-          <option value="">Pilih Lokasi Jemput</option>
-        </select>
-        <div id="lokasiJemputList" class="mt-2"></div>
+    <div class="row g-0">
+      <div class="col-md-6">
+        <div class="input-group">
+          <select id="lokasiJemput" name="lokasi_jemput" class="form-select select2">
+            <option value="">Pilih Lokasi Jemput</option>
+          </select>
+          <button class="btn btn-outline-primary" type="button" id="switchButton"><i class="fa fa-exchange"></i></button>
+        </div>
       </div>
-      <div class="col-6">
-        <select class="form-control" name="lokasi_tujuan" id="lokasiTujuan">
-          <option value="">Pilih Lokasi Tujuan</option>
-        </select>
-        <div id="lokasiTujuanList" class="mt-2"></div>
+      <div class="col-md-6">
+        <div class="input-group">
+          <select id="lokasiTujuan" name="lokasi_tujuan" class="form-select select2">
+            <option value="">Pilih Lokasi Tujuan</option>
+          </select>
+          <button class="btn btn-outline-primary" type="button" id="tambahRute"><i class="fa fa-plus-square"></i></button>
+        </div>
       </div>
     </div>
+
+    <ul id="listRute" class="list-group mt-2">
+        <!-- Daftar rute akan ditambahkan di sini -->
+    </ul>
   </div>
 
   <!-- Biaya Tambahan -->
-  <div class="mb-0">
+  <div class="mb-3">
     <label class="form-label d-block">Biaya Tambahan</label>
     <div class="form-check form-check-inline">
       <input type="checkbox" class="form-check-input" name="is_bbm" id="fuel" checked>
@@ -100,6 +108,8 @@
   </div>
 
   <!-- hidden -->
+  <input type="hidden" name="origins[]" id="origin">
+  <input type="hidden" name="destinations[]" id="destination">
   <input type="hidden" name="jarak" id="jarak">
   <input type="hidden" name="ketr" id="ketr">
   <input type="hidden" name="fee" id="fee">
