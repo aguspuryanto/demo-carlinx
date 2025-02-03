@@ -34,8 +34,8 @@ class Filters extends BaseFilters
         'forcehttps'    => ForceHTTPS::class,
         'pagecache'     => PageCache::class,
         'performance'   => PerformanceMetrics::class,
-        // 'auth'          => \App\Filters\AuthMiddleware::class,
         'auth'          => \App\Filters\AuthFilter::class,
+        'inspector'     => \Inspector\CodeIgniter\Filter::class,
     ];
 
     /**
@@ -72,11 +72,13 @@ class Filters extends BaseFilters
     public array $globals = [
         'before' => [
             'auth' => ['except' => ['/', '/login', '/logout']], // Tidak berlaku untuk halaman login/logout
+            'inspector'   // Inspector APM
             // 'honeypot',
             // 'csrf',
             // 'invalidchars',
         ],
         'after' => [
+            'inspector'   // Inspector APM
             // 'honeypot',
             // 'secureheaders',
         ],

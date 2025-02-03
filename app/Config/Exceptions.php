@@ -101,6 +101,41 @@ class Exceptions extends BaseConfig
      */
     public function handler(int $statusCode, Throwable $exception): ExceptionHandlerInterface
     {
+        // Handle specific HTTP status codes
+        if (in_array($statusCode, [400, 403, 404, 500])) {
+            // You can create custom handlers for specific status codes
+            // For now, we'll use the default handler with enhanced logging
+            $handler = new ExceptionHandler($this);
+            
+            // Add additional context for specific status codes
+            if ($statusCode === 404) {
+                log_message('error', '[PAGE NOT FOUND] {message} - URL: {url}', [
+                    'message' => $exception->getMessage(),
+                    'url' => current_url()
+                ]);
+            } elseif ($statusCode === 500) {
+                log_message('critical', '[INTERNAL ERROR] {message} in {file} on line {line}', [
+                    'message' => $exception->getMessage(),
+                    'file' => $exception->getFile(),
+                    'line' => $exception->getLine()
+                ]);
+            }
+            
+            return $handler;
+        }
+
+        // Handle specific exception types
+        if ($exception instanceof \CodeIgniter\Database\Exceptions\DatabaseException) {
+            log_message('critical', '[DATABASE ERROR] {message}', [
+                'message' => $exception->getMessage()
+            ]);
+        } elseif ($exception instanceof \CodeIgniter\Security\Exceptions\SecurityException) {
+            log_message('alert', '[SECURITY EXCEPTION] {message}', [
+                'message' => $exception->getMessage()
+            ]);
+        }
+
+        // Default handler for all other cases
         return new ExceptionHandler($this);
     }
 }

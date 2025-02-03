@@ -3,6 +3,7 @@
 namespace Config;
 
 use CodeIgniter\Config\BaseService;
+use Inspector\CodeIgniter\Inspector;
 
 /**
  * Services Configuration file.
@@ -29,4 +30,13 @@ class Services extends BaseService
      *     return new \CodeIgniter\Example();
      * }
      */
+    public static function inspector($getShared = true)
+    {
+        if ($getShared) {
+            return static::getSharedInstance('inspector');
+        }
+
+        $config = config('Inspector');
+        return new \Inspector\CodeIgniter\Inspector($config);
+    }
 }
