@@ -4,7 +4,7 @@
 
 <?= form_open('rate/hitung', ['id' => 'formHitung']); ?>
   <!-- Nama Unit -->
-  <div class="form-group">
+  <div class="mb-3">
     <label for="unitName" class="form-label">Nama Unit</label>
     <select class="form-control" name="kd_unit" id="unitName">
       <option value="">Pilih Nama Unit</option>
