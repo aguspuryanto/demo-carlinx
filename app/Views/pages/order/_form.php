@@ -69,7 +69,7 @@ helper('form');
   <div class="mb-3">
     <label class="form-label d-block">Biaya Tambahan</label>
     <div class="form-check form-check-inline">
-      <input type="checkbox" class="form-check-input" name="is_bbm" id="fuel">
+      <input type="checkbox" class="form-check-input" name="is_bbm" id="fuel" checked>
       <label class="form-check-label" for="fuel">BBM</label>
     </div>
     <div class="form-check form-check-inline">
