@@ -1,5 +1,5 @@
 <?php //echo json_encode($listData['result_unit_order']); ?>
-<ul class="list-group">
+<ul class="list-group d-sm-block d-md-block d-lg-none d-xl-none">
     <li class="list-group-item active" aria-current="true">Hasil Pencarian <?= count($listData['result_unit_order']) ?></li>
     <?php foreach ($listData['result_unit_order'] as $item) : ?>
     <li class="list-group-item">
@@ -22,7 +22,7 @@
     <?php endforeach ?>
 </ul>
 
-<div class="d-none table-responsive">
+<div class="d-none table-responsive d-sm-none d-md-none d-lg-block d-xl-block mt-3">
 <table class="table table-striped">
     <thead>
         <tr>
@@ -30,13 +30,12 @@
             <th scope="col">Images</th>
             <th scope="col">Rental</th>
             <th scope="col">Harga</th>
-            <th scope="col">Aksi</th>
         </tr>
     </thead>
     <tbody>
         <?php $no = 1; ?>
         <?php foreach ($listData['result_unit_order'] as $item) : ?>
-            <tr>
+            <tr data-bs-toggle="modal" data-bs-target="#exampleModal" data-item="<?= esc(json_encode($item)) ?>">
                 <th scope="row"><?= $no++ ?></th>
                 <td>
                     <img class="avatar avatar-lg" src="<?= getImage($_ENV['API_BASEURL'] . 'images/' . $item['path_foto']) ?>" style="width: 64px; height: 64px;" />
@@ -52,14 +51,6 @@
                 </td>
                 <td>
                     <p class="mb-0 fs-sm">Rp <?= number_format($item['hrg_sewa'], 0, ',', '.') ?></p>
-                </td>
-                <td>
-                    <a href="#" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal" data-item="<?= esc(json_encode($item)) ?>">
-                        <i class="fas fa-eye"></i>
-                    </a>
-                    <a href="#" class="btn btn-danger btn-delete">
-                        <i class="fas fa-trash"></i>
-                    </a>
                 </td>
             </tr>
         <?php endforeach ?>
