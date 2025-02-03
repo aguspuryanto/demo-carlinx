@@ -73,8 +73,6 @@
       <input type="checkbox" class="form-check-input" name="is_hotel" id="driverStay">
       <label class="form-check-label" for="driverStay">Inap Driver</label>
     </div>
-  </div>
-  <div class="mb-3">
     <div class="form-check form-check-inline">
       <input type="checkbox" class="form-check-input" name="drop_awal" id="transferIn">
       <label class="form-check-label" for="transferIn">Transfer In</label>
@@ -94,16 +92,18 @@
   </div>
 
   <!-- Hasil Perhitungan -->
-  <div class="mb-3">
-    <label for="totalCost" class="form-label">Hasil Perhitungan</label>
-    <input type="text" class="form-control" id="totalCost" placeholder="Total Biaya" readonly>
+  <div class="row mb-3">
+    <div class="col-6">
+      <label for="totalCost" class="form-label">Hasil Perhitungan</label>
+      <input type="text" class="form-control" id="totalCost" placeholder="Total Biaya" readonly>
+    </div>
+    <div class="col-6 mt-4 pt-2">
+      <button type="submit" class="btn btn-primary w-100" id="btnHitung">Mulai Perhitungan</button>
+    </div>
   </div>
 
   <!-- hidden -->
   <input type="hidden" name="jarak" id="jarak">
   <input type="hidden" name="ketr" id="ketr">
   <input type="hidden" name="fee" id="fee">
-
-  <!-- Tombol -->
-  <button type="submit" class="btn btn-primary w-100" id="btnHitung">Mulai Perhitungan</button>
 <?php echo form_close(); ?>

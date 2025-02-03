@@ -234,6 +234,7 @@
             // $('#btnHitung').attr('disabled', true);
             // show #btnKonfirm
             $('#cardKonfirm, #cardPelanggan').show().removeClass('d-none');
+            scrollTo($('#cardKonfirm').offset().top, 500);
           } else {
             console.error("Data tidak ditemukan atau tidak valid.");
           }
