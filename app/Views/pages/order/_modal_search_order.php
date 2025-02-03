@@ -60,7 +60,7 @@
                             <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="Jumlah Order (Unit)">
                         </div>
                         <div class="col-md-6 col-lg-4">
-                            <label for="jumlah" class="visually-hidden">Password</label>
+                            <label for="jumlah" class="visually-hidden">Jumlah Order (Unit)</label>
                             <div class="input-group">
                                 <button class="btn btn-outline-secondary button-minus" type="button">-</button>
                                 <input type="text" name="jumlah" class="form-control text-center" id="jumlah" value="1" readonly>
