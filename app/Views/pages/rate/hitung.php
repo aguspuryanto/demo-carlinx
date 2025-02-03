@@ -269,16 +269,20 @@
 
             // set konfirmasi
             $('#tanggal').text(result.tgl_start + ' s/d ' + result.tgl_finish); // 20-01-2025 06:00 s/d 20-01-2025 23:59
-            $('#tujuan').text(result.lokasi_tujuan.substr(result.lokasi_tujuan.lastIndexOf(",") + 1) + ' - ' + result.lokasi_jemput.substr(result.lokasi_jemput.lastIndexOf(",") + 1)); // Surabaya - Malang
+            $('#tujuan').text(result.lokasi_jemput.substr(result.lokasi_jemput.lastIndexOf(",") + 1) + ' - ' + result.lokasi_tujuan.substr(result.lokasi_tujuan.lastIndexOf(",") + 1)); // Surabaya - Malang
             $('#namaUnit').text(result.nama); // AVANZA 2017 (TES)
             $('#include').text(result.include); // Mobil, Driver, BBM
             $('#totalBiaya').text(convertRupiah(result.total_hrg_sewa)); // 2375000
 
             // set data pelanggan
             $('#formSendWhatsapp').find('#tgl_start').val(result.tgl_start);
-            // $('#jam_start').val(result.jam_start);
+            let jam_start = getHourAndMinute(result.tgl_start);
+            $('#jam_start').val(jam_start);
+
             $('#formSendWhatsapp').find('#tgl_finish').val(result.tgl_finish);
-            // $('#jam_end').val(result.jam_end);
+            let jam_finish = getHourAndMinute(result.tgl_finish);
+            $('#jam_finish').val(jam_finish);
+            
             $('#formSendWhatsapp').find('#lokasi_jemput').val(result.lokasi_jemput.substr(result.lokasi_jemput.lastIndexOf(",") + 1));
             $('#formSendWhatsapp').find('#lokasi_tujuan').val(result.lokasi_tujuan.substr(result.lokasi_tujuan.lastIndexOf(",") + 1));
             $('#formSendWhatsapp').find('#nama_unit').val(result.nama);
@@ -425,6 +429,17 @@
         } catch (error) {
             console.error('Error calculating route:', error);
         }
+    }
+
+    function getHourAndMinute(dateString) {
+      // Konversi string ke objek Date
+      let dateObj = new Date(dateString);
+
+      // Ambil jam dan menit
+      let hours = dateObj.getHours();
+      let minutes = dateObj.getMinutes();
+
+      return { hours, minutes };
     }
   });
 </script>
