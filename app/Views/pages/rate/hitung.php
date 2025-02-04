@@ -165,87 +165,111 @@
       e.preventDefault();
       var form = $('#formHitung')[0];
       var data = new FormData(form);
-
-      // validation, kd_unit
-      if (!$('#unitName').val()) {
-        alert('Mohon pilih unit');
-        return;
-      }
-
-      // validation, pickupDate
-      if (!$('#pickupDate').val()) {
-        alert('Mohon pilih tanggal jemput');
-        return;
-      }
-
-      // validation, returnDate
-      if (!$('#returnDate').val()) {
-        alert('Mohon pilih tanggal kembali');
-        return;
-      }
-
-      // validation, lokasiJemput
-      if (!$('#lokasiJemput').val()) {
-        alert('Mohon pilih lokasi jemput');
-        return;
-      }
-
-      // validation, lokasiTujuan
-      if (!$('#lokasiTujuan').val()) {
-        alert('Mohon pilih lokasi tujuan');
-        return;
-      }
-
-      $.ajax({
-        url: 'rate/hitung',
-        type: 'POST',
-        data: data,
-        dataType: 'json',
-        contentType: false,
-        processData: false,
-        success: function (response) {
-          console.log(response.result_unit_order[0], 'response');
-          if (response.success && response.result_unit_order && response.result_unit_order.length > 0) {
-            const result = response.result_unit_order[0];
-            $('#totalCost').val(convertRupiah(result.total_hrg_sewa));
-
-            // set konfirmasi
-            $('#tanggal').text(result.tgl_start + ' s/d ' + result.tgl_finish); // 20-01-2025 06:00 s/d 20-01-2025 23:59
-            $('#tujuan').text(result.lokasi_jemput.substr(result.lokasi_jemput.lastIndexOf(",") + 1) + ' - ' + result.lokasi_tujuan.substr(result.lokasi_tujuan.lastIndexOf(",") + 1)); // Surabaya - Malang
-            $('#namaUnit').text(result.nama); // AVANZA 2017 (TES)
-            $('#include').text(result.include); // Mobil, Driver, BBM
-            $('#totalBiaya').text(convertRupiah(result.total_hrg_sewa)); // 2375000
-
-            // set data pelanggan
-            $('#formSendWhatsapp').find('#tgl_start').val(result.tgl_start);
-            let jam_start = getHourAndMinute(result.tgl_start);
-            $('#jam_start').val(jam_start);
-
-            $('#formSendWhatsapp').find('#tgl_finish').val(result.tgl_finish);
-            let jam_finish = getHourAndMinute(result.tgl_finish);
-            $('#jam_finish').val(jam_finish);
-            
-            $('#formSendWhatsapp').find('#lokasi_jemput').val(result.lokasi_jemput.substr(result.lokasi_jemput.lastIndexOf(",") + 1));
-            $('#formSendWhatsapp').find('#lokasi_tujuan').val(result.lokasi_tujuan.substr(result.lokasi_tujuan.lastIndexOf(",") + 1));
-            $('#formSendWhatsapp').find('#nama_unit').val(result.nama);
-            $('#formSendWhatsapp').find('#include').val(result.include);
-            $('#formSendWhatsapp').find('#total_hrg_sewa').val(result.total_hrg_sewa);
-            // $('#formSendWhatsapp').find('#nama_pelanggan').val(result.nama_pelanggan);
-            $('#formSendWhatsapp').find('#no_hp').attr('placeholder', '+62');
-
-            // hide #btnHItung
-            // $('#btnHitung').attr('disabled', true);
-            // show #btnKonfirm
-            $('#cardKonfirm, #cardPelanggan').show().removeClass('d-none');
-            scrollTo($('#cardKonfirm').offset().top, 500);
-          } else {
-            console.error("Data tidak ditemukan atau tidak valid.");
-          }
+      
+      // Define validation rules
+      const validationRules = [
+        {
+          field: 'unitName',
+          message: 'Unit harus dipilih'
         },
-        error: function (xhr, status, error) {
-          console.error(error);
+        {
+          field: 'pickupDate',
+          message: 'Tanggal/Jam Sewa harus dipilih'
+        },
+        {
+          field: 'returnDate',
+          message: 'Tanggal/Jam Sewa harus dipilih'
+        },
+        {
+          field: 'lokasiJemput',
+          message: 'Lokasi Jemput harus dipilih'
+        },
+        {
+          field: 'lokasiTujuan',
+          message: 'Lokasi Tujuan harus dipilih'
         }
-      });
+      ];
+
+      // Validate all fields
+      let isValid = true;
+      // Skip validation if dalamKota is checked
+      if ($('#dalamKota').is(':checked')) {
+        isValid = true;
+      } else {
+        for (const rule of validationRules) {
+          if ($(`#${rule.field}`).val() === '') {
+            if($(`#${rule.field}`).parent().hasClass('invalid-feedback')) {
+              $(`#${rule.field}`).parent().removeClass('invalid-feedback');
+            } else {
+              $(`#${rule.field}`).parent().append('<div class="invalid-feedback">' + rule.message + '</div>');
+            }
+            $(`#${rule.field}`).addClass('is-invalid');
+            isValid = false;
+          } else {
+            $(`#${rule.field}`).removeClass('is-invalid');
+          }
+        }
+      }
+
+      if(isValid) {
+        $.ajax({
+          url: 'rate/hitung',
+          type: 'POST',
+          data: data,
+          dataType: 'json',
+          contentType: false,
+          processData: false,
+          success: function (response) {
+            // console.log(response.result_unit_order[0], 'response');
+            if (response.success && response.result_unit_order && response.result_unit_order.length > 0) {
+              const result = response.result_unit_order[0];
+              $('#totalCost').val(convertRupiah(result.total_hrg_sewa));
+
+              // Set tujuan text only if both locations are available
+              let lokasi_jemput = result.lokasi_jemput;
+              let lokasi_tujuan = result.lokasi_tujuan;
+              if (lokasi_jemput && lokasi_tujuan) {
+                lokasi_jemput = lokasi_jemput.substr(lokasi_jemput.lastIndexOf(",") + 1);
+                lokasi_tujuan = lokasi_tujuan.substr(lokasi_tujuan.lastIndexOf(",") + 1);
+                $('#tujuan').text(lokasi_jemput + ' - ' + lokasi_tujuan);
+              }
+
+              $('#tanggal').text(result.tgl_start + ' s/d ' + result.tgl_finish); // 20-01-2025 06:00 s/d 20-01-2025 23:59
+              $('#namaUnit').text(result.nama); // AVANZA 2017 (TES)
+              $('#include').text(result.include); // Mobil, Driver, BBM
+              $('#totalBiaya').text(convertRupiah(result.total_hrg_sewa)); // 2375000
+
+              // set data pelanggan
+              $('#formSendWhatsapp').find('#tgl_start').val(result.tgl_start);
+              let jam_start = getHourAndMinute(result.tgl_start);
+              $('#jam_start').val(jam_start);
+
+              $('#formSendWhatsapp').find('#tgl_finish').val(result.tgl_finish);
+              let jam_finish = getHourAndMinute(result.tgl_finish);
+              $('#jam_finish').val(jam_finish);
+
+              $('#formSendWhatsapp').find('#lokasi_jemput').val(lokasi_jemput);
+              $('#formSendWhatsapp').find('#lokasi_tujuan').val(lokasi_tujuan);
+              $('#formSendWhatsapp').find('#nama_unit').val(result.nama);
+              $('#formSendWhatsapp').find('#include').val(result.include);
+              $('#formSendWhatsapp').find('#total_hrg_sewa').val(result.total_hrg_sewa);
+              // $('#formSendWhatsapp').find('#nama_pelanggan').val(result.nama_pelanggan);
+              $('#formSendWhatsapp').find('#no_hp').attr('placeholder', '+62');
+
+              // hide #btnHItung
+              // $('#btnHitung').attr('disabled', true);
+              // show #btnKonfirm
+              $('#cardKonfirm, #cardPelanggan').show().removeClass('d-none');
+              scrollTo($('#cardKonfirm').offset().top, 500);
+            } else {
+              console.error("Data tidak ditemukan atau tidak valid.");
+            }
+          },
+          error: function (xhr, status, error) {
+            console.error(error);
+          }
+        });
+      }
     });
 
     $('#btnSendWhatsapp').on('click', function (e) {

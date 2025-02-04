@@ -98,7 +98,7 @@ class Order extends BaseController
         // handle POST
         if ($this->request->getMethod() == 'POST') {
             $data = $this->request->getPost();
-            // echo json_encode($data);
+            // echo json_encode($data); die;
 
             /**
              * $jns_order = $_POST['jns_order'];
@@ -153,7 +153,7 @@ class Order extends BaseController
             $data['include'] = $include;
 
             // if dalam kota
-            if($data['dalam_kota']) $data['jarak'] = 1;
+            if(isset($data['dalam_kota']) && $data['dalam_kota']=='on') $data['jarak'] = 1;
 
             $curlOpt = array_merge($curlOpt, $data);
             // echo json_encode($curlOpt); die();

@@ -72,21 +72,28 @@ class Rate extends BaseController
             $data = $this->request->getPost();
             // echo json_encode($data); die();
 
-            // Gunakan explode() untuk memisahkan berdasarkan "Indonesia"
-            $result = explode("Indonesia", $data['origins'][0]);
-            // Hapus elemen kosong yang mungkin muncul akibat pemisahan
-            $result = array_filter($result, fn($value) => trim($value) !== "");
-            // Reset indeks array agar dimulai dari 0
-            $result = array_values($result);
-            $result = array_map(fn($value) => trim($value, ", "), $result);
+            // Process origins only if the array is not empty and contains non-empty string
+            if (!empty($data['origins']) && is_array($data['origins']) && isset($data['origins'][0]) && !empty(trim($data['origins'][0]))) {
+                // Gunakan explode() untuk memisahkan berdasarkan "Indonesia"
+                $result = explode("Indonesia", $data['origins'][0]);
+                // Hapus elemen kosong yang mungkin muncul akibat pemisahan
+                $result = array_filter($result, fn($value) => trim($value) !== "");
+                // Reset indeks array agar dimulai dari 0
+                $result = array_values($result);
+                $result = array_map(fn($value) => trim($value, ", "), $result);
+
+                if (!empty($result[0])) {
+                    $data['lokasi_jemput'] = "Indonesia, " . $result[0];
+                }
+            }
 
             $data = [
                 'jns_order' => 1,
                 'kd_unit' => $data['kd_unit'],
                 'tgl_start' => date('Y-m-d H:i:s', strtotime($data['tgl_start'] . ' ' . $data['jam_start'])), //$data['tgl_start'] . ' ' . $data['jam_start'],
                 'tgl_finish' => date('Y-m-d H:i:s', strtotime($data['tgl_finish'] . ' ' . $data['jam_end'])), //$data['tgl_finish'] . ' ' . $data['jam_end'],
-                'lokasi_jemput' => ($result[0]) ? "Indonesia, " . $result[0] : $data['lokasi_jemput'],
-                'lokasi_tujuan' => $data['lokasi_tujuan'],
+                'lokasi_jemput' => !empty($data['lokasi_jemput']) ? $data['lokasi_jemput'] : null,
+                'lokasi_tujuan' => !empty($data['lokasi_tujuan']) ? $data['lokasi_tujuan'] : null,
                 'jarak' => ($data['jarak']) ? format_km($data['jarak']) : 1,
                 'is_bbm' => isset($data['is_bbm']) ? 1 : 0,
                 'is_makan' => isset($data['is_makan']) ? 1 : 0,
@@ -99,7 +106,7 @@ class Rate extends BaseController
                 'drop_akhir' => isset($data['drop_akhir']) ? 1 : 0,
             ];
 
-            if($data['dalam_kota']) {
+            if(isset($data['dalam_kota']) && $data['dalam_kota']=='on') {
                 $data['jarak'] = 1;
             }
 
@@ -108,19 +115,21 @@ class Rate extends BaseController
 
             if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'search_entry_order_tunggal_4.php');
 
-            // include
-            $include = 'Mobil, Driver, ';
-            if($data['is_bbm']) $include .= 'BBM, ';
-            if($data['is_makan']) $include .= 'Makan, ';
-            if($data['is_hotel']) $include .= 'Hotel, ';
-            if($data['drop_awal']) $include .= 'Drop Awal, ';
-            if($data['drop_akhir']) $include .= 'Drop Akhir, ';
-            $include = rtrim($include, ', ');
-            $listData['result_unit_order'][0]['include'] = $include;
-            
-            // set data pelanggan
-            $listData['result_unit_order'][0]['nama_pelanggan'] = $this->session->get('user')['nama'];
-            $listData['result_unit_order'][0]['no_hp'] = $this->session->get('user')['username'];
+            if($listData['success'] == 1) {
+                // include
+                $include = 'Mobil, Driver, ';
+                if($data['is_bbm']) $include .= 'BBM, ';
+                if($data['is_makan']) $include .= 'Makan, ';
+                if($data['is_hotel']) $include .= 'Hotel, ';
+                if($data['drop_awal']) $include .= 'Drop Awal, ';
+                if($data['drop_akhir']) $include .= 'Drop Akhir, ';
+                $include = rtrim($include, ', ');
+                $listData['result_unit_order'][0]['include'] = $include;
+                
+                // set data pelanggan
+                $listData['result_unit_order'][0]['nama_pelanggan'] = $this->session->get('user')['nama'];
+                $listData['result_unit_order'][0]['no_hp'] = $this->session->get('user')['username'];
+            }
 
             echo json_encode($listData);
         }

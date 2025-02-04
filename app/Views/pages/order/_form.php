@@ -71,24 +71,24 @@ helper('form');
   <div class="mb-3">
     <label class="form-label d-block">Biaya Tambahan</label>
     <div class="form-check form-check-inline">
-      <input type="checkbox" class="form-check-input" name="is_bbm" id="fuel" checked>
-      <label class="form-check-label" for="fuel">BBM</label>
+      <input type="checkbox" class="form-check-input" name="is_bbm" id="is_bbm" checked>
+      <label class="form-check-label" for="is_bbm">BBM</label>
     </div>
     <div class="form-check form-check-inline">
-      <input type="checkbox" class="form-check-input" name="is_makan" id="driverMeal">
-      <label class="form-check-label" for="driverMeal">Makan Driver</label>
+      <input type="checkbox" class="form-check-input" name="is_makan" id="is_makan">
+      <label class="form-check-label" for="is_makan">Makan Driver</label>
     </div>
     <div class="form-check form-check-inline">
-      <input type="checkbox" class="form-check-input" name="is_hotel" id="driverStay">
-      <label class="form-check-label" for="driverStay">Inap Driver</label>
+      <input type="checkbox" class="form-check-input" name="is_hotel" id="is_hotel">
+      <label class="form-check-label" for="is_hotel">Inap Driver</label>
     </div>
     <div class="form-check form-check-inline">
-      <input type="checkbox" class="form-check-input" name="drop_awal" id="transferIn">
-      <label class="form-check-label" for="transferIn">Transfer In</label>
+      <input type="checkbox" class="form-check-input" name="drop_awal" id="drop_awal">
+      <label class="form-check-label" for="drop_awal">Transfer In</label>
     </div>
     <div class="form-check form-check-inline">
-      <input type="checkbox" class="form-check-input" name="drop_akhir" id="transferOut">
-      <label class="form-check-label" for="transferOut">Transfer Out</label>
+      <input type="checkbox" class="form-check-input" name="drop_akhir" id="drop_akhir">
+      <label class="form-check-label" for="drop_akhir">Transfer Out</label>
     </div>
   </div>
 

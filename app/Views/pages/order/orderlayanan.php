@@ -158,47 +158,56 @@
     $('#formSearchOrder').on('submit', function(e) {
       e.preventDefault();
       
-      // Define validation rules
-      const validationRules = [
-        {
-          field: 'kotaTujuan',
-          message: 'Kota Tujuan harus dipilih'
-        },
-        {
-          field: 'pickupDate',
-          message: 'Tanggal/Jam Sewa harus dipilih'
-        },
-        {
-          field: 'returnDate',
-          message: 'Tanggal/Jam Sewa harus dipilih'
-        },
-        {
-          field: 'lokasiJemput',
-          message: 'Lokasi Jemput harus dipilih'
-        },
-        {
-          field: 'lokasiTujuan',
-          message: 'Lokasi Tujuan harus dipilih'
-        },
-        {
-          field: 'is_bbm',
-          message: 'Is BBm harus dipilih'
-        }
+      // Define base validation rules
+      const baseValidationRules = [
+        { field: 'kotaTujuan', message: 'Kota Tujuan harus dipilih' },
+        { field: 'pickupDate', message: 'Tanggal/Jam Sewa harus dipilih' },
+        { field: 'returnDate', message: 'Tanggal/Jam Sewa harus dipilih' },
+        { field: 'lokasiJemput', message: 'Lokasi Jemput harus dipilih' },
+        { field: 'lokasiTujuan', message: 'Lokasi Tujuan harus dipilih' },
+        { field: 'is_bbm', message: 'Is BBM harus dipilih' }
       ];
 
       // Validate all fields
       let isValid = true;
+      let errors = [];
+      
+      let validationRules = [...baseValidationRules]; // Copy base rules
+      // Skip validation if dalamKota is checked
+      if ($('#dalamKota').is(':checked')) {
+        validationRules = validationRules.filter(rule => 
+          rule.field !== 'lokasiJemput' && rule.field !== 'lokasiTujuan'
+        );
+      }
+
+      // Validate each field
       for (const rule of validationRules) {
-        if ($(`#${rule.field}`).val() === '') {
-          if($(`#${rule.field}`).parent().hasClass('invalid-feedback')) {
-            $(`#${rule.field}`).parent().removeClass('invalid-feedback');
-          } else {
-            $(`#${rule.field}`).parent().append('<div class="invalid-feedback">' + rule.message + '</div>');
-          }
-          $(`#${rule.field}`).addClass('is-invalid');
-          isValid = false;
+        const $field = $(`#${rule.field}`);
+
+        // Pastikan elemen ditemukan sebelum membaca nilainya
+        if ($field.length === 0) {
+            console.warn(`Elemen dengan ID '${rule.field}' tidak ditemukan.`);
+            continue; // Lewati iterasi jika elemen tidak ada
+        }
+
+        const $parent = $field.parent(); // Pastikan ini sesuai dengan struktur HTML Anda
+        const fieldValue = $field.val()?.trim() || ''; // Cegah error undefined
+
+        if (fieldValue === '') {
+            // Hapus pesan error lama jika sudah ada
+            $parent.find('.invalid-feedback').remove();
+
+            // Tambahkan pesan error
+            $parent.append(`<div class="invalid-feedback">${rule.message}</div>`);
+
+            // Tambahkan class untuk menandai error
+            $field.addClass('is-invalid');
+
+            isValid = false;
         } else {
-          $(`#${rule.field}`).removeClass('is-invalid');
+            // Hapus error jika input sudah benar
+            $field.removeClass('is-invalid');
+            $parent.find('.invalid-feedback').remove();
         }
       }
 
