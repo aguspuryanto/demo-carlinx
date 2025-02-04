@@ -144,19 +144,19 @@ class Order extends BaseController
                 'jml_bln' => isset($data['jml_bln']) ? $data['jml_bln'] : 0
             ];
 
-            $curlOpt = array_merge($curlOpt, $data);
-            // echo json_encode($curlOpt); die();
-
-            if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'search_entry_order_7.php');
-            // echo json_encode($listData);
-
             // include
             $include = 'Mobil, Driver, ';
             if($data['is_bbm']) $include .= 'BBM, ';
             if($data['is_makan']) $include .= 'Makan, ';
             if($data['is_hotel']) $include .= 'Hotel, ';
             $include = rtrim($include, ', ');
-            $listData['include'] = $include;
+            $data['include'] = $include;
+
+            $curlOpt = array_merge($curlOpt, $data);
+            // echo json_encode($curlOpt); die();
+
+            if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'search_entry_order_7.php');
+            // echo json_encode($listData);
         }
 
         return view('pages/order/searchorder', [
@@ -252,13 +252,6 @@ class Order extends BaseController
                 }
             
             } else {
-                // include
-                $include = 'Mobil, Driver, ';
-                // if($data['is_bbm']) $include .= 'BBM, ';
-                // if($data['is_makan']) $include .= 'Makan, ';
-                // if($data['is_hotel']) $include .= 'Hotel, ';
-                $include = rtrim($include, ', ');
-                $data['include'] = $include;
 
                 echo json_encode($data); //{"kode":"23050001AV0001","jenis_transmisi":"Manual","warna":"Hitam","jumlah":"1","nama":"Galih Pratama","no_hp":"0876543210","nik":"1234567","note":"ini note","jenis_pembayaran":"1","catatan":"ini catatan","voucher":"ini voucher"}
                 
