@@ -7,7 +7,7 @@
                     </a>
                 </div>
                 <div class="modal-body">
-                    <form action="<?= base_url('pengaturan/unit/harga') ?>" method="POST" id="formHargaUnit">
+                    <form action="" method="POST" id="formHargaUnit">
                     <!-- Pilih Wilayah -->
                     <div class="mb-3">
                         <label class="form-label">Pilih Wilayah</label>
@@ -84,7 +84,7 @@
                         Minimal Sewa : 1<br>
                         Lakukan langkah yg sama untuk Pilihan Wilayah yang lain
                     </div>
-                    <button type="submit" class="btn btn-primary w-100">SIMPAN HASIL PERHITUNGAN</button>
+                    <button type="submit" class="btn btn-primary w-100" id="btnSimpan">SIMPAN HASIL PERHITUNGAN</button>
                 </div>
             </form>
         </div>

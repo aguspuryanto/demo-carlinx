@@ -207,6 +207,10 @@
             console.log(event.relatedTarget.dataset.id);
         });
 
+        $('#btnSimpan').on('click', function() {
+            // $('#formHargaUnit').submit();
+        });
+
         var listTujuan = [];
         // Initialize Select2
         $('#lokasiJemput, #lokasiTujuan').select2({
