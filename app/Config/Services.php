@@ -30,13 +30,14 @@ class Services extends BaseService
      *     return new \CodeIgniter\Example();
      * }
      */
-    public static function inspector($getShared = true)
-    {
-        if ($getShared) {
-            return static::getSharedInstance('inspector');
-        }
+    
+    // public static function inspector($getShared = true)
+    // {
+    //     if ($getShared) {
+    //         return static::getSharedInstance('inspector');
+    //     }
 
-        $config = config('Inspector');
-        return new \Inspector\CodeIgniter\Inspector($config);
-    }
+    //     $config = config('Inspector');
+    //     return new \Inspector\CodeIgniter\Inspector($config);
+    // }
 }

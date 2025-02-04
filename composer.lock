@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fee7e64835ada3166ec6a45655385e6b",
+    "content-hash": "13bbc04b1d5bb1f39b3852f8d9313a60",
     "packages": [
         {
             "name": "codeigniter4/framework",
@@ -404,106 +404,6 @@
                 }
             ],
             "time": "2024-07-18T11:15:46+00:00"
-        },
-        {
-            "name": "inspector-apm/inspector-codeigniter",
-            "version": "0.7.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/inspector-apm/inspector-codeigniter.git",
-                "reference": "3eaf2d339b169d207bf2fea52695df90e727742a"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/inspector-apm/inspector-codeigniter/zipball/3eaf2d339b169d207bf2fea52695df90e727742a",
-                "reference": "3eaf2d339b169d207bf2fea52695df90e727742a",
-                "shasum": ""
-            },
-            "require": {
-                "codeigniter4/framework": "^4.0",
-                "inspector-apm/inspector-php": "^3.7",
-                "php": ">=7.4"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Inspector\\CodeIgniter\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Valerio Barbera",
-                    "email": "valerio@inspector.dev"
-                },
-                {
-                    "name": "Benedict Tshaba",
-                    "email": "benedict@prysis.co.za"
-                }
-            ],
-            "description": "Code Execution Monitoring for CodeIgniter applications.",
-            "keywords": [
-                "codeigniter4",
-                "inspector",
-                "monitoring",
-                "php"
-            ],
-            "support": {
-                "issues": "https://github.com/inspector-apm/inspector-codeigniter/issues",
-                "source": "https://github.com/inspector-apm/inspector-codeigniter/tree/0.7.1"
-            },
-            "time": "2025-01-31T11:15:23+00:00"
-        },
-        {
-            "name": "inspector-apm/inspector-php",
-            "version": "3.9.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/inspector-apm/inspector-php.git",
-                "reference": "44bcac4c2a758c027f0eee20addec7fbbb1f4a09"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/inspector-apm/inspector-php/zipball/44bcac4c2a758c027f0eee20addec7fbbb1f4a09",
-                "reference": "44bcac4c2a758c027f0eee20addec7fbbb1f4a09",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.2"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "^9.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Inspector\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Valerio Barbera",
-                    "email": "valerio@inspector.dev"
-                }
-            ],
-            "description": "Inspector for PHP applications.",
-            "keywords": [
-                "inspector",
-                "monitoring",
-                "php"
-            ],
-            "support": {
-                "issues": "https://github.com/inspector-apm/inspector-php/issues",
-                "source": "https://github.com/inspector-apm/inspector-php/tree/3.9.0"
-            },
-            "time": "2025-01-22T16:06:35+00:00"
         },
         {
             "name": "laminas/laminas-escaper",

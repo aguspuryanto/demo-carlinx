@@ -72,13 +72,13 @@ class Filters extends BaseFilters
     public array $globals = [
         'before' => [
             'auth' => ['except' => ['/', '/login', '/logout']], // Tidak berlaku untuk halaman login/logout
-            'inspector'   // Inspector APM
+            // 'inspector'   // Inspector APM
             // 'honeypot',
             // 'csrf',
             // 'invalidchars',
         ],
         'after' => [
-            'inspector'   // Inspector APM
+            // 'inspector'   // Inspector APM
             // 'honeypot',
             // 'secureheaders',
         ],
