@@ -86,6 +86,11 @@
 <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
 
 <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+<style>
+    body .select2-container {
+        z-index: 9999 !important;
+    }
+</style>
 <?= $this->endSection() ?>
 
 <?= $this->section('scripts') ?>
@@ -99,6 +104,7 @@
 <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-clustering.js"></script>
 <script>
     $(document).ready(function() {
+
         const listKategori = '<?= json_encode($listKategori['result_kategori']) ?>';
         const listPaketBbm = '<?= json_encode($listPaketBbm['result_bbm']) ?>';
 
@@ -106,15 +112,19 @@
             theme: 'bootstrap-5',
             placeholder: 'Type to search...',
             minimumInputLength: 2,
-            data: listKategori
+            data: listKategori,
+            width: '100%',
+            dropdownParent: $("#addModal")
         });
 
-        // $('#bbm').select2({
-        //     theme: 'bootstrap-5',
-        //     placeholder: 'Type to search...',
-        //     minimumInputLength: 2,
-        //     data: listPaketBbm
-        // });
+        $('#bbm').select2({
+            theme: 'bootstrap-5',
+            placeholder: 'Type to search...',
+            minimumInputLength: 2,
+            data: listPaketBbm,
+            width: '100%',
+            dropdownParent: $("#addModal")
+        });
 
         const baseUrlImg = "<?= base_url('proxy.php?url=' . $_ENV['API_BASEURL'] . 'images/') ?>";
         $('#addModal').on('show.bs.modal', function (event) {

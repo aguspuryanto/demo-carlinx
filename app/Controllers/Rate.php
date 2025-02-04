@@ -87,7 +87,7 @@ class Rate extends BaseController
                 'tgl_finish' => date('Y-m-d H:i:s', strtotime($data['tgl_finish'] . ' ' . $data['jam_end'])), //$data['tgl_finish'] . ' ' . $data['jam_end'],
                 'lokasi_jemput' => ($result[0]) ? "Indonesia, " . $result[0] : $data['lokasi_jemput'],
                 'lokasi_tujuan' => $data['lokasi_tujuan'],
-                'jarak_tempuh' => ($data['jarak']) ? format_km($data['jarak']) : 0,
+                'jarak' => ($data['jarak']) ? format_km($data['jarak']) : 1,
                 'is_bbm' => isset($data['is_bbm']) ? 1 : 0,
                 'is_makan' => isset($data['is_makan']) ? 1 : 0,
                 'is_hotel' => isset($data['is_hotel']) ? 1 : 0,
@@ -98,6 +98,10 @@ class Rate extends BaseController
                 'drop_awal' => isset($data['drop_awal']) ? 1 : 0,
                 'drop_akhir' => isset($data['drop_akhir']) ? 1 : 0,
             ];
+
+            if($data['dalam_kota']) {
+                $data['jarak'] = 1;
+            }
 
             $curlOpt = array_merge($curlOpt, $data);
             // echo json_encode($curlOpt); die();

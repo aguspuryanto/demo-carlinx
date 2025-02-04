@@ -122,64 +122,7 @@
 
     // Event listener untuk tombol Tambah Rute
     $('#tambahRute').click(function() {
-        let lokasiJemput = $('#lokasiJemput').val();
-        let lokasiTujuan = $('#lokasiTujuan').val();
-
-        // Validasi input, tidak boleh kosong
-        if (lokasiJemput=='' || lokasiTujuan=='') {
-            alert('Lokasi Jemput dan Tujuan tidak boleh kosong.');
-            return;
-        }
-
-        // if not exists, then push to lokasiJemputArr
-        if(!lokasiJemputArr.includes(lokasiJemput)) {
-          lokasiJemputArr.push(lokasiJemput);
-        }
-        console.log(lokasiJemputArr, 'lokasiJemputArr');
-
-        // if not exists, then push to lokasiTujuanArr
-        if(!lokasiTujuanArr.includes(lokasiTujuan)) {
-          lokasiTujuanArr.push(lokasiTujuan);
-        }
-        console.log(lokasiTujuanArr, 'lokasiTujuanArr');
-
-        // set value to input
-        $('input[name="origins[]"]').val(lokasiJemputArr);
-        $('input[name="destinations[]"]').val(lokasiTujuanArr);
-
-        const rute = `${lokasiJemput.substr(lokasiJemput.lastIndexOf(",") + 1)} - ${lokasiTujuan.substr(lokasiTujuan.lastIndexOf(",") + 1)}`;
-
-        // Cek apakah rute sudah ada di daftar
-        let ruteSudahAda = false;
-        $('#listRute li').each(function() {
-            if ($(this).text() === rute) {
-                ruteSudahAda = true;
-                return false; // Hentikan iterasi
-            }
-        });
-
-        if (ruteSudahAda) {
-            console.log('Rute sudah ada di daftar.');
-            // set lokasi jemput with tujuan
-            $('#lokasiJemput').select2("trigger", "select", {
-              data: { id: lokasiTujuan, text: lokasiTujuan.substr(lokasiTujuan.lastIndexOf(",") + 1) }
-            });
-            // reset lokasi tujuan
-            $('#lokasiTujuan').select2("trigger", "select", {
-              data: { id: '', text: '' }
-            });
-        } else {
-            if(lokasiJemput=='' || lokasiTujuan=='') return false;
-
-            // Tambahkan rute ke daftar
-            $('#listRute').append(`<li class="list-group-item">${rute}</li>`);
-
-            // hitung jarak
-            hitungJarak(lokasiJemput, lokasiTujuan).then(jarak => {
-                console.log(jarak, '182_jarak');
-                $('#jarak').val(jarak / 1000); // Convert to kilometers
-            });
-        }
+      tambahRute();
     });
 
     // Event listener untuk tombol Switch
@@ -205,18 +148,17 @@
         });
     });
 
-    $('#lokasiTujuan').on('change', async function() {
-        // const origin = $('#lokasiJemput').val();
-        // const destination = $('#lokasiTujuan').val();
-        // let totJarak = 0;
+    $('#dalamKota').on('change', function() {
+      if($(this).is(':checked')) {
+        $('#lokasiJemput, #lokasiTujuan').val('').trigger('change.select2');
+        $('#lokasiJemput, #lokasiTujuan').attr('disabled', true);
+      } else {
+        $('#lokasiJemput, #lokasiTujuan').attr('disabled', false);
+      }
+    });
 
-        $('#tambahRute').trigger('click');
-        
-        // hitungJarak(origin, destination).then(jarak => {
-        //     totJarak += jarak;
-        //     console.log(totJarak, '215_jarak');
-        //     $('#jarak').val(totJarak / 1000); // Convert to kilometers
-        // });
+    $('#lokasiTujuan').on('change', async function() {
+      tambahRute();
     });
 
     $('#btnHitung').on('click', function (e) {
@@ -358,6 +300,63 @@
         }
       });
     });
+
+    function tambahRute() {
+      let lokasiJemput = $('#lokasiJemput').val();
+      let lokasiTujuan = $('#lokasiTujuan').val();
+
+      // Validasi input, tidak boleh kosong
+      if (lokasiJemput=='' || lokasiTujuan=='') {
+          alert('Lokasi Jemput dan Tujuan tidak boleh kosong.');
+          return;
+      }
+
+      // if not exists, then push to lokasiJemputArr
+      if(!lokasiJemputArr.includes(lokasiJemput)) {
+        lokasiJemputArr.push(lokasiJemput);
+      }
+      console.log(lokasiJemputArr, 'lokasiJemputArr');
+
+      // if not exists, then push to lokasiTujuanArr
+      if(!lokasiTujuanArr.includes(lokasiTujuan)) {
+        lokasiTujuanArr.push(lokasiTujuan);
+      }
+      console.log(lokasiTujuanArr, 'lokasiTujuanArr');
+      
+      const rute = `${lokasiJemput.substr(lokasiJemput.lastIndexOf(",") + 1)} - ${lokasiTujuan.substr(lokasiTujuan.lastIndexOf(",") + 1)}`;
+
+      // Cek apakah rute sudah ada di daftar
+      let ruteSudahAda = false;
+      $('#listRute li').each(function() {
+          if ($(this).text() === rute) {
+              ruteSudahAda = true;
+              return false; // Hentikan iterasi
+          }
+      });
+
+      if (ruteSudahAda) {
+          console.log('Rute sudah ada di daftar.');
+          // set lokasi jemput with tujuan
+          $('#lokasiJemput').select2("trigger", "select", {
+            data: { id: lokasiTujuan, text: lokasiTujuan.substr(lokasiTujuan.lastIndexOf(",") + 1) }
+          });
+          // reset lokasi tujuan
+          $('#lokasiTujuan').select2("trigger", "select", {
+            data: { id: '', text: '' }
+          });
+      } else {
+          if(lokasiJemput=='' || lokasiTujuan=='') return false;
+
+          // Tambahkan rute ke daftar
+          $('#listRute').append(`<li class="list-group-item">${rute}</li>`);
+
+          // hitung jarak
+          hitungJarak(lokasiJemput, lokasiTujuan).then(jarak => {
+              console.log(jarak, '182_jarak');
+              $('#jarak').val(jarak / 1000); // Convert to kilometers
+          });
+      }
+    }
 
     async function hitungJarak(origin, destination) {
         let totJarak = 0;

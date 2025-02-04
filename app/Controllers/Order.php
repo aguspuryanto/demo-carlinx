@@ -131,7 +131,7 @@ class Order extends BaseController
                 'tgl_finish' => date('Y-m-d H:i', strtotime($data['tgl_finish'] . ' ' . $data['jam_finish'])),
                 'lokasi_jemput' => isset($data['lokasi_jemput']) ? $data['lokasi_jemput'] : '',
                 'lokasi_tujuan' => isset($data['lokasi_tujuan']) ? $data['lokasi_tujuan'] : '',
-                'jarak' => isset($data['jarak']) ? ($data['jarak']) : 0, //40.165 meter
+                'jarak' => isset($data['jarak']) ? ($data['jarak']) : 1, //40.165 meter
                 'is_bbm' => isset($data['is_bbm']) ? 1 : 0,
                 'is_makan' => isset($data['is_makan']) ? 1 : 0,
                 'is_hotel' => isset($data['is_hotel']) ? 1 : 0,
@@ -151,6 +151,9 @@ class Order extends BaseController
             if($data['is_hotel']) $include .= 'Hotel, ';
             $include = rtrim($include, ', ');
             $data['include'] = $include;
+
+            // if dalam kota
+            if($data['dalam_kota']) $data['jarak'] = 1;
 
             $curlOpt = array_merge($curlOpt, $data);
             // echo json_encode($curlOpt); die();

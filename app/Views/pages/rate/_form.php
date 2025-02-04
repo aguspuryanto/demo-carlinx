@@ -41,23 +41,25 @@
 
   <!-- Rute Perjalanan -->
   <div class="mb-3">
-    <label class="form-label">Rute Perjalanan</label>
+    <!-- <label class="form-label">Rute Perjalanan</label> -->
     <div class="row g-0">
       <div class="col-md-6">
-        <div class="input-group">
+        <!-- <div class="input-group"> -->
+          <label class="form-label">Rute Perjalanan</label>
           <select id="lokasiJemput" name="lokasi_jemput" class="form-select select2">
             <option value="">Pilih Lokasi Jemput</option>
           </select>
-          <button class="btn btn-outline-primary" type="button" id="switchButton"><i class="fa fa-exchange"></i></button>
-        </div>
+          <!-- <button class="btn btn-outline-primary" type="button" id="switchButton"><i class="fa fa-exchange"></i></button>
+        </div> -->
       </div>
       <div class="col-md-6">
-        <div class="input-group">
+        <!-- <div class="input-group"> -->
+          <label class="form-label"><input type="checkbox" id="dalamKota" name="dalam_kota" class="form-check-input"> Dalam Kota</label>
           <select id="lokasiTujuan" name="lokasi_tujuan" class="form-select select2">
             <option value="">Pilih Lokasi Tujuan</option>
           </select>
-          <button class="btn btn-outline-primary" type="button" id="tambahRute"><i class="fa fa-plus-square"></i></button>
-        </div>
+          <!-- <button class="btn btn-outline-primary" type="button" id="tambahRute"><i class="fa fa-plus-square"></i></button>
+        </div> -->
       </div>
     </div>
 
