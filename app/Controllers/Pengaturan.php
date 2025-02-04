@@ -604,4 +604,70 @@ class Pengaturan extends BaseController
 
         return view('pengaturan/ganti-pwd', ['title' => 'Ganti Password', 'sessionUser' => $sessionUser]);
     }
+
+    public function hitungHarga()
+    {
+       /*Api yg kepakae:
+        1. hitung_harga_dasar.php --> klo klik tombol gambar panah
+        2. update_harga_dasar.php --> klo klik Simpan Hasil Perhitungan
+        
+        Parameter:
+        1. hitung_harga_dasar:
+        - kd_member
+        - kd_unit
+        - wilayah
+        - jarak
+        - harga
+        - hari
+        2. update_harga_dasar:
+        - kd_unit
+        - wilayah
+        - harga
+
+        dimana
+        1. Wilayah --> dalam kota = 1, Dlm Propinsi. = 2, Luar Batas = 3*/ 
+
+        
+        /* params: 
+         * caller optional
+         * kd_member required
+         */
+
+        $listData   = [];
+        $curlOpt    = [
+            'caller' => 'MASTER',
+            'kd_member' => $this->session->get('user')['kode']
+        ];
+        
+        // handle POST
+        if ($this->request->getMethod() == 'POST') {
+            $data = $this->request->getPost();
+
+            // lakukan validasi data
+            $validation =  \Config\Services::validation();
+            $validation->setRules([
+                'wilayah' => 'required',
+                'jarak' => 'required',
+                'harga' => 'required',
+                'hari' => 'required',
+            ]);
+
+            $isDataValid = $validation->withRequest($this->request)->run();
+            if($isDataValid){
+                $curlOpt = array_merge($curlOpt, $data);
+                $listData = getCurl($curlOpt, $this->ipAddress . 'hitung_harga_dasar.php');
+                // echo json_encode($listData);
+            }
+        }
+
+        echo json_encode($listData);
+    }
+
+    public function updateHarga()
+    {
+        /* params: 
+         * caller required, default: MASTER
+         * kd_member required
+         */
+    }
 }

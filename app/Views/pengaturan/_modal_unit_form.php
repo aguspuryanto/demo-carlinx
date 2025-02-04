@@ -1,4 +1,4 @@
-    <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel">
+    <div class="modal fade" id="addModal" role="dialog" aria-labelledby="addModalLabel">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <form action="<?= base_url('pengaturan/unit') ?>" method="POST">

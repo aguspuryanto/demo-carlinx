@@ -7,7 +7,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="kategori" class="form-label">Kategori</label>
-                    <select class="form-select" id="kategori" name="kategori">
+                    <select class="form-select select2" id="kategori" name="kategori">
                         <option value="">Pilih Kategori</option>
                         <?php foreach ($listKategori['result_kategori'] as $kategori_it) : ?>
                         <option value="<?= $kategori_it['kode'] ?>" selected><?= $kategori_it['descr'] ?></option>
@@ -16,7 +16,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="bbm" class="form-label">BBM</label>
-                    <select class="form-select" id="bbm" name="bbm">
+                    <select class="form-select select2" id="bbm" name="bbm">
                         <option value="">Pilih BBM</option>
                         <?php foreach ($listPaketBbm['result_bbm'] as $bbm_it) : ?>
                         <option value="<?= $bbm_it['kode'] ?>" selected><?= $bbm_it['descr'] ?></option>
