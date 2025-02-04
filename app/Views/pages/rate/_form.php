@@ -43,7 +43,7 @@
   <div class="mb-3">
     <!-- <label class="form-label">Rute Perjalanan</label> -->
     <div class="row g-0">
-      <div class="col-md-6">
+      <div class="col-6 col-md-6">
         <!-- <div class="input-group"> -->
           <label class="form-label">Rute Perjalanan</label>
           <select id="lokasiJemput" name="lokasi_jemput" class="form-select select2">
@@ -52,7 +52,7 @@
           <!-- <button class="btn btn-outline-primary" type="button" id="switchButton"><i class="fa fa-exchange"></i></button>
         </div> -->
       </div>
-      <div class="col-md-6">
+      <div class="col-6 col-md-6">
         <!-- <div class="input-group"> -->
           <label class="form-label"><input type="checkbox" id="dalamKota" name="dalam_kota" class="form-check-input"> Dalam Kota</label>
           <select id="lokasiTujuan" name="lokasi_tujuan" class="form-select select2">
