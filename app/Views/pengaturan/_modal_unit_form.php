@@ -3,10 +3,11 @@
             <div class="modal-content">
                 <form action="<?= base_url('pengaturan/unit') ?>" method="POST">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addModalLabel">Tambah Unit</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span>&times;</span>
-                    </button>
+                    <a href="#" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                        <i class="fa fa-arrow-left"></i> Unit
+                    </a>
+                    <!-- <h5 class="modal-title" id="addModalLabel">Tambah Unit</h5> -->
+                    <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
                 </div>
                 <div class="modal-body">
                     <?php include_once '_form_unit.php'; ?>

@@ -76,6 +76,7 @@
     <!-- end main page content -->
      
     <?php include_once '_modal_unit_form.php'; ?>
+    <?php include_once '_modal_harga_unit.php'; ?>
 
 <?= $this->endSection() ?>
 
@@ -88,7 +89,7 @@
 
             if(event.relatedTarget.dataset.id){
                 // edit header modal
-                $('#addModalLabel').text('Edit Unit');
+                $('#addModalLabel').text('Unit');
                 
                 // get data-item
                 var item = JSON.parse(event.relatedTarget.dataset.item);

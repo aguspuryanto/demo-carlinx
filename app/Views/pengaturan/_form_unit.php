@@ -46,33 +46,38 @@
             </div>
 
             <div class="mb-4">
-                <h5>Harga dan Biaya Pelayanan</h5>
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="m-0">Harga dan Biaya Pelayanan</h5>
+                    <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#hargaModal">
+                        <i class="fa fa-calculator"></i>
+                    </a>
+                </div>
                 <div class="row g-3">
-                    <div class="col-md-4">
+                    <div class="col-sm-4 col-md-4">
                         <label for="dlm_kota" class="form-label">Dalam Kota</label>
                         <input type="number" class="form-control" id="dlm_kota" name="dlm_kota"  value="0">
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-sm-4 col-md-4">
                         <label for="dlm_prop" class="form-label">Luar Kota</label>
                         <input type="number" class="form-control" id="dlm_prop" name="dlm_prop"  value="0">
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-sm-4 col-md-4">
                         <label for="luar_prop" class="form-label">Luar Batas</label>
                         <input type="number" class="form-control" id="luar_prop" name="luar_prop" value="0">
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-sm-4 col-md-4">
                         <label for="drop_in" class="form-label">Transfer (%)</label>
                         <input type="number" class="form-control" id="drop_in" name="drop_in"  value="0">
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-sm-4 col-md-4">
                         <label for="over_time" class="form-label">OverTime (%)</label>
                         <input type="number" class="form-control" id="over_time" name="over_time" value="0">
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-sm-4 col-md-4">
                         <label for="stgh_hr" class="form-label">12 Jam (%)</label>
                         <input type="number" class="form-control" id="stgh_hr" name="stgh_hr" value="0">
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-sm-4 col-md-4">
                         <label for="fee" class="form-label">Margin (Rp)</label>
                         <input type="number" class="form-control" id="fee" name="fee" value="0">
                     </div>
