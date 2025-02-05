@@ -61,7 +61,7 @@
                                     <td>Rp. <?= number_format($item['dlm_prop'], 0, ',', '.') ?></td>
                                     <td>Rp. <?= number_format($item['luar_prop'], 0, ',', '.') ?></td>
                                     <td>
-                                        <a href="#" class="btn btn-warning" data-id="<?= $item['kode'] ?>" data-item="<?= esc(json_encode($item)) ?>" data-bs-toggle="modal" data-bs-target="#addModal"><i class="fas fa-edit"></i></a>
+                                        <a href="<?= base_url('pengaturan/unit-detail/' . $item['kode']) ?>" class="btn btn-warning" data-xid="<?= $item['kode'] ?>" data-xitem="<?= esc(json_encode($item)) ?>" data-bs-xtoggle="modal" data-bs-xtarget="#addModal"><i class="fas fa-edit"></i></a>
                                     </td>
                                 </tr>
                             <?php endforeach ?>

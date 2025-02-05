@@ -102,6 +102,8 @@ $routes->group('pengaturan', ['filter' => 'auth'], function($routes) {
     $routes->get('unit-detail/(:segment)', 'Pengaturan::unitDetail/$1');
     $routes->add('pengguna', 'Pengaturan::pengguna');
     $routes->add('ganti-password', 'Pengaturan::gantiPassword');
+    $routes->post('hitung-harga', 'Pengaturan::hitungHarga');
+    $routes->add('update-harga', 'Pengaturan::updateHarga');
 });
 
 $routes->group('api', function($routes) {

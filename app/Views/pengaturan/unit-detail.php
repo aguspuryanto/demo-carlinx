@@ -140,22 +140,25 @@
 
             // append id into form class modal-body
             // if name id is exist, then set value id
-            if($('.modal-body input[name="id"]').length > 0){
-                $('.modal-body input[name="id"]').val(item.kode);
-            } else {
-                // append id into form class modal-body
-                $('.modal-body').append('<input type="hidden" name="id" value="' + item.kode + '">');
-            }
+            // if($('.modal-body input[name="id"]').length > 0){
+            //     $('.modal-body input[name="id"]').val(item.kode);
+            // } else {
+            //     // append id into form class modal-body
+            //     $('.modal-body').append('<input type="hidden" name="id" value="' + item.kode + '">');
+            // }
         };
 
         initForm();
 
-        var listTujuan = [];
+        let listTujuan = [];
+        let lokasiJemputArr = [];
+        let lokasiTujuanArr = [];
         // Initialize Select2
-        $('#lokasiJemput, #lokasiTujuan').select2({
+        $('#lokasiJemput2, #lokasiTujuan2').select2({
             theme: 'bootstrap-5',
             placeholder: 'Type to search...',
             minimumInputLength: 3,
+            dropdownParent: $('#hargaModal'),
             ajax: {
                 url: '<?= $_ENV['API_BASEURL_HERE'] ?>/autocomplete',
                 dataType: 'json',
@@ -192,9 +195,9 @@
             // console.log($('#lokasiJemput').val());
         });        
 
-        $('#lokasiTujuan').on('change', async function() {
-            let lokasiJemput = $('#lokasiJemput').val();
-            let lokasiTujuan = $('#lokasiTujuan').val();
+        $('#lokasiTujuan2').on('change', async function() {
+            let lokasiJemput = $('#lokasiJemput2').val();
+            let lokasiTujuan = $('#lokasiTujuan2').val();
 
             // Validasi input, tidak boleh kosong
             if (lokasiJemput=='' || lokasiTujuan=='') {
@@ -204,19 +207,19 @@
 
             // if not exists, then push to lokasiJemputArr
             if(!lokasiJemputArr.includes(lokasiJemput)) {
-            lokasiJemputArr.push(lokasiJemput);
+                lokasiJemputArr.push(lokasiJemput);
             }
             console.log(lokasiJemputArr, 'lokasiJemputArr');
 
             // if not exists, then push to lokasiTujuanArr
             if(!lokasiTujuanArr.includes(lokasiTujuan)) {
-            lokasiTujuanArr.push(lokasiTujuan);
+                lokasiTujuanArr.push(lokasiTujuan);
             }
             console.log(lokasiTujuanArr, 'lokasiTujuanArr');
 
             // set value to input
-            $('input[name="origins[]"]').val(lokasiJemputArr);
-            $('input[name="destinations[]"]').val(lokasiTujuanArr);
+            // $('input[name="origins[]"]').val(lokasiJemputArr);
+            // $('input[name="destinations[]"]').val(lokasiTujuanArr);
 
             const rute = `${lokasiJemput.substr(lokasiJemput.lastIndexOf(",") + 1)} - ${lokasiTujuan.substr(lokasiTujuan.lastIndexOf(",") + 1)}`;
 
@@ -255,29 +258,27 @@
 
         // modal-2
         const baseValidationRules = [
-            { field: 'lokasiJemput', message: 'Lokasi Jemput harus dipilih' },
-            { field: 'lokasiTujuan', message: 'Lokasi Tujuan harus dipilih' }
+            { field: 'lokasiJemput2', message: 'Lokasi Jemput harus dipilih' },
+            { field: 'lokasiTujuan2', message: 'Lokasi Tujuan harus dipilih' },
+            { field: 'harga', message: 'Harga harus diisi' }
         ];
 
-        $('#hargaModal').on('show.bs.modal', function (event) {
+        $(document).find('#hargaModal').on('show.bs.modal', function (event) {
             console.log(event.relatedTarget.dataset.id);
-            $(this).find('.select2').each(function() {
-                $(this).select2({
-                    dropdownParent: $('#hargaModal')
-                });
-            });
+            let formHarga = $('#formHargaUnit');
+            if(formHarga.find('input[name="id"]').length > 0){
+                formHarga.find('input[name="id"]').val(event.relatedTarget.dataset.id);
+            } else {
+                // append id into form class modal-body
+                formHarga.append('<input type="hidden" name="id" value="' + event.relatedTarget.dataset.id + '">');
+            }
         });
 
-        $(document).find('#lokasiTujuan2').on('change', async function() {
-            let lokasiJemput = $('#lokasiJemput2').val();
-            let lokasiTujuan = $('#lokasiTujuan2').val();
-            console.log('lokasiJemput2 = ' + lokasiJemput + ', lokasiTujuan2 = ' + lokasiTujuan);
-        });
-
-        $(document).on('click', '#btnHitung', function() {
+        $(document).on('click', '#btnHitung', function(e) {
+            e.preventDefault();
             let wilayah = $('input[name="wilayah"]:checked').val();
-            let lokasiJemput = $(document).find('#lokasiJemput').val();
-            let lokasiTujuan = $(document).find('#lokasiTujuan').val();
+            let lokasiJemput = $(document).find('#lokasiJemput2').val();
+            let lokasiTujuan = $(document).find('#lokasiTujuan2').val();
             
             console.log('wilayah = ' + wilayah + ', lokasiJemput = ' + lokasiJemput + ', lokasiTujuan = ' + lokasiTujuan);
 
@@ -313,11 +314,136 @@
                     $parent.find('.invalid-feedback').remove();
                 }
             }
+
+            if(isValid) {
+                // $('#formHargaUnit').submit();
+                $.ajax({
+                    url: '<?= base_url('pengaturan/hitung-harga') ?>',
+                    type: 'POST',
+                    data: new FormData($('#formHargaUnit')[0]),
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        console.log(response, 'response before parsing');
+                        // Jika response masih string, ubah ke JSON
+                        if (typeof response === 'string') {
+                            response = JSON.parse(response);
+                        }
+                        // console.log(response, 'response after parsing');
+
+                        if (response.success == 1) {
+                            if (response.result_harga_dasar && response.result_harga_dasar.length > 0) {
+                                let harga_dasar = response.result_harga_dasar[0].hrg_dasar; // Change to hrg_dasar
+                                console.log(harga_dasar, 'harga_dasar');
+                                $(document).find('input#harga_dasar').val(harga_dasar);
+                                $('#btnSimpan').prop('disabled', false);
+                            } else {
+                                console.error('No harga_dasar found in the response');
+                            }
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error:', error);
+                    }
+                });
+            }
         });
 
-        $(document).on('click', '#btnHitung', function() {
-            // $('#formHargaUnit').submit();
+        $(document).on('click', '#btnSimpan', function(e) {
+            e.preventDefault();
+            $('#formHargaUnit').submit();
+            
+            // $.ajax({
+            //     url: '<?= base_url('pengaturan/update-harga') ?>',
+            //     type: 'POST',
+            //     data: new FormData($('#formHargaUnit')[0]),
+            //     processData: false,
+            //     contentType: false,
+            //     success: function(response) {
+            //         console.log(response, 'response before parsing');
+            //         // Jika response masih string, ubah ke JSON
+            //         if (typeof response === 'string') {
+            //             response = JSON.parse(response);
+            //         }
+            //         console.log(response, 'response after parsing');
+            //     },
+            //     error: function(xhr, status, error) {
+            //         console.error('Error:', error);
+            //     }
+            // });
         });
     });
+
+    async function hitungJarak(origin, destination) {
+        let totJarak = 0;
+        
+        if (!origin || !destination) return;
+
+        try {
+            // Get coordinates for origin
+            const originResponse = await fetch(`https://geocode.search.hereapi.com/v1/geocode?q=${encodeURIComponent(origin)}&apiKey=<?= $_ENV['API_KEY_HERE'] ?>`);
+            const originData = await originResponse.json();
+            
+            // Get coordinates for destination
+            const destResponse = await fetch(`https://geocode.search.hereapi.com/v1/geocode?q=${encodeURIComponent(destination)}&apiKey=<?= $_ENV['API_KEY_HERE'] ?>`);
+            const destData = await destResponse.json();
+
+            if (!originData.items.length || !destData.items.length) {
+                console.error('Location not found');
+                return;
+            }
+
+            const originCoords = `${originData.items[0].position.lat},${originData.items[0].position.lng}`;
+            const destCoords = `${destData.items[0].position.lat},${destData.items[0].position.lng}`;
+
+            // cek listRute
+            let listRute = [];
+            $('#listRute li').each(function() {
+                listRute.push($(this).text().trim());
+            });
+            console.log(listRute, 'listRute');
+            console.log(listRute.length, 'jumlah listRute');
+            
+            // Calculate route 1 way
+            const routeResponse = await fetch(`https://router.hereapi.com/v8/routes?transportMode=car&origin=${originCoords}&destination=${destCoords}&return=summary&apikey=<?= $_ENV['API_KEY_HERE'] ?>`);
+            const routeData = await routeResponse.json();
+
+            // const distance = routeData.routes[0].sections[0].summary.length;
+            totJarak += routeData.routes[0].sections[0].summary.length;
+
+            if(listRute.length == 1) {
+                // Calculate route 2 way
+                const routeResponse2 = await fetch(`https://router.hereapi.com/v8/routes?transportMode=car&origin=${destCoords}&destination=${originCoords}&return=summary&apikey=<?= $_ENV['API_KEY_HERE'] ?>`);
+                const routeData2 = await routeResponse2.json();
+
+                const distance = routeData.routes[0].sections[0].summary.length;
+                totJarak += routeData2.routes[0].sections[0].summary.length;
+            } else if(listRute.length > 1) {
+              // lokasiJemputArr = ['Indonesia, 60261, Surabaya', 'Indonesia, 65119, Malang Kota', 'Indonesia, 64126, Kediri Kota']
+              // remove firt element
+              lokasiJemputArr.shift();
+
+              // re-calculate
+              for (let i = 0; i < lokasiJemputArr.length; i++) {
+                const origin = lokasiJemputArr[i];
+                const destination = lokasiTujuanArr[i];
+                console.log('origin:' + origin + ', destination:' + destination);
+
+                // Calculate route 2 way
+                // const routeResponse2 = await fetch(`https://router.hereapi.com/v8/routes?transportMode=car&origin=${destination}&destination=${origin}&return=summary&apikey=<?= $_ENV['API_KEY_HERE'] ?>`);
+                // const routeData2 = await routeResponse2.json();
+
+                // const distance = routeData.routes[0].sections[0].summary.length;
+                // totJarak += routeData2.routes[0].sections[0].summary.length;
+              }
+            }
+
+            let roundedDown = Math.round(parseFloat(totJarak));
+            return roundedDown; // return in kilometers
+            
+        } catch (error) {
+            console.error('Error calculating route:', error);
+        }
+    }
 </script>
 <?= $this->endSection() ?>

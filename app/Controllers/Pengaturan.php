@@ -653,7 +653,6 @@ class Pengaturan extends BaseController
     {
        /*Api yg kepakae:
         1. hitung_harga_dasar.php --> klo klik tombol gambar panah
-        2. update_harga_dasar.php --> klo klik Simpan Hasil Perhitungan
         
         Parameter:
         1. hitung_harga_dasar:
@@ -663,14 +662,9 @@ class Pengaturan extends BaseController
         - jarak
         - harga
         - hari
-        2. update_harga_dasar:
-        - kd_unit
-        - wilayah
-        - harga
 
         dimana
-        1. Wilayah --> dalam kota = 1, Dlm Propinsi. = 2, Luar Batas = 3*/ 
-
+        1. Wilayah --> dalam kota = 1, Dlm Propinsi. = 2, Luar Batas = 3*/
         
         /* params: 
          * caller optional
@@ -686,6 +680,7 @@ class Pengaturan extends BaseController
         // handle POST
         if ($this->request->getMethod() == 'POST') {
             $data = $this->request->getPost();
+            // echo json_encode($data); die(); //{"wilayah":"1","lokasi_jemput2":"Indonesia, 60261, Surabaya","lokasi_tujuan2":"Indonesia, 65119, Malang Kota","hari":"1","harga":"450000","harga_dasar":""}
 
             // lakukan validasi data
             $validation =  \Config\Services::validation();
@@ -698,20 +693,65 @@ class Pengaturan extends BaseController
 
             $isDataValid = $validation->withRequest($this->request)->run();
             if($isDataValid){
+                // format jarak
+                $data['jarak'] = format_km($data['jarak']);
+                $data['kd_unit'] = $data['id'];
+
                 $curlOpt = array_merge($curlOpt, $data);
+                // echo json_encode($curlOpt); die();
                 $listData = getCurl($curlOpt, $this->ipAddress . 'hitung_harga_dasar.php');
-                // echo json_encode($listData);
             }
         }
 
-        echo json_encode($listData);
+        // echo json_encode($listData);
+        return $this->response->setJSON($listData);
     }
 
     public function updateHarga()
     {
+        // 2. update_harga_dasar.php --> klo klik Simpan Hasil Perhitungan
+        // 2. update_harga_dasar:
+        // - kd_unit
+        // - wilayah
+        // - harga
+
         /* params: 
          * caller required, default: MASTER
          * kd_member required
          */
+
+        $listData   = [];
+        $curlOpt    = [
+            'caller' => 'MASTER',
+            'kd_member' => $this->session->get('user')['kode']
+        ];
+        
+        // handle POST
+        if ($this->request->getMethod() == 'POST') {
+            $data = $this->request->getPost();
+            // echo json_encode($data); die(); //{"wilayah":"1","lokasi_jemput2":"Indonesia, 60261, Surabaya","lokasi_tujuan2":"Indonesia, 65119, Malang Kota","hari":"1","harga":"500000","jarak":"194.997","id":"22040001AV0002"}
+
+            $newData = [
+                'kd_unit' => $data['id'],
+                'wilayah' => $data['wilayah'],
+                'harga' => $data['harga'],
+            ];
+
+            $curlOpt = array_merge($curlOpt, $newData);
+            // echo json_encode($curlOpt); die();
+            $listData = getCurl($curlOpt, $this->ipAddress . 'update_harga_dasar.php');
+            
+            if($listData['success'] == '1') {
+                // redirect to home
+                return redirect()->to('pengaturan/unit-detail/' . $data['id'])->with('success', 'Harga dan Biaya Pelayanan berhasil diupdate');
+            } else {
+                // show error
+                // echo json_encode($listData);
+                return redirect()->to('pengaturan/unit-detail/' . $data['id'])->with('error', $listData['message']);
+            }
+        }
+
+        // echo json_encode($listData);
+        // return $this->response->setJSON($listData);
     }
 }

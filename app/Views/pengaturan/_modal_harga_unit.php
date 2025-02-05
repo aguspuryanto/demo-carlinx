@@ -7,7 +7,7 @@
                     </a>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="POST" id="formHargaUnit">
+                    <form action="<?= base_url('pengaturan/update-harga') ?>" method="POST" id="formHargaUnit">
                     <!-- Pilih Wilayah -->
                     <div class="mb-3">
                         <label class="form-label">Pilih Wilayah</label>
@@ -53,12 +53,12 @@
                         <label class="form-label">Harga Sewa yg dikehendaki</label>
                         <div class="mb-2">
                             <label class="form-label small text-muted">Minimal Sewa (hari)</label>
-                            <input type="number" class="form-control" name="minimal_sewa" value="1">
+                            <input type="number" class="form-control" name="hari" value="1" id="hari">
                         </div>
                         <div class="mb-2">
                             <label class="form-label small text-muted">Harga (Rp)</label>
                             <div class="input-group">
-                                <input type="number" class="form-control" name="harga" placeholder="0">
+                                <input type="number" class="form-control" name="harga" placeholder="0" id="harga">
                                 <button class="btn btn-outline-secondary" type="button" id="btnHitung"><i class="fa fa-arrow-right"></i> </button>
                             </div>
                         </div>
@@ -69,7 +69,7 @@
                         <label class="form-label">Hasil Perhitungan</label>
                         <div class="mb-2">
                             <label class="form-label small text-muted">Harga Dasar (Rp)</label>
-                            <input type="number" class="form-control" name="harga_dasar" placeholder="0" readonly>
+                            <input type="number" class="form-control" name="harga_dasar" id="harga_dasar" placeholder="0" disabled>
                         </div>
                     </div>
 
@@ -84,9 +84,13 @@
                         Minimal Sewa : 1<br>
                         Lakukan langkah yg sama untuk Pilihan Wilayah yang lain
                     </div>
-                    <button type="submit" class="btn btn-primary w-100" id="btnSimpan">SIMPAN HASIL PERHITUNGAN</button>
+
+                    <!-- <input type="hidden" name="origins[]" id="origin">
+                    <input type="hidden" name="destinations[]" id="destination"> -->
+                    <input type="hidden" name="jarak" id="jarak">
+                    <button type="submit" class="btn btn-primary w-100" id="btnSimpan" disabled>SIMPAN HASIL PERHITUNGAN</button>
+                    </form>
                 </div>
-            </form>
         </div>
     </div>
 </div>

@@ -48,7 +48,7 @@
             <div class="mb-4">
                 <div class="d-flex justify-content-between align-items-center">
                     <h5 class="m-0">Harga dan Biaya Pelayanan</h5>
-                    <a href="#" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#hargaModal">
+                    <a href="#" class="btn btn-sm btn-primary" data-id="<?= $listData['result_unit'][0]['kode'] ?>" data-unit="<?= esc(json_encode($listData['result_unit'])) ?>" data-bs-toggle="modal" data-bs-target="#hargaModal">
                         <i class="fa fa-calculator"></i>
                     </a>
                 </div>

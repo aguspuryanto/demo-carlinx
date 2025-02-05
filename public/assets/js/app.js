@@ -100,7 +100,7 @@ $(window).on('load', function () {
             introswiper.on('reachEnd', function () {
                 introswiper.autoplay = false;
                 setTimeout(function () {
-                    window.location.replace("signin.html");
+                    window.location.replace("/");
                 }, 5000);
             });
             break;
