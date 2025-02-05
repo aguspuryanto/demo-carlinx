@@ -516,7 +516,15 @@ class Pengaturan extends BaseController
             'kd_member' => $this->session->get('user')['kode']
         ];
 
-        if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'select_unit_1.php');
+        // if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'select_unit_1.php');
+        // echo json_encode($listData);
+        
+        // Filter $listData where kode matches $id
+        // $listData = array_filter($listData['result_unit'], function($item) use ($id) {
+        //     return $item['kode'] == $id;
+        // });
+
+        if(empty($listData)) $listData = getCurl(['kd_unit' => $id], $this->ipAddress . 'select_unit_by_kode.php');
         // echo json_encode($listData);
 
         if(empty($listPaketDriver)) $listPaketDriver = getCurl($curlOpt, $this->ipAddress . 'select_driver.php');

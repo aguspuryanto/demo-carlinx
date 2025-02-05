@@ -14,19 +14,25 @@ var cacheassets = [
   "/assets/js/pwa-services.js",
 ];
 
-self.addEventListener("install", function (event) {    
+self.addEventListener('install', (event) => {
     event.waitUntil(
-        caches.open(static).then(function (cache) {
-            cache.addAll(cacheassets);
-        }).then(function () {
-            return self.skipWaiting();
+        caches.open('your-cache-name').then((cache) => {
+            return cache.addAll([
+                // List of URLs to cache
+                '/path/to/resource1',
+                '/path/to/resource2',
+                // Add your resources here
+            ]).catch((error) => {
+                console.error('Failed to cache:', error);
+            });
         })
     );
 });
-self.addEventListener("activate", function (event) {    
+
+self.addEventListener('activate', function (event) {    
 });
 
-self.addEventListener("fetch", function (event) {
+self.addEventListener('fetch', function (event) {
     event.respondWith(
         caches.match(event.request).then(function (response) {
             return response || fetch(event.request)

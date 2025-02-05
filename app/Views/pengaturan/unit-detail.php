@@ -13,8 +13,13 @@
                         <i class="fa fa-arrow-left"></i> Unit
                     </a>
                 </div>
-                <div class="card-body">
-                    <?php include_once '_form_unit.php'; ?>
+                <div class="card-body">                    
+                    <form action="<?= base_url('pengaturan/unit') ?>" method="POST">
+                    <?php 
+                    // echo json_encode($listData); 
+                    include_once '_form_unit.php';
+                    ?>
+                    </form>
                 </div>
             </div>
         </div>
@@ -54,6 +59,7 @@
         const baseUrlImg    = "<?= base_url('proxy.php?url=' . $_ENV['API_BASEURL'] . 'images/') ?>";
         const listKategori  = '<?= json_encode($listKategori['result_kategori']) ?>';
         const listPaketBbm  = '<?= json_encode($listPaketBbm['result_bbm']) ?>';
+        const listData      = '<?= json_encode($listData['result_unit']) ?>';
 
         $('#kategori').select2({
             theme: 'bootstrap-5',
@@ -69,81 +75,80 @@
             data: listPaketBbm
         });
 
-        $('#addModal').on('show.bs.modal', function (event) {
-            console.log(event.relatedTarget.dataset.id);
-
-            if(event.relatedTarget.dataset.id){
-                // edit header modal
-                $('#addModalLabel').text('Unit');
+        function initForm(){
                 
-                // get data-item
-                var item = JSON.parse(event.relatedTarget.dataset.item);
-                console.log(item, 'item');
+            // get data-item
+            // var item = JSON.parse(event.relatedTarget.dataset.item);
+            var item = JSON.parse(listData)[0];
+            console.log(item, '81_item');
 
-                // set value into form
-                $('#nama').val(item.nama);
-                $('#kategori option').filter(function() {
-                    return $(this).text() == item.kategori;
-                }).prop("selected", true);
-                $("#bbm option").filter(function() {
-                    return $(this).text() == item.bbm;
-                }).prop("selected", true);
+            // set value into form
+            $('#nama').val(item.nama);
+            // $('#kategori option').filter(function() {
+            //     return $(this).text() == item.kategori;
+            // }).prop("selected", true);
+            // $("#bbm option").filter(function() {
+            //     return $(this).text() == item.bbm;
+            // }).prop("selected", true);
 
-                $('#kursi').val(item.kursi);
-                $('#tahun').val(item.tahun);
-                $('#transmisi').val(item.transmisi);
-                $('#warna').val(item.warna);
-                $('#jarak_tempuh').val(item.jarak_tempuh);
-                $('#dlm_kota').val(item.dlm_kota);
-                $('#dlm_prop').val(item.dlm_prop);
-                $('#luar_prop').val(item.luar_prop);
-                $('#drop_in').val(item.drop_in);
-                $('#over_time').val(item.over_time);
-                $('#stgh_hr').val(item.stgh_hr);
-                $('#fee').val(item.fee);
-                $('#lepas_kunci').val(item.lepas_kunci);
-                $('#bulanan').val(item.bulanan);
+            $('#kategori').select2("trigger", "select", {
+                data: { id: item.kategori, text: item.kategori }
+            });
+            $('#bbm').select2("trigger", "select", {
+                data: { id: item.bbm, text: item.bbm }
+            });
 
-                if(item.path_foto.length > 0){
-                    $("#path_foto").attr("src", baseUrlImg + item.path_foto);
-                }
-                if(item.path_foto_2.length > 0){
-                    $("#path_foto_2").attr("src", baseUrlImg + item.path_foto_2);
-                }
-                if(item.path_foto_3.length > 0){
-                    $("#path_foto_3").attr("src", baseUrlImg + item.path_foto_3);
-                }
-                if(item.path_foto_4.length > 0){
-                    $("#path_foto_4").attr("src", baseUrlImg + item.path_foto_4);
-                }
+            $('#kursi').val(item.kursi);
+            $('#tahun').val(item.tahun);
+            $('#transmisi').val(item.transmisi);
+            $('#warna').val(item.warna);
+            $('#jarak_tempuh').val(item.jarak_tempuh);
+            $('#dlm_kota').val(item.dlm_kota);
+            $('#dlm_prop').val(item.dlm_prop);
+            $('#luar_prop').val(item.luar_prop);
+            $('#drop_in').val(item.drop_in);
+            $('#over_time').val(item.over_time);
+            $('#stgh_hr').val(item.stgh_hr);
+            $('#fee').val(item.fee);
+            $('#lepas_kunci').val(item.lepas_kunci);
+            $('#bulanan').val(item.bulanan);
 
-                if(item.stat == 0){
-                    $('#stat').val(item.stat).prop('checked', false);
-                } else {
-                    $('#stat').val(item.stat).prop('checked', true);
-                }
-
-                $('#biaya_antar').val(item.biaya_antar);
-                $('#biaya_ambil').val(item.biaya_ambil);
-                $('#tuslah').val(item.tuslah);
-                $('#is_tuslah').val(item.is_tuslah);
-                $('#kons_bbm').val(item.kons_bbm);
-
-                // append id into form class modal-body
-                // if name id is exist, then set value id
-                if($('.modal-body input[name="id"]').length > 0){
-                    $('.modal-body input[name="id"]').val(event.relatedTarget.dataset.id);
-                } else {
-                    // append id into form class modal-body
-                    $('.modal-body').append('<input type="hidden" name="id" value="' + event.relatedTarget.dataset.id + '">');
-                }
-            } else {
-                // reset form
-                $('#addModal').find('input').val('');
-                $('#addModal').find('textarea').val('');
-                $('#addModal').find('select').val('');
+            if (item.path_foto && item.path_foto.length > 0) {
+                $("#path_foto").attr("src", baseUrlImg + item.path_foto);
             }
-        });
+            if (item.path_foto_2 && item.path_foto_2.length > 0) {
+                $("#path_foto_2").attr("src", baseUrlImg + item.path_foto_2);
+            }
+            if (item.path_foto_3 && item.path_foto_3.length > 0) {
+                $("#path_foto_3").attr("src", baseUrlImg + item.path_foto_3);
+            }
+            if (item.path_foto_4 && item.path_foto_4.length > 0) {
+                $("#path_foto_4").attr("src", baseUrlImg + item.path_foto_4);
+            }
+
+            if(item.stat == 0){
+                $('#stat').val(item.stat).prop('checked', false);
+            } else {
+                $('#stat').val(item.stat).prop('checked', true);
+            }
+
+            $('#biaya_antar').val(item.biaya_antar);
+            $('#biaya_ambil').val(item.biaya_ambil);
+            $('#tuslah').val(item.tuslah);
+            $('#is_tuslah').val(item.is_tuslah);
+            $('#kons_bbm').val(item.kons_bbm);
+
+            // append id into form class modal-body
+            // if name id is exist, then set value id
+            if($('.modal-body input[name="id"]').length > 0){
+                $('.modal-body input[name="id"]').val(item.kode);
+            } else {
+                // append id into form class modal-body
+                $('.modal-body').append('<input type="hidden" name="id" value="' + item.kode + '">');
+            }
+        };
+
+        initForm();
 
         var listTujuan = [];
         // Initialize Select2
