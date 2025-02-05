@@ -32,12 +32,12 @@
                         <label class="form-label">Rute Perjalanan</label>
                         <div class="row g-3">
                             <div class="col-sm-6 col-md-6">
-                                <select id="lokasiJemput" name="lokasi_jemput" class="form-select select2">
+                                <select id="lokasiJemput2" name="lokasi_jemput2" class="form-select select2">
                                     <option value="">Pilih Lokasi Jemput</option>
                                 </select>
                             </div>
                             <div class="col-sm-6 col-md-6">
-                                <select id="lokasiTujuan" name="lokasi_tujuan" class="form-select select2">
+                                <select id="lokasiTujuan2" name="lokasi_tujuan2" class="form-select select2">
                                     <option value="">Pilih Lokasi Tujuan</option>
                                 </select>
                             </div>

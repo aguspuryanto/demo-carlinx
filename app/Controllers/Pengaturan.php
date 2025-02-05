@@ -503,6 +503,42 @@ class Pengaturan extends BaseController
         ]);
     }
 
+    public function unitDetail($id)
+    {
+
+        $listData = [];
+        $listPaketDriver = [];
+        $listPaketBbm    = [];
+        $listKategori = [];
+
+        $curlOpt    = [
+            'caller' => 'MASTER',
+            'kd_member' => $this->session->get('user')['kode']
+        ];
+
+        if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'select_unit_1.php');
+        // echo json_encode($listData);
+
+        if(empty($listPaketDriver)) $listPaketDriver = getCurl($curlOpt, $this->ipAddress . 'select_driver.php');
+        // echo json_encode($listPaketDriver);
+
+        if(empty($listPaketBbm)) $listPaketBbm = getCurl($curlOpt, $this->ipAddress . 'select_bbm.php');
+        // echo json_encode($listPaketBbm);
+
+        if(empty($listKategori)) $listKategori = getCurl(['kd_member' => $this->session->get('user')['kode']], $this->ipAddress . 'select_kategori.php');
+        // echo json_encode($listKategori);
+
+        // echo "Detail unit dengan ID: " . $id;
+        return view('pengaturan/unit-detail', [
+            'title' => 'Unit Detail',
+            'id' => $id,
+            'listData' => $listData,
+            'listPaketDriver' => $listPaketDriver,
+            'listPaketBbm'    => $listPaketBbm,
+            'listKategori'    => $listKategori,
+        ]);
+    }
+
     public function pengguna()
     {
         /* params: 

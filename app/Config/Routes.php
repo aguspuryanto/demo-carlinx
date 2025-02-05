@@ -98,6 +98,8 @@ $routes->group('pengaturan', ['filter' => 'auth'], function($routes) {
     $routes->add('lokasi-garasi', 'Pengaturan::lokasiGarasi');
     $routes->post('delete-garasi', 'Pengaturan::lokasiGarasiDelete');
     $routes->add('unit', 'Pengaturan::unit');
+    // $routes->get('unit-detail/(:num)', 'Pengaturan::unitDetail/$1');
+    $routes->get('unit-detail/(:segment)', 'Pengaturan::unitDetail/$1');
     $routes->add('pengguna', 'Pengaturan::pengguna');
     $routes->add('ganti-password', 'Pengaturan::gantiPassword');
 });

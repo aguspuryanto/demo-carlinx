@@ -6,7 +6,7 @@
             <?php  $file = __DIR__ . '/../_alert.php'; include($file); ?>
 
             <div class="row">
-                <div class="col-4 col-md-4 col-lg-4">
+                <div class="col-4 col-md-4 col-lg-3">
                     <a href="<?= base_url('dashboard'); ?>" class="card shadow-sm mb-4">
                         <div class="card-body px-1">
                             <div class="xrow">
@@ -23,7 +23,7 @@
                     </a>
                 </div>
 
-                <div class="col-4 col-md-4 col-lg-4">
+                <div class="col-4 col-md-4 col-lg-3">
                     <a href="<?= base_url('rate'); ?>" class="card shadow-sm mb-4">
                         <div class="card-body px-1">
                             <div class="xrow">
@@ -40,7 +40,7 @@
                     </a>
                 </div>
 
-                <div class="col-4 col-md-4 col-lg-4">
+                <div class="col-4 col-md-4 col-lg-3">
                     <a href="<?= base_url('order/orderlayanan'); ?>" class="card shadow-sm mb-4">
                         <div class="card-body px-1">
                             <div class="xrow">
@@ -57,7 +57,7 @@
                     </a>
                 </div>
 
-                <div class="col-4 col-md-4 col-lg-4">
+                <div class="col-4 col-md-4 col-lg-3">
                     <a href="<?= base_url('order/lepaskunci'); ?>" class="card shadow-sm mb-4">
                         <div class="card-body px-1">
                             <div class="xrow">
@@ -74,7 +74,7 @@
                     </a>
                 </div>
 
-                <div class="col-4 col-md-4 col-lg-4">
+                <div class="col-4 col-md-4 col-lg-3">
                     <a href="<?= base_url('order/orderbulanan'); ?>" class="card shadow-sm mb-4">
                         <div class="card-body px-1">
                             <div class="xrow">
@@ -91,7 +91,7 @@
                     </a>
                 </div>
 
-                <div class="col-4 col-md-4 col-lg-4">
+                <div class="col-4 col-md-4 col-lg-3">
                     <a href="<?= base_url('event'); ?>" class="card shadow-sm mb-4">
                         <div class="card-body px-1">
                             <div class="xrow">
@@ -108,7 +108,7 @@
                     </a>
                 </div>
 
-                <div class="col-4 col-md-4 col-lg-4">
+                <div class="col-4 col-md-4 col-lg-3">
                     <a href="<?= base_url('inbox'); ?>" class="card shadow-sm mb-4">
                         <div class="card-body px-1">
                             <div class="xrow">
@@ -125,7 +125,7 @@
                     </a>
                 </div>
 
-                <div class="col-4 col-md-4 col-lg-4">
+                <div class="col-4 col-md-4 col-lg-3">
                     <a href="<?= base_url('proses'); ?>" class="card shadow-sm mb-4">
                         <div class="card-body px-1">
                             <div class="xrow">
@@ -142,7 +142,7 @@
                     </a>
                 </div>
 
-                <div class="col-4 col-md-4 col-lg-4">
+                <div class="col-4 col-md-4 col-lg-3">
                     <a href="<?= base_url('riwayat'); ?>" class="card shadow-sm mb-4">
                         <div class="card-body px-1">
                             <div class="xrow">
@@ -159,7 +159,7 @@
                     </a>
                 </div>
 
-                <div class="col-4 col-md-4 col-lg-4">
+                <div class="col-4 col-md-4 col-lg-3">
                     <a href="<?= base_url('pelaporan'); ?>" class="card shadow-sm mb-4">
                         <div class="card-body px-1">
                             <div class="xrow">
@@ -176,7 +176,7 @@
                     </a>
                 </div>
 
-                <div class="col-4 col-md-4 col-lg-4">
+                <div class="col-4 col-md-4 col-lg-3">
                     <a href="<?= base_url('pengaturan'); ?>" class="card shadow-sm mb-0">
                         <div class="card-body px-1">
                             <div class="xrow">
@@ -193,7 +193,7 @@
                     </a>
                 </div>
 
-                <div class="col-4 col-md-4 col-lg-4">
+                <div class="col-4 col-md-4 col-lg-3">
                     <a href="<?= base_url('rate/orderbulanan'); ?>" class="card shadow-sm mb-0">
                         <div class="card-body px-1">
                             <div class="xrow">
