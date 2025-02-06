@@ -77,7 +77,7 @@
                                     <a class="dropdown-item nav-link <?= uri_string() == 'pengaturan' ? 'active' : '' ?>" href="<?= base_url('pengaturan') ?>">
                                         <div class="avatar avatar-40 rounded icon"><i class="bi bi-gear"></i>
                                         </div>
-                                        <div class="col">Settings</div>
+                                        <div class="col">Pengaturan</div>
                                         <div class="arrow"><i class="bi bi-chevron-right"></i></div>
                                     </a>
                                 </li>
@@ -86,12 +86,12 @@
                         <li class="nav-item">
                             <a class="nav-link <?= uri_string() == 'inbox' ? 'active' : '' ?>" href="<?= base_url('inbox') ?>" tabindex="-1">
                                 <div class="avatar avatar-40 rounded icon"><i class="bi bi-chat-text"></i></div>
-                                <div class="col">Pesan</div>
+                                <div class="col">Inbox</div>
                                 <div class="arrow"><i class="bi bi-chevron-right"></i></div>
                             </a>
                         </li>
 
-                        <li class="nav-item">
+                        <!-- <li class="nav-item">
                             <a class="nav-link <?= uri_string() == 'notifikasi' ? 'active' : '' ?>" href="<?= base_url('notifikasi') ?>" tabindex="-1">
                                 <div class="avatar avatar-40 rounded icon"><i class="bi bi-bell"></i></div>
                                 <div class="col">Notifikasi</div>
@@ -105,7 +105,7 @@
                                 <div class="col">Informasi</div>
                                 <div class="arrow"><i class="bi bi-chevron-right"></i></div>
                             </a>
-                        </li>
+                        </li> -->
 
                         <li class="nav-item">
                             <a class="nav-link <?= uri_string() == 'event' ? 'active' : '' ?>" href="<?= base_url('event') ?>" tabindex="-1">
@@ -116,9 +116,9 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link <?= uri_string() == 'laporan' ? 'active' : '' ?>" href="<?= base_url('laporan') ?>" tabindex="-1">
+                            <a class="nav-link <?= uri_string() == 'pelaporan' ? 'active' : '' ?>" href="<?= base_url('pelaporan') ?>" tabindex="-1">
                                 <div class="avatar avatar-40 rounded icon"><i class="bi bi-file-earmark-text"></i></div>
-                                <div class="col">Laporan <span class="badge bg-info fw-light">new</span></div>
+                                <div class="col">Pelaporan <span class="badge bg-info fw-light">new</span></div>
                                 <div class="arrow"><i class="bi bi-chevron-right"></i></div>
                             </a>
                         </li>

@@ -25,29 +25,29 @@
                             <img src="<?= base_url(); ?>/assets/img/search.png" class="nav-icond" alt="">
                         </span>
                         <div class="nav-menu-popover justify-content-between">
-                            <button type="button" class="btn btn-lg btn-icon-text">
+                            <a href="<?= base_url('rate') ?>" class="btn btn-lg btn-icon-text">
                                 <i class="bi bi-calculator size-32"></i><span>Rate</span>
-                            </button>
+                            </a>
 
-                            <button type="button" class="btn btn-lg btn-icon-text">
+                            <a href="<?= base_url('order/orderlayanan') ?>" class="btn btn-lg btn-icon-text">
                                 <i class="bi bi-cart-check-fill size-32"></i><span>Layanan</span>
-                            </button>
+                            </a>
 
-                            <button type="button" class="btn btn-lg btn-icon-text">
+                            <a href="<?= base_url('order/orderbulanan') ?>" class="btn btn-lg btn-icon-text">
                                 <i class="bi bi-calendar-check size-32"></i><span>Bulanan</span>
-                            </button>
+                            </a>
 
-                            <button type="button" class="btn btn-lg btn-icon-text">
+                            <a href="<?= base_url('order/lepaskunci') ?>" class="btn btn-lg btn-icon-text">
                                 <i class="bi bi-key size-32"></i><span>Lepas Kunci</span>
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="<?= base_url('history') ?>">
+                    <a class="nav-link" href="<?= base_url('riwayat') ?>">
                         <span>
                             <i class="nav-icon bi bi-stack"></i>
-                            <span class="nav-text">History</span>
+                            <span class="nav-text">Riwayat</span>
                         </span>
                     </a>
                 </li>
