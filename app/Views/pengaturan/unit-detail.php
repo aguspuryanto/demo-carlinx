@@ -8,19 +8,22 @@
         
         <div class="row">
             <div class="card">
+            <form action="<?= base_url('pengaturan/unit') ?>" method="POST">
                 <div class="card-header">
                     <a href="<?= base_url('pengaturan/unit') ?>" class="btn">
                         <i class="fa fa-arrow-left"></i> Unit
                     </a>
                 </div>
-                <div class="card-body">                    
-                    <form action="<?= base_url('pengaturan/unit') ?>" method="POST">
+                <div class="card-body">
                     <?php 
                     // echo json_encode($listData); 
                     include_once '_form_unit.php';
                     ?>
-                    </form>
+                </div>                
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Simpan</button>
                 </div>
+            </form>
             </div>
         </div>
     </div>
