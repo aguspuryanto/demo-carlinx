@@ -8,9 +8,9 @@ helper('form');
     <label for="kotaTujuan" class="form-label">Kota Tujuan</label>
     <select class="form-control" name="kd_kota" id="kotaTujuan" required>
       <option value="">Pilih Kota Tujuan</option>
-      <?php foreach ($listKota['result_kota'] as $kota) : ?>
+      <?php if (!empty($listKota['result_kota'])) : foreach ($listKota['result_kota'] as $kota) : ?>
         <option value="<?= $kota['kode']; ?>"><?= $kota['nama']; ?></option>
-      <?php endforeach; ?>
+      <?php endforeach; endif; ?>
     </select>
   </div> 
 
@@ -64,6 +64,9 @@ helper('form');
 
     <ul id="listRute" class="list-group mt-2">
         <!-- Daftar rute akan ditambahkan di sini -->
+    </ul>
+    <ul id="listRuteButton" class="list-group d-none">
+      <a href="#" class="d-flex justify-content-end list-group-item list-group-item-action list-group-item-light" id="tambahRute">+ Tambah Lokasi Tujuan</a>
     </ul>
   </div>
 

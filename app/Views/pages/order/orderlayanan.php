@@ -233,7 +233,7 @@
 
       // Validasi input, tidak boleh kosong
       if (lokasiJemput=='' || lokasiTujuan=='') {
-          alert('Lokasi Jemput dan Tujuan tidak boleh kosong.');
+          // alert('Lokasi Jemput dan Tujuan tidak boleh kosong.');
           return;
       }
 
@@ -275,6 +275,7 @@
 
           // Tambahkan rute ke daftar
           $('#listRute').append(`<li class="list-group-item">${rute}</li>`);
+          $('#listRuteButton').removeClass('d-none');
 
           // hitung jarak
           hitungJarak(lokasiJemput, lokasiTujuan).then(jarak => {
