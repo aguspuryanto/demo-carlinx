@@ -3,4 +3,4 @@ cp -R app/Controllers/* /home/carlinxi/partner.carlinx.id/ci4_core/app/Controlle
 cp -R app/Config/Routes.php /home/carlinxi/partner.carlinx.id/ci4_core/app/Config/Routes.php
 cp -R app/Helpers/my_helper.php /home/carlinxi/partner.carlinx.id/ci4_core/app/Helpers/my_helper.php
 cp -R public/assets/* /home/carlinxi/partner.carlinx.id/assets/
-cp -R public/serviceWorker.js /home/carlinxi/partner.carlinx.id/public/
+cp -R public/serviceWorker.js /home/carlinxi/partner.carlinx.id/
