@@ -79,21 +79,11 @@
         });
 
         function initForm(){
-                
-            // get data-item
-            // var item = JSON.parse(event.relatedTarget.dataset.item);
             var item = JSON.parse(listData)[0];
             console.log(item, '81_item');
 
             // set value into form
             $('#nama').val(item.nama);
-            // $('#kategori option').filter(function() {
-            //     return $(this).text() == item.kategori;
-            // }).prop("selected", true);
-            // $("#bbm option").filter(function() {
-            //     return $(this).text() == item.bbm;
-            // }).prop("selected", true);
-
             $('#kategori').select2("trigger", "select", {
                 data: { id: item.kategori, text: item.kategori }
             });
@@ -140,15 +130,6 @@
             $('#tuslah').val(item.tuslah);
             $('#is_tuslah').val(item.is_tuslah);
             $('#kons_bbm').val(item.kons_bbm);
-
-            // append id into form class modal-body
-            // if name id is exist, then set value id
-            // if($('.modal-body input[name="id"]').length > 0){
-            //     $('.modal-body input[name="id"]').val(item.kode);
-            // } else {
-            //     // append id into form class modal-body
-            //     $('.modal-body').append('<input type="hidden" name="id" value="' + item.kode + '">');
-            // }
         };
 
         initForm();
@@ -355,25 +336,6 @@
         $(document).on('click', '#btnSimpan', function(e) {
             e.preventDefault();
             $('#formHargaUnit').submit();
-            
-            // $.ajax({
-            //     url: '<?= base_url('pengaturan/update-harga') ?>',
-            //     type: 'POST',
-            //     data: new FormData($('#formHargaUnit')[0]),
-            //     processData: false,
-            //     contentType: false,
-            //     success: function(response) {
-            //         console.log(response, 'response before parsing');
-            //         // Jika response masih string, ubah ke JSON
-            //         if (typeof response === 'string') {
-            //             response = JSON.parse(response);
-            //         }
-            //         console.log(response, 'response after parsing');
-            //     },
-            //     error: function(xhr, status, error) {
-            //         console.error('Error:', error);
-            //     }
-            // });
         });
     });
 

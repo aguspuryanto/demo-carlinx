@@ -69,6 +69,7 @@
                         <label class="form-label">Hasil Perhitungan</label>
                         <div class="mb-2">
                             <label class="form-label small text-muted">Harga Dasar (Rp)</label>
+                            <input type="hidden" class="form-control" name="harga_dasar" id="harga_dasar">
                             <input type="number" class="form-control" name="harga_dasar" id="harga_dasar" placeholder="0" disabled>
                         </div>
                     </div>

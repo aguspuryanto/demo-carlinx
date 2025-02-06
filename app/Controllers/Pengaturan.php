@@ -729,12 +729,12 @@ class Pengaturan extends BaseController
         // handle POST
         if ($this->request->getMethod() == 'POST') {
             $data = $this->request->getPost();
-            // echo json_encode($data); die(); //{"wilayah":"1","lokasi_jemput2":"Indonesia, 60261, Surabaya","lokasi_tujuan2":"Indonesia, 65119, Malang Kota","hari":"1","harga":"500000","jarak":"194.997","id":"22040001AV0002"}
+            // echo json_encode($data); die(); //{"wilayah":"1","lokasi_jemput2":"Indonesia, 60261, Surabaya","lokasi_tujuan2":"Indonesia, 65119, Malang Kota","hari":"1","harga":"650000","harga_dasar":"300000","jarak":"194.997","id":"22040001AV0002"}
 
             $newData = [
                 'kd_unit' => $data['id'],
                 'wilayah' => $data['wilayah'],
-                'harga' => $data['harga'],
+                'harga' => $data['harga_dasar'],
             ];
 
             $curlOpt = array_merge($curlOpt, $newData);
