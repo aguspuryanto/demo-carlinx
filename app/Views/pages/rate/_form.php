@@ -66,6 +66,9 @@
     <ul id="listRute" class="list-group mt-2">
         <!-- Daftar rute akan ditambahkan di sini -->
     </ul>
+    <ul id="listRuteButton" class="list-group d-none">
+      <a href="#" class="d-flex justify-content-end list-group-item list-group-item-action list-group-item-light" id="tambahRute">+ Tambah Lokasi Tujuan</a>
+    </ul>
   </div>
 
   <!-- Biaya Tambahan -->
