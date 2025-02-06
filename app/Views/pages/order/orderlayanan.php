@@ -334,7 +334,7 @@
               for (let i = 0; i < lokasiJemputArr.length; i++) {
                 const origin = lokasiJemputArr[i];
                 const destination = lokasiTujuanArr[i];
-                console.log('origin:' + origin + ', destination:' + destination);
+                // console.log(i +'. origin:' + origin + ', destination:' + destination);
 
                 // Get coordinates for origin
                 const originResponse = await fetch(`https://geocode.search.hereapi.com/v1/geocode?q=${encodeURIComponent(origin)}&apiKey=<?= $_ENV['API_KEY_HERE'] ?>`);

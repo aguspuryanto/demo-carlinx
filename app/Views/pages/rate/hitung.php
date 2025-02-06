@@ -346,13 +346,13 @@
       if(!lokasiJemputArr.includes(lokasiJemput)) {
         lokasiJemputArr.push(lokasiJemput);
       }
-      console.log(lokasiJemputArr, 'lokasiJemputArr');
+      // console.log(lokasiJemputArr, 'lokasiJemputArr');
 
       // if not exists, then push to lokasiTujuanArr
       if(!lokasiTujuanArr.includes(lokasiTujuan)) {
         lokasiTujuanArr.push(lokasiTujuan);
       }
-      console.log(lokasiTujuanArr, 'lokasiTujuanArr');
+      // console.log(lokasiTujuanArr, 'lokasiTujuanArr');
       
       const rute = `${lokasiJemput.substr(lokasiJemput.lastIndexOf(",") + 1)} - ${lokasiTujuan.substr(lokasiTujuan.lastIndexOf(",") + 1)}`;
 
@@ -435,22 +435,35 @@
                 const distance = routeData.routes[0].sections[0].summary.length;
                 totJarak += routeData2.routes[0].sections[0].summary.length;
             } else if(listRute.length > 1) {
-              // lokasiJemputArr = ['Indonesia, 60261, Surabaya', 'Indonesia, 65119, Malang Kota', 'Indonesia, 64126, Kediri Kota']
-              // remove firt element
-              lokasiJemputArr.shift();
-
               // re-calculate
               for (let i = 0; i < lokasiJemputArr.length; i++) {
                 const origin = lokasiJemputArr[i];
                 const destination = lokasiTujuanArr[i];
-                console.log('origin:' + origin + ', destination:' + destination);
+                // console.log(i +'. origin:' + origin + ', destination:' + destination);
+
+                // Get coordinates for origin
+                const originResponse = await fetch(`https://geocode.search.hereapi.com/v1/geocode?q=${encodeURIComponent(origin)}&apiKey=<?= $_ENV['API_KEY_HERE'] ?>`);
+                const originData = await originResponse.json();
+
+                // Get coordinates for destination
+                const destResponse = await fetch(`https://geocode.search.hereapi.com/v1/geocode?q=${encodeURIComponent(destination)}&apiKey=<?= $_ENV['API_KEY_HERE'] ?>`);
+                const destData = await destResponse.json();
+
+                if (!originData.items.length || !destData.items.length) {
+                    console.error('Location not found');
+                    return;
+                }
+
+                const originCoords = `${originData.items[0].position.lat},${originData.items[0].position.lng}`;
+                const destCoords = `${destData.items[0].position.lat},${destData.items[0].position.lng}`;
 
                 // Calculate route 2 way
-                // const routeResponse2 = await fetch(`https://router.hereapi.com/v8/routes?transportMode=car&origin=${destination}&destination=${origin}&return=summary&apikey=<?= $_ENV['API_KEY_HERE'] ?>`);
-                // const routeData2 = await routeResponse2.json();
+                const routeResponse2 = await fetch(`https://router.hereapi.com/v8/routes?transportMode=car&origin=${destCoords}&destination=${originCoords}&return=summary&apikey=<?= $_ENV['API_KEY_HERE'] ?>`);
+                const routeData2 = await routeResponse2.json();
+                console.log(routeData2, 'routeData2');
 
                 // const distance = routeData.routes[0].sections[0].summary.length;
-                // totJarak += routeData2.routes[0].sections[0].summary.length;
+                totJarak += routeData2.routes[0].sections[0].summary.length;
               }
             }
 
