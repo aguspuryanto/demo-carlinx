@@ -24,6 +24,7 @@ class Auth extends BaseController
     {
         $jabatan = ['0' => 'CEO', '1' => 'DIREKTUR', '2' => 'MANAGER'];
         $cityList = [];
+        $korwilList = [];
 
         if ($this->request->getMethod() === 'post') {
             $data = $this->request->getPost();
@@ -57,10 +58,14 @@ class Auth extends BaseController
         if(empty($cityList)) $cityList = getCurl([], $this->ipAddress . 'select_kota_1.php');
         // echo json_encode($cityList);
 
+        if(empty($korwilList)) $korwilList = getCurl([], $this->ipAddress . 'select_korwil.php');
+        // echo json_encode($korwilList);
+
         return view('auth/register', [
             'title' => 'Register',
             'jabatan' => $jabatan,
-            'cityList' => $cityList
+            'cityList' => $cityList,
+            'korwilList' => $korwilList
         ]);
     }
 
