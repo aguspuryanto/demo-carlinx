@@ -20,6 +20,11 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
     $routes->post('login', 'Auth::loginSubmit');
     $routes->get('logout', 'Auth::logout');
 
+    $routes->get('register', 'Auth::register');
+    $routes->post('register', 'Auth::registerSubmit');
+
+    $routes->get('forgot-password', 'Auth::forgotPassword');
+
     $routes->get('profile', 'Profile::index');
 
     // akun

@@ -22,14 +22,46 @@ class Auth extends BaseController
 
     public function register()
     {
+        $jabatan = ['0' => 'CEO', '1' => 'DIREKTUR', '2' => 'MANAGER'];
+        $cityList = [];
+
         if ($this->request->getMethod() === 'post') {
             $data = $this->request->getPost();
-            $userModel = new \App\Models\User();
-            $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
-            $userModel->insert($data);
-            return redirect()->to('/login');
+            echo json_encode($data);
+
+            // $nama = $_POST['nama'];
+            // $alamat_perush = $_POST['alamat'];
+            // $kd_kota = $_POST['kd_kota'];
+            // $nama_perush = $_POST['nama_perush'];
+            // $ijin_perush = $_POST['ijin_perush'];
+            // $email = $_POST['email_addr'];
+            // $layanan = $_POST['layanan'];
+            // $event = $_POST['event'];
+            // $bulanan = $_POST['bulanan'];
+            // $lepaskunci = $_POST['lepaskunci'];
+            // $grup = $_POST['grup'];
+            // $jabatan = $_POST['jabatan'];
+            // $nohp_0 = $_POST['usernm'];
+            // $secode_0 = $_POST['passwd'];
+            // $secode = password_hash($secode_0,PASSWORD_DEFAULT);
+            // $kd_korwil = $_POST['kd_korwil'];
+
+            // $userModel = new \App\Models\User();
+            // $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
+            // $userModel->insert($data);
+            // return redirect()->to('/login');
+
+            // reg_user_2.php
         }
-        return view('auth/register');
+
+        if(empty($cityList)) $cityList = getCurl([], $this->ipAddress . 'select_kota_1.php');
+        // echo json_encode($cityList);
+
+        return view('auth/register', [
+            'title' => 'Register',
+            'jabatan' => $jabatan,
+            'cityList' => $cityList
+        ]);
     }
 
     public function login()

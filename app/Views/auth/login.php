@@ -24,8 +24,9 @@
                 <?php endif; ?>
                 
                 <h1 class="mb-4 text-color-theme">Login</h1>
-                <form method="post" action="/login" class="was-validated needs-validation" novalidate="">
+                <form method="post" action="<?= base_url('login'); ?>" class="was-validated needs-validation" novalidate="">
                     <?= csrf_field(); ?>
+
                     <div class="form-group form-floating mb-3 is-valid">
                         <input type="text" name="username" id="username" class="form-control" placeholder="username" required>
                         <label class="form-control-label" for="username">Username</label>
@@ -39,7 +40,7 @@
                         </button>
                     </div>
                     <p class="mb-3 text-center">
-                        <a href="#" class="">
+                        <a href="<?= base_url('forgot-password'); ?>" class="">
                             Lupa password?
                         </a>
                     </p>
@@ -49,7 +50,7 @@
                     </button>
                 </form>
                 <p class="mb-2 text-muted">Belum punya Akun ?</p>
-                <a href="#" target="_self" class="">
+                <a href="<?= base_url('register'); ?>" target="_self" class="">
                     Register <i class="bi bi-arrow-right"></i>
                 </a>
 
