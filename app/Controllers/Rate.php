@@ -149,7 +149,7 @@ class Rate extends BaseController
             $include = 'Mobil, Driver';
             if($data['include']) $include = $data['include'];
 
-            $phone = '0818336745';//$data['no_hp'];
+            $phone = $data['no_hp'];
             // remove 0 at first of phone, then replace +62
             $phone = ltrim($phone, '0');
             $phone = '+62' . $phone;
