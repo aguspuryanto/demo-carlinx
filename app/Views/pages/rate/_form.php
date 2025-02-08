@@ -120,7 +120,6 @@
   <input type="hidden" name="destinations[]" id="destination">
   <input type="hidden" name="jarak" id="jarak">
   <input type="hidden" name="ketr" id="ketr">
-  <input type="hidden" name="fee" id="fee">
 
   <!-- Tombol -->
   <button type="submit" class="btn btn-primary w-100" id="btnHitung">Mulai Perhitungan</button>
