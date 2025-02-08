@@ -1,7 +1,7 @@
 <?= $this->extend('layouts/login') ?>
 
 <?= $this->section('content') ?>
-<?php  $file = __DIR__ . '/../../_alert.php'; include($file); ?>
+<?php  $file = __DIR__ . '/../_alert.php'; include($file); ?>
 
 <main class="container-fluid h-100" style="min-height: 945px;">
     <div class="row h-100 overflow-auto">
