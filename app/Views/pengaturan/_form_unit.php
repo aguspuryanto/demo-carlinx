@@ -77,7 +77,7 @@
                         <label for="stgh_hr" class="form-label">12 Jam (%)</label>
                         <input type="number" class="form-control" id="stgh_hr" name="stgh_hr" value="0">
                     </div>
-                    <div class="col-sm-4 col-md-4">
+                    <div class="col-sm-4 col-md-4 d-none">
                         <label for="fee" class="form-label">Margin (Rp)</label>
                         <input type="number" class="form-control" id="fee" name="fee" value="0">
                     </div>

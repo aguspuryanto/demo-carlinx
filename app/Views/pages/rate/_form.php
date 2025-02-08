@@ -97,11 +97,14 @@
   </div>
   <div class="mb-3">
     <div class="row mt-2">
-      <div class="col-6">
+      <div class="col-4">
         <input type="number" class="form-control" name="tolparkir" placeholder="Tol/Parkir">
       </div>
-      <div class="col-6">
+      <div class="col-4">
         <input type="number" class="form-control" name="lainlain" placeholder="Lain-lain">
+      </div>
+      <div class="col-4">
+        <input type="number" class="form-control" name="fee" placeholder="Fee/Margin">
       </div>
     </div>
   </div>
