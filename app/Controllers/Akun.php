@@ -33,15 +33,21 @@ class Akun extends BaseController
 
         $usernm = ($this->session->get('user')['username']) ?? '0876543210';
         if(empty($userList)) $client = getCurl(['usernm' => $usernm], $this->ipAddress . 'select_user.php');
-        // echo json_encode($client);
-        if($client['success']){
+        // echo json_encode($client); die();
+        if($client['success'] == '1'){
             $userList = $client['result'];
+        } else {
+            // user not found
+            $this->session->destroy();
+            return redirect()->to('/login');
         }
 
         if(empty($cityList)) $cityList = getCurl([], $this->ipAddress . 'select_kota_1.php');
         // echo json_encode($cityList);
-        if($cityList['success']){
+        if($cityList['success'] == '1'){
             $cityList = $cityList['result_kota'];
+        } else {
+            $cityList = [];
         }
 
         return view('akun/index', [

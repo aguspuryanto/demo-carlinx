@@ -96,27 +96,7 @@ class Auth extends BaseController
                 }
 
                 // Copy files to destination server
-                foreach ($files as $file) {
-                    $filePath = $uploadDir . $file;
-                    if (is_file($filePath)) {
-                        $ch = curl_init();
-
-                        $postData = [
-                            'uploaded_file' => new \CURLFile($filePath)
-                        ];
-
-                        curl_setopt($ch, CURLOPT_URL, $this->destinationUrl);
-                        curl_setopt($ch, CURLOPT_POST, true);
-                        curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
-                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-                        $response = curl_exec($ch);
-                        if (curl_errno($ch)) {
-                            $errors[] = "Failed to copy file: $file. Error: " . curl_error($ch);
-                        }
-                        curl_close($ch);
-                    }
-                }
+                $this->syncupload();
 
                 if (empty($errors)) {
                     // return redirect()->to('/login')->with('success', 'Registration successful! Please login.');
