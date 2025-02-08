@@ -111,7 +111,7 @@ class Rate extends BaseController
             }
 
             $curlOpt = array_merge($curlOpt, $data);
-            echo json_encode($curlOpt); die();
+            // echo json_encode($curlOpt); die();
 
             if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'search_entry_order_tunggal_4.php');
 
