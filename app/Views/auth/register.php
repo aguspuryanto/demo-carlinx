@@ -23,7 +23,7 @@
                 <div class="alert alert-danger"><?= session()->getFlashdata('error'); ?></div>
             <?php endif; ?>
             
-            <form method="post" class="was-validated needs-validation" novalidate="">
+            <form id="registrationForm" method="post" enctype="multipart/form-data" class="row g-3 needs-validation" novalidate>
                 <?= csrf_field(); ?>
                 <div class="card">
                     <div class="card-body">
@@ -54,14 +54,14 @@
                             <label class="form-label" for="alamat">Alamat</label>
                         </div>
                         <div class="form-group form-floating mb-3">
-                            <select name="kd_kota" id="kd_kota" class="form-select" required>
+                            <select name="kd_kota" id="kotaTujuan" class="form-select select2" required>
                                 <option value="">-- Pilih Kota --</option>
                                 <?php if (!empty($cityList)): foreach ($cityList['result_kota'] as $key => $value): ?>
                                         <option value="<?= $value['kode']; ?>"><?= $value['nama']; ?></option>
                                 <?php endforeach;
                                 endif; ?>
                             </select>
-                            <label class="form-label" for="kd_kota">Kota</label>
+                            <label class="form-label" for="kotaTujuan">Kota</label>
                         </div>
                         <div class="form-group form-floating mb-3">
                             <input type="email" name="email" id="email" class="form-control" placeholder="email" required>
@@ -101,19 +101,19 @@
                                 </div>
                                 <div class="col-9">
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" name="layanan" value="2" id="groupCheckbox1" checked/>
+                                        <input class="form-check-input" type="checkbox" name="layanan[]" value="2" id="groupCheckbox1" checked/>
                                         <label class="form-check-label" for="groupCheckbox1">Pelayanan</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" name="layanan" value="4" id="groupCheckbox3" />
+                                        <input class="form-check-input" type="checkbox" name="layanan[]" value="4" id="groupCheckbox3" />
                                         <label class="form-check-label" for="groupCheckbox3">Event</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" name="layanan" value="8" id="groupCheckbox4" />
+                                        <input class="form-check-input" type="checkbox" name="layanan[]" value="8" id="groupCheckbox4" />
                                         <label class="form-check-label" for="groupCheckbox4">Bulanan</label>
                                     </div>
                                     <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="checkbox" name="layanan" value="16" id="groupCheckbox5" />
+                                        <input class="form-check-input" type="checkbox" name="layanan[]" value="16" id="groupCheckbox5" />
                                         <label class="form-check-label" for="groupCheckbox5">Lepas Kunci</label>
                                     </div>
                                 </div>
@@ -128,19 +128,31 @@
                             <label class="form-label" for="dokumen_pendukung">Dokumen Pendukung</label>
                             <div class="row">
                                 <div class="col-3">
-                                    <img class="mr-3 img-thumbnail" src="<?= getImage($_ENV['API_BASEURL'] . 'images/car_75.png') ?>" alt="Foto Diri" title="Foto Diri"><small>Foto Diri</small>
+                                    <img class="mr-3 img-thumbnail" src="<?= getImage($_ENV['API_BASEURL'] . 'images/car_75.png') ?>" alt="Foto Diri" title="Foto Diri">
+                                    <p>
+                                        <span>Foto Diri</span>
+                                    </p>
                                     <input type="file" name="foto_diri" id="foto_diri" class="form-control" placeholder="foto_diri" required>
                                 </div>
                                 <div class="col-3">
-                                    <img class="mr-3 img-thumbnail" src="<?= getImage($_ENV['API_BASEURL'] . 'images/car_75.png') ?>" alt="Foto Kantor" title="Foto Kantor"><small>Foto Kantor</small>
+                                    <img class="mr-3 img-thumbnail" src="<?= getImage($_ENV['API_BASEURL'] . 'images/car_75.png') ?>" alt="Foto Kantor" title="Foto Kantor">
+                                    <p>
+                                        <small>Foto Kantor</small>
+                                    </p>
                                     <input type="file" name="foto_kantor" id="foto_kantor" class="form-control" placeholder="foto_kantor" required>
                                 </div>
                                 <div class="col-3">
-                                    <img class="mr-3 img-thumbnail" src="<?= getImage($_ENV['API_BASEURL'] . 'images/car_75.png') ?>" alt="Foto Garasi" title="Foto Garasi"><small>Foto Garasi</small>
+                                    <img class="mr-3 img-thumbnail" src="<?= getImage($_ENV['API_BASEURL'] . 'images/car_75.png') ?>" alt="Foto Garasi" title="Foto Garasi">
+                                    <p>
+                                        <small>Foto Garasi</small>
+                                    </p>
                                     <input type="file" name="foto_garasi" id="foto_garasi" class="form-control" placeholder="foto_garasi" required>
                                 </div>
                                 <div class="col-3">
-                                    <img class="mr-3 img-thumbnail" src="<?= getImage($_ENV['API_BASEURL'] . 'images/car_75.png') ?>" alt="Form Order" title="Form Order"><small>Form Order</small>
+                                    <img class="mr-3 img-thumbnail" src="<?= getImage($_ENV['API_BASEURL'] . 'images/car_75.png') ?>" alt="Form Order" title="Form Order">
+                                    <p>
+                                        <small>Form Order</small>
+                                    </p>
                                     <input type="file" name="form_order" id="form_order" class="form-control" placeholder="form_order" required>
                                 </div>
                             </div>
@@ -157,21 +169,21 @@
                         <div class="form-group form-floating mb-3">
                             <input type="password" name="password" id="password" class="form-control " placeholder="admin123" required>
                             <label class="form-label" for="password">Password</label>
-                            <button type="button" class="text-danger tooltip-btn">
+                            <button type="button" class="text-danger tooltip-btn" id="togglePassword">
                                 <i class="bi bi-eye-slash"></i>
                             </button>
                         </div>
                         <div class="form-group form-floating mb-3">
                             <input type="password" name="repassword" id="repassword" class="form-control " placeholder="admin123" required>
                             <label class="form-label" for="repassword">Ulangi Password</label>
-                            <button type="button" class="text-danger tooltip-btn">
+                            <button type="button" class="text-danger tooltip-btn" id="toggleRePassword">
                                 <i class="bi bi-eye-slash"></i>
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-lg btn-default w-100 mb-4 shadow" id="btnSubmit">
+                <button type="submit" class="btn btn-lg btn-default w-100 mb-4 shadow">
                     Submit
                 </button>
             <?= form_close(); ?>
@@ -182,11 +194,27 @@
 
 <?= $this->endSection() ?>
 
+<?= $this->section('styles') ?>
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+
+<?= $this->endSection() ?>
+
 <?= $this->section('scripts') ?>
-<!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 <script>
     $(function () {
-        $('#btnSubmit').on('click', function (e) {
+        let listKota = <?= json_encode($cityList['result_kota']) ?>;
+        
+        // $('#kotaTujuan').select2({
+        //     theme: 'bootstrap-5',
+        //     placeholder: 'Type to search...',
+        //     minimumInputLength: 2,
+        //     allowClear: true,
+        //     data: listKota
+        // });
+
+        $('#registrationForm').on('submit', function (e) {
             e.preventDefault();
             var form = $('#registrationForm')[0];
             var data = new FormData(form);
@@ -203,7 +231,8 @@
                 { field: 'grup', message: 'Jenis Usaha harus diisi' },
                 { field: 'kd_korwil', message: 'Koordinator harus diisi' },
                 { field: 'no_hp', message: 'No HP harus diisi' },
-                { field: 'password', message: 'Password harus diisi' }
+                { field: 'password', message: 'Password harus diisi' },
+                { field: 'repassword', message: 'Ulangi Password harus diisi' }
             ];
 
             // Validate all fields
@@ -243,12 +272,47 @@
                 }
             }
 
+            // Password validation
+            let passwordInput = $('#password');
+            let repassword = $('#repassword');
+            if (passwordInput.val() && repassword.val() !== passwordInput.val()) {
+                repassword.addClass('is-invalid');
+                repassword.next('.invalid-feedback').remove();
+                repassword.after(`<div class="invalid-feedback">Passwords do not match.</div>`);
+                isValid = false;
+            } else {
+                repassword.removeClass('is-invalid');
+                repassword.next('.invalid-feedback').remove();
+            }
+
             // Tampilkan pesan error jika ada
             if (!isValid) {
                 errors.push('Silakan perbaiki error diatas.');
+                console.log(errors);
+            } else {
+                this.submit();
             }
-            
-            return;
+        });
+
+        const togglePassword = document.querySelector('#togglePassword');
+        const toggleRePassword = document.querySelector('#toggleRePassword');
+        const password = document.querySelector('#password');
+        const repassword = document.querySelector('#repassword');
+        togglePassword.addEventListener('click', () => {
+            // Toggle the type attribute using
+            // getAttribure() method
+            const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+            password.setAttribute('type', type);
+            // Toggle the eye and bi-eye icon
+            this.classList.toggle('bi-eye');
+        });
+        toggleRePassword.addEventListener('click', () => {
+            // Toggle the type attribute using
+            // getAttribure() method
+            const type = repassword.getAttribute('type') === 'password' ? 'text' : 'password';
+            repassword.setAttribute('type', type);
+            // Toggle the eye and bi-eye icon
+            this.classList.toggle('bi-eye');
         });
     });
 </script>

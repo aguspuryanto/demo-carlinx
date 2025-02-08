@@ -25,13 +25,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <!-- bootstrap icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/bootstrap-icons.css">
 
     <!-- swiper carousel css -->
-    <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/swiper-bundle.min.css">
 
     <!-- style css for this template -->
-    <link href="assets/css/style.css" rel="stylesheet" id="style">
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="<?= base_url(); ?>assets/css/font-awesome/all.min.css"> -->
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>assets/css/style.css">
+
+    <?= $this->renderSection('styles') ?>
 </head>
 
 <body class="body-scroll" data-page="index">
@@ -83,6 +88,7 @@
     <script src="assets/js/daterangepicker.js"></script> -->
     <!-- page level custom script -->
     <!-- <script src="assets/js/app.js"></script> -->
+    <?= $this->renderSection('scripts') ?>
 
 </body>
 </html>

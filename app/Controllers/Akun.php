@@ -13,6 +13,7 @@ class Akun extends BaseController
     protected $ipAddress;
     protected $session;
     protected $helpers = ['form', 'my'];
+    protected $destinationUrl = 'http://103.178.174.7/foxrent/upload_profile.php';
 
     public function __construct()
     {
@@ -56,21 +57,6 @@ class Akun extends BaseController
         $req = $this->request->getPost();
         // echo json_encode($req); die(); //{"usernm":"+62876543210","nama":"Foxie","nama_pt":"GASIK TRANSX","jabatan":"0","ijin_pt":"123.456.789.00","norek":"BCA 001.1234.5678a\/n Gemilang Kreasi Kami","alamat":"Tenggilis Mejoyo","kota":"KOTA SURABAYA","email":"april_id2000@yahoo.com","hp_perush":"+62818336745","hp_cs":"+6281131183229","is_layanan":"on","is_bulanan":"on","is_lepaskunci":"on"}
 
-        // $nohp_0 = $_POST['usernm'];
-        // $nama = $_POST['nama'];
-        // $kd_kota = $_POST['kd_kota'];
-        // $nama_perush = $_POST['nm_perush'];
-        // $alamat_perush = $_POST['alamat'];
-        // $ijin_perush = $_POST['ijin_perush'];
-        // $norek = $_POST['norek'];
-        // $email = $_POST['email_addr'];
-        // $layanan = $_POST['layanan'];
-        // $event = $_POST['event'];
-        // $bulanan = $_POST['bulanan'];
-        // $lepaskunci = $_POST['lepaskunci'];
-        // $publish = $_POST['publish'];
-        // $hp_perush_0 = $_POST['hp_perush'];
-
         if(empty($req)) {
             // return redirect()->back()->with('error', 'Data tidak boleh kosong');
             $this->session->setFlashdata('error', 'Data tidak valid');
@@ -97,37 +83,43 @@ class Akun extends BaseController
         // echo json_encode($client);
         
         if($client['success']){
-            // upload file
-            $data = [];
-            
-            echo print_r($_FILES['uploaded_file']);
-            if(isset($_FILES['uploaded_file'])){
-                // $getCurl = getCurl($_FILES, $this->ipAddress . 'upload_profile.php');
-                // echo json_encode($getCurl);
-
-                // $ch = curl_init();
-                // curl_setopt($ch, CURLOPT_HEADER, 0);
-                // curl_setopt($ch, CURLOPT_VERBOSE, 0);
-                // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-                // curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/4.0 (compatible;)");
-                // curl_setopt($ch, CURLOPT_URL, $this->ipAddress . 'upload_profile.php');
-                // curl_setopt($ch, CURLOPT_POST, true);
-                // // same as <input type="file" name="file_box">
-                // // $post = array(
-                // //     "file_box"=>"@/path/to/myfile.jpg",
-                // // );
-                // curl_setopt($ch, CURLOPT_POSTFIELDS, $_FILES['uploaded_file']); 
-                // $response = curl_exec($ch);
-                // echo $response;
+            $uploadDir = 'uploads/';
+            if (!is_dir($uploadDir)) {
+                mkdir($uploadDir, 0777, true);
             }
-
             
-            // $foto_4 = $this->request->getFile('uploaded_file');
-            // if (!$foto_4->hasMoved()) {
-            //     $filename = $foto_4->getRandomName();
-            //     // $foto_4->move(ROOTPATH . 'public/uploads/', $filename);
-            //     $data = ['foto_4' => ($filename)];
-            // }
+            $errors = [];
+            $kd_site = $this->session->get('user')['kode'];
+            // echo print_r($_FILES['uploaded_file']);
+            if(isset($_FILES['uploaded_file'])){
+                if (isset($_FILES['uploaded_file']) && $_FILES['uploaded_file']['size'] > 0) {
+                    $fileName = $kd_site . "_1.jpg";
+                    $targetFile = $uploadDir . $fileName;
+
+                    if (!move_uploaded_file($_FILES['uploaded_file']['tmp_name'], $targetFile)) {
+                        $errors[] = "Failed to upload file: $fileName. Please check file permissions and try again.";
+                    }
+                    
+                    if (is_file($targetFile)) {
+                        $ch = curl_init();
+
+                        $postData = [
+                            'uploaded_file' => new \CURLFile($targetFile)
+                        ];
+
+                        curl_setopt($ch, CURLOPT_URL, $this->destinationUrl);
+                        curl_setopt($ch, CURLOPT_POST, true);
+                        curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+                        $response = curl_exec($ch);
+                        if (curl_errno($ch)) {
+                            $errors[] = "Failed to copy file: $fileName. Error: " . curl_error($ch);
+                        }
+                        curl_close($ch);
+                    }
+                }
+            }
 
             // echo json_encode($data);
             return redirect()->back()->with('success', 'Data berhasil diubah');

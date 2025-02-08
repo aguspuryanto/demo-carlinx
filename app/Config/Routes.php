@@ -20,7 +20,7 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
     $routes->post('login', 'Auth::loginSubmit');
     $routes->get('logout', 'Auth::logout');
 
-    $routes->get('register', 'Auth::register');
+    $routes->add('register', 'Auth::register');
     $routes->post('register', 'Auth::registerSubmit');
 
     $routes->get('forgot-password', 'Auth::forgotPassword');
@@ -37,6 +37,9 @@ $routes->group('', ['filter' => 'auth'], function($routes) {
 
     // proses
     $routes->get('proses', 'Proses::index');
+
+    // sync
+    $routes->get('fileman', 'Auth::syncupload');
 });
 
 // rate
