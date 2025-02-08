@@ -99,12 +99,12 @@ class Auth extends BaseController
                 $this->syncupload();
 
                 if (empty($errors)) {
-                    // return redirect()->to('/login')->with('success', 'Registration successful! Please login.');
-                    echo json_encode(["status" => "success", "message" => "Semua file berhasil diupload"]);
+                    return redirect()->to('/login')->with('success', 'Registration successful! Please login.');
+                    // echo json_encode(["status" => "success", "message" => "Semua file berhasil diupload"]);
                 } else {
-                    // return redirect()->to('/register')->with('error', 'Registration failed! Please try again. <br>' . implode(", ", $errors));
-                    http_response_code(500);
-                    echo json_encode(["status" => "error", "message" => implode(", ", $errors)]);
+                    return redirect()->to('/register')->with('error', 'Registration failed! Please try again. <br>' . implode(", ", $errors));
+                    // http_response_code(500);
+                    // echo json_encode(["status" => "error", "message" => implode(", ", $errors)]);
                 }
             } else {
                 return redirect()->to('/register')->with('error', 'Registration failed! Please try again. <br>' . $listData['message']);
