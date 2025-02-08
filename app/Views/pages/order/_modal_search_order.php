@@ -83,13 +83,13 @@
                         <div class="mb-3 row">
                             <label for="no_hp" class="col-sm-2 col-form-label">No HP</label>
                             <div class="col-sm-10">
-                                <input type="text" name="no_hp[]" class="form-control" id="no_hp" placeholder="Masukkan no. hp" required>
+                                <input type="text" name="no_hp[]" class="form-control" id="no_hp" placeholder="Masukkan no. hp">
                             </div>
                         </div>
                         <div class="mb-3 row">
                             <label for="nik" class="col-sm-2 col-form-label">NIK</label>
                             <div class="col-sm-10">
-                                <input type="text" name="nik[]" class="form-control" id="nik" placeholder="Masukkan NIK" required>
+                                <input type="text" name="nik[]" class="form-control" id="nik" placeholder="Masukkan NIK">
                             </div>
                         </div>
                         <div class="mb-3 row">
