@@ -57,19 +57,11 @@
                 console.log('ID Order:', idOrder);
                 console.log('Item Data:', itemData);
 
-                // load
-                let resultPlgn = [];
-                $.get('<?= base_url('order/detail-order') ?>/' + idOrder, function(data) {
-                    let jsonData = JSON.parse(data);
-                    resultPlgn = jsonData.result_plgn[0];
-                    console.log(resultPlgn, 'resultPlgn');
-                });
-
                 // Panggil fungsi
                 // let resultPlgn = [];
-                loadDetailOrder(idOrder).then(resp => {
-                    console.log('Data pelanggan:', resp);
-                });
+                // loadDetailOrder(idOrder).then(resp => {
+                //     console.log('Data pelanggan:', resp);
+                // });
 
                 var textNote = '';
                 if(itemData.stat == '1'){
@@ -115,11 +107,20 @@
                 
                 newForm.innerHTML = '<div class="mb-3 align-items-center"><input type="hidden" name="id_order" class="form-control" id="id_order" value="' + idOrder + '"></div>'; // Add the hidden input with value
                 newForm.innerHTML += '<div class="mb-3 align-items-center"><input type="hidden" name="stat_ori" class="form-control" id="stat_ori" value="' + itemData.stat + '"></div>'; // Add the hidden input with value
-                newForm.innerHTML += '<div class="mb-3 align-items-center"><label class="form-label">Pelanggan</label><input type="text" name="nama_plgn" class="form-control" id="nama_plgn" value="' + (resultPlgn.nama_plgn || '') + '"></div>'; // Add input with value
-                newForm.innerHTML += '<div class="mb-3 align-items-center"><label class="form-label">No HP</label><input type="text" name="no_hp" class="form-control" id="no_hp" value="' + (resultPlgn.no_hp || '') + '"></div>'; // Add input with value
-                newForm.innerHTML += '<div class="mb-3 align-items-center"><label class="form-label">No KTP</label><input type="text" name="ktp_plgn" class="form-control" id="ktp_plgn" value="' + (resultPlgn.ktp_plgn || '') + '"></div>'; // Add input with value
-                newForm.innerHTML += '<div class="mb-3 align-items-center"><label class="form-label">Note</label><input type="text" name="note" class="form-control" id="note" value="' + (resultPlgn.note || '') + '"></div>'; // Add input with value
-                newForm.innerHTML += '<div class="mb-3 align-items-center"><button type="submit" class="btn btn-primary w-100 btnConfirmOrder">Batal</button></div>'; // Changed button text
+
+                // load
+                let resultPlgn = [];
+                $.get('<?= base_url('order/detail-order') ?>/' + idOrder, function(data) {
+                    let jsonData = JSON.parse(data);
+                    resultPlgn = jsonData.result_plgn[0];
+                    console.log(resultPlgn, 'resultPlgn');
+
+                    newForm.innerHTML += '<div class="mb-3 align-items-center"><label class="form-label">Pelanggan</label><input type="text" name="nama_plgn" class="form-control" id="nama_plgn" value="' + (resultPlgn.nama_plgn || '') + '"></div>'; // Add input with value
+                    newForm.innerHTML += '<div class="mb-3 align-items-center"><label class="form-label">No HP</label><input type="text" name="no_hp" class="form-control" id="no_hp" value="' + (resultPlgn.no || '') + '"></div>'; // Add input with value
+                    newForm.innerHTML += '<div class="mb-3 align-items-center"><label class="form-label">No KTP</label><input type="text" name="ktp_plgn" class="form-control" id="ktp_plgn" value="' + (resultPlgn.ktp_plgn || '') + '"></div>'; // Add input with value
+                    newForm.innerHTML += '<div class="mb-3 align-items-center"><label class="form-label">Note</label><input type="text" name="note" class="form-control" id="note" value="' + (resultPlgn.note || '') + '"></div>'; // Add input with value
+                    newForm.innerHTML += '<div class="mb-3 align-items-center"><button type="submit" class="btn btn-primary w-100 btnConfirmOrder">Batal</button></div>'; // Changed button text
+                });
                 
                 $('#addModal .modal-body').html(html).append(newForm);
                 $('#addModal').modal('show');

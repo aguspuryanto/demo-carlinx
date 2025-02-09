@@ -180,7 +180,7 @@
             if(jns_order == '4'){
                 html += '<tr><th>Jumlah Bulan</th><td>' + (item.jml_bln) + '</td></tr>';
             } else {
-                html += '<tr><th>Tujuan</th><td>' + item.lokasi_tujuan + '</td></tr>';
+                html += '<tr><th>Tujuan</th><td>' + (item.lokasi_tujuan == '' ? 'Dalam Kota' : item.lokasi_jemput + ' - ' + item.lokasi_tujuan) + '</td></tr>';
             }
             html += '<tr><th>Unit</th><td>' + item.nama + '</td></tr>';
             html += '<tr><th>Tahun</th><td>' + item.tahun + '</td></tr>';
