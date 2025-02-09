@@ -27,8 +27,10 @@ class Inbox extends BaseController
          * caller optional
          * kd_member required
          */
+        // echo json_encode($this->session->get('user'));
 
         $listData   = [];
+        $listUser   = [];
         $curlOpt    = [
             'caller' => 'INBOX', // default. INBOX, AKTIF, RIWAYAT
             'kd_member' => $this->session->get('user')['kode']
@@ -85,11 +87,25 @@ class Inbox extends BaseController
             // '5' => 'Paket',
         ];
 
-        if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'select_order_5.php');
-        // echo json_encode($listData); die();
+        $dataLogin = [
+            'usernm' => $this->session->get('user')['username'],
+            'passwd' => $this->session->get('user')['password']
+        ];
+        // if(empty($listUser)) $listUser = getCurl($dataLogin, $this->ipAddress . 'login_user.php');
+        if(empty($listUser)) $listUser = ($this->session->get('user'));
+        // echo json_encode($listUser); die();
 
+        if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'select_order_5.php');
+        $listData = json_decode('{"success":1,"result_list_order":[{"id_order":"250209000001","kd_member":"ADM00001","kode_rental":"23050001","kd_unit":"23050001AV0001","hrg_sewa":"650000","tgl_start":"2025-02-09 06:00:00","tgl_finish":"2025-02-09 23:59:00","jemput":"Indonesia, 60261, Surabaya","tujuan":"Indonesia, 65119, Malang Kota","ketr":"","nama_penyewa":null,"ktp_penyewa":null,"hp_penyewa":null,"nopol":null,"nama_driver":null,"hp_driver":null,"tgl_order":"2025-02-09 17:05:32","stat":"1","nama_unit":"AVANZA XL (DEV)","rating":"0.0","note":"","jns_order":"1","norek_rental":"BANK JATIM001.1234.5678a/n MCorner Jaya Sejati","nominal_dp":"0","path_foto":null,"alasan_batal":null,"jml_order":"1","tahun":"","bbm":"Pertalite","transmisi":"Manual","warna":"Silver","jns_byr":"1","tgl_tempo":"2025-02-09","hrg_sewa_total":650000,"sisa_byr":"0","biaya_1":"0","biaya_2":"0","biaya_3":"0","note_driver":null,"tg_jwb":"0","nama_cs":null,"foto_serah":"","foto_terima":"","grp_penyewa":"1","jml_bln":"1","rental_penyewa":"GASIK TRANSX","rental_tujuan":"MCORNER SMS","nominal_disc":"0","ketr_byr":"","nama_member":"Foxie","liq_tujuan":"2","liq":"1","tempo_bayar":"0","catatan_byr":"ini catatan","voucher":"VCH10"}]}', true);
+        
+        if ($listData === null) {
+            // Handle JSON decode error
+            echo "Error decoding JSON";
+            die();
+        }
+        
         $newlistData = [];
-        if($listData['success']=='1'){
+        if ($listData['success'] == '1') {
             foreach ($listData['result_list_order'] as $item) {
                 // echo $item['stat'];
                 if(in_array($item['stat'], ['1', '2', '3', '4', '5'])) $newlistData[] = $item;
@@ -98,7 +114,7 @@ class Inbox extends BaseController
         // echo json_encode($newlistData);
 
         if($listData['success']){
-            $listData = $listData; //{"success":1,"result_list_order":[{"id_order":"250209000001","kd_member":"ADM00001","kode_rental":"23050001","kd_unit":"23050001AV0001","hrg_sewa":"650000","tgl_start":"2025-02-09 06:00:00","tgl_finish":"2025-02-09 23:59:00","jemput":"Indonesia, 60261, Surabaya","tujuan":"Indonesia, 65119, Malang Kota","ketr":"","nama_penyewa":null,"ktp_penyewa":null,"hp_penyewa":null,"nopol":null,"nama_driver":null,"hp_driver":null,"tgl_order":"2025-02-09 17:05:32","stat":"1","nama_unit":"AVANZA XL (DEV)","rating":"0.0","note":"","jns_order":"1","norek_rental":"BANK JATIM001.1234.5678a\/n MCorner Jaya Sejati","nominal_dp":"0","path_foto":null,"alasan_batal":null,"jml_order":"1","tahun":"","bbm":"Pertalite","transmisi":"Manual","warna":"Silver","jns_byr":"1","tgl_tempo":"2025-02-09","hrg_sewa_total":650000,"sisa_byr":"0","biaya_1":"0","biaya_2":"0","biaya_3":"0","note_driver":null,"tg_jwb":"0","nama_cs":null,"foto_serah":"","foto_terima":"","grp_penyewa":"1","jml_bln":"1","rental_penyewa":"GASIK TRANSX","rental_tujuan":"MCORNER SMS","nominal_disc":"0","ketr_byr":"","nama_member":"Foxie","liq_tujuan":"2","liq":"1","tempo_bayar":"0","catatan_byr":"ini catatan","voucher":"VCH10"}]}
+            $listData = $listData;
         }
 
         return view('inbox/index', [
@@ -107,7 +123,8 @@ class Inbox extends BaseController
             'listGroup' => $listGroup,
             'listOrder' => $listOrder,
             'newlistData' => $newlistData,
-            'listData' => $listData
+            'listData' => $listData,
+            'listUser' => $listUser
         ]);
     }
 

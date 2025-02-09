@@ -12,7 +12,11 @@
                 <div class="card-body">
                     <?php
                     //include_once '_form.php';
-                    // echo json_encode($listData);
+                    // echo json_encode($listData); die();
+                    // echo json_encode($listUser); die();
+                    // 1. Vendor : jika user.kd_rental == order.kd_rental
+                    // 2. Pemesan : jika user.kd_rental != order.kd_rental
+                    // In = Pemesan, Out = Vendor
                     ?>
                     <ul class="list-group">
                     <?php if (empty($listData['result_list_order'])) : ?>
@@ -21,13 +25,20 @@
                         <?php foreach ($listData['result_list_order'] as $item) : ?>
                             <li class="list-group-item">
                             <a href="#" class="list-group-item-action" data-bs-toggle="modal" data-bs-target="#addModal" data-id="<?= $item['id_order'] ?>" data-item="<?= esc(json_encode($item)) ?>">
-                                <div class="mb-2"><span class="badge <?=($item['grp_penyewa']=='1') ? 'bg-danger' : 'bg-info';?>"><?= $listGroup[$item['grp_penyewa']] ?></span> <span class="badge bg-secondary"><?= $listOrder[$item['jns_order']] ?></span> <small><?= date('d-m-Y', strtotime($item['tgl_order'])) ?></small> <small class="<?=($item['stat']=='9') ? 'text-success' : 'text-danger'; ?> pull-right"><?= $listStatus[$item['stat']]; ?></small></div>
+                                <!-- <div class="mb-2"><span class="badge <?=($item['grp_penyewa']=='1') ? 'bg-danger' : 'bg-info';?>"><?= $listGroup[$item['grp_penyewa']] ?></span> <span class="badge bg-secondary"><?= $listOrder[$item['jns_order']] ?></span> <small><?= date('d-m-Y', strtotime($item['tgl_order'])) ?></small> <small class="<?=($item['stat']=='9') ? 'text-success' : 'text-danger'; ?> pull-right"><?= $listStatus[$item['stat']]; ?></small></div>
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-0"><?= $item['nama_unit'] ?></h6>
+                                    <small class="<?=($item['stat']=='9') ? 'text-success' : 'text-danger'; ?> text-right"><?=$item['liq'] == '2' ? 'cs: ' . $item['nama_cs'] : 'cs: ' . $item['nama_member'] ?></small>
+                                </div>
+                                <p class="mb-0">Rp. <?= number_format($item['hrg_sewa_total'], 0, ',', '.') ?></p>
+                                <small><span class="badge <?=$item['liq'] == '2' ? 'bg-warning text-warning' : 'bg-success text-success'?>">*</span> <?=$item['grp_penyewa'] == '2' ? 'pemesan' : 'vendor'; ?>: <?= $item['grp_penyewa'] == '2' ? $item['rental_penyewa'] : $item['rental_tujuan'] ?></small> -->
+                                <div class="mb-2"><span class="badge <?=($item['kode_rental'] != $listUser['kd_rental']) ? 'bg-info' : 'bg-danger';?>"><?= ($item['kode_rental'] != $listUser['kd_rental']) ? 'In' : 'Out' ?></span> <span class="badge bg-secondary"><?= $listOrder[$item['jns_order']] ?></span> <small><?= date('d-m-Y', strtotime($item['tgl_order'])) ?></small> <small class="<?=($item['stat']=='9') ? 'text-success' : 'text-danger'; ?> pull-right"><?= $listStatus[$item['stat']]; ?></small></div>
                                 <div class="d-flex w-100 justify-content-between">
                                     <h6 class="mb-0"><?= $item['nama_unit'] ?></h6>
                                     <small class="<?=($item['stat']=='9') ? 'text-success' : 'text-danger'; ?> text-right">cs: <?=$item['liq'] == '2' ? $item['nama_cs'] : $item['nama_member'] ?></small>
                                 </div>
                                 <p class="mb-0">Rp. <?= number_format($item['hrg_sewa_total'], 0, ',', '.') ?></p>
-                                <small><span class="badge <?=$item['liq'] == '2' ? 'bg-warning text-warning' : 'bg-success text-success'?>">*</span> <?=$item['grp_penyewa'] == '2' ? 'pemesan' : 'vendor'; ?>: <?= $item['grp_penyewa'] == '2' ? $item['rental_penyewa'] : $item['rental_tujuan'] ?></small>
+                                <small><span class="badge <?=$item['liq'] == '2' ? 'bg-warning text-warning' : 'bg-success text-success'?>">*</span> <?=($item['kode_rental'] != $listUser['kd_rental']) ? 'Pemesan' : 'Vendor'; ?>: <?= ($item['kode_rental'] != $listUser['kd_rental']) ? $item['rental_penyewa'] : $item['rental_tujuan'] ?></small>
                             </a>
                             </li>
                         <?php endforeach; ?>
@@ -78,7 +89,7 @@
                 if(itemData.jns_order == '4'){
                     html += '<tr><th>Jumlah Bulan</th><td>' + (itemData.jml_bln) + '</td></tr>';
                 } else {
-                    html += '<tr><th>Tujuan</th><td>' + itemData.lokasi_tujuan + '</td></tr>';
+                    html += '<tr><th>Tujuan</th><td>' + itemData.jemput.substr(itemData.jemput.lastIndexOf(",") + 1) + ' - ' + itemData.tujuan.substr(itemData.tujuan.lastIndexOf(",") + 1) + '</td></tr>';
                 }
                 html += '<tr><th>Unit</th><td>' + itemData.nama_unit + '</td></tr>';
                 html += '<tr><th>Tahun</th><td>' + itemData.tahun + '</td></tr>';
@@ -86,7 +97,7 @@
                 html += '<tr><th>Transmisi</th><td>' + (itemData.transmisi) + '</td></tr>';
                 html += '<tr><th>Warna</th><td>' + (itemData.warna) + '</td></tr>';
                 html += '<tr><th>Jml.Order</th><td>' + (itemData.jml_order) + '</td></tr>';
-                html += '<tr><th>Include</th><td>' + (itemData.ketr ?? '-') + '</td></tr>';
+                html += '<tr><th>Include</th><td>' + (itemData.ketr !='' ? itemData.ketr : 'Mobil, Driver') + '</td></tr>';
                 html += '<tr><th>Biaya</th><td>Rp. ' + numberFormat(itemData.hrg_sewa) + '</td></tr>';
                 html += '<tr><th>Pembayaran</th><td>' + (itemData.jns_byr == '1' ? 'Lunas' : 'Mundur') + '</td></tr>';
                 html += '<tr><th>Catatan</th><td>' + (itemData.catatan_byr ?? '-') + '</td></tr>';

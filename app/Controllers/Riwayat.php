@@ -28,6 +28,7 @@ class Riwayat extends BaseController
          * kd_member required
          */
 
+        $listUser   = [];
         $listData   = [];
         $curlOpt    = [
             'caller' => 'RIWAYAT', // default. INBOX, AKTIF, RIWAYAT
@@ -78,6 +79,8 @@ class Riwayat extends BaseController
             // '5' => 'Paket',
         ];
 
+        if(empty($listUser)) $listUser = ($this->session->get('user'));
+
         if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'select_order_5.php');
         // echo json_encode($listData); die();
         if($listData['success']){
@@ -89,7 +92,8 @@ class Riwayat extends BaseController
             'listStatus' => $listStatus,
             'listGroup' => $listGroup,
             'listOrder' => $listOrder,
-            'listData' => $listData
+            'listData' => $listData,
+            'listUser' => $listUser
         ]);
     }
 }
