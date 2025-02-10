@@ -38,7 +38,7 @@
                                     <small class="<?=($item['stat']=='9') ? 'text-success' : 'text-danger'; ?> text-right">cs: <?=$item['liq'] == '2' ? $item['nama_cs'] : $item['nama_member'] ?></small>
                                 </div>
                                 <p class="mb-0">Rp. <?= number_format($item['hrg_sewa_total'], 0, ',', '.') ?></p>
-                                <small><span class="badge <?=$item['liq_tujuan'] == '2' ? 'bg-warning text-warning' : 'bg-success text-success'?>">*</span> <?=($item['kode_rental'] != $listUser['kd_rental']) ? 'Pemesan' : 'Vendor'; ?>: <?= ($item['liq_tujuan'] == 1) ? $item['rental_penyewa'] : $item['rental_tujuan'] ?></small>
+                                <small><span class="badge <?=$item['liq_tujuan'] == '2' ? 'bg-warning text-warning' : 'bg-success text-success'?>">*</span> <?=($item['kode_rental'] == $listUser['kd_rental']) ? 'Pemesan' : 'Vendor'; ?>: <?= ($item['liq_tujuan'] == 1) ? $item['rental_penyewa'] : $item['rental_tujuan'] ?></small>
                             </a>
                             </li>
                         <?php endforeach; ?>
