@@ -37,9 +37,9 @@
                     <div class="form-group form-floating mb-3">
                         <input type="password" name="password" id="password" class="form-control " placeholder="admin123" required>
                         <label class="form-control-label" for="password">Password</label>
-                        <button type="button" class="text-danger tooltip-btn" data-bs-toggle="tooltip" data-bs-placement="left" title="" id="passworderror" data-bs-original-title="Enter valid Password">
+                        <!-- <button type="button" class="text-danger tooltip-btn" data-bs-toggle="tooltip" data-bs-placement="left" title="" id="passworderror" data-bs-original-title="Enter valid Password">
                             <i class="bi bi-info-circle"></i>
-                        </button>
+                        </button> -->
                     </div>
                     <p class="mb-3 text-center">
                         <a href="<?= base_url('forgot-password'); ?>" class="">
