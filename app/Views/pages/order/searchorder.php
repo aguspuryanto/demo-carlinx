@@ -161,6 +161,8 @@
       var item = JSON.parse(form.item.value);
       console.log(item, '117_item');
 
+      let listInclude = 'Mobil, Driver';
+
       // if pass validation
       if(form.checkValidity()){
         $.ajax({
@@ -171,6 +173,10 @@
             console.log(response, 'response');
             const parseResponse = JSON.parse(response);
             console.log(parseResponse.jenis_pembayaran, '_jenis_pembayaran');
+
+            if(item.is_bbm == '1') listInclude += ', BBM';
+            if(item.is_makan == '1') listInclude += ', Makan';
+            if(item.is_hotel == '1') listInclude += ', Hotel';
 
             var html = '<div class="table-responsive mb-3">';
             html += '<table class="table table-bordered">';
@@ -188,7 +194,7 @@
             html += '<tr><th>Transmisi</th><td>' + (parseResponse.jenis_transmisi) + '</td></tr>';
             html += '<tr><th>Warna</th><td>' + (parseResponse.warna) + '</td></tr>';
             html += '<tr><th>Jml.Order</th><td>' + (parseResponse.jumlah) + '</td></tr>';
-            html += '<tr><th>Include</th><td>' + (item.include ?? 'Mobil, Driver') + '</td></tr>';
+            html += '<tr><th>Include</th><td>' + (listInclude) + '</td></tr>';
             html += '<tr><th>Biaya</th><td>Rp. ' + numberFormat(item.hrg_sewa) + '</td></tr>';
             html += '<tr><th>Pembayaran</th><td>' + (parseResponse.jenis_pembayaran == '1' ? 'Tunai' : 'Mundur') + '</td></tr>';
             html += '<tr><th>Catatan</th><td>' + (parseResponse.catatan ?? '-') + '</td></tr>';
