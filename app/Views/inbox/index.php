@@ -130,7 +130,7 @@
                     newForm.innerHTML += '<div class="mb-3 align-items-center"><label class="form-label">No HP</label><input type="text" name="no_hp" class="form-control" id="no_hp" value="' + (resultPlgn.no || '') + '"></div>'; // Add input with value
                     newForm.innerHTML += '<div class="mb-3 align-items-center"><label class="form-label">No KTP</label><input type="text" name="ktp_plgn" class="form-control" id="ktp_plgn" value="' + (resultPlgn.ktp_plgn || '') + '"></div>'; // Add input with value
                     newForm.innerHTML += '<div class="mb-3 align-items-center"><label class="form-label">Note</label><input type="text" name="note" class="form-control" id="note" value="' + (resultPlgn.note || '') + '"></div>'; // Add input with value
-                    newForm.innerHTML += '<div class="mb-3 align-items-center"><button type="submit" class="btn btn-primary w-100 btnConfirmOrder">Batal</button></div>'; // Changed button text
+                    newForm.innerHTML += '<div class="mb-3 align-items-center"><button type="submit" class="btn btn-primary w-100 btnConfirmOrder">Batal</button> <button type="button" class="btn btn-secondary w-100 btnCancel">Batal</button></div>'; // Changed button text
                 });
                 
                 $('#addModal .modal-body').html(html).append(newForm);
