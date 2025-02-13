@@ -250,8 +250,8 @@ class Order extends BaseController
                     return redirect()->to('/')->with('success', 'Order berhasil dibuat');
                 } else {
                     // show error
-                    echo json_encode($listData);
-                    // return redirect()->to('order/orderlayanan')->with('error', $listData['message']);
+                    // echo json_encode($listData);
+                    return redirect()->to('order/orderlayanan')->with('error', $listData['message'] . ' ' . $listData['error']);
                 }
             
             } else {
