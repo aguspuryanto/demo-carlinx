@@ -175,7 +175,7 @@
             console.log(parseResponse.jenis_pembayaran, '_jenis_pembayaran');
 
             if(item.is_bbm == '1') listInclude += ', BBM';
-            if(item.is_makan == '1') listInclude += ', Makan';
+            if(item.is_makan == '1') listInclude += ', Makan Driver';
             if(item.is_hotel == '1') listInclude += ', Hotel';
 
             var html = '<div class="table-responsive mb-3">';
