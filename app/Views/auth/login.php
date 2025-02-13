@@ -29,12 +29,12 @@
                 <form method="post" action="<?= base_url('login'); ?>" class="was-validated needs-validation" novalidate="">
                     <?= csrf_field(); ?>
 
-                    <div class="form-group form-floating mb-3 is-valid">
+                    <div class="form-group form-floating mb-3">
                         <input type="text" name="username" id="username" class="form-control" placeholder="username" required>
                         <label class="form-control-label" for="username">Username</label>
                     </div>
 
-                    <div class="form-group form-floating is-invalid mb-3">
+                    <div class="form-group form-floating mb-3">
                         <input type="password" name="password" id="password" class="form-control " placeholder="admin123" required>
                         <label class="form-control-label" for="password">Password</label>
                         <button type="button" class="text-danger tooltip-btn" data-bs-toggle="tooltip" data-bs-placement="left" title="" id="passworderror" data-bs-original-title="Enter valid Password">
