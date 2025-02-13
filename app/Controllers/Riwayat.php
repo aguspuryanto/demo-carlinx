@@ -23,6 +23,13 @@ class Riwayat extends BaseController
 
     public function index()
     {
+        if ($this->session->get('user') && is_array($this->session->get('user'))) {
+            $kd_member = $this->session->get('user')['kode'];
+        } else {
+            // Handle the case where the user session is not set or not an array
+            $kd_member = null; // or some default value or error handling
+        }
+        
         /* params: 
          * caller optional
          * kd_member required
@@ -32,7 +39,7 @@ class Riwayat extends BaseController
         $listData   = [];
         $curlOpt    = [
             'caller' => 'RIWAYAT', // default. INBOX, AKTIF, RIWAYAT
-            'kd_member' => $this->session->get('user')['kode']
+            'kd_member' => $kd_member
         ];
 
         //update status terbaru
