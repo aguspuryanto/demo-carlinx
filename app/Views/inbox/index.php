@@ -136,7 +136,7 @@
                                 <button type="submit" class="btn btn-primary w-100 btnConfirmOrder">Batal</button>
                             </div>
                             <div class="col">
-                                <button type="button" class="btn btn-secondary w-100 btnCancel">Batal</button>
+                                <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">Batal</button>
                             </div>
                         </div>
                     </div>`; // Changed button text
