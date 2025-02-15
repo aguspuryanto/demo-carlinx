@@ -60,7 +60,8 @@ class Inbox extends BaseController
         // Stat : 8 = Pemesan Batal
         // Stat : 9 = Selesai
 
-        $listStatus = [
+        $listStatus = [];
+        $listStatus_pemesan = [
             '1' => 'Menunggu',
             '2' => 'Diterima',
             '3' => 'Data Plgn',
@@ -70,6 +71,16 @@ class Inbox extends BaseController
             '7' => 'Rental Batal',
             '8' => 'Kedaluwarsa', //'Batal By Pemesan',
             '9' => 'Selesai', //'Pembayaran Diterima'
+        ];
+
+        $listStatus_rental = [
+            '1' => 'Order Baru',
+            '4' => 'Menunggu',
+            '5' => 'Tunggu Pembayaran',
+            '6' => 'Ditolak',
+            '7' => 'Rental Batal',
+            '8' => 'Pemesan Batal',
+            '9' => 'Selesai'
         ];
 
         // grp_penyewa
@@ -114,6 +125,12 @@ class Inbox extends BaseController
 
         if($listData['success']){
             $listData = $listData;
+            
+            $is_vendor = ($listData['result_list_order'][0]['kode_rental'] == $listUser['kd_rental']) ? true : false;
+            $is_pemesan = ($listData['result_list_order'][0]['kode_rental'] != $listUser['kd_rental']) ? true : false;
+
+            if($is_vendor) $listStatus = $listStatus_rental;
+            if($is_pemesan) $listStatus = $listStatus_pemesan;
         }
 
         return view('inbox/index', [
@@ -132,20 +149,21 @@ class Inbox extends BaseController
         // handle POST
         if ($this->request->getMethod() == 'POST') {
             $data = $this->request->getPost();
-            // echo json_encode($data); die();
+            // echo json_encode($data); die(); //{"id_order":"250215000003","stat_ori":"1","nama_plgn":"Test","no_hp":"8765432","ktp_plgn":"12345","note":"","nama_driver":"NAMA DRIVER","no_hp_driver":"087712199","nopol_driver":"L111pO","note_driver":"note"}
+
             // $id_order = $this->request->getPost('id_order');
             // $pelanggan = $this->request->getPost('pelanggan');
             // $stat_ori = $this->request->getPost('stat_ori');
             
-            if (!$data['id_order'] || !$data['pelanggan']) {
-                // return redirect()->to(base_url('inbox'))->with('error', 'Please fill in all required fields');
-                $response = [
-                    'success' => false,
-                    'message' => 'Please fill in all required fields'
-                ];
-                echo json_encode($response);
-                return;
-            }
+            // if (!$data['id_order'] || !$data['pelanggan']) {
+            //     // return redirect()->to(base_url('inbox'))->with('error', 'Please fill in all required fields');
+            //     $response = [
+            //         'success' => false,
+            //         'message' => 'Please fill in all required fields'
+            //     ];
+            //     echo json_encode($response);
+            //     return;
+            // }
 
             // $caller = $_POST['caller'];
             // $kd_member = $_POST['kd_member'];
@@ -156,16 +174,34 @@ class Inbox extends BaseController
 
             // update_order_1a.php
             $curlOpt    = [
-                'caller' => 'INBOX', // default. INBOX, AKTIF, RIWAYAT
+                'caller' => 'STAT', // default. INBOX, AKTIF, RIWAYAT
                 'kd_member' => $this->session->get('user')['kode'],
                 'id_order' => $data['id_order'],
                 'stat_ori' => $data['stat_ori'],
-                'stat' => 8, //batal
+                'stat' => $data['stat'], //batal
                 'alasan_batal' => '-'
             ];
 
+            /*- stat = 1 : terima (stat: 4), tolak (stat: 6)
+            - stat = 5 :
+            * Batal : update stat = 7
+            * pembayaran diterima  
+            * Submit : update stat = 9
+            */
             $listData   = getCurl($curlOpt, $this->ipAddress . 'update_order_1a.php');
             // echo json_encode($listData); die();
+
+            $curlOptDrv    = [
+                'id_order' => $data['id_order'],
+                'no' => $data['no_hp_driver'],
+                'nama' => $data['nama_driver'],
+                'nohp' => $data['no_hp_driver'],
+                'nopol' => $data['nopol_driver'],
+                'note' => $data['note_driver']
+            ];
+
+            $updtDrv   = getCurl($curlOptDrv, $this->ipAddress . 'update_single_drv.php');
+            // echo json_encode($updtDrv); die();
 
             $response = [
                 'success' => ($listData['success']=='1') ? true : false,

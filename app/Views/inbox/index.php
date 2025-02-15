@@ -16,7 +16,15 @@
                     // echo json_encode($listUser); die();
                     // 1. Vendor : jika user.kd_rental == order.kd_rental
                     // 2. Pemesan : jika user.kd_rental != order.kd_rental
-                    // In = Pemesan, Out = Vendor
+                    // In = Pemesan, Out = Vendor
+                    $is_vendor = false;
+                    $is_pemesan = false;
+                    
+                    if (!empty($listData['result_list_order'])) {
+                        $is_vendor = ($listData['result_list_order'][0]['kode_rental'] == $listUser['kd_rental']);
+                        $is_pemesan = ($listData['result_list_order'][0]['kode_rental'] != $listUser['kd_rental']);
+                    }
+                    echo 'is_vendor : ' . $is_vendor . '; is_pemesan : ' . $is_pemesan . '<br>';
                     ?>
                     <ul class="list-group">
                     <?php if (empty($listData['result_list_order'])) : ?>
@@ -57,6 +65,9 @@
 <?= $this->section('scripts') ?>
 <script>
     $(document).ready(function() {
+        let is_vendor = '<?= $is_vendor ?>';
+        let is_pemesan = '<?= $is_pemesan ?>';
+
         $('#addModal').on('show.bs.modal', function (e) {
             // Accessing the target element that triggered the modal
             let triggerElement = e.relatedTarget;
@@ -126,20 +137,39 @@
                     resultPlgn = jsonData.result_plgn[0];
                     console.log(resultPlgn, 'resultPlgn');
 
-                    newForm.innerHTML += '<div class="mb-3 align-items-center"><label class="form-label">Pelanggan</label><input type="text" name="nama_plgn" class="form-control" id="nama_plgn" value="' + (resultPlgn.nama_plgn || '') + '"></div>'; // Add input with value
-                    newForm.innerHTML += '<div class="mb-3 align-items-center"><label class="form-label">No HP</label><input type="text" name="no_hp" class="form-control" id="no_hp" value="' + (resultPlgn.no || '') + '"></div>'; // Add input with value
-                    newForm.innerHTML += '<div class="mb-3 align-items-center"><label class="form-label">No KTP</label><input type="text" name="ktp_plgn" class="form-control" id="ktp_plgn" value="' + (resultPlgn.ktp_plgn || '') + '"></div>'; // Add input with value
-                    newForm.innerHTML += '<div class="mb-3 align-items-center"><label class="form-label">Note</label><input type="text" name="note" class="form-control" id="note" value="' + (resultPlgn.note || '') + '"></div>'; // Add input with value
-                    newForm.innerHTML += `<div class="mb-3 align-items-center">
-                        <div class="row">
-                            <div class="col">
-                                <button type="submit" class="btn btn-primary w-100 btnConfirmOrder">Batal</button>
+                    let is_readonly = (is_vendor == '1') ? 'readonly' : '';
+
+                    newForm.innerHTML += '<div class="mb-3 align-items-center"><label class="form-label">Pelanggan</label><input type="text" name="nama_plgn" class="form-control" id="nama_plgn" value="' + (resultPlgn.nama_plgn || '') + '" ' + is_readonly + ' required></div>'; // Add input with value
+                    newForm.innerHTML += '<div class="mb-3 align-items-center"><label class="form-label visually-hidden">No HP</label><input type="text" name="no_hp" class="form-control" id="no_hp" placeholder="No HP" value="' + (resultPlgn.no || '') + '" ' + is_readonly + '></div>'; // Add input with value
+                    newForm.innerHTML += '<div class="mb-3 align-items-center"><label class="form-label visually-hidden">No KTP</label><input type="text" name="ktp_plgn" class="form-control" id="ktp_plgn" placeholder="No KTP" value="' + (resultPlgn.ktp_plgn || '') + '" ' + is_readonly + '></div>'; // Add input with value
+                    newForm.innerHTML += '<div class="mb-3 align-items-center"><label class="form-label visually-hidden">Note</label><input type="text" name="note" class="form-control" id="note" placeholder="Note" value="' + (resultPlgn.note || '') + '" ' + is_readonly + '></div>'; // Add input with value
+
+                    if(is_vendor == '1'){
+                        // form driver
+                        newForm.innerHTML += '<div class="mb-3 align-items-center"><label class="form-label">Driver</label><input type="text" name="nama_driver" class="form-control" id="nama_driver" placeholder="Nama Driver" required></div>'; // Add input with value
+                        newForm.innerHTML += '<div class="mb-3 align-items-center"><label class="form-label visually-hidden">No HP</label><input type="text" name="no_hp_driver" class="form-control" id="no_hp_driver" placeholder="No HP"></div>'; // Add input with value
+                        newForm.innerHTML += '<div class="mb-3 align-items-center"><label class="form-label visually-hidden">Nopol</label><input type="text" name="nopol_driver" class="form-control" id="nopol_driver" placeholder="Nopol" required></div>'; // Add input with value
+                        newForm.innerHTML += '<div class="mb-3 align-items-center"><label class="form-label visually-hidden">Note</label><input type="text" name="note_driver" class="form-control" id="note_driver" placeholder="Note"></div>'; // Add input with value
+
+                        newForm.innerHTML += `<div class="mb-3 align-items-center">
+                            <div class="row">
+                                <div class="col">
+                                    <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-stat="6">Tolak</button>
+                                </div>
+                                <div class="col">
+                                    <button type="submit" class="btn btn-secondary w-100 btnConfirmOrder" data-stat="4">Terima</button>
+                                </div>
                             </div>
-                            <div class="col">
-                                <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">Batal</button>
+                        </div>`; // Changed button text
+                    } else {
+                        newForm.innerHTML += `<div class="mb-3 align-items-center">
+                            <div class="row">
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-stat="6">Batal</button>
+                                </div>
                             </div>
-                        </div>
-                    </div>`; // Changed button text
+                        </div>`; // Changed button text
+                    }
                 });
                 
                 $('#addModal .modal-body').html(html).append(newForm);
@@ -151,43 +181,109 @@
 
         $(document).on('click', 'button.btnConfirmOrder', function(e) {
             e.preventDefault();
+            let stat = $(this).data('stat');
+            console.log(stat, 'stat');
             
             let form = $('#formConfirmOrder');
-            let formData = new FormData(form[0]);
-
-            // Get values and validate
-            let id_order = $('#id_order').val();
-            let stat_ori = $('#stat_ori').val();
-            let nama_penyewa = $('#nama_penyewa').val();
+            form.addClass('was-validated'); // Add Bootstrap validation class
             
-            if (!id_order || !nama_penyewa) {
-                alert('Please fill in all required fields');
+            // Reset previous error states
+            $('.invalid-feedback').remove();
+            $('.is-invalid').removeClass('is-invalid');
+      
+            // Define base validation rules
+            const baseValidationRules = [
+                { field: 'id_order', message: 'Order data is missing' },
+                { field: 'stat_ori', message: 'Order data is missing' },
+                { field: 'nama_plgn', message: 'Customer name is required' }
+            ];
+
+            if (is_vendor == '1') {
+                baseValidationRules.push({ field: 'nama_driver', message: 'Driver name is required' });
+                baseValidationRules.push({ field: 'nopol_driver', message: 'Vehicle plate number is required' });
+            }
+
+            // Validate all fields
+            let isValid = true;
+            let errors = [];
+      
+            let validationRules = [...baseValidationRules]; // Copy base rules
+
+            // Validate each field
+            for (const rule of validationRules) {
+                const $field = $(`#${rule.field}`);
+
+                // Pastikan elemen ditemukan sebelum membaca nilainya
+                if ($field.length === 0) {
+                    console.warn(`Elemen dengan ID '${rule.field}' tidak ditemukan.`);
+                    continue; // Lewati iterasi jika elemen tidak ada
+                }
+
+                const $parent = $field.parent(); // Pastikan ini sesuai dengan struktur HTML Anda
+                const fieldValue = $field.val()?.trim() || ''; // Cegah error undefined
+
+                if (fieldValue === '') {
+                    // Hapus pesan error lama jika sudah ada
+                    $parent.find('.invalid-feedback').remove();
+
+                    // Tambahkan pesan error
+                    $parent.append(`<div class="invalid-feedback">${rule.message}</div>`);
+
+                    // Tambahkan class untuk menandai error
+                    $field.addClass('is-invalid');
+
+                    isValid = false;
+                } else {
+                    // Hapus error jika input sudah benar
+                    $field.removeClass('is-invalid');
+                    $parent.find('.invalid-feedback').remove();
+                }
+            }
+
+            if (!isValid) {
                 return false;
             }
 
-            formData.append('id_order', id_order);
-            formData.append('stat_ori', stat_ori);
-            formData.append('nama_penyewa', nama_penyewa);
+            let formData = new FormData(form[0]);
 
-            // Send AJAX request
+            // If validation passes, continue with form submission
             $.ajax({
-                url: '<?= base_url('inbox/confirm') ?>', // Update this to your actual endpoint
+                url: '<?= base_url('inbox/confirm') ?>',
                 type: 'POST',
                 data: formData,
                 processData: false,
                 contentType: false,
                 success: function(response) {
-                    if (response.success) {
-                        alert('Order confirmed successfully!');
-                        $('#addModal').modal('hide');
-                        // Optionally reload the page or update the UI
-                        location.reload();
+                    console.log(response);
+                    let data = JSON.parse(response);
+                    if (data.success) {
+                        // Show success message with Bootstrap toast or alert
+                        const successAlert = `<div class="alert alert-success alert-dismissible fade show" role="alert">
+                            Order confirmed successfully!
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>`;
+                        form.before(successAlert);
+                        
+                        setTimeout(() => {
+                            $('#addModal').modal('hide');
+                            location.reload();
+                        }, 1500);
                     } else {
-                        alert(response.message || 'Failed to confirm order');
+                        // Show error message
+                        const errorAlert = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            ${data.message || 'Failed to confirm order'}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>`;
+                        form.before(errorAlert);
                     }
                 },
                 error: function(xhr, status, error) {
-                    alert('An error occurred: ' + error);
+                    // Show error message
+                    const errorAlert = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        An error occurred: ${error}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>`;
+                    form.before(errorAlert);
                 }
             });
         });

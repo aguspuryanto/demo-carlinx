@@ -4,9 +4,9 @@
     <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-header">
-            <a href="#" class="btn" data-bs-dismiss="modal" aria-label="Close">
+            <h5 class="modal-title"><a href="#" class="nav-link" data-bs-dismiss="modal" aria-label="Close">
                 <i class="fa fa-arrow-left"></i> Detail Order
-            </a>
+            </a></h5>
         </div>
         <div class="modal-body">
             ...

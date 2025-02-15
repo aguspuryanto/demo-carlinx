@@ -74,6 +74,7 @@ $routes->group('event', ['filter' => 'auth'], function($routes) {
 // inbox
 $routes->group('inbox', ['filter' => 'auth'], function($routes) {
     $routes->get('index', 'Inbox::index');
+    $routes->post('confirm', 'Inbox::confirm');
 });
 
 // history
