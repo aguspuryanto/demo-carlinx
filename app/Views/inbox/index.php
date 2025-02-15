@@ -76,21 +76,14 @@
                 let idOrder = triggerElement.dataset.id;
                 let itemData = JSON.parse(triggerElement.dataset.item); // Decoding JSON
 
-                console.log('ID Order:', idOrder);
-                console.log('Item Data:', itemData);
-
-                // Panggil fungsi
-                // let resultPlgn = [];
-                // loadDetailOrder(idOrder).then(resp => {
-                //     console.log('Data pelanggan:', resp);
-                // });
-
                 var textNote = '';
                 if(itemData.stat == '1'){
                     textNote = 'Menunggu respon dari rental';
                 } else if(itemData.stat == '2'){
                     textNote = 'Pastikan data order sudah benar';
                 }
+
+                textNote = 'Pastikan Unit Tersedia sebelum menerima order';
 
                 var html = '<div class="table-responsive mb-0">';
                 html += '<table class="table table-bordered">';
@@ -206,6 +199,20 @@
             // Validate all fields
             let isValid = true;
             let errors = [];
+
+            if(stat == '6'){
+                let form = $('#formConfirmOrder');
+                // find #note, then add input alasan_batal
+                let notedriver = form.find('#note_driver');
+                notedriver.after('<div class="mt-3 mb-3 align-items-center"><label class="form-label">Alasan Tolak</label><textarea name="alasan_batal" class="form-control" id="alasan_batal" placeholder="Keterangan" required></textarea></div>');
+
+                // Clear previous validation rules and set new ones for cancellation
+                validationRules = [
+                    { field: 'id_order', message: 'Order data is missing' },
+                    { field: 'stat_ori', message: 'Order data is missing' },
+                    { field: 'alasan_batal', message: 'Reason for rejection is required' }
+                ];
+            }
       
             let validationRules = [...baseValidationRules]; // Copy base rules
 
