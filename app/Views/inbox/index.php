@@ -136,8 +136,8 @@
                 let resultPlgn = [];
                 $.get('<?= base_url('order/detail-order') ?>/' + idOrder, function(data) {
                     let jsonData = JSON.parse(data);
-                    resultPlgn = jsonData.result_plgn[0];
-                    console.log(resultPlgn, 'resultPlgn');
+                    // resultPlgn = jsonData.result_plgn[0];
+                    // console.log(resultPlgn, 'resultPlgn');
 
                     let is_readonly = (is_vendor == '1') ? 'readonly' : '';
                     // form pelanggan
@@ -145,6 +145,9 @@
 
                     // loop jml_order
                     for(let i = 0; i < itemData.jml_order; i++){
+                        resultPlgn = jsonData.result_plgn[i];
+                        console.log(resultPlgn, 'resultPlgn');
+
                         let nama_plgn = (resultPlgn.nama_plgn || '') + ' (' + (resultPlgn.no || '') + ')';
                         let no_hp = (resultPlgn.no || '');
                         let ktp_plgn = (resultPlgn.ktp_plgn || '');
@@ -228,32 +231,48 @@
             $('.is-invalid').removeClass('is-invalid');
       
             // Define base validation rules
-            const baseValidationRules = [
-                { field: 'id_order', message: 'Order data is missing' },
-                { field: 'stat_ori', message: 'Order data is missing' },
-                { field: 'nama_plgn', message: 'Customer name is required' }
-            ];
-
-            if (is_vendor == '1') {
-                baseValidationRules.push({ field: 'nama_driver', message: 'Driver name is required' });
-                baseValidationRules.push({ field: 'nopol_driver', message: 'Vehicle plate number is required' });
-            }
+            const baseValidationRules = [];
 
             // Validate all fields
             let isValid = true;
             let errors = [];
+            let alasan_batal = form.find('textarea#alasan_batal').val();
+            
+            if(stat == '6' && !alasan_batal) {
+                // Remove any existing alasan_batal field to prevent duplicates
+                form.find('#alasan_batal').closest('.mb-3').remove();
+                
+                // Add the alasan_batal textarea
+                form.append(`
+                    <div class="mt-3 mb-3 align-items-center">
+                        <label class="form-label">Alasan Pembatalan</label>
+                        <textarea name="alasan_batal" class="form-control" id="alasan_batal" placeholder="Keterangan" required></textarea>
+                    </div>
+                `);
 
-            if(stat == '6'){
-                let form = $('#formConfirmOrder');
-                // find #note, then add input alasan_batal
-                form.append('<div class="mt-3 mb-3 align-items-center"><label class="form-label">Alasan Pembatalan</label><textarea name="alasan_batal" class="form-control" id="alasan_batal" placeholder="Keterangan" required></textarea></div>');
+                // remove all class required from input
+                form.find('input').removeClass('required');
+                form.find('textarea').removeClass('required');
 
                 // Clear previous validation rules and set new ones for cancellation
-                validationRules = [
+                baseValidationRules = [
                     { field: 'id_order', message: 'Order data is missing' },
                     { field: 'stat_ori', message: 'Order data is missing' },
                     { field: 'alasan_batal', message: 'Reason for rejection is required' }
                 ];
+                
+                // return false; // Stop form submission to allow user to enter reason
+            } else {
+                baseValidationRules = [
+                    { field: 'id_order', message: 'Order data is missing' },
+                    { field: 'stat_ori', message: 'Order data is missing' },
+                    { field: 'nama_plgn', message: 'Customer name is required' }
+                ];
+
+                if (is_vendor == '1') {
+                    baseValidationRules.push({ field: 'nama_driver', message: 'Driver name is required' });
+                    baseValidationRules.push({ field: 'nopol_driver', message: 'Vehicle plate number is required' });
+                }
             }
       
             let validationRules = [...baseValidationRules]; // Copy base rules

@@ -1,4 +1,4 @@
-<?php //echo json_encode($listData['result_unit_order']); ?>
+<?php if($listData['result_unit_order']): ?>
 <ul class="list-group d-sm-block d-md-block d-lg-none d-xl-none">
     <li class="list-group-item active" aria-current="true">Hasil Pencarian <?= count($listData['result_unit_order']) ?></li>
     <?php foreach ($listData['result_unit_order'] as $item) : ?>
@@ -21,6 +21,11 @@
     </li>
     <?php endforeach ?>
 </ul>
+<?php else: ?>
+<div class="alert alert-warning">
+    <p class="mb-0">Tidak ada data</p>
+</div>
+<?php endif ?>
 
 <div class="d-none table-responsive d-sm-none d-md-none d-lg-block d-xl-block mt-3">
 <table class="table table-striped">
