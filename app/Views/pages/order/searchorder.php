@@ -185,8 +185,10 @@
             html += '<tr><th>Tgl.Selesai</th><td>' + item.tgl_finish + '</td></tr>';
             if(jns_order == '4'){
                 html += '<tr><th>Jumlah Bulan</th><td>' + (item.jml_bln) + '</td></tr>';
-            } else {
-                html += '<tr><th>Tujuan</th><td>' + (item.lokasi_tujuan == '' ? 'Dalam Kota' : item.lokasi_jemput + ' - ' + item.lokasi_tujuan) + '</td></tr>';
+            } else {                
+                lokasi_jemput = item.lokasi_jemput.substr(item.lokasi_jemput.lastIndexOf(",") + 1);
+                lokasi_tujuan = item.lokasi_tujuan.substr(item.lokasi_tujuan.lastIndexOf(",") + 1);
+                html += '<tr><th>Tujuan</th><td>' + (lokasi_tujuan == '' ? 'Dalam Kota' : lokasi_jemput + ' - ' + lokasi_tujuan) + '</td></tr>';
             }
             html += '<tr><th>Unit</th><td>' + item.nama + '</td></tr>';
             html += '<tr><th>Tahun</th><td>' + item.tahun + '</td></tr>';

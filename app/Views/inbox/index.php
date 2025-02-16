@@ -75,16 +75,18 @@
                 // Accessing data-id and data-item
                 let idOrder = triggerElement.dataset.id;
                 let itemData = JSON.parse(triggerElement.dataset.item); // Decoding JSON
-
+                console.log(itemData, 'itemData');
+                
                 var textNote = '';
-                if(itemData.stat == '1'){
+                if(is_pemesan == '1'){
                     textNote = 'Menunggu respon dari rental';
-                } else if(itemData.stat == '2'){
-                    textNote = 'Pastikan data order sudah benar';
+                } 
+                if(is_vendor == '1'){
+                    // textNote = 'Pastikan data order sudah benar';
+                    textNote = 'Pastikan Unit Tersedia sebelum menerima order';
                 }
 
-                textNote = 'Pastikan Unit Tersedia sebelum menerima order';
-
+                // Create the detail HTML
                 var html = '<div class="table-responsive mb-0">';
                 html += '<table class="table table-bordered">';
                 html += '<tbody>';
@@ -112,7 +114,14 @@
                 html += '</tbody>';
                 html += '</table>';
                 html += '</div>';
+
+                // form here
+                html += '<div class="mb-3" id="formConfirmOrder"></div>';
+                // Add the note text
                 html += '<div class="mb-3"><p class="h6">* ' + textNote + '</p></div>';
+                
+                // First append the detail table to modal body
+                $('#addModal .modal-body').html(html);
 
                 // append form hidden
                 const newForm = document.createElement('form'); // Create a new form
@@ -131,41 +140,75 @@
                     console.log(resultPlgn, 'resultPlgn');
 
                     let is_readonly = (is_vendor == '1') ? 'readonly' : '';
+                    // form pelanggan
+                    newForm.innerHTML += '<h6 class="mb-3">Pelanggan</h6><ul class="list-group mb-3" id="list_plgn"></ul>';
 
-                    newForm.innerHTML += '<div class="mb-3 align-items-center"><label class="form-label">Pelanggan</label><input type="text" name="nama_plgn" class="form-control" id="nama_plgn" value="' + (resultPlgn.nama_plgn || '') + '" ' + is_readonly + ' required></div>'; // Add input with value
-                    newForm.innerHTML += '<div class="mb-3 align-items-center"><label class="form-label visually-hidden">No HP</label><input type="text" name="no_hp" class="form-control" id="no_hp" placeholder="No HP" value="' + (resultPlgn.no || '') + '" ' + is_readonly + '></div>'; // Add input with value
-                    newForm.innerHTML += '<div class="mb-3 align-items-center"><label class="form-label visually-hidden">No KTP</label><input type="text" name="ktp_plgn" class="form-control" id="ktp_plgn" placeholder="No KTP" value="' + (resultPlgn.ktp_plgn || '') + '" ' + is_readonly + '></div>'; // Add input with value
-                    newForm.innerHTML += '<div class="mb-3 align-items-center"><label class="form-label visually-hidden">Note</label><input type="text" name="note" class="form-control" id="note" placeholder="Note" value="' + (resultPlgn.note || '') + '" ' + is_readonly + '></div>'; // Add input with value
+                    // loop jml_order
+                    for(let i = 0; i < itemData.jml_order; i++){
+                        let nama_plgn = (resultPlgn.nama_plgn || '') + ' (' + (resultPlgn.no || '') + ')';
+                        let no_hp = (resultPlgn.no || '');
+                        let ktp_plgn = (resultPlgn.ktp_plgn || '');
+                        let note = (resultPlgn.note || '');
+
+                        let html_plgn = `<li class="list-group-item">
+                        <div class="mb-3 align-items-center">
+                            <label class="form-label visually-hidden">Pelanggan</label>
+                            <input type="text" name="nama_plgn" class="form-control" id="nama_plgn" value="` + nama_plgn + `" ` + is_readonly + ` required>
+                        </div>
+                        <div class="mb-3 align-items-center">
+                            <label class="form-label visually-hidden">No HP</label>
+                            <input type="text" name="no_hp" class="form-control" id="no_hp" placeholder="No HP" value="` + no_hp + `" ` + is_readonly + `>
+                        </div>
+                        <div class="mb-3 align-items-center">
+                            <label class="form-label visually-hidden">No KTP</label>
+                            <input type="text" name="ktp_plgn" class="form-control" id="ktp_plgn" placeholder="No KTP" value="` + ktp_plgn + `" ` + is_readonly + `>
+                        </div>
+                        <div class="mb-0 align-items-center">
+                            <label class="form-label visually-hidden">Note</label>
+                            <input type="text" name="note" class="form-control" id="note" placeholder="Note" value="` + note + `" ` + is_readonly + `>
+                        </div></li>`;
+                        $('#list_plgn').append(html_plgn);
+                    }
 
                     if(is_vendor == '1'){
                         // form driver
-                        newForm.innerHTML += '<div class="mb-3 align-items-center"><label class="form-label">Driver</label><input type="text" name="nama_driver" class="form-control" id="nama_driver" placeholder="Nama Driver" required></div>'; // Add input with value
-                        newForm.innerHTML += '<div class="mb-3 align-items-center"><label class="form-label visually-hidden">No HP</label><input type="text" name="no_hp_driver" class="form-control" id="no_hp_driver" placeholder="No HP"></div>'; // Add input with value
-                        newForm.innerHTML += '<div class="mb-3 align-items-center"><label class="form-label visually-hidden">Nopol</label><input type="text" name="nopol_driver" class="form-control" id="nopol_driver" placeholder="Nopol" required></div>'; // Add input with value
-                        newForm.innerHTML += '<div class="mb-3 align-items-center"><label class="form-label visually-hidden">Note</label><input type="text" name="note_driver" class="form-control" id="note_driver" placeholder="Note"></div>'; // Add input with value
-
-                        newForm.innerHTML += `<div class="mb-3 align-items-center">
-                            <div class="row">
-                                <div class="col">
-                                    <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-stat="6">Tolak</button>
-                                </div>
-                                <div class="col">
-                                    <button type="submit" class="btn btn-secondary w-100 btnConfirmOrder" data-stat="4">Terima</button>
-                                </div>
+                        newForm.innerHTML += '<h6 class="mb-3">Driver</h6><ul class="list-group" id="list_driver"></ul>';
+                        // loop jml_order
+                        for(let i = 0; i < itemData.jml_order; i++){
+                            let html_driver = `<li class="list-group-item">
+                            <div class="mb-3 align-items-center">
+                                <label class="form-label visually-hidden">Driver</label>
+                                <input type="text" name="nama_driver[' + i + ']" class="form-control" id="nama_driver" placeholder="Nama Driver" required>
                             </div>
-                        </div>`; // Changed button text
-                    } else {
-                        newForm.innerHTML += `<div class="mb-3 align-items-center">
-                            <div class="row">
-                                <div class="col-12">
-                                    <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-stat="6">Batal</button>
-                                </div>
+                            <div class="mb-3 align-items-center">
+                                <label class="form-label visually-hidden">No HP</label>
+                                <input type="text" name="no_hp_driver[' + i + ']" class="form-control" id="no_hp_driver" placeholder="No HP">
                             </div>
-                        </div>`; // Changed button text
+                            <div class="mb-3 align-items-center">
+                                <label class="form-label visually-hidden">Nopol</label>
+                                <input type="text" name="nopol_driver[' + i + ']" class="form-control" id="nopol_driver" placeholder="Nopol" required>
+                            </div>
+                            <div class="mb-0 align-items-center">
+                                <label class="form-label visually-hidden">Note</label>
+                                <input type="text" name="note_driver[' + i + ']" class="form-control" id="note_driver" placeholder="Note">
+                            </div></li>`;
+                            $('#list_driver').append(html_driver);
+                        }
                     }
                 });
                 
-                $('#addModal .modal-body').html(html).append(newForm);
+                // Then append the form to the formConfirmOrder div
+                $('#formConfirmOrder').html(newForm);
+
+                // append to modal footer
+                if(is_vendor == '1'){
+                    $('#addModal .modal-footer').html(`<div class="row col-12"><div class="col-6"><button type="submit" class="btn btn-outline-danger w-100 btnConfirmOrder" data-stat="6">Tolak</button></div><div class="col-6"><button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-stat="4">Terima</button></div></div>`);
+                } else {
+                    $('#addModal .modal-footer').html(`
+                        <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-stat="6">Batal</button>
+                    `);
+                }
+
                 $('#addModal').modal('show');
             } else {
                 console.warn("Modal triggered without related target!");
@@ -203,8 +246,7 @@
             if(stat == '6'){
                 let form = $('#formConfirmOrder');
                 // find #note, then add input alasan_batal
-                let notedriver = form.find('#note_driver');
-                notedriver.after('<div class="mt-3 mb-3 align-items-center"><label class="form-label">Alasan Tolak</label><textarea name="alasan_batal" class="form-control" id="alasan_batal" placeholder="Keterangan" required></textarea></div>');
+                form.append('<div class="mt-3 mb-3 align-items-center"><label class="form-label">Alasan Pembatalan</label><textarea name="alasan_batal" class="form-control" id="alasan_batal" placeholder="Keterangan" required></textarea></div>');
 
                 // Clear previous validation rules and set new ones for cancellation
                 validationRules = [

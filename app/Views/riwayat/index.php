@@ -83,7 +83,7 @@
                 if(itemData.jns_order == '4'){
                     html += '<tr><td>Jumlah Bulan</td><td>' + (itemData.jml_bln) + '</td></tr>';
                 } else {
-                    html += '<tr><td>Tujuan</td><td>' + itemData.lokasi_tujuan + '</td></tr>';
+                    html += '<tr><td>Tujuan</td><td>' + itemData.tujuan + '</td></tr>';
                 }
                 html += '<tr><td>Unit</td><td>' + itemData.nama_unit + '</td></tr>';
                 html += '<tr><td>Tahun</td><td>' + itemData.tahun + '</td></tr>';
@@ -91,7 +91,7 @@
                 html += '<tr><td>Transmisi</td><td>' + itemData.transmisi + '</td></tr>';
                 html += '<tr><td>Warna</td><td>' + itemData.warna + '</td></tr>';
                 html += '<tr><td>Jml.Order</td><td>' + itemData.jml_order + '</td></tr>';
-                html += '<tr><td>Include</td><td>' + (itemData.ketr ?? '-') + '</td></tr>';
+                html += '<tr><td>Include</td><td>' + (itemData.ketr !='' ? itemData.ketr : 'Mobil, Driver') + '</td></tr>';
                 html += '<tr><td>Biaya</td><td>Rp. ' + numberFormat(itemData.hrg_sewa) + '</td></tr>';
                 html += '<tr><td>Pembayaran</td><td>' + (itemData.jns_byr == '1' ? 'Lunas' : 'Mundur') + '</td></tr>';
                 html += '<tr><td>Catatan</td><td>' + (itemData.catatan_byr ?? '-') + '</td></tr>';
@@ -137,7 +137,15 @@
                     html += '</div>';
                     html += '<div class="mb-3"><input type="checkbox" id="setuju" checked> Pihak Rental telah menyetuji dan menerima pengembalian Unit</div>';
                 } else {
-                    html += '<div class="mb-3"><p class="h6 lead">Alasan Pembatalan</p><span>' + (itemData.alasan_batal ?? '-') + '</span></div>';
+                    html += `<div class="mb-3">
+                        <p class="h6 lead">Alasan Pembatalan</p>
+                    </div>
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <textarea class="form-control" id="floatingTextarea" cols="30" rows="2" readonly>` + (itemData.alasan_batal ?? `-`) + `</textarea>
+                            <label for="floatingTextarea">Keterangan</label>
+                        </div>
+                    </div>`;
                 }
 
                 // append form hidden
