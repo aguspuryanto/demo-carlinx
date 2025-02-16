@@ -181,19 +181,19 @@
                             let html_driver = `<li class="list-group-item">
                             <div class="mb-3 align-items-center">
                                 <label class="form-label visually-hidden">Driver</label>
-                                <input type="text" name="nama_driver[' + i + ']" class="form-control" id="nama_driver" placeholder="Nama Driver" required>
+                                <input type="text" name="nama_driver[` + i + `]" class="form-control" id="nama_driver" placeholder="Nama Driver" required>
                             </div>
                             <div class="mb-3 align-items-center">
                                 <label class="form-label visually-hidden">No HP</label>
-                                <input type="text" name="no_hp_driver[' + i + ']" class="form-control" id="no_hp_driver" placeholder="No HP">
+                                <input type="text" name="no_hp_driver[` + i + `]" class="form-control" id="no_hp_driver" placeholder="No HP">
                             </div>
                             <div class="mb-3 align-items-center">
                                 <label class="form-label visually-hidden">Nopol</label>
-                                <input type="text" name="nopol_driver[' + i + ']" class="form-control" id="nopol_driver" placeholder="Nopol" required>
+                                <input type="text" name="nopol_driver[` + i + `]" class="form-control" id="nopol_driver" placeholder="Nopol" required>
                             </div>
                             <div class="mb-0 align-items-center">
                                 <label class="form-label visually-hidden">Note</label>
-                                <input type="text" name="note_driver[' + i + ']" class="form-control" id="note_driver" placeholder="Note">
+                                <input type="text" name="note_driver[` + i + `]" class="form-control" id="note_driver" placeholder="Note">
                             </div></li>`;
                             $('#list_driver').append(html_driver);
                         }
@@ -223,7 +223,7 @@
             let stat = $(this).data('stat');
             console.log(stat, 'stat');
             
-            let form = $('#formConfirmOrder');
+            let form = $('#formConfirmOrder form'); // Get the actual form element inside #formConfirmOrder
             form.addClass('was-validated'); // Add Bootstrap validation class
             
             // Reset previous error states
@@ -231,7 +231,11 @@
             $('.is-invalid').removeClass('is-invalid');
       
             // Define base validation rules
-            const baseValidationRules = [];
+            const baseValidationRules = [
+                { field: 'id_order', message: 'Order data is missing' },
+                { field: 'stat_ori', message: 'Order data is missing' },
+                { field: 'nama_plgn', message: 'Customer name is required' }
+            ];
 
             // Validate all fields
             let isValid = true;
@@ -239,6 +243,9 @@
             let alasan_batal = form.find('textarea#alasan_batal').val();
             
             if(stat == '6' && !alasan_batal) {
+                // remove all class required from input
+                form.find('input').removeAttr('required');
+                
                 // Remove any existing alasan_batal field to prevent duplicates
                 form.find('#alasan_batal').closest('.mb-3').remove();
                 
@@ -250,10 +257,6 @@
                     </div>
                 `);
 
-                // remove all class required from input
-                form.find('input').removeClass('required');
-                form.find('textarea').removeClass('required');
-
                 // Clear previous validation rules and set new ones for cancellation
                 baseValidationRules = [
                     { field: 'id_order', message: 'Order data is missing' },
@@ -263,13 +266,8 @@
                 
                 // return false; // Stop form submission to allow user to enter reason
             } else {
-                baseValidationRules = [
-                    { field: 'id_order', message: 'Order data is missing' },
-                    { field: 'stat_ori', message: 'Order data is missing' },
-                    { field: 'nama_plgn', message: 'Customer name is required' }
-                ];
 
-                if (is_vendor == '1') {
+                if (stat == '4' && is_vendor == '1') {
                     baseValidationRules.push({ field: 'nama_driver', message: 'Driver name is required' });
                     baseValidationRules.push({ field: 'nopol_driver', message: 'Vehicle plate number is required' });
                 }
@@ -312,6 +310,7 @@
                 return false;
             }
 
+            // If validation passes, create FormData from the actual form element
             let formData = new FormData(form[0]);
 
             // If validation passes, continue with form submission

@@ -149,7 +149,7 @@ class Inbox extends BaseController
         // handle POST
         if ($this->request->getMethod() == 'POST') {
             $data = $this->request->getPost();
-            // echo json_encode($data); die(); //{"id_order":"250215000003","stat_ori":"1","nama_plgn":"Test","no_hp":"8765432","ktp_plgn":"12345","note":"","nama_driver":"NAMA DRIVER","no_hp_driver":"087712199","nopol_driver":"L111pO","note_driver":"note"}
+            echo json_encode($data); die(); //{"id_order":"250216000003","stat_ori":"1","nama_plgn":"Test2 (8765432)","no_hp":"8765432","ktp_plgn":"12345","note":"","nama_driver":{"' + i + '":""},"no_hp_driver":{"' + i + '":""},"nopol_driver":{"' + i + '":""},"note_driver":{"' + i + '":""},"alasan_batal":"Alasan Pembatalan"}
 
             // $id_order = $this->request->getPost('id_order');
             // $pelanggan = $this->request->getPost('pelanggan');
