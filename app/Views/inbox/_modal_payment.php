@@ -10,7 +10,7 @@
             </div>
             <div class="modal-body">
                 <h6 class="mb-3">Ubah Data Pembayaran</h6>
-                <form action="" method="post">
+                <form id="formPayment" action="#" method="post">
                     <div class="row mb-3">
                         <div class="col-md-4">Metode</div>
                         <div class="col-md-8">
