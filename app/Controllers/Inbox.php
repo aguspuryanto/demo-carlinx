@@ -146,10 +146,12 @@ class Inbox extends BaseController
 
     public function confirm()
     {
+        $listData = [];
+
         // handle POST
         if ($this->request->getMethod() == 'POST') {
             $data = $this->request->getPost();
-            // echo json_encode($data); die(); //{"id_order":"250216000003","stat_ori":"1","nama_plgn":"Test2 (8765432)","no_hp":"8765432","ktp_plgn":"12345","note":"","nama_driver":{"' + i + '":""},"no_hp_driver":{"' + i + '":""},"nopol_driver":{"' + i + '":""},"note_driver":{"' + i + '":""},"alasan_batal":"Alasan Pembatalan"}
+            // echo json_encode($data); die(); //{"id_order":"250218000007","stat_ori":"1","stat":"1","is_vendor":"1","is_pemesan":"","nama_plgn":"Test (8765432)","no_hp":"8765432","ktp_plgn":"12345","note":"","nama_driver":["TEST DRIVER"],"no_hp_driver":["08271615"],"nopol_driver":["L 2345 WE"],"note_driver":["test terima"],"action":"terima"}
 
             /* Sisi Pemesan
             - stat = 1 : batal (stat: 8)
@@ -212,17 +214,24 @@ class Inbox extends BaseController
             // echo json_encode($listData); die();
 
             if($data['is_vendor'] == '1'){
-                $curlOptDrv    = [
-                    'id_order' => $data['id_order'],
-                    'no' => $data['no_hp_driver'],
-                    'nama' => $data['nama_driver'],
-                    'nohp' => $data['no_hp_driver'],
-                    'nopol' => $data['nopol_driver'],
-                    'note' => $data['note_driver']
-                ];
+                // update driver
+                $countDrv = count($data['nama_driver']);
+                for($i=0; $i<$countDrv; $i++){
+                    $curlOptDrv    = [
+                        'id_order' => $data['id_order'],
+                        'no' => ($i+1),
+                        'nama' => $data['nama_driver'][$i],
+                        'nohp' => $data['no_hp_driver'][$i],
+                        'nopol' => $data['nopol_driver'][$i],
+                        'note' => $data['note_driver'][$i]
+                    ];
+                    // echo json_encode($curlOptDrv); //die(); //{"id_order":"250218000007","no":["08271615"],"nama":["TEST DRIVER"],"nohp":["08271615"],"nopol":["L 2345 WE"],"note":["test terima"]}
 
-                $updtDrv   = getCurl($curlOptDrv, $this->ipAddress . 'update_single_drv.php');
-                // echo json_encode($updtDrv); die();
+                    $updtDrv   = getCurl($curlOptDrv, $this->ipAddress . 'update_single_drv.php');
+                    // echo json_encode($updtDrv); die();
+                    $listData = array_merge($listData, $updtDrv);
+                    // echo json_encode($updtDrv); die();
+                }
             }
             
             $response = [
@@ -234,5 +243,11 @@ class Inbox extends BaseController
 
             // return redirect()->to(base_url('inbox'))->with('success', 'Order confirmed successfully');
         }
+    }
+
+    public function ubahPayment()
+    {
+        $data = $this->request->getPost();
+        echo json_encode($data); die();
     }
 }

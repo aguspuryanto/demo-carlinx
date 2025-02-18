@@ -59,6 +59,7 @@
     <!-- end main page content -->
      
     <?php include_once '_modal_order.php'; ?>
+    <?php include_once '_modal_payment.php'; ?>
 
 <?= $this->endSection() ?>
 
@@ -86,7 +87,10 @@
                 } 
                 if(is_vendor == '1'){
                     // textNote = 'Pastikan data order sudah benar';
-                    textNote = 'Pastikan Unit Tersedia sebelum menerima order';
+                    textNote = 'Menunggu respon dari rental';
+                    if(itemData.stat == '4'){
+                        textNote = 'Pastikan Unit Tersedia sebelum menerima order';
+                    }
                 }
 
                 // Create the detail HTML
@@ -189,74 +193,81 @@
                             let html_driver = `<li class="list-group-item mb-3">
                             <div class="mb-3 align-items-center">
                                 <label class="form-label visually-hidden">Driver</label>
-                                <input type="text" name="nama_driver[` + i + `]" class="form-control" id="nama_driver" placeholder="Nama Driver" required>
+                                <input type="text" name="nama_driver[` + i + `]" class="form-control" id="nama_driver" placeholder="Nama Driver" value="` + (resultPlgn.nama_drv || '') + `" required>
                             </div>
                             <div class="mb-3 align-items-center">
                                 <label class="form-label visually-hidden">No HP</label>
-                                <input type="text" name="no_hp_driver[` + i + `]" class="form-control" id="no_hp_driver" placeholder="No HP">
+                                <input type="text" name="no_hp_driver[` + i + `]" class="form-control" id="no_hp_driver" placeholder="No HP" value="` + (resultPlgn.hp_drv || '') + `">
                             </div>
                             <div class="mb-3 align-items-center">
                                 <label class="form-label visually-hidden">Nopol</label>
-                                <input type="text" name="nopol_driver[` + i + `]" class="form-control" id="nopol_driver" placeholder="Nopol" required>
+                                <input type="text" name="nopol_driver[` + i + `]" class="form-control" id="nopol_driver" placeholder="Nopol" value="` + (resultPlgn.nopol || '') + `" required>
                             </div>
                             <div class="mb-0 align-items-center">
                                 <label class="form-label visually-hidden">Note</label>
-                                <input type="text" name="note_driver[` + i + `]" class="form-control" id="note_driver" placeholder="Note">
+                                <input type="text" name="note_driver[` + i + `]" class="form-control" id="note_driver" placeholder="Note" value="` + (resultPlgn.note_drv || '') + `">
                             </div></li>`;
                             $('#list_driver').append(html_driver);
                         }
                     }
 
                     if(itemData.stat == '4'){
-                        newForm.innerHTML += '<h6 class="mb-3">Pembayaran</h6><ul class="list-group" id="list_pembayaran"></ul>';
-                        // loop jml_order
-                        // for(let i = 0; i < itemData.jml_order; i++){
-                            let html_pembayaran = `<li class="list-group-item">
-                            <table class="table table-borderless">
-                                <tbody>
-                                    <tr>
-                                        <td>Sub Total</td>
-                                        <td>Rp. <span class="pull-right">` + numberFormat(itemData.hrg_sewa_total) + `</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Diskon</td>
-                                        <td>Rp. <span class="pull-right">` + numberFormat(itemData.nominal_disc) + `</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Uang Muka</td>
-                                        <td>Rp. <span class="pull-right">` + numberFormat(itemData.uang_muka || 0) + `</span></td>
-                                    </tr>
-                                    <tr class="h6">
-                                        <td>Total Tagihan</td>
-                                        <td>Rp. <span class="pull-right">` + numberFormat(itemData.hrg_sewa_total) + `</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Metode Bayar</td>
-                                        <td>` + (itemData.sisa_byr == '0' ? 'LUNAS' : 'MUNDUR') + `</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jatuh Tempo</td>
-                                        <td>` + (itemData.tgl_tempo || '') + `</td>
-                                    </tr>
-                                    <tr>
-                                        <td>*Keterangan</td>
-                                        <td>` + (itemData.ketr || '') + `</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Bank Tujuan Transfer</td>
-                                        <td>` + (itemData.norek_rental || '') + `</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">
-                                            <label class="form-label">Upload Bukti Transfer</label>
-                                            <input type="file" name="bukti_transfer" class="form-control" id="bukti_transfer">
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            </li>`;
-                            $('#list_pembayaran').append(html_pembayaran);
-                        // }
+                        if(is_pemesan == '1'){
+                            newForm.innerHTML += '<h6 class="mb-3">Pembayaran</h6><ul class="list-group" id="list_pembayaran"></ul>';
+                        } else {
+                            newForm.innerHTML += `<h6 class="mb-3 d-flex justify-content-between">Pembayaran <span class="pull-right"><a href="#" data-bs-toggle="modal" data-bs-target="#paymentModal" data-id="` + idOrder + `" data-item="` + JSON.stringify(itemData) + `">Ubah Pembayaran</a></span></h6><ul class="list-group" id="list_pembayaran"></ul>`;
+                        }
+                        
+                        let html_pembayaran = `<li class="list-group-item">
+                        <table class="table table-borderless">
+                            <tbody>
+                                <tr>
+                                    <td>Sub Total</td>
+                                    <td>Rp. <span class="pull-right">` + numberFormat(itemData.hrg_sewa_total) + `</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Diskon</td>
+                                    <td>Rp. <span class="pull-right">` + numberFormat(itemData.nominal_disc) + `</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Uang Muka</td>
+                                    <td>Rp. <span class="pull-right">` + numberFormat(itemData.uang_muka || 0) + `</span></td>
+                                </tr>
+                                <tr class="h6">
+                                    <td>Total Tagihan</td>
+                                    <td>Rp. <span class="pull-right">` + numberFormat(itemData.hrg_sewa_total) + `</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Metode Bayar</td>
+                                    <td>` + (itemData.sisa_byr == '0' ? 'LUNAS' : 'MUNDUR') + `</td>
+                                </tr>
+                                <tr>
+                                    <td>Jatuh Tempo</td>
+                                    <td>` + (itemData.tgl_tempo || '') + `</td>
+                                </tr>
+                                <tr>
+                                    <td>*Keterangan</td>
+                                    <td>` + (itemData.ketr || '') + `</td>
+                                </tr>
+                                <tr>
+                                    <td>Bank Tujuan Transfer</td>
+                                    <td>` + (itemData.norek_rental || '') + `</td>
+                                </tr>`;
+
+                                // pemesan
+                                if(is_pemesan == '1'){
+                                html_pembayaran += `<tr>
+                                    <td colspan="2">
+                                        <label class="form-label">Upload Bukti Transfer</label>
+                                        <input type="file" name="bukti_transfer" class="form-control" id="bukti_transfer">
+                                    </td>
+                                </tr>`;
+                                }
+                                
+                        html_pembayaran += `</tbody>
+                        </table>
+                        </li>`;
+                        $('#list_pembayaran').append(html_pembayaran);
                     }
                 });
                 
@@ -286,6 +297,17 @@
                 $('#addModal').modal('show');
             } else {
                 console.warn("Modal triggered without related target!");
+            }
+        });
+
+        // paymentModal
+        $('#paymentModal').on('show.bs.modal', function (e) {
+            let triggerElement = e.relatedTarget;
+            if (triggerElement) {
+                let idOrder = triggerElement.dataset.id;
+                let itemData = JSON.parse(triggerElement.dataset.item);
+                console.log(idOrder, 'idOrder');
+                console.log(itemData, 'itemData');
             }
         });
 
@@ -404,10 +426,10 @@
                         </div>`;
                         form.before(successAlert);
                         
-                        setTimeout(() => {
-                            $('#addModal').modal('hide');
-                            location.reload();
-                        }, 1500);
+                        // setTimeout(() => {
+                        //     $('#addModal').modal('hide');
+                        //     location.reload();
+                        // }, 1500);
                     } else {
                         // Show error message
                         const errorAlert = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
