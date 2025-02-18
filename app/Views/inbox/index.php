@@ -1,6 +1,7 @@
 <?= $this->extend('layouts/main') ?>
 
 <?= $this->section('content') ?>
+    <?php  $file = __DIR__ . '/../_alert.php'; include($file); ?>
 
     <!-- main page content -->
     <div class="main-container container">
@@ -63,7 +64,12 @@
 
 <?= $this->endSection() ?>
 
+<?= $this->section('styles') ?>
+<link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+<?= $this->endSection() ?>
+
 <?= $this->section('scripts') ?>
+<script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
 <script>
     $(document).ready(function() {
         let is_vendor = '<?= $is_vendor ?>';
@@ -87,7 +93,7 @@
                 } 
                 if(is_vendor == '1'){
                     // textNote = 'Pastikan data order sudah benar';
-                    textNote = 'Menunggu respon dari rental';
+                    textNote = 'Menunggu respon dari pemesan';
                     if(itemData.stat == '4'){
                         textNote = 'Pastikan Unit Tersedia sebelum menerima order';
                     }
@@ -295,21 +301,6 @@
                 }
 
                 $('#addModal').modal('show');
-            } else {
-                console.warn("Modal triggered without related target!");
-            }
-        });
-
-        // paymentModal
-        $('#paymentModal').on('show.bs.modal', function (e) {
-            let triggerElement = e.relatedTarget;
-            if (triggerElement) {
-                let idOrder = triggerElement.dataset.id;
-                console.log(idOrder, 'idOrder');
-                // Parse JSON string into an object
-                let itemData = JSON.parse(triggerElement.dataset.item);
-                console.log(itemData, 'itemData');
-                
             }
         });
 
@@ -448,6 +439,105 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>`;
                     form.before(errorAlert);
+                }
+            });
+        });
+
+        // paymentModal
+        $('#paymentModal').on('show.bs.modal', function (e) {
+            let triggerElement = e.relatedTarget;
+            if (triggerElement) {
+                let idOrder = triggerElement.dataset.id;
+                // Parse JSON string into an object
+                let itemData = JSON.parse(triggerElement.dataset.item);
+                console.log(itemData, 'itemData');
+
+                // Hapus instance datepicker sebelumnya agar tidak terjadi duplikasi
+                $('#tgl_tempo').datepicker('destroy');
+
+                // Inisialisasi datepicker
+                $('#tgl_tempo').datepicker({
+                    format: 'dd-mm-yyyy',
+                    uiLibrary: 'bootstrap5',
+                    autoclose: true
+                });
+                
+                // jns_byr
+                let jns_byr = itemData.jns_byr;
+                if(jns_byr == '1'){
+                    $('#paymentModal').find('#inlineRadio1').prop('checked', true);
+                } else {
+                    $('#paymentModal').find('#inlineRadio2').prop('checked', true);
+                }
+
+                // over_time
+                let biaya_1 = (itemData.biaya_1 || 0);
+                $('#paymentModal').find('#biaya_1').val(biaya_1);
+
+                // tol_parkir
+                let biaya_2 = (itemData.biaya_2 || 0);
+                $('#paymentModal').find('#biaya_2').val(biaya_2);
+
+                // lain_lain
+                let biaya_3 = (itemData.biaya_3 || 0);
+                $('#paymentModal').find('#biaya_3').val(biaya_3);
+
+                // tgl_jatuh_tempo
+                let tgl_tempo = (itemData.tgl_tempo || '');
+                // Konversi format tanggal dari YYYY-MM-DD ke DD-MM-YYYY
+                var parts = tgl_tempo.split('-');
+                var formattedDate = parts[2] + '-' + parts[1] + '-' + parts[0]; // DD-MM-YYYY
+                $('#paymentModal').find('#tgl_tempo').val(formattedDate);
+
+                // diskon
+                let nominal_disc = (itemData.diskon || 0);
+                $('#paymentModal').find('#nominal_disc').val(nominal_disc);
+                
+                // keterangan
+                let ketr_byr = (itemData.ketr_byr || '');
+                $('#paymentModal').find('#ketr_byr').val(ketr_byr);
+                
+                // total_tagihan
+                let hrg_sewa_total = (itemData.hrg_sewa_total || 0);
+                $('#paymentModal').find('#total_tagihan').html(numberFormat(hrg_sewa_total));
+
+                // id_order hidden
+                $('#paymentModal').find('#id_order').val(idOrder);
+            }
+        });
+
+        // btnPaymentSave
+        $(document).on('click', 'button.btnPaymentSave', function(e) {
+            e.preventDefault();
+            console.log('btnPaymentSave');
+
+            let form = $('#formPayment');
+            let formData = new FormData(form[0]);
+            // tambahkan is_pemesan, is_vendor
+            formData.append('is_pemesan', is_pemesan);
+            formData.append('is_vendor', is_vendor);
+            // submit form
+            $.ajax({
+                url: '<?= base_url('inbox/ubahPayment') ?>',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    console.log(response);
+                    let data = JSON.parse(response);
+                    if (data.success) {
+                        // close modal
+                        $('#paymentModal').modal('hide');
+                        // open addModal
+                        // $('#addModal').modal('show');
+                    } else {
+                        // show error
+                        console.log(data.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log(error);
                 }
             });
         });

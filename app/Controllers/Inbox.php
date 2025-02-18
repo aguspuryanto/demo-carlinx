@@ -247,7 +247,45 @@ class Inbox extends BaseController
 
     public function ubahPayment()
     {
+        $listData = [];
+        $curlOpt    = [
+            'kd_member' => $this->session->get('user')['kode']
+        ];
+
         $data = $this->request->getPost();
-        echo json_encode($data); die();
+        // echo json_encode($data); die(); //{"jns_byr":"lunas","biaya_1":"75000","biaya_2":"190000","biaya_3":"150000","tgl_tempo":"22-02-2025","nominal_disc":"0","ketr_byr":"Test2","id_order":"250218000007","is_pemesan":"","is_vendor":"1"}
+
+        // sisi pemesan, update_single_plgn_1.php
+        
+        // sisi rental, update_pembayaran_2.php
+        /*$kd_member = $_POST['kd_member'];
+        $id_order = $_POST['id_order'];		
+        $jns_byr = $_POST['jns_byr'];
+        $nominal_byr = $_POST['nominal_byr'];
+        $tgl_tempo = $_POST['tgl_tempo'];
+        $over_time = $_POST['biaya_1'];
+        $parkir_tol = $_POST['biaya_2'];
+        $lain_lain = $_POST['biaya_3'];
+        $nominal_disc = $_POST['nominal_disc'];
+        $ketr_byr = $_POST['ketr_byr'];*/
+
+        //Jenis Bayar (1: lunas, 2: DP, 3: mundur)
+        if($data['is_vendor'] == '1'){
+            $curlOpt    = [
+                'kd_member' => $this->session->get('user')['kode'],
+                'id_order' => $data['id_order'],
+                'jns_byr' => $data['jns_byr'],
+                'nominal_byr' => isset($data['nominal_byr']) ? $data['nominal_byr'] : 0,
+                'tgl_tempo' => $data['tgl_tempo'],
+                'biaya_1' => $data['biaya_1'],
+                'biaya_2' => $data['biaya_2'],
+                'biaya_3' => $data['biaya_3'],
+                'nominal_disc' => $data['nominal_disc'],
+                'ketr_byr' => $data['ketr_byr']
+            ];
+
+            $listData   = getCurl($curlOpt, $this->ipAddress . 'update_pembayaran_2.php');
+            echo json_encode($listData); die();
+        }
     }
 }
