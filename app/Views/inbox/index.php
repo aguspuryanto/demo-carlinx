@@ -24,7 +24,7 @@
                         $is_vendor = ($listData['result_list_order'][0]['kode_rental'] == $listUser['kd_rental']);
                         $is_pemesan = ($listData['result_list_order'][0]['kode_rental'] != $listUser['kd_rental']);
                     }
-                    echo 'is_vendor : ' . $is_vendor . '; is_pemesan : ' . $is_pemesan . '<br>';
+                    // echo 'is_vendor : ' . $is_vendor . '; is_pemesan : ' . $is_pemesan . '<br>';
                     ?>
                     <ul class="list-group">
                     <?php if (empty($listData['result_list_order'])) : ?>
