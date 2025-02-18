@@ -312,6 +312,8 @@
 
             // If validation passes, create FormData from the actual form element
             let formData = new FormData(form[0]);
+            // push stat
+            formData.append('stat', stat);
 
             // If validation passes, continue with form submission
             $.ajax({

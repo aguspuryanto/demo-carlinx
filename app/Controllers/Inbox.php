@@ -151,27 +151,6 @@ class Inbox extends BaseController
             $data = $this->request->getPost();
             // echo json_encode($data); die(); //{"id_order":"250216000003","stat_ori":"1","nama_plgn":"Test2 (8765432)","no_hp":"8765432","ktp_plgn":"12345","note":"","nama_driver":{"' + i + '":""},"no_hp_driver":{"' + i + '":""},"nopol_driver":{"' + i + '":""},"note_driver":{"' + i + '":""},"alasan_batal":"Alasan Pembatalan"}
 
-            // $id_order = $this->request->getPost('id_order');
-            // $pelanggan = $this->request->getPost('pelanggan');
-            // $stat_ori = $this->request->getPost('stat_ori');
-            
-            // if (!$data['id_order'] || !$data['pelanggan']) {
-            //     // return redirect()->to(base_url('inbox'))->with('error', 'Please fill in all required fields');
-            //     $response = [
-            //         'success' => false,
-            //         'message' => 'Please fill in all required fields'
-            //     ];
-            //     echo json_encode($response);
-            //     return;
-            // }
-
-            // $caller = $_POST['caller'];
-            // $kd_member = $_POST['kd_member'];
-            // $id_order = $_POST['id_order'];		
-            // $stat_ori = $_POST['stat_ori'];
-            // $stat = $_POST['stat'];
-            // $alasan_batal = $_POST['alasan_batal'];
-
             // update_order_1a.php
             $curlOpt    = [
                 'caller' => 'STAT', // default. INBOX, AKTIF, RIWAYAT
@@ -191,18 +170,20 @@ class Inbox extends BaseController
             $listData   = getCurl($curlOpt, $this->ipAddress . 'update_order_1a.php');
             // echo json_encode($listData); die();
 
-            $curlOptDrv    = [
-                'id_order' => $data['id_order'],
-                'no' => $data['no_hp_driver'],
-                'nama' => $data['nama_driver'],
-                'nohp' => $data['no_hp_driver'],
-                'nopol' => $data['nopol_driver'],
-                'note' => $data['note_driver']
-            ];
+            if($data['stat'] == '9'){
+                $curlOptDrv    = [
+                    'id_order' => $data['id_order'],
+                    'no' => $data['no_hp_driver'],
+                    'nama' => $data['nama_driver'],
+                    'nohp' => $data['no_hp_driver'],
+                    'nopol' => $data['nopol_driver'],
+                    'note' => $data['note_driver']
+                ];
 
-            $updtDrv   = getCurl($curlOptDrv, $this->ipAddress . 'update_single_drv.php');
-            // echo json_encode($updtDrv); die();
-
+                $updtDrv   = getCurl($curlOptDrv, $this->ipAddress . 'update_single_drv.php');
+                // echo json_encode($updtDrv); die();
+            }
+            
             $response = [
                 'success' => ($listData['success']=='1') ? true : false,
                 'message' => $listData['message']
