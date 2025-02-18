@@ -166,20 +166,35 @@ class Inbox extends BaseController
             */
 
             if($data['is_pemesan'] == '1'){
-                if($data['stat_ori'] == '1'){
+                if($data['stat_ori'] == '1' && $data['action'] == 'batal'){
                     $data['stat'] = '8'; // batal
                 }
                 if($data['stat_ori'] == '4'){
-                    $data['stat'] = '8'; // batal
+                    if($data['action'] == 'batal'){
+                        $data['stat'] = '8'; // batal
+                    }
+                    if($data['action'] == 'terima'){
+                        $data['stat'] = '5'; // submit
+                    }
                 }
             }
 
             if($data['is_vendor'] == '1'){
                 if($data['stat_ori'] == '1'){
-                    $data['stat'] = '4'; // terima  
+                    if($data['action'] == 'tolak'){
+                        $data['stat'] = '6'; // tolak
+                    }
+                    if($data['action'] == 'terima'){
+                        $data['stat'] = '4'; // terima  
+                    }
                 }
                 if($data['stat_ori'] == '5'){
-                    $data['stat'] = '7'; // batal
+                    if($data['action'] == 'batal'){
+                        $data['stat'] = '7'; // batal
+                    }
+                    if($data['action'] == 'terima'){
+                        $data['stat'] = '9'; // submit
+                    }
                 }                
             }
 

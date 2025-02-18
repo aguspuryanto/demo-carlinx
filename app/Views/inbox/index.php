@@ -80,6 +80,9 @@
                 var textNote = '';
                 if(is_pemesan == '1'){
                     textNote = 'Menunggu respon dari rental';
+                    if(itemData.stat == '4'){
+                        textNote = 'Segera lakukan pembayaran ke Rental (atau sesuai kesepakatan)';
+                    }
                 } 
                 if(is_vendor == '1'){
                     // textNote = 'Pastikan data order sudah benar';
@@ -178,12 +181,12 @@
                         $('#list_plgn').append(html_plgn);
                     }
 
-                    if(is_vendor == '1'){
+                    if(is_vendor == '1' || itemData.stat == '4'){
                         // form driver
                         newForm.innerHTML += '<h6 class="mb-3">Driver</h6><ul class="list-group" id="list_driver"></ul>';
                         // loop jml_order
                         for(let i = 0; i < itemData.jml_order; i++){
-                            let html_driver = `<li class="list-group-item">
+                            let html_driver = `<li class="list-group-item mb-3">
                             <div class="mb-3 align-items-center">
                                 <label class="form-label visually-hidden">Driver</label>
                                 <input type="text" name="nama_driver[` + i + `]" class="form-control" id="nama_driver" placeholder="Nama Driver" required>
@@ -203,6 +206,58 @@
                             $('#list_driver').append(html_driver);
                         }
                     }
+
+                    if(itemData.stat == '4'){
+                        newForm.innerHTML += '<h6 class="mb-3">Pembayaran</h6><ul class="list-group" id="list_pembayaran"></ul>';
+                        // loop jml_order
+                        // for(let i = 0; i < itemData.jml_order; i++){
+                            let html_pembayaran = `<li class="list-group-item">
+                            <table class="table table-borderless">
+                                <tbody>
+                                    <tr>
+                                        <td>Sub Total</td>
+                                        <td>Rp. <span class="pull-right">` + numberFormat(itemData.hrg_sewa_total) + `</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Diskon</td>
+                                        <td>Rp. <span class="pull-right">` + numberFormat(itemData.nominal_disc) + `</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Uang Muka</td>
+                                        <td>Rp. <span class="pull-right">` + numberFormat(itemData.uang_muka || 0) + `</span></td>
+                                    </tr>
+                                    <tr class="h6">
+                                        <td>Total Tagihan</td>
+                                        <td>Rp. <span class="pull-right">` + numberFormat(itemData.hrg_sewa_total) + `</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Metode Bayar</td>
+                                        <td>` + (itemData.sisa_byr == '0' ? 'LUNAS' : 'MUNDUR') + `</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jatuh Tempo</td>
+                                        <td>` + (itemData.tgl_tempo || '') + `</td>
+                                    </tr>
+                                    <tr>
+                                        <td>*Keterangan</td>
+                                        <td>` + (itemData.ketr || '') + `</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Bank Tujuan Transfer</td>
+                                        <td>` + (itemData.norek_rental || '') + `</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="2">
+                                            <label class="form-label">Upload Bukti Transfer</label>
+                                            <input type="file" name="bukti_transfer" class="form-control" id="bukti_transfer">
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            </li>`;
+                            $('#list_pembayaran').append(html_pembayaran);
+                        // }
+                    }
                 });
                 
                 // Then append the form to the formConfirmOrder div
@@ -210,11 +265,22 @@
 
                 // append to modal footer
                 if(is_vendor == '1'){
-                    $('#addModal .modal-footer').html(`<div class="row col-12"><div class="col-6"><button type="submit" class="btn btn-outline-danger w-100 btnConfirmOrder" data-stat="6">Tolak</button></div><div class="col-6"><button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-stat="4">Terima</button></div></div>`);
+                    $('#addModal .modal-footer').html(`<div class="row col-12"><div class="col-6"><button type="submit" class="btn btn-outline-danger w-100 btnConfirmOrder" data-action="tolak">Tolak</button></div><div class="col-6"><button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="terima">Terima</button></div></div>`);
                 } else {
-                    $('#addModal .modal-footer').html(`
-                        <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-stat="6">Batal</button>
-                    `);
+                    if(itemData.stat == '4'){
+                        $('#addModal .modal-footer').html(`<div class="row col-12">
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-outline-danger w-100 btnConfirmOrder" data-action="batal">Batal</button>
+                            </div>
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="lanjut">Lanjut</button>
+                            </div>
+                        </div>`);
+                    } else {
+                        $('#addModal .modal-footer').html(`
+                            <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="batal">Batal</button>
+                        `);
+                    }
                 }
 
                 $('#addModal').modal('show');
@@ -225,8 +291,8 @@
 
         $(document).on('click', 'button.btnConfirmOrder', function(e) {
             e.preventDefault();
-            let stat = $(this).data('stat');
-            console.log(stat, 'stat');
+            let action = $(this).data('action');
+            console.log(action, 'action');
             
             let form = $('#formConfirmOrder form'); // Get the actual form element inside #formConfirmOrder
             form.addClass('was-validated'); // Add Bootstrap validation class
@@ -247,7 +313,7 @@
             let errors = [];
             let alasan_batal = form.find('textarea#alasan_batal').val();
             
-            if(stat == '6' && !alasan_batal) {
+            if(action == 'batal' && !alasan_batal) {
                 // remove all class required from input
                 form.find('input').removeAttr('required');
                 
@@ -272,7 +338,7 @@
                 // return false; // Stop form submission to allow user to enter reason
             } else {
 
-                if (stat == '4' && is_vendor == '1') {
+                if (action == 'terima' && is_vendor == '1') {
                     baseValidationRules.push({ field: 'nama_driver', message: 'Driver name is required' });
                     baseValidationRules.push({ field: 'nopol_driver', message: 'Vehicle plate number is required' });
                 }
@@ -318,7 +384,7 @@
             // If validation passes, create FormData from the actual form element
             let formData = new FormData(form[0]);
             // push stat
-            formData.append('stat', stat);
+            formData.append('action', action);
 
             // If validation passes, continue with form submission
             $.ajax({
