@@ -428,10 +428,10 @@
                         </div>`;
                         form.before(successAlert);
                         
-                        // setTimeout(() => {
-                        //     $('#addModal').modal('hide');
-                        //     location.reload();
-                        // }, 1500);
+                        setTimeout(() => {
+                            $('#addModal').modal('hide');
+                            location.reload();
+                        }, 1500);
                     } else {
                         // Show error message
                         const errorAlert = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
