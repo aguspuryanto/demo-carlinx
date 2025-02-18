@@ -151,6 +151,38 @@ class Inbox extends BaseController
             $data = $this->request->getPost();
             // echo json_encode($data); die(); //{"id_order":"250216000003","stat_ori":"1","nama_plgn":"Test2 (8765432)","no_hp":"8765432","ktp_plgn":"12345","note":"","nama_driver":{"' + i + '":""},"no_hp_driver":{"' + i + '":""},"nopol_driver":{"' + i + '":""},"note_driver":{"' + i + '":""},"alasan_batal":"Alasan Pembatalan"}
 
+            /* Sisi Pemesan
+            - stat = 1 : batal (stat: 8)
+            - stat = 4 :
+            * Batal : update stat = 8
+            * Submit : update stat = 5
+
+            Sisi Rental
+            - stat = 1 : terima (stat: 4), tolak (stat: 6)
+            - stat = 5 :
+            * Batal : update stat = 7
+            * pembayaran diterima  
+            * Submit : update stat = 9
+            */
+
+            if($data['is_pemesan'] == '1'){
+                if($data['stat_ori'] == '1'){
+                    $data['stat'] = '8'; // batal
+                }
+                if($data['stat_ori'] == '4'){
+                    $data['stat'] = '8'; // batal
+                }
+            }
+
+            if($data['is_vendor'] == '1'){
+                if($data['stat_ori'] == '1'){
+                    $data['stat'] = '4'; // terima  
+                }
+                if($data['stat_ori'] == '5'){
+                    $data['stat'] = '7'; // batal
+                }                
+            }
+
             // update_order_1a.php
             $curlOpt    = [
                 'caller' => 'STAT', // default. INBOX, AKTIF, RIWAYAT
@@ -161,16 +193,10 @@ class Inbox extends BaseController
                 'alasan_batal' => '-'
             ];
 
-            /*- stat = 1 : terima (stat: 4), tolak (stat: 6)
-            - stat = 5 :
-            * Batal : update stat = 7
-            * pembayaran diterima  
-            * Submit : update stat = 9
-            */
             $listData   = getCurl($curlOpt, $this->ipAddress . 'update_order_1a.php');
             // echo json_encode($listData); die();
 
-            if($data['stat'] == '9'){
+            if($data['is_vendor'] == '1'){
                 $curlOptDrv    = [
                     'id_order' => $data['id_order'],
                     'no' => $data['no_hp_driver'],

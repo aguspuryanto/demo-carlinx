@@ -129,8 +129,13 @@
                 newForm.id = 'formConfirmOrder';
                 newForm.action = '#';
                 
-                newForm.innerHTML = '<div class="mb-3 align-items-center"><input type="hidden" name="id_order" class="form-control" id="id_order" value="' + idOrder + '"></div>'; // Add the hidden input with value
-                newForm.innerHTML += '<div class="mb-3 align-items-center"><input type="hidden" name="stat_ori" class="form-control" id="stat_ori" value="' + itemData.stat + '"></div>'; // Add the hidden input with value
+                newForm.innerHTML = '<div class="mb-3 align-items-center"><input type="hidden" name="id_order" class="form-control" id="id_order" value="' + idOrder + '"></div>';
+                newForm.innerHTML += '<div class="mb-3 align-items-center"><input type="hidden" name="stat_ori" class="form-control" id="stat_ori" value="' + itemData.stat + '"></div>';
+                newForm.innerHTML += '<div class="mb-3 align-items-center"><input type="hidden" name="stat" class="form-control" id="stat" value="' + itemData.stat + '"></div>';
+                // is_vendor
+                newForm.innerHTML += '<div class="mb-3 align-items-center"><input type="hidden" name="is_vendor" class="form-control" id="is_vendor" value="' + is_vendor + '"></div>';
+                // is_pemesan
+                newForm.innerHTML += '<div class="mb-3 align-items-center"><input type="hidden" name="is_pemesan" class="form-control" id="is_pemesan" value="' + is_pemesan + '"></div>';
 
                 // load
                 let resultPlgn = [];
