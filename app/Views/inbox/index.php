@@ -91,7 +91,7 @@
 
                 // Create the detail HTML
                 var html = '<div class="table-responsive mb-0">';
-                html += '<table class="table table-bordered">';
+                html += '<table class="table table-sm table-bordered">';
                 html += '<tbody>';
                 html += '<tr><th width="150">Tgl.Mulai</th><td>' + itemData.tgl_start + '</td></tr>';
                 html += '<tr><th>Tgl.Selesai</th><td>' + itemData.tgl_finish + '</td></tr>';

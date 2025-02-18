@@ -17,6 +17,14 @@
                     // 1. Vendor : jika user.kd_rental == order.kd_rental
                     // 2. Pemesan : jika user.kd_rental != order.kd_rental
                     // In = Pemesan, Out = Vendor
+                    $is_vendor = false;
+                    $is_pemesan = false;
+                    
+                    if (!empty($listData['result_list_order'])) {
+                        $is_vendor = ($listData['result_list_order'][0]['kode_rental'] == $listUser['kd_rental']);
+                        $is_pemesan = ($listData['result_list_order'][0]['kode_rental'] != $listUser['kd_rental']);
+                    }
+                    echo 'is_vendor : ' . $is_vendor . '; is_pemesan : ' . $is_pemesan . '<br>';
                     ?>
                     <ul class="list-group">
                     <?php if (empty($listData['result_list_order'])) : ?>
@@ -76,7 +84,7 @@
                     html += '<div class="mb-3"><p class="h6 lead p-2">Tgl Order</p><div class="d-flex justify-content-between"><span>' + itemData.tgl_order + '</span><span><a href="#">Lihat bukti pesanan</a></span></div></div>';
                 }
 
-                html += '<p class="h6 lead p-2">Pesanan</p><table class="table table-borderless">';
+                html += '<p class="h6 lead p-2">Pesanan</p><table class="table table-sm table-borderless">';
                 html += '<tbody>';
                 html += '<tr><td width="150">Tgl.Mulai</td><td>' + itemData.tgl_start + '</td></tr>';
                 html += '<tr><td>Tgl.Selesai</td><td>' + itemData.tgl_finish + '</td></tr>';

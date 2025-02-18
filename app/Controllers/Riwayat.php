@@ -47,19 +47,9 @@ class Riwayat extends BaseController
         // 5 = konfirmasi bayar (upload bukti transfer)
         // 6 = tolak by rental; 7 = batal by rental; 8 = batal by pemesan
         // 9 = pembayaran diterima (order selesai - ke menu Proses)
-        // $listStatus = [
-        //     '1' => 'Baru',
-        //     '2' => 'Diterima',
-        //     '3' => 'Data Plgn',
-        //     '4' => 'Data Driver + Invoice',
-        //     '5' => 'Konfirmasi Bayar',
-        //     '6' => 'Ditolak', //'Tolak By Rental',
-        //     '7' => 'Batal By Rental',
-        //     '8' => 'Pemesan Batal', //'Batal By Pemesan',
-        //     '9' => 'Selesai', //'Pembayaran Diterima'
-        // ];
 
-        $listStatus = [
+        $listStatus = [];
+        $listStatus_pemesan = [
             '1' => 'Menunggu',
             '2' => 'Diterima',
             '3' => 'Data Plgn',
@@ -69,6 +59,16 @@ class Riwayat extends BaseController
             '7' => 'Rental Batal',
             '8' => 'Kedaluwarsa', //'Batal By Pemesan',
             '9' => 'Selesai', //'Pembayaran Diterima'
+        ];
+
+        $listStatus_rental = [
+            '1' => 'Order Baru',
+            '4' => 'Menunggu',
+            '5' => 'Tunggu Pembayaran',
+            '6' => 'Ditolak',
+            '7' => 'Rental Batal',
+            '8' => 'Pemesan Batal',
+            '9' => 'Selesai'
         ];
 
         // grp_penyewa
@@ -92,6 +92,16 @@ class Riwayat extends BaseController
         // echo json_encode($listData); die();
         if($listData['success']){
             $listData = $listData;
+            
+            $is_vendor = ($listData['result_list_order'][0]['kode_rental'] == $listUser['kd_rental']) ? true : false;
+            $is_pemesan = ($listData['result_list_order'][0]['kode_rental'] != $listUser['kd_rental']) ? true : false;
+
+            if($listData['result_list_order'][0]['alasan_batal'] == '-'){
+                // $listStatus_pemesan['8'] = 'Pemesan Batal';
+            }
+
+            if($is_vendor) $listStatus = $listStatus_rental;
+            if($is_pemesan) $listStatus = $listStatus_pemesan;
         }
 
         return view('riwayat/index', [
