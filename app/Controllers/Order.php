@@ -199,23 +199,23 @@ class Order extends BaseController
                 $decoded = rawurldecode($data['item']);
                 $array_data = json_decode($decoded, true);
                 // $resp = json_encode($array_data);
-
                 $array_data['jns_order'] = $data['jns_order'] ?? 1;
                 $array_data['tempo_bayar'] = 0;
-
-                // list_plgn, nama:["Satrio", "Satrio2"]
-                for ($i = 0; $i < ($array_data['jumlah']); $i++) {
-                    $jsonString['values'][] = [
-                        'nama' => $array_data['nama'][$i],
-                        'no' => $array_data['no_hp'][$i],
-                        'nik' => $array_data['nik'][$i],
-                        'note' => $array_data['note'][$i]
-                    ];
-                }
 
                 // Parsing ulang bagian "item" yang masih dalam format JSON string
                 $respItem = json_decode($array_data['item'], true);
                 // $respItem = json_encode($respItem);
+                
+                // list_plgn
+                for ($i = 0; $i < ($array_data['jumlah']); $i++) {
+                    $jsonString['values'][] = [
+                        'no' => ($i+1),
+                        'nama' => $array_data['nama'][$i],
+                        'nohp' => $array_data['no_hp'][$i],
+                        'nik' => $array_data['nik'][$i],
+                        'note' => $array_data['note'][$i]
+                    ];
+                }
 
                 $respItemArr = [
                     'kd_rental' => $respItem['koderental'],
@@ -250,7 +250,6 @@ class Order extends BaseController
                     return redirect()->to('/')->with('success', 'Order berhasil dibuat');
                 } else {
                     // show error
-                    // echo json_encode($listData);
                     return redirect()->to('order/orderlayanan')->with('error', $listData['message'] . ' ' . $listData['error']);
                 }
             
