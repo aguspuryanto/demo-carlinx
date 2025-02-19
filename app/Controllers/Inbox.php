@@ -9,6 +9,7 @@ class Inbox extends BaseController
 {
     protected $ipAddress;
     protected $session;
+    // protected $destinationUrl = 'http://103.178.174.7/foxrent/upload_profile.php';
 
     public function __construct()
     {
@@ -150,7 +151,8 @@ class Inbox extends BaseController
 
         // handle POST
         if ($this->request->getMethod() == 'POST') {
-            $data = $this->request->getPost();
+            $data = $this->request->getPost();            
+            // echo print_r($_FILES['bukti_transfer']);
             // echo json_encode($data); die(); //{"id_order":"250218000007","stat_ori":"1","stat":"1","is_vendor":"1","is_pemesan":"","nama_plgn":"Test (8765432)","no_hp":"8765432","ktp_plgn":"12345","note":"","nama_driver":["TEST DRIVER"],"no_hp_driver":["08271615"],"nopol_driver":["L 2345 WE"],"note_driver":["test terima"],"action":"terima"}
 
             /* Sisi Pemesan
@@ -231,6 +233,44 @@ class Inbox extends BaseController
                     // echo json_encode($updtDrv); die();
                     $listData = array_merge($listData, $updtDrv);
                     // echo json_encode($updtDrv); die();
+                }
+            }
+
+            // upload bukti transfer, upload bukti tranfer jika jenis bayar MUNDUR -> upload_bukti_dp_1.php
+            if(isset($_FILES['bukti_transfer'])){
+                $uploadDir = 'uploads/';
+                if (!is_dir($uploadDir)) {
+                    mkdir($uploadDir, 0777, true);
+                }
+
+                if (isset($_FILES['bukti_transfer']) && $_FILES['bukti_transfer']['size'] > 0) {
+                    $fileExt = pathinfo($_FILES['bukti_transfer']['name'], PATHINFO_EXTENSION);
+                    $fileName = $data['id_order'] . "." . $fileExt;
+                    $targetFile = $uploadDir . $fileName;
+
+                    if (!move_uploaded_file($_FILES['bukti_transfer']['tmp_name'], $targetFile)) {
+                        $errors[] = "Failed to upload file: $fileName. Please check file permissions and try again.";
+                    }
+                    
+                    // $destinationUrl = $this->ipAddress . 'upload_bukti_dp_1.php';
+                    if (is_file($targetFile)) {
+                        $ch = curl_init();
+
+                        $postData = [
+                            'uploaded_file' => new \CURLFile($targetFile)
+                        ];
+
+                        curl_setopt($ch, CURLOPT_URL, $this->ipAddress . 'upload_bukti_dp_1.php');
+                        curl_setopt($ch, CURLOPT_POST, true);
+                        curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+                        $response = curl_exec($ch);
+                        if (curl_errno($ch)) {
+                            $errors[] = "Failed to copy file: $fileName. Error: " . curl_error($ch);
+                        }
+                        curl_close($ch);
+                    }
                 }
             }
             

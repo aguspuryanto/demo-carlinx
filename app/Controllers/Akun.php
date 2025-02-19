@@ -13,7 +13,7 @@ class Akun extends BaseController
     protected $ipAddress;
     protected $session;
     protected $helpers = ['form', 'my'];
-    protected $destinationUrl = 'http://103.178.174.7/foxrent/upload_profile.php';
+    protected $destinationUrl;
 
     public function __construct()
     {
@@ -24,6 +24,7 @@ class Akun extends BaseController
         if (!$this->session->get('user') || !isset($this->session->get('user')['kode'])) {
             return redirect()->to('/login');
         }
+        $this->destinationUrl = $this->ipAddress. 'upload_profile.php';
     }
 
     public function index()
