@@ -1,13 +1,11 @@
     <div class="modal fade" id="addModal" role="dialog" aria-labelledby="addModalLabel">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-fullscreen" role="document">
             <div class="modal-content">
-                <form action="<?= base_url('pengaturan/driver') ?>" method="POST">
                 <div class="modal-header">
                     <h5 class="modal-title" id="addModalLabel">Tambah Driver</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <span>&times;</span>
-                    </button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <form action="<?= base_url('pengaturan/driver') ?>" method="POST">
                 <div class="modal-body">
                         <!-- kategory -->
                         <div class="form-group">

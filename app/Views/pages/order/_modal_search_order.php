@@ -1,10 +1,10 @@
 
     <!-- Modal -->
     <div class="modal fade" id="exampleModal" aria-labelledby="exampleModalLabel" aria-hidden="false" aria-modal="true">
-        <div class="modal-dialog modal-lg">
+        <div class="modal-dialog modal-fullscreen">
             <div class="modal-content">
             <div class="modal-header">
-                <a href="#" class="btn" data-bs-dismiss="modal" aria-label="Close">
+                <a href="#" class="nav-link p-0" data-bs-dismiss="modal" aria-label="Close">
                     <i class="fa fa-arrow-left"></i>
                 </a>
             </div>

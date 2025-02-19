@@ -9,10 +9,9 @@
         <div class="row">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title float-left"><?= $title ?></h4>
-                    <div class="card-header-action float-right">
-                        <!-- <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal"><i class="fas fa-plus"></i> Tambah</a> -->
-                    </div>
+                    <h4 class="card-title d-flex justify-content-between"><?= $title ?>
+                        <!-- <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addModal"><i class="fa fa-plus"></i> Tambah</a> -->
+                    </h4>
                 </div>
                 <div class="card-body">
                     <?php 
