@@ -26,7 +26,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="card bg-opac text-white border-0">
+                        <!-- <div class="card bg-opac text-white border-0">
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-12">
@@ -41,7 +41,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
