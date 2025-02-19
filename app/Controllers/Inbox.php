@@ -237,6 +237,7 @@ class Inbox extends BaseController
             }
 
             // upload bukti transfer, upload bukti tranfer jika jenis bayar MUNDUR -> upload_bukti_dp_1.php
+            // Ada 2 formate DP_ dan TC_. Yg TC_ buat bukti bayar hutang(bukti setor)
             if(isset($_FILES['bukti_transfer'])){
                 $uploadDir = 'uploads/';
                 if (!is_dir($uploadDir)) {
@@ -245,7 +246,7 @@ class Inbox extends BaseController
 
                 if (isset($_FILES['bukti_transfer']) && $_FILES['bukti_transfer']['size'] > 0) {
                     $fileExt = pathinfo($_FILES['bukti_transfer']['name'], PATHINFO_EXTENSION);
-                    $fileName = $data['id_order'] . "." . $fileExt;
+                    $fileName = 'DP_' . $data['id_order'] . "." . $fileExt;
                     $targetFile = $uploadDir . $fileName;
 
                     if (!move_uploaded_file($_FILES['bukti_transfer']['tmp_name'], $targetFile)) {
