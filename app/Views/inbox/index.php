@@ -260,15 +260,15 @@
                                     <td>` + (itemData.norek_rental || '') + `</td>
                                 </tr>`;
 
-                                // pemesan
-                                if(is_pemesan == '1'){
-                                html_pembayaran += `<tr>
-                                    <td colspan="2">
-                                        <label class="form-label">Upload Bukti Transfer</label>
-                                        <input type="file" name="bukti_transfer" class="form-control" id="bukti_transfer">
-                                    </td>
-                                </tr>`;
-                                }
+                        // pemesan
+                        if(is_pemesan == '1'){
+                            html_pembayaran += `<tr>
+                                <td colspan="2">
+                                    <label class="form-label">Upload Bukti Transfer</label>
+                                    <input type="file" name="bukti_transfer" class="form-control" id="bukti_transfer">
+                                </td>
+                            </tr>`;
+                        }
                                 
                         html_pembayaran += `</tbody>
                         </table>
