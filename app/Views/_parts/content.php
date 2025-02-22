@@ -198,8 +198,8 @@
                         <div class="card-body px-1">
                             <div class="xrow">
                                 <div class="col-auto">
-                                    <div class="avatar avatar-40 alert-warning text-warning rounded-circle">
-                                        <i class="bi bi-person-workspace"></i>
+                                    <div class="avatar avatar-40 alert-success text-success rounded-circle">
+                                        <i class="bi bi-headset"></i>
                                     </div>
                                 </div>
                                 <div class="col px-0 align-self-center">
