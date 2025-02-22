@@ -209,7 +209,7 @@ class Inbox extends BaseController
                 'id_order' => $data['id_order'],
                 'stat_ori' => $data['stat_ori'],
                 'stat' => $data['stat'], //batal
-                'alasan_batal' => $data['alasan_batal']
+                'alasan_batal' => ($data['action'] == 'batal') ? $data['alasan_batal'] : '-'
             ];
 
             $listData   = getCurl($curlOpt, $this->ipAddress . 'update_order_1a.php');
