@@ -291,7 +291,20 @@
 
                 // append to modal footer
                 if(is_vendor == '1'){
-                    $('#addModal .modal-footer').html(`<div class="row col-12"><div class="col-6"><button type="submit" class="btn btn-outline-danger w-100 btnConfirmOrder" data-action="tolak">Tolak</button></div><div class="col-6"><button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="terima">Terima</button></div></div>`);
+                    if(itemData.stat == '4'){
+                        $('#addModal .modal-footer').html(`
+                            <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="batal">Batal</button>
+                        `);
+                    } else {
+                        $('#addModal .modal-footer').html(`<div class="row col-12">
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-outline-danger w-100 btnConfirmOrder" data-action="tolak">Tolak</button>
+                            </div>
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="terima">Terima</button>
+                            </div>
+                        </div>`);
+                    }
                 } else {
                     if(itemData.stat == '4'){
                         $('#addModal .modal-footer').html(`<div class="row col-12">
