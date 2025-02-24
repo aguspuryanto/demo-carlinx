@@ -475,6 +475,7 @@
 
         // paymentModal
         $('#paymentModal').on('show.bs.modal', function (e) {
+            $('#addModal').modal('hide');
             let triggerElement = e.relatedTarget;
             if (triggerElement) {
                 let idOrder = triggerElement.dataset.id;
