@@ -37,6 +37,10 @@
                         <label for="biaya_3" class="form-label">Lain-lain (Rp)</label>
                         <input type="text" name="biaya_3" id="biaya_3" class="form-control" required>
                     </div>
+                    <div class="mb-3 nominal_byr d-none">
+                        <label for="nominal_byr" class="form-label">DP (Rp)</label>
+                        <input type="text" name="nominal_byr" id="nominal_byr" class="form-control" required>
+                    </div>
                     <div class="mb-3">
                         <label for="tgl_tempo" class="form-label">Tgl. Jatuh Tempo</label>
                         <input type="text" name="tgl_tempo" id="tgl_tempo" class="form-control" required>

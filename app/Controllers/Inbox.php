@@ -325,8 +325,9 @@ class Inbox extends BaseController
                 'ketr_byr' => $data['ketr_byr']
             ];
 
+            // echo json_encode($curlOpt); die(); //{"kd_member":"PAK00001","id_order":"250222000003","jns_byr":"1","nominal_byr":"350000","tgl_tempo":"25-02-2025","biaya_1":"0","biaya_2":"0","biaya_3":"0","nominal_disc":"0","ketr_byr":"test payment mundur"}
             $listData   = getCurl($curlOpt, $this->ipAddress . 'update_pembayaran_2.php');
-            echo json_encode($listData); die();
+            echo json_encode($listData); //die();
         }
     }
 }

@@ -75,6 +75,15 @@
         let is_vendor = '<?= $is_vendor ?>';
         let is_pemesan = '<?= $is_pemesan ?>';
 
+        $('input[name=jns_byr]').on('change', function() {
+            let val = $(this).val();
+            if(val == '3'){
+                $('.nominal_byr').removeClass('d-none');
+            } else {
+                $('.nominal_byr').addClass('d-none');
+            }
+        });
+
         $('#addModal').on('show.bs.modal', function (e) {
             // Accessing the target element that triggered the modal
             let triggerElement = e.relatedTarget;
@@ -237,15 +246,15 @@
                                 </tr>
                                 <tr>
                                     <td>Uang Muka</td>
-                                    <td>Rp. <span class="pull-right">` + numberFormat(itemData.uang_muka || 0) + `</span></td>
+                                    <td>Rp. <span class="pull-right">` + numberFormat(itemData.nominal_dp || 0) + `</span></td>
                                 </tr>
                                 <tr class="h6">
                                     <td>Total Tagihan</td>
-                                    <td>Rp. <span class="pull-right">` + numberFormat(itemData.hrg_sewa_total) + `</span></td>
+                                    <td>Rp. <span class="pull-right">` + numberFormat(itemData.hrg_sewa_total - (itemData.nominal_dp - itemData.nominal_disc)) + `</span></td>
                                 </tr>
                                 <tr>
                                     <td>Metode Bayar</td>
-                                    <td>` + (itemData.sisa_byr == '0' ? 'LUNAS' : 'MUNDUR') + `</td>
+                                    <td>` + (itemData.jns_byr == '1' ? 'LUNAS' : 'MUNDUR') + `</td>
                                 </tr>
                                 <tr>
                                     <td>Jatuh Tempo</td>
@@ -503,6 +512,10 @@
                 // lain_lain
                 let biaya_3 = (itemData.biaya_3 || 0);
                 $('#paymentModal').find('#biaya_3').val(biaya_3);
+
+                // nominal_byr
+                let nominal_byr = (itemData.nominal_byr || 0);
+                $('#paymentModal').find('#nominal_byr').val(nominal_byr);
 
                 // tgl_jatuh_tempo
                 let tgl_tempo = (itemData.tgl_tempo || '');
