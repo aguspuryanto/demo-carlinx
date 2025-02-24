@@ -514,7 +514,7 @@
                 $('#paymentModal').find('#biaya_3').val(biaya_3);
 
                 // nominal_byr
-                let nominal_byr = (itemData.nominal_byr || 0);
+                let nominal_byr = (itemData.nominal_dp || 0);
                 $('#paymentModal').find('#nominal_byr').val(nominal_byr);
 
                 // tgl_jatuh_tempo
@@ -525,7 +525,7 @@
                 $('#paymentModal').find('#tgl_tempo').val(formattedDate);
 
                 // diskon
-                let nominal_disc = (itemData.diskon || 0);
+                let nominal_disc = (itemData.nominal_disc || 0);
                 $('#paymentModal').find('#nominal_disc').val(nominal_disc);
                 
                 // keterangan
