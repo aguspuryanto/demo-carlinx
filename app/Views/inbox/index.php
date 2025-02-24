@@ -495,9 +495,9 @@
                 // jns_byr
                 let jns_byr = itemData.jns_byr;
                 if(jns_byr == '1'){
-                    $('#paymentModal').find('#inlineRadio1').prop('checked', true);
+                    $('#paymentModal').find('#inlineRadio1').prop('checked', true).trigger('change');
                 } else {
-                    $('#paymentModal').find('#inlineRadio2').prop('checked', true);
+                    $('#paymentModal').find('#inlineRadio2').prop('checked', true).trigger('change');
                 }
 
                 // over_time
