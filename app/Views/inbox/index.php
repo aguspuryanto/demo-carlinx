@@ -532,7 +532,7 @@
                 $('#paymentModal').find('#ketr_byr').val(ketr_byr);
                 
                 // total_tagihan
-                let hrg_sewa_total = (itemData.hrg_sewa_total || 0);
+                let hrg_sewa_total = (itemData.hrg_sewa_total - (itemData.nominal_byr - itemData.nominal_disc) || 0);
                 $('#paymentModal').find('#total_tagihan').html(numberFormat(hrg_sewa_total));
 
                 // id_order hidden
