@@ -265,8 +265,7 @@
                                     <td>` + (itemData.ketr || '') + `</td>
                                 </tr>
                                 <tr>
-                                    <td>Bank Tujuan Transfer</td>
-                                    <td>` + (itemData.norek_rental || '') + `</td>
+                                    <td colspan="2">Bank Tujuan Transfer <br>` + (itemData.norek_rental || '') + `</td>
                                 </tr>`;
 
                         // pemesan
