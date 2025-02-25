@@ -284,8 +284,7 @@
                         // pemesan
                         if(is_pemesan == '1'){
                             let path_img = "<?= base_url(); ?>proxy.php?url=<?= $_ENV['API_BASEURL']; ?>images_dp/" + encodeURIComponent(itemData.path_foto);
-                            // let path_img = `<?= getImage(` + apiBaseUrl + `); ?>` ;
-                            console.log(path_img,'path_img');
+                            // console.log(path_img,'path_img');
                             if(itemData.path_foto) {
                                 let link_img = `<img class="avatar avatar-lg" src="${path_img}" style="width: 64px; height: 64px;" />`;
                                 html_pembayaran += `<tr>
