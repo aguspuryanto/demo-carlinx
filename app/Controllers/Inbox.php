@@ -15,7 +15,7 @@ class Inbox extends BaseController
     {
         helper('my');
         $this->ipAddress = $_ENV['API_BASEURL'];
-        $this->session = \Config\Services::session(); // Pastikan session di-load
+        $this->session = session(); // Pastikan session di-load
         // jika tidak ada session, redirect ke login
         if (!$this->session->has('user')) {
             return redirect()->to('/login'); // Redirect ke halaman login jika user belum login
