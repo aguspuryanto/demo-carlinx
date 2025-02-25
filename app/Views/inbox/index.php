@@ -283,13 +283,15 @@
 
                         // pemesan
                         if(is_pemesan == '1'){
-                            let path_img = `<?= $_ENV['API_BASEURL']; ?>images_dp/` + itemData.path_foto;
+                            let apiBaseUrl = "<?= $_ENV['API_BASEURL']; ?>images_dp/";
+                            // let path_img = `<?= $_ENV['API_BASEURL']; ?>images_dp/` + itemData.path_foto;
+                            let path_img = apiBaseUrl + itemData.path_foto;
                             console.log(path_img,'path_img');
                             if(itemData.path_foto) {
-                                let path_img = `<img class="avatar avatar-lg" src="` + path_img + `" style="width: 64px; height: 64px;" />`;
+                                let link_img = `<img class="avatar avatar-lg" src="${path_img}" style="width: 64px; height: 64px;" />`;
                                 html_pembayaran += `<tr>
                                     <td colspan="2">
-                                        <div class="d-flex align-items-center">` + path_img + `</div>
+                                        <div class="d-flex align-items-center">${link_img}</div>
                                     </td>
                                 </tr>`;
                             }
