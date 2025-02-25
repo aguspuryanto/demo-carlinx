@@ -315,9 +315,14 @@
                     }
                 } else {
                     if(itemData.stat == '4'){
-                        $('#addModal .modal-footer').html(`
-                            <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="batal">Batal</button>
-                        `);
+                        $('#addModal .modal-footer').html(`<div class="row col-12">
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="batal">Batal</button>
+                            </div>
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="lanjut">Lanjut</button>
+                            </div>
+                        </div>`);
                     } else {
                         $('#addModal .modal-footer').html(`<div class="row col-12">
                             <div class="col-6">
