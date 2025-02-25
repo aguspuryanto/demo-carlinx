@@ -74,6 +74,12 @@
     $(document).ready(function() {
         let is_vendor = '<?= $is_vendor ?>';
         let is_pemesan = '<?= $is_pemesan ?>';
+        let payment_type = {
+            1: 'Lunas',      // Full payment
+            2: 'Uang Muka', // Down payment
+            3: 'Mundur'    // Deferred payment
+        };
+        // payment_type[1]
 
         $('input[name=jns_byr]').on('change', function() {
             let val = $(this).val();
@@ -108,6 +114,13 @@
                     }
                 }
 
+                // text Pembayaran
+                if(itemData.jns_byr == '2'){
+                    textPayment = payment_type[itemData.jns_byr] + ' ' + itemData.tempo_bayar + ' hari';
+                } else {
+                    textPayment = payment_type[itemData.jns_byr];
+                }
+
                 // Create the detail HTML
                 var html = '<div class="table-responsive mb-0">';
                 html += '<table class="table table-sm table-bordered">';
@@ -127,7 +140,7 @@
                 html += '<tr><th>Jml.Order</th><td>' + (itemData.jml_order) + '</td></tr>';
                 html += '<tr><th>Include</th><td>' + (itemData.ketr !='' ? itemData.ketr : 'Mobil, Driver') + '</td></tr>';
                 html += '<tr><th>Biaya</th><td>Rp. ' + numberFormat(itemData.hrg_sewa) + '</td></tr>';
-                html += '<tr><th>Pembayaran</th><td>' + (itemData.jns_byr == '1' ? 'Lunas' : 'Mundur ' + itemData.tempo_bayar + ' hari') + '</td></tr>';
+                html += '<tr><th>Pembayaran</th><td>' + textPayment + '</td></tr>';
                 html += '<tr><th>Catatan</th><td>' + (itemData.catatan_byr ?? '-') + '</td></tr>';
                 html += '<tr><th>Voucher</th><td>' + (itemData.voucher ?? '-') + '</td></tr>';
                 if(itemData.jns_order == '4'){
@@ -254,7 +267,7 @@
                                 </tr>
                                 <tr>
                                     <td>Metode Bayar</td>
-                                    <td>` + (itemData.jns_byr == '1' ? 'LUNAS' : 'MUNDUR') + `</td>
+                                    <td>` + textPayment.toUpperCase() + `</td>
                                 </tr>
                                 <tr>
                                     <td>Jatuh Tempo</td>
