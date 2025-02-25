@@ -283,6 +283,8 @@
 
                         // pemesan
                         if(is_pemesan == '1'){
+                            let path_img = `<?= $_ENV['API_BASEURL']; ?>images_dp/` + itemData.path_foto;
+                            console.log(path_img,'path_img');
                             if(itemData.path_foto) {
                                 let path_img = `<img class="avatar avatar-lg" src="${'<?= $_ENV['API_BASEURL'] ?>'}images_dp/${itemData.path_foto}" style="width: 64px; height: 64px;" />`;
                                 html_pembayaran += `<tr>
@@ -336,6 +338,10 @@
                                 <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="lanjut">Lanjut</button>
                             </div>
                         </div>`);
+                    } if(itemData.stat == '5'){
+                        $('#addModal .modal-footer').html(`
+                            <button type="submit" class="btn btn-outline-primary w-100 btnConfirmOrder" data-action="batal">Batal</button>
+                        `);
                     } else {
                         $('#addModal .modal-footer').html(`<div class="row col-12">
                             <div class="col-6">
