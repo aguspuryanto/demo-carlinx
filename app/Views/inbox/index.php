@@ -127,7 +127,7 @@
                 html += '<tr><th>Jml.Order</th><td>' + (itemData.jml_order) + '</td></tr>';
                 html += '<tr><th>Include</th><td>' + (itemData.ketr !='' ? itemData.ketr : 'Mobil, Driver') + '</td></tr>';
                 html += '<tr><th>Biaya</th><td>Rp. ' + numberFormat(itemData.hrg_sewa) + '</td></tr>';
-                html += '<tr><th>Pembayaran</th><td>' + (itemData.jns_byr == '1' ? 'Lunas' : 'Mundur') + '</td></tr>';
+                html += '<tr><th>Pembayaran</th><td>' + (itemData.jns_byr == '1' ? 'Lunas' : 'Uang Muka ' + itemData.tempo_bayar + ' hari') + '</td></tr>';
                 html += '<tr><th>Catatan</th><td>' + (itemData.catatan_byr ?? '-') + '</td></tr>';
                 html += '<tr><th>Voucher</th><td>' + (itemData.voucher ?? '-') + '</td></tr>';
                 if(itemData.jns_order == '4'){
@@ -254,7 +254,7 @@
                                 </tr>
                                 <tr>
                                     <td>Metode Bayar</td>
-                                    <td>` + (itemData.jns_byr == '1' ? 'LUNAS' : 'MUNDUR') + `</td>
+                                    <td>` + (itemData.jns_byr == '1' ? 'LUNAS' : 'UANG MUKA') + `</td>
                                 </tr>
                                 <tr>
                                     <td>Jatuh Tempo</td>
