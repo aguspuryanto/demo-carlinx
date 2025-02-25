@@ -239,7 +239,7 @@
                         }
                     }
 
-                    if(itemData.stat == '4'){
+                    if((is_vendor == '1' && itemData.stat == '4') || (is_pemesan == '1' && itemData.stat == '5')){
                         if(is_pemesan == '1'){
                             newForm.innerHTML += '<h6 class="mb-3">Pembayaran</h6><ul class="list-group" id="list_pembayaran"></ul>';
                         } else {
