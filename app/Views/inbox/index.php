@@ -213,7 +213,7 @@
                         $('#list_plgn').append(html_plgn);
                     }
 
-                    if(is_vendor == '1' || itemData.stat == '4'){
+                    if((is_vendor == '1' && itemData.stat == '4') || (is_pemesan == '1' && itemData.stat == '5')){
                         // form driver
                         newForm.innerHTML += '<h6 class="mb-3">Driver</h6><ul class="list-group" id="list_driver"></ul>';
                         // loop jml_order
