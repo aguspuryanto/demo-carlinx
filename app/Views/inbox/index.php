@@ -283,7 +283,7 @@
 
                         // pemesan
                         if(is_pemesan == '1'){
-                            let path_img = "<?= $_ENV['API_BASEURL']; ?>images_dp/" + encodeURIComponent(itemData.path_foto);
+                            let path_img = "<?= base_url(); ?>proxy.php?url=<?= $_ENV['API_BASEURL']; ?>images_dp/" + encodeURIComponent(itemData.path_foto);
                             // let path_img = `<?= getImage(` + apiBaseUrl + `); ?>` ;
                             console.log(path_img,'path_img');
                             if(itemData.path_foto) {
