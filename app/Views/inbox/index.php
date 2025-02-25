@@ -103,7 +103,7 @@
                 if(is_vendor == '1'){
                     // textNote = 'Pastikan data order sudah benar';
                     textNote = 'Menunggu respon dari pemesan';
-                    if(itemData.stat == '4'){
+                    if(itemData.stat == '1'){
                         textNote = 'Pastikan Unit Tersedia sebelum menerima order';
                     }
                 }
@@ -301,7 +301,7 @@
                 if(is_vendor == '1'){
                     if(itemData.stat == '4'){
                         $('#addModal .modal-footer').html(`
-                            <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="batal">Batal</button>
+                            <button type="submit" class="btn btn-outline-primary w-100 btnConfirmOrder" data-action="batal">Batal</button>
                         `);
                     } else {
                         $('#addModal .modal-footer').html(`<div class="row col-12">
