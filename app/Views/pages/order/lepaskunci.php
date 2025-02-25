@@ -51,10 +51,7 @@
     $('#pickupDate').datepicker({
       uiLibrary: 'bootstrap5',
       format: 'dd-mm-yyyy',
-      minDate: today,
-      maxDate: function () {
-        return $('#returnDate').val();
-      }
+      minDate: today
     });
 
     $('#returnDate').datepicker({
