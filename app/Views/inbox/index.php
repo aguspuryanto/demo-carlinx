@@ -281,7 +281,7 @@
 
                             html_pembayaran += `<tr>
                                 <td colspan="2">
-                                    <label class="form-label">Upload Bukti Transfer</label>
+                                    <label class="form-label">Pilih Bukti Transfer</label>
                                     <input type="file" name="bukti_transfer" class="form-control" id="bukti_transfer">
                                 </td>
                             </tr>`;
