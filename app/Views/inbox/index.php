@@ -112,6 +112,9 @@
                     if(itemData.stat == '1'){
                         textNote = 'Pastikan Unit Tersedia sebelum menerima order';
                     }
+                    if(itemData.stat == '5'){
+                        textNote = 'Pembatalan hanya jika sudah konfirmasi ke Pemesan';
+                    }
                 }
 
                 // text Pembayaran
@@ -237,7 +240,9 @@
                             </div></li>`;
                             $('#list_driver').append(html_driver);
                         }
-                        
+                    }
+
+                    if((is_vendor == '1' && ['1','4','5'].includes(itemData.stat)) || (is_pemesan == '1' && ['4','5'].includes(itemData.stat))){
                         if(is_pemesan == '1'){
                             newForm.innerHTML += '<h6 class="mb-3">Pembayaran</h6><ul class="list-group" id="list_pembayaran"></ul>';
                         } else {
@@ -261,7 +266,7 @@
                                 </tr>
                                 <tr class="h6">
                                     <td>Total Tagihan</td>
-                                    <td>Rp. <span class="pull-right">` + numberFormat(itemData.hrg_sewa_total - (itemData.nominal_dp - itemData.nominal_disc)) + `</span></td>
+                                    <td>Rp. <span class="pull-right">` + numberFormat(itemData.hrg_sewa_total - itemData.nominal_dp - itemData.nominal_disc) + `</span></td>
                                 </tr>
                                 <tr>
                                     <td>Metode Bayar</td>
@@ -318,15 +323,6 @@
                         $('#addModal .modal-footer').html(`
                             <button type="submit" class="btn btn-outline-primary w-100 btnConfirmOrder" data-action="batal">Batal</button>
                         `);
-                    } else if(itemData.stat == '5'){
-                        $('#addModal.modal-footer').html(`<div class="row col-12">
-                            <div class="col-6">
-                                <button type="submit" class="btn btn-outline-danger w-100 btnConfirmOrder" data-action="batal">Batal</button>
-                            </div>
-                            <div class="col-6">
-                                <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="selesai">Selesai</button>
-                            </div>
-                        </div>`);
                     } else {
                         $('#addModal .modal-footer').html(`<div class="row col-12">
                             <div class="col-6">
@@ -347,7 +343,7 @@
                                 <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="lanjut">Lanjut</button>
                             </div>
                         </div>`);
-                    } else if(itemData.stat == '5'){
+                    } if(itemData.stat == '5'){
                         $('#addModal .modal-footer').html(`
                             <button type="submit" class="btn btn-outline-primary w-100 btnConfirmOrder" data-action="batal">Batal</button>
                         `);
