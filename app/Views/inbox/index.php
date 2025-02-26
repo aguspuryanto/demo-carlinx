@@ -142,7 +142,7 @@
                 html += '<tr><th>Warna</th><td>' + (itemData.warna) + '</td></tr>';
                 html += '<tr><th>Jml.Order</th><td>' + (itemData.jml_order) + '</td></tr>';
                 html += '<tr><th>Include</th><td>' + (itemData.ketr !='' ? itemData.ketr : 'Mobil, Driver') + '</td></tr>';
-                html += '<tr><th>Biaya</th><td>Rp. ' + numberFormat(itemData.hrg_sewa_total) + '</td></tr>';
+                html += '<tr><th>Biaya</th><td>Rp. ' + numberFormat(itemData.hrg_sewa_total - itemData.nominal_dp - itemData.nominal_disc) + '</td></tr>';
                 html += '<tr><th>Pembayaran</th><td>' + textPayment + '</td></tr>';
                 html += '<tr><th>Catatan</th><td>' + (itemData.catatan_byr ?? '-') + '</td></tr>';
                 html += '<tr><th>Voucher</th><td>' + (itemData.voucher ?? '-') + '</td></tr>';
