@@ -188,7 +188,7 @@
                         resultPlgn = jsonData.result_plgn[i];
                         console.log(resultPlgn, 'resultPlgn');
 
-                        let nama_plgn = (resultPlgn.nama_plgn || '') + ' (' + (resultPlgn.no || '') + ')';
+                        let nama_plgn = (resultPlgn.nama_plgn || '');
                         let no_hp = (resultPlgn.hp_plgn || '');
                         let ktp_plgn = (resultPlgn.ktp_plgn || '');
                         let note = (resultPlgn.note || '');
