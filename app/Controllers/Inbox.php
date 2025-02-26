@@ -196,7 +196,7 @@ class Inbox extends BaseController
                     if($data['action'] == 'batal'){
                         $data['stat'] = '7'; // batal
                     }
-                    if($data['action'] == 'terima'){
+                    if($data['action'] == 'selesai'){
                         $data['stat'] = '9'; // submit
                     }
                 }                

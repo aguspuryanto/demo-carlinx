@@ -318,6 +318,15 @@
                         $('#addModal .modal-footer').html(`
                             <button type="submit" class="btn btn-outline-primary w-100 btnConfirmOrder" data-action="batal">Batal</button>
                         `);
+                    } if(itemData.stat == '5'){
+                        $('#addModal.modal-footer').html(`<div class="row col-12">
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-outline-danger w-100 btnConfirmOrder" data-action="batal">Batal</button>
+                            </div>
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="selesai">Selesai</button>
+                            </div>
+                        </div>`);
                     } else {
                         $('#addModal .modal-footer').html(`<div class="row col-12">
                             <div class="col-6">
