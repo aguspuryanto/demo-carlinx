@@ -152,7 +152,7 @@ class Rate extends BaseController
             $phone = $data['no_hp'];
             // remove 0 at first of phone, then replace +62
             $phone = ltrim($phone, '0');
-            $phone = '+62' . $phone;
+            // $phone = '+62' . $phone;
 
             $message = 'Yth. Bpk/Ibu ' . $data['nama_pelanggan'] . ',
 Berikut kami sampaikan penawaran harga sewa mobil yang Bpk/Ibu butuhkan: 
