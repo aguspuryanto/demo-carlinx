@@ -139,7 +139,7 @@
                 html += '<tr><th>Warna</th><td>' + (itemData.warna) + '</td></tr>';
                 html += '<tr><th>Jml.Order</th><td>' + (itemData.jml_order) + '</td></tr>';
                 html += '<tr><th>Include</th><td>' + (itemData.ketr !='' ? itemData.ketr : 'Mobil, Driver') + '</td></tr>';
-                html += '<tr><th>Biaya</th><td>Rp. ' + numberFormat(itemData.hrg_sewa) + '</td></tr>';
+                html += '<tr><th>Biaya</th><td>Rp. ' + numberFormat(itemData.hrg_sewa_total) + '</td></tr>';
                 html += '<tr><th>Pembayaran</th><td>' + textPayment + '</td></tr>';
                 html += '<tr><th>Catatan</th><td>' + (itemData.catatan_byr ?? '-') + '</td></tr>';
                 html += '<tr><th>Voucher</th><td>' + (itemData.voucher ?? '-') + '</td></tr>';
@@ -213,7 +213,7 @@
                         $('#list_plgn').append(html_plgn);
                     }
 
-                    if((is_vendor == '1' && itemData.stat == '4') || (is_pemesan == '1' && itemData.stat == '5')){
+                    if((is_vendor == '1' && (itemData.stat == '1' || itemData.stat == '4')) || (is_pemesan == '1' && itemData.stat == '5')){
                         // form driver
                         newForm.innerHTML += '<h6 class="mb-3">Driver</h6><ul class="list-group" id="list_driver"></ul>';
                         // loop jml_order
