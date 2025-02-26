@@ -61,6 +61,7 @@
      
     <?php include_once '_modal_order.php'; ?>
     <?php include_once '_modal_payment.php'; ?>
+    <?php include_once '_modal_img.php'; ?>
 
 <?= $this->endSection() ?>
 
@@ -287,7 +288,7 @@
                         let path_img = "<?= base_url(); ?>proxy.php?url=<?= $_ENV['API_BASEURL']; ?>images_dp/" + encodeURIComponent(itemData.path_foto);
                         // console.log(path_img,'path_img');
                         if(itemData.path_foto) {
-                            let link_img = `<img class="avatar avatar-lg" src="${path_img}" style="width: 64px; height: 64px;" />`;
+                            let link_img = `<img class="avatar avatar-lg" data-url="${path_img}" src="${path_img}" style="width: 64px; height: 64px;" />`;
                             html_pembayaran += `<tr>
                                 <td colspan="2">
                                     <div class="d-flex align-items-center">${link_img}</div>
@@ -616,6 +617,17 @@
             });
         });
 
+    });
+
+    // $(".container").imageBox();
+    $(document).on('click', 'img', function(e) {
+        $('#imgViewer').html('').append(
+            $(e.currentTarget).clone()
+                .removeAttr('style')
+                .attr('style', 'width:100%') // Add width:100% style
+                .addClass('img-fluid')
+        );
+        $('#viewImg').modal('show');
     });
 
     async function loadDetailOrder(idOrder) {
