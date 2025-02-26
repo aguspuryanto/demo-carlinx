@@ -213,7 +213,7 @@
                         $('#list_plgn').append(html_plgn);
                     }
 
-                    if((is_vendor == '1' && (itemData.stat == '1' || itemData.stat == '4')) || (is_pemesan == '1' && itemData.stat == '5')){
+                    if((is_vendor == '1' && ['1','4'].includes(itemData.stat)) || (is_pemesan == '1' && ['4','5'].includes(itemData.stat))){
                         // form driver
                         newForm.innerHTML += '<h6 class="mb-3">Driver</h6><ul class="list-group" id="list_driver"></ul>';
                         // loop jml_order
@@ -237,9 +237,7 @@
                             </div></li>`;
                             $('#list_driver').append(html_driver);
                         }
-                    }
-
-                    if((is_vendor == '1' && itemData.stat == '4') || (is_pemesan == '1' && itemData.stat == '5')){
+                        
                         if(is_pemesan == '1'){
                             newForm.innerHTML += '<h6 class="mb-3">Pembayaran</h6><ul class="list-group" id="list_pembayaran"></ul>';
                         } else {
