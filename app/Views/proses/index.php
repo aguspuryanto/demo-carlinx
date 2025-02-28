@@ -162,7 +162,7 @@
                 // form here
                 html += '<div class="mb-3" id="formConfirmOrder"></div>';
                 // Add the note text
-                html += '<div class="mb-3"><p class="h6">* ' + textNote + '</p></div>';
+                // html += '<div class="mb-3"><p class="h6">* ' + textNote + '</p></div>';
                 
                 // First append the detail table to modal body
                 $('#addModal .modal-body').html(html);
