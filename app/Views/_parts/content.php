@@ -6,13 +6,13 @@
             <?php  $file = __DIR__ . '/../_alert.php'; include($file); ?>
 
             <div class="row">
-                <div class="col-4 col-md-4 col-lg-3">
+                <!--<div class="col-4 col-md-4 col-lg-3">
                     <a href="<?= base_url('dashboard'); ?>" class="card shadow-sm mb-4">
                         <div class="card-body px-1">
                             <div class="xrow">
                                 <div class="col-auto">
-                                    <div class="avatar avatar-40 alert-success text-success rounded-circle">
-                                        <i class="bi bi-clipboard-data"></i>
+                                    <div class="avatar avatar-40 alert-danger text-secondary rounded-circle" style="background: <?=getheadercolormuda() ?>">
+                                        <i class="bi bi-clipboard-data" style="color: <?=getheadercolor() ?>"></i>
                                     </div>
                                 </div>
                                 <div class="col px-0 align-self-center">
@@ -21,15 +21,15 @@
                             </div>
                         </div>
                     </a>
-                </div>
+                </div>-->
 
                 <div class="col-4 col-md-4 col-lg-3">
                     <a href="<?= base_url('rate'); ?>" class="card shadow-sm mb-4">
                         <div class="card-body px-1">
                             <div class="xrow">
                                 <div class="col-auto">
-                                    <div class="avatar avatar-40 alert-success text-success rounded-circle">
-                                        <i class="bi bi-calculator"></i>
+                                    <div class="avatar avatar-40 alert-danger text-secondary rounded-circle" style="background: <?=getheadercolormuda() ?>">
+                                        <i class="bi bi-calculator" style="color: <?=getheadercolor() ?>"></i>
                                     </div>
                                 </div>
                                 <div class="col px-0 align-self-center">
@@ -45,8 +45,8 @@
                         <div class="card-body px-1">
                             <div class="xrow">
                                 <div class="col-auto">
-                                    <div class="avatar avatar-40 alert-danger text-danger rounded-circle">
-                                        <i class="bi bi-cart-check-fill"></i>
+                                    <div class="avatar avatar-40 alert-danger text-secondary rounded-circle" style="background: <?=getheadercolormuda() ?>">
+                                        <i class="fa fa-handshake-o" style="color: <?=getheadercolor() ?>"></i>
                                     </div>
                                 </div>
                                 <div class="col px-0 align-self-center">
@@ -62,8 +62,8 @@
                         <div class="card-body px-1">
                             <div class="xrow">
                                 <div class="col-auto">
-                                    <div class="avatar avatar-40 alert-primary text-primary rounded-circle">
-                                        <i class="bi bi-key"></i>
+                                    <div class="avatar avatar-40 alert-danger text-secondary rounded-circle" style="background: <?=getheadercolormuda() ?>">
+                                        <i class="bi bi-key" style="color: <?=getheadercolor() ?>"></i>
                                     </div>
                                 </div>
                                 <div class="col px-0 align-self-center">
@@ -79,8 +79,8 @@
                         <div class="card-body px-1">
                             <div class="xrow">
                                 <div class="col-auto">
-                                    <div class="avatar avatar-40 alert-warning text-warning rounded-circle">
-                                        <i class="bi bi-calendar-month"></i>
+                                    <div class="avatar avatar-40 alert-danger text-secondary rounded-circle" style="background: <?=getheadercolormuda() ?>">
+                                        <i class="bi bi-calendar-month" style="color: <?=getheadercolor() ?>"></i>
                                     </div>
                                 </div>
                                 <div class="col px-0 align-self-center">
@@ -96,8 +96,8 @@
                         <div class="card-body px-1">
                             <div class="xrow">
                                 <div class="col-auto">
-                                    <div class="avatar avatar-40 alert-warning text-warning rounded-circle">
-                                        <i class="bi bi-calendar-event"></i>
+                                    <div class="avatar avatar-40 alert-danger text-secondary rounded-circle" style="background: <?=getheadercolormuda() ?>">
+                                        <i class="bi bi-calendar-event" style="color: <?=getheadercolor() ?>"></i>
                                     </div>
                                 </div>
                                 <div class="col px-0 align-self-center">
@@ -113,8 +113,8 @@
                         <div class="card-body px-1">
                             <div class="xrow">
                                 <div class="col-auto">
-                                    <div class="avatar avatar-40 alert-warning text-warning rounded-circle">
-                                        <i class="bi bi-envelope"></i>
+                                    <div class="avatar avatar-40 alert-danger text-secondary rounded-circle" style="background: <?=getheadercolormuda() ?>">
+                                        <i class="bi bi-envelope" style="color: <?=getheadercolor() ?>"></i>
                                     </div>
                                 </div>
                                 <div class="col px-0 align-self-center">
@@ -130,8 +130,8 @@
                         <div class="card-body px-1">
                             <div class="xrow">
                                 <div class="col-auto">
-                                    <div class="avatar avatar-40 alert-warning text-warning rounded-circle">
-                                        <i class="bi bi-calendar-check"></i>
+                                    <div class="avatar avatar-40 alert-danger text-secondary rounded-circle" style="background: <?=getheadercolormuda() ?>">
+                                        <i class="bi bi-lightbulb" style="color: <?=getheadercolor() ?>"></i>
                                     </div>
                                 </div>
                                 <div class="col px-0 align-self-center">
@@ -147,8 +147,8 @@
                         <div class="card-body px-1">
                             <div class="xrow">
                                 <div class="col-auto">
-                                    <div class="avatar avatar-40 alert-warning text-warning rounded-circle">
-                                        <i class="bi bi-clock-history"></i>
+                                    <div class="avatar avatar-40 alert-danger text-secondary rounded-circle" style="background: <?=getheadercolormuda() ?>">
+                                        <i class="bi bi-clock-history" style="color: <?=getheadercolor() ?>"></i>
                                     </div>
                                 </div>
                                 <div class="col px-0 align-self-center">
@@ -164,8 +164,8 @@
                         <div class="card-body px-1">
                             <div class="xrow">
                                 <div class="col-auto">
-                                    <div class="avatar avatar-40 alert-warning text-warning rounded-circle">
-                                        <i class="bi bi-clock-history"></i>
+                                    <div class="avatar avatar-40 alert-danger text-secondary rounded-circle" style="background: <?=getheadercolormuda() ?>">
+                                        <i class="bi bi-file-earmark-text" style="color: <?=getheadercolor() ?>"></i>
                                     </div>
                                 </div>
                                 <div class="col px-0 align-self-center">
@@ -181,8 +181,8 @@
                         <div class="card-body px-1">
                             <div class="xrow">
                                 <div class="col-auto">
-                                    <div class="avatar avatar-40 alert-warning text-warning rounded-circle">
-                                        <i class="bi bi-gear"></i>
+                                    <div class="avatar avatar-40 alert-danger text-secondary rounded-circle" style="background: <?=getheadercolormuda() ?>">
+                                        <i class="bi bi-gear" style="color: <?=getheadercolor() ?>"></i>
                                     </div>
                                 </div>
                                 <div class="col px-0 align-self-center">
@@ -198,8 +198,8 @@
                         <div class="card-body px-1">
                             <div class="xrow">
                                 <div class="col-auto">
-                                    <div class="avatar avatar-40 alert-success text-success rounded-circle">
-                                        <i class="bi bi-headset"></i>
+                                    <div class="avatar avatar-40 alert-danger text-secondary rounded-circle" style="background: <?=getheadercolormuda() ?>">
+                                        <i class="bi bi-headset" style="color: <?=getheadercolor() ?>"></i>
                                     </div>
                                 </div>
                                 <div class="col px-0 align-self-center">

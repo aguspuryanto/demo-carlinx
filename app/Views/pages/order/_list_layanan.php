@@ -10,7 +10,7 @@
             <div class="p-2 w-100">
                 <p class="fw-bold mb-0"><?= $item['nama'] ?></p>
                 <p class="text-muted mb-0 fs-sm">Tahun <?= $item['tahun'] ?></p>
-                <p class="text-muted mb-0 fs-sm"><?= $item['nama_rental'] ?></p>
+                <p class="text-muted mb-0 fs-sm"><?= $item['nama_rental'] . ' ' ?><?= ($item['is_verify']==1? '<i class="bi bi-shield-fill-check " style="color:green !important"></i>' : ''); ?></p>
                 <p class="text-muted mb-0 fs-sm"><?= $item['kota_rental'] ?></p>
                 <div class="d-flex">
                     <span class="p-0 flex-fill"><i class="fa fa-star text-warning"></i> <?= $item['rating'] ?> | <?= $item['terjual'] ?> Terlayani</span>
@@ -48,14 +48,14 @@
                 <td>
                     <p class="fw-bold mb-0"><?= $item['nama'] ?></p>
                     <p class="text-muted mb-0 fs-sm">Tahun <?= $item['tahun'] ?></p>
-                    <p class="text-muted mb-0 fs-sm"><?= $item['nama_rental'] ?></p>
+                    <p class="text-muted mb-0 fs-sm"><?= $item['nama_rental'] . ' ' ?><?= ($item['is_verify']==1? '<i class="bi bi-shield-fill-check " style="color:green !important"></i>' : ''); ?></p>
                     <p class="text-muted mb-0 fs-sm"><?= $item['kota_rental'] ?></p>
                     <div class="d-flex">
                         <span class="p-0 flex-fill"><i class="fa fa-star text-warning"></i> <?= $item['rating'] ?> | <?= $item['terjual'] ?> Terlayani</span>
                     </div>
                 </td>
                 <td>
-                    <p class="mb-0 fs-sm">Rp <?= number_format($item['hrg_sewa'], 0, ',', '.') ?></p>
+                    <p class="mb-0 fs-sm">Rp <?= number_format($item['total_hrg_sewa'], 0, ',', '.') ?></p>
                 </td>
             </tr>
         <?php endforeach ?>

@@ -98,3 +98,11 @@ function getImage($url) {
 
     return base_url() . 'proxy.php?url=' . urlencode($url);
 }
+
+function getheadercolor(){
+	return '#b415a0'; //new purple
+}
+
+function getheadercolormuda(){
+	return '#ffefff'; //purple muda
+}

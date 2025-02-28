@@ -1,4 +1,4 @@
-    <?php //echo json_encode($listBerita); ?>
+<?php //echo json_encode($listBerita); ?>
     <!-- Blogs -->
     <!-- <div class="row mb-3">
         <div class="col">
@@ -10,7 +10,7 @@
     </div> -->
     <div class="row">
         <ul class="list-group">
-            <li class="list-group-item active">Berita</li>
+            <li class="list-group-item active" style="background: <?=getheadercolor() ?>; border: <?=getheadercolor() ?>">Berita</li>
             <?php foreach($listBerita['result_news'] as $berita): ?>
             <li class="list-group-item">    
                 <a href="/#" data-bs-toggle="modal" data-bs-target="#exampleModal" data-item="<?= esc(json_encode($berita)) ?>">
