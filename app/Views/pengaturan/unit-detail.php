@@ -85,7 +85,7 @@
             // set value into form
             $('#nama').val(item.nama);
             $('#kategori').select2("trigger", "select", {
-                data: { id: item.kategori, text: item.kategori }
+                data: { id: item.kode, text: item.kategori }
             });
             $('#bbm').select2("trigger", "select", {
                 data: { id: item.bbm, text: item.bbm }
