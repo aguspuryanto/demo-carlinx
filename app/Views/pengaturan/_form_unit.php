@@ -141,8 +141,8 @@
                 <a href="#" class="float-end text-decoration-underline">tanggal tidak tersedia</a>
             </div>
 
-            <input type="hidden" name="kd_unit" value="<?= $listData['result_unit'][0]['kode'] ?>">
-            <input type="hidden" name="biaya_antar" value="0">
+            <input type="hidden" name="kd_unit" id="kd_unit" value="<?= $listData['result_unit'][0]['kode'] ?>">
+            <input type="hidden" name="biaya_antar" id="biaya_antar" value="0">
             <input type="hidden" name="biaya_ambil" value="0">
             <input type="hidden" name="tuslah" value="0">
             <input type="hidden" name="is_tuslah" value="0">

@@ -125,11 +125,12 @@
                 $('#stat').val(item.stat).prop('checked', true);
             }
 
-            $('#biaya_antar').val(item.biaya_antar);
-            $('#biaya_ambil').val(item.biaya_ambil);
-            $('#tuslah').val(item.tuslah);
-            $('#is_tuslah').val(item.is_tuslah);
-            $('#kons_bbm').val(item.kons_bbm);
+            $('input[name=kd_unit]').val(item.kode);
+            $('input[name=biaya_antar]').val(item.biaya_antar);
+            $('input[name=biaya_ambil]').val(item.biaya_ambil);
+            $('input[name=tuslah]').val(item.tuslah);
+            $('input[name=is_tuslah]').val(item.is_tuslah);
+            $('input[name=kons_bbm]').val(item.kons_bbm);
         };
 
         initForm();
