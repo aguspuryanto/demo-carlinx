@@ -39,7 +39,7 @@
     <?= $this->renderSection('styles') ?>
     <style>
         html, body {
-            font-size: 14px;
+            font-size: 12px;
             font-family: 'Nunito', sans-serif;
         }
         .body-scroll {

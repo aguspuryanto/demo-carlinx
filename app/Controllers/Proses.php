@@ -118,7 +118,8 @@ class Proses extends BaseController
         if ($listData['success'] == '1') {
             foreach ($listData['result_list_order'] as $item) {
                 // echo $item['stat'];
-                if(in_array($item['stat'], ['1', '2', '3', '4', '5'])) $newlistData[] = $item;
+                // if(in_array($item['stat'], ['9'])) $newlistData[] = $item;
+                // if($item['stat']=='9') $newlistData[] = $item;
             }
         }
         // echo json_encode($newlistData);

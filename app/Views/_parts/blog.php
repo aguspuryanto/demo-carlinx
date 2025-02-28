@@ -36,6 +36,14 @@
         </div>
     </div>
 
+    <?= $this->section('styles') ?>
+    <style>
+        .list-group-item {
+            font-size: 13px;
+            cursor: pointer;
+        }
+    </style>
+    <?= $this->endSection() ?>
     <?= $this->section('scripts') ?>
     <script>
         $('#exampleModal').on('show.bs.modal', function (event) {                
