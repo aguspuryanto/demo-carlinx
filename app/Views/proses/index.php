@@ -228,7 +228,7 @@
                         newForm.innerHTML += '<h6 class="mb-3">Driver</h6><div class="list-group mb-3" id="list_driver"></div>';
                         // loop jml_order
                         for(let i = 0; i < itemData.jml_order; i++){
-                            let html_driver = `<a href="#" data-bs-toggle="modal" data-bs-target="#driverModal" data-id="` + i + `" data-item='` + JSON.stringify(resultPlgn) + `' data-order='` + idOrder + `' class="list-group-item list-group-item-action">
+                            let html_driver = `<a href="#" data-bs-toggle="modal" data-bs-target="#driverModal" data-id="` + (i+1) + `" data-item='` + JSON.stringify(resultPlgn) + `' data-order='` + idOrder + `' class="list-group-item list-group-item-action">
                             <div class="mb-3 align-items-center">
                                 <label class="form-label visually-hidden">Driver</label>
                                 <input type="text" name="nama_driver[` + i + `]" class="form-control-plaintext" id="nama_driver" placeholder="Nama Driver" value="` + (resultPlgn.nama_drv || '') + `" readonly>
@@ -528,7 +528,7 @@
                         // close modal
                         $('#driverModal').modal('hide');
                         // open addModal
-                        // $('#addModal').modal('show');
+                        $('#addModal').modal('show');
                     } else {
                         // show error
                         console.log(data.message);
