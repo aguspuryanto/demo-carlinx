@@ -324,7 +324,7 @@
                 if(is_vendor == '1'){
                     if(itemData.stat == '9'){
                         $('#addModal .modal-footer').html(`
-                            <button type="submit" class="btn btn-outline-primary w-100 btnConfirmOrder" data-action="batal">Selesaikan Pelayanan</button>
+                            <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="selesai">Selesaikan Pelayanan</button>
                         `);
                     }
                 }

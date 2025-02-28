@@ -154,24 +154,24 @@ class Proses extends BaseController
             // echo print_r($_FILES['bukti_transfer']);
             // echo json_encode($data); die();
 
-            if($data['is_vendor'] == '1'){
-                if($data['stat_ori'] == '1'){
-                    if($data['action'] == 'tolak'){
-                        $data['stat'] = '6'; // tolak
-                    }
-                    if($data['action'] == 'terima'){
-                        $data['stat'] = '4'; // terima  
-                    }
-                }
-                if($data['stat_ori'] == '5'){
-                    if($data['action'] == 'batal'){
-                        $data['stat'] = '7'; // batal
-                    }
-                    if($data['action'] == 'selesai'){
-                        $data['stat'] = '9'; // submit
-                    }
-                }                
-            }
+            // if($data['is_vendor'] == '1'){
+            //     if($data['stat_ori'] == '1'){
+            //         if($data['action'] == 'tolak'){
+            //             $data['stat'] = '6'; // tolak
+            //         }
+            //         if($data['action'] == 'terima'){
+            //             $data['stat'] = '4'; // terima  
+            //         }
+            //     }
+            //     if($data['stat_ori'] == '5'){
+            //         if($data['action'] == 'batal'){
+            //             $data['stat'] = '7'; // batal
+            //         }
+            //         if($data['action'] == 'selesai'){
+            //             $data['stat'] = '9'; // submit
+            //         }
+            //     }                
+            // }
 
             // $id_order = $_POST['id_order'];
             // $stat_ori = $_POST['stat_ori'];
