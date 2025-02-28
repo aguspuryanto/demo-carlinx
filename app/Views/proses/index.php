@@ -83,6 +83,15 @@
         };
         // payment_type[1]
 
+        document.addEventListener("DOMContentLoaded", function() {
+            // Cek apakah modal harus dibuka setelah reload
+            if (localStorage.getItem("openModal") === "true") {
+            // var myModal = new bootstrap.Modal(document.getElementById('addModal'));
+            $('#addModal').show();
+            localStorage.removeItem("openModal"); // Hapus setelah dibuka
+            }
+        });
+
         $('input[name=jns_byr]').on('change', function() {
             let val = $(this).val();
             if(val == '3'){
@@ -527,6 +536,7 @@
                     if (data.success) {
                         // close modal
                         $('#driverModal').modal('hide');
+                        localStorage.setItem("openModal", "true");
                         // open addModal
                         $('#addModal').modal('show');
                     } else {
