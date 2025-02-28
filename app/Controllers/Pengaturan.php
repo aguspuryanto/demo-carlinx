@@ -477,7 +477,7 @@ class Pengaturan extends BaseController
             if($resultData['success'] == '1'){
                 $this->session->setFlashdata('success', 'Data berhasil diubah');
             } else {
-                $this->session->setFlashdata('error', 'Data gagal diubah');
+                $this->session->setFlashdata('error', 'Data gagal diubah ' . $resultData['message']);
             }
             // return redirect()->back()->with('success', 'Data berhasil diubah');
         }
