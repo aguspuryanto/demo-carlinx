@@ -83,14 +83,11 @@
         };
         // payment_type[1]
 
-        document.addEventListener("DOMContentLoaded", function() {
-            // Cek apakah modal harus dibuka setelah reload
-            if (localStorage.getItem("openModal") === "true") {
-            // var myModal = new bootstrap.Modal(document.getElementById('addModal'));
-            $('#addModal').show();
+        // Cek apakah modal harus dibuka setelah reload
+        if (localStorage.getItem("openModal") === "true") {
+            $("#addModal").modal("show"); // Buka modal
             localStorage.removeItem("openModal"); // Hapus setelah dibuka
-            }
-        });
+        }
 
         $('input[name=jns_byr]').on('change', function() {
             let val = $(this).val();
