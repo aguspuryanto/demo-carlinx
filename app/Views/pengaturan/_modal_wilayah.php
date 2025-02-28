@@ -1,5 +1,5 @@
     <div class="modal fade" id="addModal" role="dialog" aria-labelledby="addModalLabel">
-        <div class="modal-dialog modal-fullscreen" role="document">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="addModalLabel">Tambah Batas Wilayah</h5>
@@ -23,7 +23,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="hari_1">Min. Sewa (hari)</label>
-                            <input type="number" class="form-control" id="hari_1" name="hari_1" required>
+                            <input type="number" step=".01" class="form-control" id="hari_1" name="hari_1" required>
                         </div>
                     </div>
                     <div class="row">
