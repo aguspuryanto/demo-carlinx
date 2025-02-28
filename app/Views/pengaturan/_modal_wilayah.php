@@ -79,6 +79,7 @@
                     <div class="form-group">
                         <label for="ketr">Catatan Form Order (opsional)</label>
                         <textarea class="form-control" id="ketr" name="ketr" rows="3"></textarea>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
