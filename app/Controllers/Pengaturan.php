@@ -419,7 +419,7 @@ class Pengaturan extends BaseController
         // handle POST
         if ($this->request->getMethod() == 'POST') {
             $data = $this->request->getPost();
-            // echo json_encode($data);
+            // echo json_encode($data); die();
 
             /* $kd_unit = $_POST['kd_unit'];
             $nama = $_POST['nama'];					
@@ -446,7 +446,7 @@ class Pengaturan extends BaseController
             $bulanan = $_POST['bulanan']; */
 
             $updateData = [
-                'kd_unit' => $data['id'],
+                'kd_unit' => $data['kode'],
                 'nama' => $data['nama'],
                 'kategori' => $data['kategori'],
                 'bbm' => $data['bbm'],
