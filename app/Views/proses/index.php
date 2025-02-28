@@ -127,7 +127,12 @@
 
                 // Create the detail HTML
                 var html = '<div class="table-responsive mb-0">';
-                html += '<table class="table table-sm table-bordered">';
+                // tgl order, jika stat=9 selesai
+                if(itemData.stat=='9') {
+                    html += '<div class="mb-3"><p class="h6 lead p-2">Tgl Order</p><div class="d-flex justify-content-between px-2"><span>' + itemData.tgl_order + '</span><span><a href="#">Lihat bukti pesanan</a></span></div></div>';
+                }
+
+                html += '<p class="h6 lead p-2">Pesanan</p><table class="table table-sm table-borderless">';
                 html += '<tbody>';
                 html += '<tr><th width="150">Tgl.Mulai</th><td>' + itemData.tgl_start + '</td></tr>';
                 html += '<tr><th>Tgl.Selesai</th><td>' + itemData.tgl_finish + '</td></tr>';
@@ -217,7 +222,7 @@
                         $('#list_plgn').append(html_plgn);
                     }
 
-                    if((is_vendor == '1' && ['1','4','5'].includes(itemData.stat)) || (is_pemesan == '1' && ['4','5'].includes(itemData.stat))){
+                    // if((is_vendor == '1' && ['1','4','5'].includes(itemData.stat)) || (is_pemesan == '1' && ['4','5'].includes(itemData.stat))){
                         // form driver
                         newForm.innerHTML += '<h6 class="mb-3">Driver</h6><ul class="list-group" id="list_driver"></ul>';
                         // loop jml_order
@@ -241,9 +246,9 @@
                             </div></li>`;
                             $('#list_driver').append(html_driver);
                         }
-                    }
+                    // }
 
-                    if((is_vendor == '1' && ['1','4','5'].includes(itemData.stat)) || (is_pemesan == '1' && ['4','5'].includes(itemData.stat))){
+                    // if((is_vendor == '1' && ['1','4','5'].includes(itemData.stat)) || (is_pemesan == '1' && ['4','5'].includes(itemData.stat))){
                         if(is_pemesan == '1'){
                             newForm.innerHTML += '<h6 class="mb-3">Pembayaran</h6><ul class="list-group" id="list_pembayaran"></ul>';
                         } else {
@@ -296,20 +301,20 @@
                             </tr>`;
                         }
 
-                        if(itemData.stat != '5') {
-                            html_pembayaran += `<tr>
-                                <td colspan="2">
-                                    <label class="form-label">Pilih Bukti Transfer</label>
-                                    <input type="file" name="bukti_transfer" class="form-control" id="bukti_transfer">
-                                </td>
-                            </tr>`;
-                        }
+                        // if(itemData.stat != '5') {
+                        //     html_pembayaran += `<tr>
+                        //         <td colspan="2">
+                        //             <label class="form-label">Pilih Bukti Transfer</label>
+                        //             <input type="file" name="bukti_transfer" class="form-control" id="bukti_transfer">
+                        //         </td>
+                        //     </tr>`;
+                        // }
                                 
                         html_pembayaran += `</tbody>
                         </table>
                         </li>`;
                         $('#list_pembayaran').append(html_pembayaran);
-                    }
+                    // }
                 });
                 
                 // Then append the form to the formConfirmOrder div
