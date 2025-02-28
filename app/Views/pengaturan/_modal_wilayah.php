@@ -33,7 +33,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="hari_2">Min. Sewa (hari)</label>
-                            <input type="number" class="form-control" id="hari_2" name="hari_2" required>
+                            <input type="number" step=".01" class="form-control" id="hari_2" name="hari_2" required>
                         </div>
                     </div>
                     <div class="row">
@@ -43,7 +43,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="hari_3">Min. Sewa (hari)</label>
-                            <input type="number" class="form-control" id="hari_3" name="hari_3" required>
+                            <input type="number" step=".01" class="form-control" id="hari_3" name="hari_3" required>
                         </div>
                     </div>
                     <div class="row">
@@ -53,7 +53,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="hari_4">Min. Sewa (hari)</label>
-                            <input type="number" class="form-control" id="hari_4" name="hari_4" required>
+                            <input type="number" step=".01" class="form-control" id="hari_4" name="hari_4" required>
                         </div>
                     </div>
                     <div class="row">
@@ -63,7 +63,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="hari_5">Min. Sewa (hari)</label>
-                            <input type="number" class="form-control" id="hari_5" name="hari_5" required>
+                            <input type="number" step=".01" class="form-control" id="hari_5" name="hari_5" required>
                         </div>
                     </div>
                     <div class="row">
@@ -73,7 +73,7 @@
                         </div>
                         <div class="form-group col-md-6">
                             <label for="hari_6">Min. Sewa (hari)</label>
-                            <input type="number" class="form-control" id="hari_6" name="hari_6" required>
+                            <input type="number" step=".01" class="form-control" id="hari_6" name="hari_6" required>
                         </div>
                     </div>
                     <div class="form-group">
