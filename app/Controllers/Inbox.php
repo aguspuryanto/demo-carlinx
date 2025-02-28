@@ -293,11 +293,12 @@ class Inbox extends BaseController
         $curlOpt    = [
             'id_order' => $this->request->getPost('id_order'),
             'no' => $this->request->getPost('no'),
-            'nama' => $this->request->getPost('nama'),
-            'nohp' => $this->request->getPost('nohp'),
-            'nopol' => $this->request->getPost('nopol'),
-            'note' => $this->request->getPost('note')
+            'nama' => $this->request->getPost('nama_driver'),
+            'nohp' => $this->request->getPost('no_hp_driver'),
+            'nopol' => $this->request->getPost('nopol_driver'),
+            'note' => $this->request->getPost('note_driver')
         ];
+        echo json_encode($curlOpt); die();
 
         $listData   = getCurl($curlOpt, $this->ipAddress . 'update_single_drv.php');
         echo json_encode($listData); //die();
