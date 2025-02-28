@@ -446,7 +446,7 @@ class Pengaturan extends BaseController
             $bulanan = $_POST['bulanan']; */
 
             $updateData = [
-                'kd_unit' => $data['kode'],
+                'kd_unit' => $data['kd_unit'],
                 'nama' => $data['nama'],
                 'kategori' => $data['kategori'],
                 'bbm' => $data['bbm'],
