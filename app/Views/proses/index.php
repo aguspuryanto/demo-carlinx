@@ -85,7 +85,7 @@
 
         // Cek apakah modal harus dibuka setelah reload
         if (localStorage.getItem("openModal") === "true") {
-            $("#addModal").modal("show"); // Buka modal
+            // $("#addModal").modal("show"); // Buka modal
             localStorage.removeItem("openModal"); // Hapus setelah dibuka
         }
 
