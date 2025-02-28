@@ -151,6 +151,7 @@ class Proses extends BaseController
 
         // handle POST
         if ($this->request->getMethod() == 'POST') {
+            $data = $this->request->getPost();
             // echo print_r($_FILES['bukti_transfer']);
             // echo json_encode($data); die();
 
