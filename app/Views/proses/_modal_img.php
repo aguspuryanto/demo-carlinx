@@ -6,7 +6,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body text-center p-0">
-        <div id="imgViewer" style="overflow-x: scroll;">
+        <div id="imgViewer" style="overflow-x: scroll;"></div>
       </div>
     </div>
   </div>

@@ -62,6 +62,7 @@
     <?php include_once '_modal_order.php'; ?>
     <?php include_once '_modal_payment.php'; ?>
     <?php include_once '_modal_img.php'; ?>
+    <?php include_once '_modal_driver.php'; ?>
 
 <?= $this->endSection() ?>
 
@@ -224,26 +225,26 @@
 
                     if(is_vendor == '1'){
                         // form driver
-                        newForm.innerHTML += '<h6 class="mb-3">Driver</h6><ul class="list-group" id="list_driver"></ul>';
+                        newForm.innerHTML += '<h6 class="mb-3">Driver</h6><div class="list-group mb-3" id="list_driver"></div>';
                         // loop jml_order
                         for(let i = 0; i < itemData.jml_order; i++){
-                            let html_driver = `<li class="list-group-item mb-3">
+                            let html_driver = `<a href="#" data-bs-toggle="modal" data-bs-target="#driverModal" data-id="` + i + `" data-item='` + JSON.stringify(resultPlgn) + `' data-order='` + idOrder + `' class="list-group-item list-group-item-action">
                             <div class="mb-3 align-items-center">
                                 <label class="form-label visually-hidden">Driver</label>
-                                <input type="text" name="nama_driver[` + i + `]" class="form-control" id="nama_driver" placeholder="Nama Driver" value="` + (resultPlgn.nama_drv || '') + `" required>
+                                <input type="text" name="nama_driver[` + i + `]" class="form-control-plaintext" id="nama_driver" placeholder="Nama Driver" value="` + (resultPlgn.nama_drv || '') + `" readonly>
                             </div>
                             <div class="mb-3 align-items-center">
                                 <label class="form-label visually-hidden">No HP</label>
-                                <input type="text" name="no_hp_driver[` + i + `]" class="form-control" id="no_hp_driver" placeholder="No HP" value="` + (resultPlgn.hp_drv || '') + `">
+                                <input type="text" name="no_hp_driver[` + i + `]" class="form-control-plaintext" id="no_hp_driver" placeholder="No HP" value="` + (resultPlgn.hp_drv || '') + `" readonly>
                             </div>
                             <div class="mb-3 align-items-center">
                                 <label class="form-label visually-hidden">Nopol</label>
-                                <input type="text" name="nopol_driver[` + i + `]" class="form-control" id="nopol_driver" placeholder="Nopol" value="` + (resultPlgn.nopol || '') + `" required>
+                                <input type="text" name="nopol_driver[` + i + `]" class="form-control-plaintext" id="nopol_driver" placeholder="Nopol" value="` + (resultPlgn.nopol || '') + `" readonly>
                             </div>
                             <div class="mb-0 align-items-center">
                                 <label class="form-label visually-hidden">Note</label>
-                                <input type="text" name="note_driver[` + i + `]" class="form-control" id="note_driver" placeholder="Note" value="` + (resultPlgn.note_drv || '') + `">
-                            </div></li>`;
+                                <input type="text" name="note_driver[` + i + `]" class="form-control-plaintext" id="note_driver" placeholder="Note" value="` + (resultPlgn.note_drv || '') + `" readonly>
+                            </div></a>`;
                             $('#list_driver').append(html_driver);
                         }
                     }
@@ -468,6 +469,75 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>`;
                     form.before(errorAlert);
+                }
+            });
+        });
+
+        // driverModal
+        $('#driverModal').on('show.bs.modal', function (e) {
+            let triggerElement = e.relatedTarget;
+            if (triggerElement) {
+                let idDriver = triggerElement.dataset.id;
+                let idOrder = triggerElement.dataset.order;
+                // Parse JSON string into an object
+                let driverData = JSON.parse(triggerElement.dataset.item); // Decoding JSON
+                console.log(driverData, '_driverData');
+
+                // nama_driver
+                let nama_driver = (driverData.nama_drv || '');
+                $('#driverModal').find('#nama_driver').val(nama_driver);
+
+                // no_hp_driver
+                let no_hp_driver = (driverData.hp_drv || '');
+                $('#driverModal').find('#no_hp_driver').val(no_hp_driver);
+
+                // nopol_driver
+                let nopol_driver = (driverData.nopol || '');
+                $('#driverModal').find('#nopol_driver').val(nopol_driver);
+
+                // note_driver
+                let note_driver = (driverData.note_drv || '');
+                $('#driverModal').find('#note_driver').val(note_driver);
+
+                // id_driver hidden
+                $('#driverModal').find('#id_order').val(idOrder);
+                // no hidden
+                $('#driverModal').find('#no').val(idDriver);
+            }
+        });
+
+        // btnDriverSave
+        $('#driverModal').on('click', 'button.btnDriverSave', function(e) {
+            e.preventDefault();
+            console.log('btnDriverSave');
+
+            let form = $('#formDriver');
+            let formData = new FormData(form[0]);
+            // tambahkan is_pemesan, is_vendor
+            formData.append('is_pemesan', is_pemesan);
+            formData.append('is_vendor', is_vendor);
+            // submit form
+            $.ajax({
+                url: '<?= base_url('inbox/ubahDriver') ?>',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    console.log(response);
+                    let data = JSON.parse(response);
+                    if (data.success) {
+                        // close modal
+                        $('#driverModal').modal('hide');
+                        // open addModal
+                        // $('#addModal').modal('show');
+                    } else {
+                        // show error
+                        console.log(data.message);
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log(error);
                 }
             });
         });

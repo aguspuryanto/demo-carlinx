@@ -286,6 +286,23 @@ class Inbox extends BaseController
         }
     }
 
+    // ubahDriver
+    public function ubahDriver()
+    {
+        $listData = [];
+        $curlOpt    = [
+            'id_order' => $this->request->getPost('id_order'),
+            'no' => $this->request->getPost('no'),
+            'nama' => $this->request->getPost('nama'),
+            'nohp' => $this->request->getPost('nohp'),
+            'nopol' => $this->request->getPost('nopol'),
+            'note' => $this->request->getPost('note')
+        ];
+
+        $listData   = getCurl($curlOpt, $this->ipAddress . 'update_single_drv.php');
+        echo json_encode($listData); //die();
+    }
+
     public function ubahPayment()
     {
         $listData = [];
