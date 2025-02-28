@@ -537,8 +537,9 @@
                         // close modal
                         $('#driverModal').modal('hide');
                         localStorage.setItem("openModal", "true");
+                        location.reload(); // Reload halaman
                         // open addModal
-                        $('#addModal').modal('show');
+                        // $('#addModal').modal('show');
                     } else {
                         // show error
                         console.log(data.message);
