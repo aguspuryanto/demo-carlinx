@@ -38,6 +38,10 @@
 
     <?= $this->renderSection('styles') ?>
     <style>
+        html, body {
+            font-size: 14px;
+            font-family: 'Nunito', sans-serif;
+        }
         .body-scroll {
             overflow: auto !important;
         }

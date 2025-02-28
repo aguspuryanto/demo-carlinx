@@ -47,6 +47,13 @@
 <script>
     $(document).ready(function() {
         const baseUrlImg = "<?= base_url('proxy.php?url=' . $_ENV['API_BASEURL'] . 'images/') ?>";
+        let payment_type = {
+            1: 'Lunas',      // Full payment
+            2: 'Uang Muka', // Down payment
+            3: 'Mundur'    // Deferred payment
+        };
+        // payment_type[1]
+        
         $('#addModal').on('show.bs.modal', function (e) {
             // Accessing the target element that triggered the modal
             let triggerElement = e.relatedTarget;
@@ -58,13 +65,20 @@
                 console.log('ID Order:', idOrder);
                 console.log('Item Data:', itemData);
 
+                // text Pembayaran
+                if(itemData.jns_byr == '2'){
+                    textPayment = payment_type[itemData.jns_byr] + ' ' + itemData.tempo_bayar + ' hari';
+                } else {
+                    textPayment = payment_type[itemData.jns_byr];
+                }
+
                 var html = '<div class="table-responsive mb-3">';
                 // tgl order, jika stat=9 selesai
                 if(itemData.stat=='9') {
-                    html += '<div class="mb-3"><p class="h6 lead p-2">Tgl Order</p><div class="d-flex justify-content-between"><span>' + itemData.tgl_order + '</span><span><a href="#">Lihat bukti pesanan</a></span></div></div>';
+                    html += '<div class="mb-3"><p class="h6 lead p-2">Tgl Order</p><div class="d-flex justify-content-between px-2"><span>' + itemData.tgl_order + '</span><span><a href="#">Lihat bukti pesanan</a></span></div></div>';
                 }
 
-                html += '<p class="h6 lead p-2">Pesanan</p><table class="table table-borderless">';
+                html += '<p class="h6 lead p-2">Pesanan</p><table class="table table-sm table-borderless">';
                 html += '<tbody>';
                 html += '<tr><td width="150">Tgl.Mulai</td><td>' + itemData.tgl_start + '</td></tr>';
                 html += '<tr><td>Tgl.Selesai</td><td>' + itemData.tgl_finish + '</td></tr>';
@@ -76,14 +90,17 @@
                 html += '<tr><td>Warna</td><td>' + itemData.warna + '</td></tr>';
                 html += '<tr><td>Jml.Order</td><td>' + itemData.jml_order + '</td></tr>';
                 html += '<tr><td>Include</td><td>' + (itemData.include ?? '-') + '</td></tr>';
-                html += '<tr><td>Biaya</td><td>Rp. ' + numberFormat(itemData.hrg_sewa) + '</td></tr>';
-                html += '<tr><td>Pembayaran</td><td>' + (itemData.jenis_pembayaran == '1' ? 'Tunai' : 'Mundur') + '</td></tr>';
+                html += '<tr><td>Biaya</td><td>Rp. ' + numberFormat(itemData.hrg_sewa_total - itemData.nominal_dp - itemData.nominal_disc) + '</td></tr>';
+                html += '<tr><th>Pembayaran</th><td>' + textPayment + '</td></tr>';
                 html += '<tr><td>Catatan</td><td>' + (itemData.catatan_byr ?? '-') + '</td></tr>';
                 html += '<tr><td>Voucher</td><td>' + (itemData.voucher ?? '-') + '</td></tr>';
-
-                if(itemData.stat=='9') {
-                    html += '<tr><td>Penangung Jawab</td><td>' + (itemData.tg_jwb == '1' ? 'Pemilik' : 'Penyewa') + '</td></tr>';
+                if(itemData.jns_order == '4'){
+                    html += '<tr><th>Penanggung Jawab</th><td>' + (itemData.tg_jwb == '1' ? 'Rental Pemesan' : 'Pelanggan') + '</td></tr>';
                 }
+
+                // if(itemData.stat=='9') {
+                //     html += '<tr><td>Penangung Jawab</td><td>' + (itemData.tg_jwb == '1' ? 'Pemilik' : 'Penyewa') + '</td></tr>';
+                // }
 
                 html += '</tbody>';
                 html += '</table>';
