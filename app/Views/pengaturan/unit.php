@@ -119,9 +119,9 @@
 
                 // set value into form
                 $('#nama').val(item.nama);
-                $('#kategori option').filter(function() {
-                    return $(this).text() == item.kategori;
-                }).prop("selected", true);
+                // $('#kategori option').filter(function() {
+                //     return $(this).text() == item.kategori;
+                // }).prop("selected", true);
                 $("#bbm option").filter(function() {
                     return $(this).text() == item.bbm;
                 }).prop("selected", true);
