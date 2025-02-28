@@ -144,4 +144,52 @@ class Proses extends BaseController
             'listUser' => $listUser
         ]);
     }
+
+    public function confirm()
+    {
+        $listData = [];
+
+        // handle POST
+        if ($this->request->getMethod() == 'POST') {
+            // echo print_r($_FILES['bukti_transfer']);
+            // echo json_encode($data); die();
+
+            if($data['is_vendor'] == '1'){
+                if($data['stat_ori'] == '1'){
+                    if($data['action'] == 'tolak'){
+                        $data['stat'] = '6'; // tolak
+                    }
+                    if($data['action'] == 'terima'){
+                        $data['stat'] = '4'; // terima  
+                    }
+                }
+                if($data['stat_ori'] == '5'){
+                    if($data['action'] == 'batal'){
+                        $data['stat'] = '7'; // batal
+                    }
+                    if($data['action'] == 'selesai'){
+                        $data['stat'] = '9'; // submit
+                    }
+                }                
+            }
+
+            // $id_order = $_POST['id_order'];
+            // $stat_ori = $_POST['stat_ori'];
+            $curlOpt    = [
+                'id_order' => $data['id_order'],
+                'stat_ori' => $data['stat_ori']
+            ];
+
+            $listData   = getCurl($curlOpt, $this->ipAddress . 'update_order_closed_1.php');
+            // echo json_encode($listData); die();
+            
+            $response = [
+                'success' => ($listData['success']=='1') ? true : false,
+                'message' => $listData['message']
+            ];
+
+            echo json_encode($response);
+            // return redirect()->to(base_url('inbox'))->with('success', 'Order confirmed successfully');
+        }
+    }
 }

@@ -322,56 +322,10 @@
 
                 // append to modal footer
                 if(is_vendor == '1'){
-                    if(itemData.stat == '4'){
+                    if(itemData.stat == '9'){
                         $('#addModal .modal-footer').html(`
-                            <button type="submit" class="btn btn-outline-primary w-100 btnConfirmOrder" data-action="batal">Batal</button>
+                            <button type="submit" class="btn btn-outline-primary w-100 btnConfirmOrder" data-action="batal">Selesaikan Pelayanan</button>
                         `);
-                    } 
-                    
-                    if(itemData.stat == '5'){
-                        $('#addModal .modal-footer').html(`<div class="row col-12">
-                            <div class="col-6">
-                                <button type="submit" class="btn btn-outline-danger w-100 btnConfirmOrder" data-action="batal">Batal</button>
-                            </div>
-                            <div class="col-6">
-                                <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="selesai">Selesai</button>
-                            </div>
-                        </div>`);
-                    } else {
-                        $('#addModal .modal-footer').html(`<div class="row col-12">
-                            <div class="col-6">
-                                <button type="submit" class="btn btn-outline-danger w-100 btnConfirmOrder" data-action="tolak">Tolak</button>
-                            </div>
-                            <div class="col-6">
-                                <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="terima">Terima</button>
-                            </div>
-                        </div>`);
-                    }
-                } else {
-                    if(itemData.stat == '4'){
-                        $('#addModal .modal-footer').html(`<div class="row col-12">
-                            <div class="col-6">
-                                <button type="submit" class="btn btn-outline-primary w-100 btnConfirmOrder" data-action="batal">Batal</button>
-                            </div>
-                            <div class="col-6">
-                                <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="lanjut">Lanjut</button>
-                            </div>
-                        </div>`);
-                    } 
-                    
-                    if(itemData.stat == '5'){
-                        $('#addModal .modal-footer').html(`
-                            <button type="submit" class="btn btn-outline-primary w-100 btnConfirmOrder" data-action="batal">Batal</button>
-                        `);
-                    } else {
-                        $('#addModal .modal-footer').html(`<div class="row col-12">
-                            <div class="col-6">
-                                <button type="submit" class="btn btn-outline-danger w-100 btnConfirmOrder" data-action="batal">Batal</button>
-                            </div>
-                            <div class="col-6">
-                                <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="lanjut">Lanjut</button>
-                            </div>
-                        </div>`);
                     }
                 }
 
@@ -478,7 +432,7 @@
 
             // If validation passes, continue with form submission
             $.ajax({
-                url: '<?= base_url('inbox/confirm') ?>',
+                url: '<?= base_url('proses/confirm') ?>',
                 type: 'POST',
                 data: formData,
                 processData: false,
