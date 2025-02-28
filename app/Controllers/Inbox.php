@@ -298,7 +298,7 @@ class Inbox extends BaseController
             'nopol' => $this->request->getPost('nopol_driver'),
             'note' => $this->request->getPost('note_driver')
         ];
-        echo json_encode($curlOpt); die();
+        // echo json_encode($curlOpt); die();
 
         $listData   = getCurl($curlOpt, $this->ipAddress . 'update_single_drv.php');
         echo json_encode($listData); //die();
