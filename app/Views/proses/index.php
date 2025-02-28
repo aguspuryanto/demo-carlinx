@@ -513,9 +513,7 @@
 
             let form = $('#formDriver');
             let formData = new FormData(form[0]);
-            // tambahkan is_pemesan, is_vendor
-            formData.append('is_pemesan', is_pemesan);
-            formData.append('is_vendor', is_vendor);
+            
             // submit form
             $.ajax({
                 url: '<?= base_url('inbox/ubahDriver') ?>',
