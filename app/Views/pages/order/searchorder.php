@@ -197,7 +197,7 @@
             html += '<tr><th>Warna</th><td>' + (parseResponse.warna) + '</td></tr>';
             html += '<tr><th>Jml.Order</th><td>' + (parseResponse.jumlah) + '</td></tr>';
             html += '<tr><th>Include</th><td>' + (listInclude) + '</td></tr>';
-            html += '<tr><th>Biaya</th><td>Rp. ' + numberFormat(item.hrg_sewa) + '</td></tr>';
+            html += '<tr><th>Biaya</th><td>Rp. ' + numberFormat(item.total_hrg_sewa) + '</td></tr>';
             html += '<tr><th>Pembayaran</th><td>' + (parseResponse.jenis_pembayaran == '1' ? 'Tunai' : 'Mundur') + '</td></tr>';
             html += '<tr><th>Catatan</th><td>' + (parseResponse.catatan ?? '-') + '</td></tr>';
             html += '<tr><th>Voucher</th><td>' + (parseResponse.voucher ?? '-') + '</td></tr>';

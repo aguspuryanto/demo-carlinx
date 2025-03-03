@@ -109,7 +109,7 @@
                         <label class="form-check-label" for="inlineRadio1">Lunas</label>
                     </div>
                     <div class="form-check form-check-inline">
-                        <input class="form-check-input" type="radio" name="jenis_pembayaran" id="inlineRadio2" value="2" required>
+                        <input class="form-check-input" type="radio" name="jenis_pembayaran" id="inlineRadio2" value="3" required>
                         <label class="form-check-label" for="inlineRadio2">Mundur</label>
                     </div>
                 </div>
