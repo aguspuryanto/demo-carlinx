@@ -343,6 +343,12 @@
                         </div>`);
                     }
                 } else {
+                    if(itemData.stat == '1'){
+                        $('#addModal .modal-footer').html(`
+                            <button type="submit" class="btn btn-outline-primary w-100 btnConfirmOrder" data-action="batal">Batal</button>
+                        `);
+                    }
+
                     if(itemData.stat == '4'){
                         $('#addModal .modal-footer').html(`<div class="row col-12">
                             <div class="col-6">
