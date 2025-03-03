@@ -280,20 +280,23 @@
                                 <tr>
                                     <td>*Keterangan</td>
                                     <td>` + (itemData.ketr || '') + `</td>
-                                </tr>
-                                <tr>
+                                </tr>`;
+
+                        if(is_pemesan == 1 && itemData.stat == '1'){
+                            html_pembayaran += `<tr>
                                     <td colspan="2">Bank Tujuan Transfer <br>` + (itemData.norek_rental || '') + `</td>
                                 </tr>`;
                                 
-                        let path_img = "<?= base_url(); ?>proxy.php?url=<?= $_ENV['API_BASEURL']; ?>images_dp/" + encodeURIComponent(itemData.path_foto);
-                        // console.log(path_img,'path_img');
-                        if(itemData.path_foto) {
-                            let link_img = `<img class="avatar avatar-lg" data-url="${path_img}" src="${path_img}" style="width: 64px; height: 64px;" />`;
-                            html_pembayaran += `<tr>
-                                <td colspan="2">
-                                    <div class="d-flex align-items-center">${link_img}</div>
-                                </td>
-                            </tr>`;
+                            let path_img = "<?= base_url(); ?>proxy.php?url=<?= $_ENV['API_BASEURL']; ?>images_dp/" + encodeURIComponent(itemData.path_foto);
+                            // console.log(path_img,'path_img');
+                            if(itemData.path_foto) {
+                                let link_img = `<img class="avatar avatar-lg" data-url="${path_img}" src="${path_img}" style="width: 64px; height: 64px;" />`;
+                                html_pembayaran += `<tr>
+                                    <td colspan="2">
+                                        <div class="d-flex align-items-center">${link_img}</div>
+                                    </td>
+                                </tr>`;
+                            }
                         }
 
                         if(itemData.stat != '5') {
