@@ -142,6 +142,39 @@
             }
         });
 
+        /* PWA add to phone Install ap button */
+        var btnAdd = document.getElementById('addtohome');
+        var deferredPrompt;
+
+        window.addEventListener('beforeinstallprompt', function(event) {
+            // Prevent Chrome 67 and earlier from automatically showing the prompt
+            e.preventDefault();
+            // Stash the event so it can be triggered later.
+            deferredPrompt = e;
+        });
+
+        // Tampilkan tombol install
+        btnAdd.style.display = 'block';
+        btnAdd.addEventListener('click', () => {
+            if (!deferredPrompt) return;
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('User accepted the A2HS prompt');
+                } else {
+                    console.log('User dismissed the A2HS prompt');
+                }
+                deferredPrompt = null;
+                btnAdd.style.display = 'none'; // Sembunyikan tombol setelah interaksi
+            });
+        });
+
+        // Sembunyikan tombol jika aplikasi sudah diinstal
+        window.addEventListener('appinstalled', () => {
+            console.log('PWA telah terinstal');
+            btnAdd.style.display = 'none';
+        });
+
         window.addEventListener('appinstalled', () => {
             // If visible, hide the install promotion
             // hideInAppInstallPromotion();
