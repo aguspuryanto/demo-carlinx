@@ -67,25 +67,36 @@ $(window).on('load', function () {
             toastElinit.show();
 
             /* PWA add to phone Install ap button */
-            var btnAdd = document.getElementById('addtohome')
-            var defferedPrompt;
-            window.addEventListener("beforeinstallprompt", function (event) {
+            var btnAdd = document.getElementById('addtohome');
+            var deferredPrompt;
+
+            window.addEventListener('beforeinstallprompt', (event) => {
                 event.preventDefault();
-                defferedPrompt = event;
+                deferredPrompt = event;
 
-                btnAdd.addEventListener("click", function (event) {
-                    defferedPrompt.prompt();
+                // Tampilkan tombol install
+                btnAdd.style.display = 'block';
 
+                btnAdd.addEventListener('click', () => {
+                    if (!deferredPrompt) return;
 
-                    defferedPrompt.userChoice.then((choiceResult) => {
+                    deferredPrompt.prompt();
+                    deferredPrompt.userChoice.then((choiceResult) => {
                         if (choiceResult.outcome === 'accepted') {
                             console.log('User accepted the A2HS prompt');
                         } else {
                             console.log('User dismissed the A2HS prompt');
                         }
-                        defferedPrompt = null;
+                        deferredPrompt = null;
+                        btnAdd.style.display = 'none'; // Sembunyikan tombol setelah interaksi
                     });
                 });
+            });
+
+            // Sembunyikan tombol jika aplikasi sudah diinstal
+            window.addEventListener('appinstalled', () => {
+                console.log('PWA telah terinstal');
+                btnAdd.style.display = 'none';
             });
 
             var introswiper = new Swiper(".introswiper", {
@@ -156,24 +167,35 @@ $(window).on('load', function () {
 
             /* PWA add to phone Install ap button */
             var btnAdd = document.getElementById('addtohome');
-            var defferedPrompt;
-            window.addEventListener("beforeinstallprompt", function (event) {
+            var deferredPrompt;
+
+            window.addEventListener('beforeinstallprompt', (event) => {
                 event.preventDefault();
-                defferedPrompt = event;
+                deferredPrompt = event;
 
-                btnAdd.addEventListener("click", function (event) {
-                    defferedPrompt.prompt();
+                // Tampilkan tombol install
+                btnAdd.style.display = 'block';
 
+                btnAdd.addEventListener('click', () => {
+                    if (!deferredPrompt) return;
 
-                    defferedPrompt.userChoice.then((choiceResult) => {
+                    deferredPrompt.prompt();
+                    deferredPrompt.userChoice.then((choiceResult) => {
                         if (choiceResult.outcome === 'accepted') {
                             console.log('User accepted the A2HS prompt');
                         } else {
                             console.log('User dismissed the A2HS prompt');
                         }
-                        defferedPrompt = null;
+                        deferredPrompt = null;
+                        btnAdd.style.display = 'none'; // Sembunyikan tombol setelah interaksi
                     });
                 });
+            });
+
+            // Sembunyikan tombol jika aplikasi sudah diinstal
+            window.addEventListener('appinstalled', () => {
+                console.log('PWA telah terinstal');
+                btnAdd.style.display = 'none';
             });
 
             break;
