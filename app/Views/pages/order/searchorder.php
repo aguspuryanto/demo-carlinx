@@ -143,6 +143,12 @@
         }
     });
 
+    // jenis_pembayaran
+    $('input[name="jenis_pembayaran"]').on('change', function() {
+        const jenis_pembayaran = $(this).val();
+        console.log(jenis_pembayaran, 'jenis_pembayaran');
+    });
+
     // formSearchOrder
     $('.btnSubmit').on('click', function(e) {
       e.preventDefault();
