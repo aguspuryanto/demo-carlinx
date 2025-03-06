@@ -13,8 +13,8 @@
                 <div class="card-body">
                     <?php
                     //include_once '_form.php';
-                    // echo json_encode($listData); die();
-                    // echo json_encode($listUser); die();
+                    // echo json_encode($listData); //die();
+                    // echo json_encode($listUser); //die();
                     // 1. Vendor : jika user.kd_rental == order.kd_rental
                     // 2. Pemesan : jika user.kd_rental != order.kd_rental
                     // In = Pemesan, Out = Vendor
@@ -40,7 +40,7 @@
                                     <small class="<?=($item['stat']=='9') ? 'text-success' : 'text-danger'; ?> text-right">cs: <?=$item['liq'] == '2' ? $item['nama_cs'] : $item['nama_member'] ?></small>
                                 </div>
                                 <p class="mb-0">Rp. <?= number_format($item['hrg_sewa_total'], 0, ',', '.') ?></p>
-                                <small><span class="badge <?=$item['liq_tujuan'] == '2' ? 'bg-warning text-warning' : 'bg-success text-success'?>">*</span> <?=($item['kode_rental'] == $listUser['kd_rental']) ? 'Pemesan' : 'Vendor'; ?>: <?= ($item['kode_rental'] == $listUser['kd_rental']) ? $item['rental_penyewa'] : $item['rental_tujuan'] ?></small>
+                                <small><span style="font-size: 40%; transform:translateY(-40%);" class="badge <?=(($item['kode_rental'] == $listUser['kd_rental'])? $item['liq'] : $item['liq_tujuan']) == '3' ? 'bg-danger text-danger rounded-circle' : ((($item['kode_rental'] == $listUser['kd_rental'])? $item['liq'] : $item['liq_tujuan']) == '2' ? 'bg-warning text-warning rounded-circle' : 'bg-success text-success rounded-circle')?>">*</span> <?=($item['kode_rental'] == $listUser['kd_rental']) ? 'Pemesan' : 'Vendor'; ?>: <?= ($item['kode_rental'] == $listUser['kd_rental']) ? $item['rental_penyewa'] : $item['rental_tujuan'] ?></small>
                             </a>
                             </li>
                         <?php endforeach; ?>
