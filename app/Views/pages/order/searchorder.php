@@ -148,9 +148,10 @@
         const jenis_pembayaran = $(this).val();
         console.log(jenis_pembayaran, 'jenis_pembayaran');
         if(jenis_pembayaran == '3'){
-            $('#tempo_bayar').removeClass('d-none');
+            $('#tempobayar').removeClass('d-none');
+            $('input[name="tempo_bayar"]').val('7');
         } else {
-            $('#tempo_bayar').addClass('d-none');
+            $('#tempobayar').addClass('d-none');
         }
     });
 

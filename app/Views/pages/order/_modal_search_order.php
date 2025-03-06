@@ -112,9 +112,9 @@
                         <input class="form-check-input" type="radio" name="jenis_pembayaran" id="inlineRadio2" value="3" required>
                         <label class="form-check-label" for="inlineRadio2">Mundur</label>
                     </div>
-                    <div class="form-check form-check-inline d-none" id="tempo_bayar">
+                    <div class="form-check form-check-inline d-none" id="tempobayar">
                         <div class="col-auto">
-                            <label class="visually-hidden">Tempo (Hari)</label>
+                            <label class="form-label">Tempo (Hari)</label>
                             <input type="text" name="tempo_bayar" class="form-control" id="tempo_bayar" placeholder="Tempo (Hari)" style="width: 100px;">
                         </div>
                     </div>
