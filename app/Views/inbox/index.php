@@ -324,9 +324,7 @@
                         $('#addModal .modal-footer').html(`
                             <button type="submit" class="btn btn-outline-primary w-100 btnConfirmOrder" data-action="batal">Batal</button>
                         `);
-                    } 
-                    
-                    if(itemData.stat == '5'){
+                    }  else if (itemData.stat == '5'){
                         $('#addModal .modal-footer').html(`<div class="row col-12">
                             <div class="col-6">
                                 <button type="submit" class="btn btn-outline-danger w-100 btnConfirmOrder" data-action="batal">Batal</button>
@@ -346,13 +344,12 @@
                         </div>`);
                     }
                 } else {
+                    // console.log(is_pemesan, '_is_pemesan');
                     if(itemData.stat == '1'){
                         $('#addModal .modal-footer').html(`
                             <button type="submit" class="btn btn-outline-primary w-100 btnConfirmOrder" data-action="batal">Batal</button>
                         `);
-                    }
-
-                    if(itemData.stat == '4'){
+                    } else if (itemData.stat == '4') {
                         $('#addModal .modal-footer').html(`<div class="row col-12">
                             <div class="col-6">
                                 <button type="submit" class="btn btn-outline-primary w-100 btnConfirmOrder" data-action="batal">Batal</button>
@@ -361,9 +358,7 @@
                                 <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="lanjut">Lanjut</button>
                             </div>
                         </div>`);
-                    } 
-                    
-                    if(itemData.stat == '5'){
+                    } else if (itemData.stat == '5'){
                         $('#addModal .modal-footer').html(`
                             <button type="submit" class="btn btn-outline-primary w-100 btnConfirmOrder" data-action="batal">Batal</button>
                         `);
