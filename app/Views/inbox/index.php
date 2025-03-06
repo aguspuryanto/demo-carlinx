@@ -13,8 +13,8 @@
                 <div class="card-body">
                     <?php
                     //include_once '_form.php';
-                    echo json_encode($listData); //die();
-                    echo json_encode($listUser); //die();
+                    // echo json_encode($listData); die();
+                    // echo json_encode($listUser); die();
                     // 1. Vendor : jika user.kd_rental == order.kd_rental
                     // 2. Pemesan : jika user.kd_rental != order.kd_rental
                     // In = Pemesan, Out = Vendor
