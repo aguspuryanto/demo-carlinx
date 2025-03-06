@@ -299,7 +299,7 @@
                             }
                         }
 
-                        if(itemData.stat != '5') {
+                        if(itemData.stat == '4' && is_pemesan == 1) {
                             html_pembayaran += `<tr>
                                 <td colspan="2">
                                     <label class="form-label">Pilih Bukti Transfer</label>
