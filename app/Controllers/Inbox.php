@@ -105,7 +105,7 @@ class Inbox extends BaseController
         ];
         // if(empty($listUser)) $listUser = getCurl($dataLogin, $this->ipAddress . 'login_user.php');
         if(empty($listUser)) $listUser = ($this->session->get('user'));
-        log_message('debug', $listUser);
+        // log_message('debug', $listUser);
         // echo json_encode($listUser); die();
 
         if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'select_order_5.php');
