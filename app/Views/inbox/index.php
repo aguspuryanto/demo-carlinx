@@ -119,7 +119,7 @@
                 }
 
                 // text Pembayaran
-                if(itemData.jns_byr == '2'){
+                if(itemData.jns_byr == '3'){
                     textPayment = payment_type[itemData.jns_byr] + ' ' + itemData.tempo_bayar + ' hari';
                 } else {
                     textPayment = payment_type[itemData.jns_byr];

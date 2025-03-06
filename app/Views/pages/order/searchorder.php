@@ -43,7 +43,14 @@
 <script>
   $(function () {
     const baseUrlImg = "<?= base_url('proxy.php?url=' . $_ENV['API_BASEURL'] . 'images/') ?>";
-    const jns_order = '<?= $jns_order ?>';  
+    const jns_order = '<?= $jns_order ?>';
+    let payment_type = {
+        1: 'Lunas',      // Full payment
+        2: 'Uang Muka', // Down payment
+        3: 'Mundur'    // Deferred payment
+    };
+    // payment_type[1]
+
     $('#exampleModal').on('show.bs.modal', function (e) {
         // console.log(e.relatedTarget.dataset.item);                
         // get data-item
@@ -190,6 +197,13 @@
             if(item.is_makan == '1') listInclude += ', Makan Driver';
             if(item.is_hotel == '1') listInclude += ', Hotel';
 
+            // text Pembayaran
+            if(parseResponse.jenis_pembayaran == '3'){
+                textPayment = payment_type[parseResponse.jenis_pembayaran] + ' ' + parseResponse.tempo_bayar + ' hari';
+            } else {
+                textPayment = payment_type[parseResponse.jenis_pembayaran];
+            }
+
             var html = '<div class="table-responsive mb-3">';
             html += '<table class="table table-bordered">';
             html += '<tbody>';
@@ -210,7 +224,7 @@
             html += '<tr><th>Jml.Order</th><td>' + (parseResponse.jumlah) + '</td></tr>';
             html += '<tr><th>Include</th><td>' + (listInclude) + '</td></tr>';
             html += '<tr><th>Biaya</th><td>Rp. ' + numberFormat(item.total_hrg_sewa) + '</td></tr>';
-            html += '<tr><th>Pembayaran</th><td>' + (parseResponse.jenis_pembayaran == '1' ? 'Tunai' : 'Mundur') + '</td></tr>';
+            html += '<tr><th>Pembayaran</th><td>' + textPayment + '</td></tr>';
             html += '<tr><th>Catatan</th><td>' + (parseResponse.catatan ?? '-') + '</td></tr>';
             html += '<tr><th>Voucher</th><td>' + (parseResponse.voucher ?? '-') + '</td></tr>';
             if(jns_order == '4'){
