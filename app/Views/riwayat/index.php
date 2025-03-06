@@ -150,7 +150,7 @@
                     html += '<div class="mb-3"><p class="h6 lead p-2">Tgl Order</p><div class="d-flex justify-content-between px-2"><span>' + itemData.tgl_order + '</span><span><a href="#">Lihat bukti pesanan</a></span></div></div>';
                 }
 
-                html += '<p class="h6 lead p-2">Pesanan</p><table class="table table-sm table-borderless">';
+                html += '<p class="h6 lead p-2">Pesanan</p><table class="table table-sm table-bordered">';
                 html += '<tbody>';
                 html += '<tr><th width="150">Tgl.Mulai</th><td>' + itemData.tgl_start + '</td></tr>';
                 html += '<tr><th>Tgl.Selesai</th><td>' + itemData.tgl_finish + '</td></tr>';
