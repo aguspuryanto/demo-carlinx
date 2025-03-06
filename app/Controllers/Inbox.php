@@ -189,7 +189,11 @@ class Inbox extends BaseController
                         $data['stat'] = '6'; // tolak
                     }
                     if($data['action'] == 'terima'){
-                        $data['stat'] = '4'; // terima  
+                        if($data['jns_byr'] == '3') {
+                            $data['stat'] = '9'; // submit
+                        } else {
+                            $data['stat'] = '4'; // terima
+                        }
                     }
                 }
                 if($data['stat_ori'] == '5'){
