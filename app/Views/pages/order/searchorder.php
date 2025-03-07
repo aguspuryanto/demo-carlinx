@@ -82,11 +82,12 @@
         $(this).find('.modal-body input#warna').val(item.warna);
 
         // total
+        const totalhrgsewa = item.total_hrg_sewa; //jns_order == '2' ? item.hrg_sewa : item.total_hrg_sewa;
         const formatRupiah = new Intl.NumberFormat('id-ID', {
             style: 'currency',
             currency: 'IDR',
             minimumFractionDigits: 0
-        }).format(jns_order == '2' ? item.hrg_sewa : item.total_hrg_sewa).replace('Rp', 'Rp ');
+        }).format(totalhrgsewa).replace('Rp', 'Rp ');
         
         $(this).find('.modal-footer p#total').text(formatRupiah);
 
@@ -227,7 +228,7 @@
             html += '<tr><th>Pembayaran</th><td>' + textPayment + '</td></tr>';
             html += '<tr><th>Catatan</th><td>' + (parseResponse.catatan ?? '-') + '</td></tr>';
             html += '<tr><th>Voucher</th><td>' + (parseResponse.voucher ?? '-') + '</td></tr>';
-            if(jns_order == '4'){
+            if(jns_order == '2'){
                 html += '<tr><th>Penanggung Jawab</th><td>' + (item.tg_jwb == '1' ? 'Rental Pemesan' : 'Pelanggan') + '</td></tr>';
             }
             html += '</tbody>';
