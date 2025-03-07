@@ -109,6 +109,7 @@ class Inbox extends BaseController
         // echo json_encode($listUser); die();
 
         if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'select_order_5.php');
+        // echo json_encode($listData); die();
         
         if ($listData === null) {
             // Handle JSON decode error
