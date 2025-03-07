@@ -43,11 +43,11 @@ helper('form');
   <div class="mb-3">
     <label class="form-label d-block">Penanggung Jawab</label>
     <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="penanggung_jawab" id="inlineRadio1" value="1" checked>
+      <input class="form-check-input" type="radio" name="tg_jwb" id="inlineRadio1" value="1" checked>
       <label class="form-check-label" for="inlineRadio1">Rental Pemesan</label>
     </div>
     <div class="form-check form-check-inline">
-      <input class="form-check-input" type="radio" name="penanggung_jawab" id="inlineRadio2" value="2">
+      <input class="form-check-input" type="radio" name="tg_jwb" id="inlineRadio2" value="2">
       <label class="form-check-label" for="inlineRadio2">Pelanggan</label>
     </div>
   </div>
