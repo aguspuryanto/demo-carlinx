@@ -234,7 +234,7 @@
             html += '<tr><th>Pembayaran</th><td>' + textPayment + '</td></tr>';
             html += '<tr><th>Catatan</th><td>' + (parseResponse.catatan ?? '-') + '</td></tr>';
             html += '<tr><th>Voucher</th><td>' + (parseResponse.voucher ?? '-') + '</td></tr>';
-            if(jns_order == '2'){
+            if (['2', '4'].includes(jns_order)) {
                 html += '<tr><th>Penanggung Jawab</th><td>' + (item.tg_jwb == '1' ? 'Rental Pemesan' : 'Pelanggan') + '</td></tr>';
             }
             html += '</tbody>';
