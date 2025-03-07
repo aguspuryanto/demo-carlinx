@@ -618,7 +618,7 @@
     });
 
     // $(".container").imageBox();
-    $(document).on('click', 'img', function(e) {
+    $(document).on('click', 'img.avatar', function(e) {
         $('#imgViewer').html('').append(
             $(e.currentTarget).clone()
                 .removeAttr('style')
