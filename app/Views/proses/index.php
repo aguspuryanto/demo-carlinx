@@ -125,6 +125,15 @@
                     }
                 }
 
+                let listInclude = 'Mobil, Driver';
+
+                if(itemData.is_bbm == '1') listInclude += ', BBM';
+                if(itemData.is_makan == '1') listInclude += ', Makan Driver';
+                if(itemData.is_hotel == '1') listInclude += ', Hotel';
+                if(itemData.jns_order == '2'){
+                    listInclude = 'Mobil Lepas Kunci';
+                }
+
                 // text Pembayaran
                 if(itemData.jns_byr == '3'){
                     textPayment = payment_type[itemData.jns_byr] + ' ' + itemData.tempo_bayar + ' hari';
@@ -145,6 +154,8 @@
                 html += '<tr><th>Tgl.Selesai</th><td>' + itemData.tgl_finish + '</td></tr>';
                 if(itemData.jns_order == '4'){
                     html += '<tr><th>Jumlah Bulan</th><td>' + (itemData.jml_bln) + '</td></tr>';
+                } else if(itemData.jns_order == '2'){
+                    // html += '<tr><th>Jumlah Bulan</th><td>' + (item.jml_bln) + '</td></tr>';
                 } else {
                     html += '<tr><th>Tujuan</th><td>' + itemData.jemput.substr(itemData.jemput.lastIndexOf(",") + 1) + ' - ' + itemData.tujuan.substr(itemData.tujuan.lastIndexOf(",") + 1) + '</td></tr>';
                 }
@@ -154,12 +165,12 @@
                 html += '<tr><th>Transmisi</th><td>' + (itemData.transmisi) + '</td></tr>';
                 html += '<tr><th>Warna</th><td>' + (itemData.warna) + '</td></tr>';
                 html += '<tr><th>Jml.Order</th><td>' + (itemData.jml_order) + '</td></tr>';
-                html += '<tr><th>Include</th><td>' + (itemData.ketr !='' ? itemData.ketr : 'Mobil, Driver') + '</td></tr>';
+                html += '<tr><th>Include</th><td>' + (listInclude) + '</td></tr>';
                 html += '<tr><th>Biaya</th><td>Rp. ' + numberFormat(itemData.hrg_sewa_total) + '</td></tr>';
                 html += '<tr><th>Pembayaran</th><td>' + textPayment + '</td></tr>';
                 html += '<tr><th>Catatan</th><td>' + (itemData.catatan_byr ?? '-') + '</td></tr>';
                 html += '<tr><th>Voucher</th><td>' + (itemData.voucher ?? '-') + '</td></tr>';
-                if(itemData.jns_order == '4'){
+                if([2, 4].includes(itemData.jns_order)){
                     html += '<tr><th>Penanggung Jawab</th><td>' + (itemData.tg_jwb == '1' ? 'Rental Pemesan' : 'Pelanggan') + '</td></tr>';
                 }
                 html += '</tbody>';
