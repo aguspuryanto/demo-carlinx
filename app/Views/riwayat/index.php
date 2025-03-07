@@ -274,6 +274,16 @@
                             <label class="form-label visually-hidden">Note</label>
                             <input type="text" name="note_driver[` + i + `]" class="form-control-plaintext" id="note_driver" placeholder="Note" value="` + (resultPlgn.note_drv || '') + `" readonly>
                         </div></a>`;
+
+                        if (['2', '4'].includes(itemData.jns_order)) {
+                            let html_driver = `<li class="list-group-item mb-3">
+                                <div class="mb-3 align-items-center">
+                                    <label class="form-label visually-hidden">Nopol</label>
+                                    <input type="text" name="nopol_driver[` + i + `]" class="form-control" id="nopol_driver" placeholder="Nopol" value="` + (resultPlgn.nopol || '') + `" required>
+                                </div>
+                            </div></li>`;
+                        }
+                        
                         $('#list_driver').append(html_driver);
                     }
                     
