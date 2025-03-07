@@ -199,7 +199,7 @@
             if(item.is_hotel == '1') listInclude += ', Hotel';
 
             if(jns_order == '2'){
-                let listInclude = 'Mobil Lepas Kunci';
+                listInclude = 'Mobil Lepas Kunci';
             }
 
             // text Pembayaran
