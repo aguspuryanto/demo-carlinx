@@ -198,6 +198,10 @@
             if(item.is_makan == '1') listInclude += ', Makan Driver';
             if(item.is_hotel == '1') listInclude += ', Hotel';
 
+            if(jns_order == '2'){
+                let listInclude = 'Mobil Lepas Kunci';
+            }
+
             // text Pembayaran
             if(parseResponse.jenis_pembayaran == '3'){
                 textPayment = payment_type[parseResponse.jenis_pembayaran] + ' ' + parseResponse.tempo_bayar + ' hari';
@@ -212,6 +216,8 @@
             html += '<tr><th>Tgl.Selesai</th><td>' + item.tgl_finish + '</td></tr>';
             if(jns_order == '4'){
                 html += '<tr><th>Jumlah Bulan</th><td>' + (item.jml_bln) + '</td></tr>';
+            } else if(jns_order == '2'){
+                // html += '<tr><th>Jumlah Bulan</th><td>' + (item.jml_bln) + '</td></tr>';
             } else {                
                 lokasi_jemput = item.lokasi_jemput.substr(item.lokasi_jemput.lastIndexOf(",") + 1);
                 lokasi_tujuan = item.lokasi_tujuan.substr(item.lokasi_tujuan.lastIndexOf(",") + 1);
