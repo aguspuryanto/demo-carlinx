@@ -141,6 +141,8 @@
                 if(itemData.is_bbm == '1') listInclude += ', BBM';
                 if(itemData.is_makan == '1') listInclude += ', Makan Driver';
                 if(itemData.is_hotel == '1') listInclude += ', Hotel';
+
+                console.log(itemData.jns_order, '_jns_order');
                 if(itemData.jns_order == '2'){
                     listInclude = 'Mobil Lepas Kunci';
                 }
@@ -181,7 +183,8 @@
                 html += '<tr><th>Pembayaran</th><td>' + textPayment + '</td></tr>';
                 html += '<tr><th>Catatan</th><td>' + (itemData.catatan_byr ?? '-') + '</td></tr>';
                 html += '<tr><th>Voucher</th><td>' + (itemData.voucher ?? '-') + '</td></tr>';
-                if([2, 4].includes(itemData.jns_order)){
+                // if ([2, 4].includes(itemData.jns_order)) {
+                if(itemData.jns_order == 2) {
                     html += '<tr><th>Penanggung Jawab</th><td>' + (itemData.tg_jwb == '1' ? 'Rental Pemesan' : 'Pelanggan') + '</td></tr>';
                 }
                 html += '</tbody>';
