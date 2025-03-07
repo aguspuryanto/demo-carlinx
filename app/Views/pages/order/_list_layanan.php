@@ -14,7 +14,8 @@
                 <p class="text-muted mb-0 fs-sm"><?= $item['kota_rental'] ?></p>
                 <div class="d-flex">
                     <span class="p-0 flex-fill"><i class="fa fa-star text-warning"></i> <?= $item['rating'] ?> | <?= $item['terjual'] ?> Terlayani</span>
-                    <span class="p-0 flex-shrink-1">Rp <?= number_format($jns_order == '2' ? $item['hrg_sewa'] : $item['total_hrg_sewa'], 0, ',', '.') ?></span>
+                    <!-- <span class="p-0 flex-shrink-1">Rp <?= number_format($jns_order == '2' ? $item['hrg_sewa'] : $item['total_hrg_sewa'], 0, ',', '.') ?></span> -->
+                    <span class="p-0 flex-shrink-1">Rp <?= number_format($item['total_hrg_sewa'], 0, ',', '.') ?></span>
                 </div>
             </div>
         </a>
