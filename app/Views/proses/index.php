@@ -278,9 +278,9 @@
 
                     if(is_vendor == '1'){
                         if(is_pemesan == '1'){
-                            newForm.innerHTML += '<h6 class="mb-3">Pembayaran</h6><ul class="list-group" id="list_pembayaran"></ul>';
+                            newForm.innerHTML += '<h6 class="mb-3">Pembayaran</h6><ul class="list-group mb-3" id="list_pembayaran"></ul>';
                         } else {
-                            newForm.innerHTML += `<h6 class="mb-3 d-flex justify-content-between">Pembayaran <span class="pull-right"><a href="#" data-bs-toggle="modal" data-bs-target="#paymentModal" data-id="` + idOrder + `" data-item='` + JSON.stringify(itemData) + `'>Ubah Pembayaran</a></span></h6><ul class="list-group" id="list_pembayaran"></ul>`;
+                            newForm.innerHTML += `<h6 class="mb-3 d-flex justify-content-between">Pembayaran <span class="pull-right"><a href="#" data-bs-toggle="modal" data-bs-target="#paymentModal" data-id="` + idOrder + `" data-item='` + JSON.stringify(itemData) + `'>Ubah Pembayaran</a></span></h6><ul class="list-group mb-3" id="list_pembayaran"></ul>`;
                         }
                         
                         let html_pembayaran = `<li class="list-group-item">
