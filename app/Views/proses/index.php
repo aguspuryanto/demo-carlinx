@@ -240,7 +240,7 @@
                         $('#list_plgn').append(html_plgn);
                     }
 
-                    if((is_vendor == '1' && ['1','4','5'].includes(itemData.stat)) || (is_pemesan == '1' && ['4','5'].includes(itemData.stat))){
+                    if((is_vendor == '1' && ['1','4','5'].includes(itemData.stat)) || (is_pemesan == '1' && ['9'].includes(itemData.stat))){
                         // form driver
                         newForm.innerHTML += '<h6 class="mb-3">Driver</h6><div class="list-group mb-3" id="list_driver"></div>';
                         // loop jml_order
