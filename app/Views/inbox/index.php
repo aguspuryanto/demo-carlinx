@@ -230,7 +230,7 @@
                             let html_driver = `<li class="list-group-item mb-3">
                             <div class="mb-3 align-items-center d-none">
                                 <label class="form-label visually-hidden">Driver</label>
-                                <input type="text" name="nama_driver[` + i + `]" class="form-control" id="nama_driver" placeholder="Nama Driver" value="` + (resultPlgn.nama_drv || '') + `" required>
+                                <input type="text" name="nama_driver[` + i + `]" class="form-control" id="nama_driver" placeholder="Nama Driver" value="` + (resultPlgn.nama_drv || '') + `">
                             </div>
                             <div class="mb-3 align-items-center d-none">
                                 <label class="form-label visually-hidden">No HP</label>
