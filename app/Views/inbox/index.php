@@ -443,7 +443,7 @@
             } else {
 
                 if (action == 'terima' && is_vendor == '1') {
-                    baseValidationRules.push({ field: 'nama_driver', message: 'Driver name is required' });
+                    // baseValidationRules.push({ field: 'nama_driver', message: 'Driver name is required' });
                     baseValidationRules.push({ field: 'nopol_driver', message: 'Vehicle plate number is required' });
                 }
             }
