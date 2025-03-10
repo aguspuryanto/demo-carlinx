@@ -346,10 +346,9 @@
 
                     // unggah Dokumen Serah/terima
                     // if(is_vendor == '1' && itemData.stat == '9'){
-                                
-                        // let path_img = "<?= base_url(); ?>proxy.php?url=<?= $_ENV['API_BASEURL']; ?>images_dp/" + encodeURIComponent(itemData.path_foto); //"https://placehold.co/100";
-                        let foto_serah =  "<?= base_url(); ?>proxy.php?url=<?= $_ENV['API_BASEURL']; ?>images_lk/" + encodeURIComponent(itemData.foto_serah);
-                        let foto_terima = "<?= base_url(); ?>proxy.php?url=<?= $_ENV['API_BASEURL']; ?>images_lk/" + encodeURIComponent(itemData.foto_terima);
+                    
+                        let foto_serah =  (itemData.foto_serah) ? "<?= base_url(); ?>proxy.php?url=<?= $_ENV['API_BASEURL']; ?>images_lk/" + encodeURIComponent(itemData.foto_serah) : "https://placehold.co/100";
+                        let foto_terima = (itemData.foto_terima) ? "<?= base_url(); ?>proxy.php?url=<?= $_ENV['API_BASEURL']; ?>images_lk/" + encodeURIComponent(itemData.foto_terima) : "https://placehold.co/100";
 
                         newForm.innerHTML += '<h6 class="mb-3">Dokumen Serah Terima</h6><ul class="list-group" id="list_dokumen"></ul>';
                         let html_dokumen = `<li class="list-group-item">
