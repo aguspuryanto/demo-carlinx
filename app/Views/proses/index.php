@@ -346,11 +346,32 @@
 
                     // unggah Dokumen Serah/terima
                     // if(is_vendor == '1' && itemData.stat == '9'){
+                                
+                        // let path_img = "<?= base_url(); ?>proxy.php?url=<?= $_ENV['API_BASEURL']; ?>images_dp/" + encodeURIComponent(itemData.path_foto); //"https://placehold.co/100";
+                        let foto_serah =  "<?= base_url(); ?>proxy.php?url=<?= $_ENV['API_BASEURL']; ?>images_lk/" + encodeURIComponent(itemData.foto_serah);
+                        let foto_terima = "<?= base_url(); ?>proxy.php?url=<?= $_ENV['API_BASEURL']; ?>images_lk/" + encodeURIComponent(itemData.foto_terima);
+
                         newForm.innerHTML += '<h6 class="mb-3">Dokumen Serah Terima</h6><ul class="list-group" id="list_dokumen"></ul>';
                         let html_dokumen = `<li class="list-group-item">
-                         <div class="mb-3 align-items-center">
-                            <label class="form-label visually-hidden">Dokumen Serah Terima</label>
-                            <input type="file" name="dokumen" class="form-control" id="dokumen" required>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="mb-3 align-items-center">
+                                    <div class="img-fluid mb-3">
+                                        <img class="avatar avatar-lg" data-url="${foto_serah}" src="${foto_serah}" />
+                                    </div>
+                                    <label class="form-label visually-hidden">Dokumen Serah Terima</label>
+                                    <input type="file" name="dokumen" class="form-control" id="dokumen" required>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="mb-3 align-items-center">
+                                    <div class="img-fluid mb-3">
+                                        <img class="avatar avatar-lg" data-url="${foto_terima}" src="${foto_terima}" />
+                                    </div>
+                                    <label class="form-label visually-hidden">Dokumen Serah Terima</label>
+                                    <input type="file" name="dokumen" class="form-control" id="dokumen" required>
+                                </div>
+                            </div>
                         </div></li>`;
                         $('#list_dokumen').append(html_dokumen);
                     // }
