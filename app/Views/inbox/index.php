@@ -228,22 +228,22 @@
                         // loop jml_order
                         for(let i = 0; i < itemData.jml_order; i++){
                             let html_driver = `<li class="list-group-item mb-3">
-                            // <div class="mb-3 align-items-center">
-                            //     <label class="form-label visually-hidden">Driver</label>
-                            //     <input type="text" name="nama_driver[` + i + `]" class="form-control" id="nama_driver" placeholder="Nama Driver" value="` + (resultPlgn.nama_drv || '') + `" required>
-                            // </div>
-                            // <div class="mb-3 align-items-center">
-                            //     <label class="form-label visually-hidden">No HP</label>
-                            //     <input type="text" name="no_hp_driver[` + i + `]" class="form-control" id="no_hp_driver" placeholder="No HP" value="` + (resultPlgn.hp_drv || '') + `">
-                            // </div>
+                            <div class="mb-3 align-items-center d-none">
+                                <label class="form-label visually-hidden">Driver</label>
+                                <input type="text" name="nama_driver[` + i + `]" class="form-control" id="nama_driver" placeholder="Nama Driver" value="` + (resultPlgn.nama_drv || '') + `" required>
+                            </div>
+                            <div class="mb-3 align-items-center d-none">
+                                <label class="form-label visually-hidden">No HP</label>
+                                <input type="text" name="no_hp_driver[` + i + `]" class="form-control" id="no_hp_driver" placeholder="No HP" value="` + (resultPlgn.hp_drv || '') + `">
+                            </div>
                             <div class="mb-3 align-items-center">
                                 <label class="form-label visually-hidden">Nopol</label>
                                 <input type="text" name="nopol_driver[` + i + `]" class="form-control" id="nopol_driver" placeholder="Nopol" value="` + (resultPlgn.nopol || '') + `" required>
                             </div>
-                            // <div class="mb-0 align-items-center">
-                            //     <label class="form-label visually-hidden">Note</label>
-                            //     <input type="text" name="note_driver[` + i + `]" class="form-control" id="note_driver" placeholder="Note" value="` + (resultPlgn.note_drv || '') + `">
-                            // </div></li>`;
+                            <div class="mb-0 align-items-center d-none">
+                                <label class="form-label visually-hidden">Note</label>
+                                <input type="text" name="note_driver[` + i + `]" class="form-control" id="note_driver" placeholder="Note" value="` + (resultPlgn.note_drv || '') + `">
+                            </div></li>`;
 
                             if (['2', '4'].includes(itemData.jns_order)) {
                                 let html_driver = `<li class="list-group-item mb-3">
