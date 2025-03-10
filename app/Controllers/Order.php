@@ -15,10 +15,16 @@ class Order extends BaseController
     public function __construct()
     {
         $this->ipAddress = $_ENV['API_BASEURL'];
-        $this->session = session();
-        // jika tidak ada session, redirect ke login
-        if (!$this->session->get('user') || !isset($this->session->get('user')['kode'])) {
-            return redirect()->to('/login');
+        // $this->session = session();
+        // // jika tidak ada session, redirect ke login
+        // if (!$this->session->get('user') || !isset($this->session->get('user')['kode'])) {
+        //     return redirect()->to('/login')->with('error', 'Silakan login terlebih dahulu.');
+        // }
+        
+        $this->session = \Config\Services::session();
+        $user = $this->session->get('user');
+        if (!$user || !isset($user['kode'])) {
+            return redirect()->to('/login')->with('error', 'Silakan login terlebih dahulu.');
         }
 
     }
@@ -48,7 +54,7 @@ class Order extends BaseController
         $listKota   = [];
         $curlOpt    = [
             // 'caller' => 'MASTER',
-            'kd_member' => $this->session->get('user')['kode'],
+            'kd_member' => $this->session->get('user')['kode'] ?? null,
         ];
 
         // handle POST
@@ -92,7 +98,7 @@ class Order extends BaseController
 
         $curlOpt    = [
             // 'caller' => 'MASTER',
-            'kd_member' => $this->session->get('user')['kode'],
+            'kd_member' => $this->session->get('user')['kode'] ?? null,
         ];
 
         // handle POST
@@ -124,7 +130,6 @@ class Order extends BaseController
 
             $data = [
                 'jns_order' => isset($data['jns_order']) ? $data['jns_order'] : 1,
-                'kd_member' => $this->session->get('user')['kode'],
                 'kd_kota' => $data['kd_kota'],
                 'search' => '%' . $data['search'] . '%',
                 'tgl_start' => date('Y-m-d H:i', strtotime($data['tgl_start'] . ' ' . $data['jam_start'])),
@@ -178,7 +183,7 @@ class Order extends BaseController
 
         $curlOpt    = [
             // 'caller' => 'MASTER',
-            'kd_member' => $this->session->get('user')['kode'],
+            'kd_member' => $this->session->get('user')['kode'] ?? null,
         ];
 
         // handle POST
@@ -272,7 +277,7 @@ class Order extends BaseController
         $listKota   = [];
         $listUnit   = [];
         $curlOpt    = [
-            'kd_member' => $this->session->get('user')['kode'],
+            'kd_member' => $this->session->get('user')['kode'] ?? null,
         ];
 
         // handle POST
@@ -283,7 +288,6 @@ class Order extends BaseController
             // search_entry_order_7.php (jns_order: 2)
             $data = [
                 'jns_order' => isset($data['jns_order']) ? $data['jns_order'] : $jns_order,
-                'kd_member' => $this->session->get('user')['kode'],
                 'kd_kota' => $data['kd_kota'],
                 'search' => '%' . $data['search'] . '%',
                 'tgl_start' => date('Y-m-d H:i', strtotime($data['tgl_start'] . ' ' . $data['jam_start'])),
@@ -346,7 +350,7 @@ class Order extends BaseController
         $listData   = [];
         $listKota   = [];
         $curlOpt    = [
-            'kd_member' => $this->session->get('user')['kode'],
+            'kd_member' => $this->session->get('user')['kode'] ?? null,
         ];
 
         // handle POST
@@ -355,7 +359,6 @@ class Order extends BaseController
             // echo json_encode($data); die();
             $data = [
                 'jns_order' => isset($data['jns_order']) ? $data['jns_order'] : $jns_order,
-                'kd_member' => $this->session->get('user')['kode'],
                 'kd_kota' => $data['kd_kota'],
                 'search' => '%' . $data['search'] . '%',
                 'tgl_start' => date('Y-m-d H:i', strtotime($data['tgl_start'] . ' ' . $data['jam_start'])),
@@ -406,7 +409,7 @@ class Order extends BaseController
         // echo 'Detail Order ' . $id;
 
         $curlOpt = [
-            'kd_member' => $this->session->get('user')['kode'],
+            'kd_member' => $this->session->get('user')['kode'] ?? null,
             'id_order' => $id
         ];
 

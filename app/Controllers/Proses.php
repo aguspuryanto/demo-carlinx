@@ -14,10 +14,16 @@ class Proses extends BaseController
     {
         helper('my');
         $this->ipAddress = $_ENV['API_BASEURL'];
-        $this->session = session();
-        // jika tidak ada session, redirect ke login
-        if (!$this->session->get('user') || !isset($this->session->get('user')['kode'])) {
-            return redirect()->to('/login');
+        // $this->session = session();
+        // // jika tidak ada session, redirect ke login
+        // if (!$this->session->get('user') || !isset($this->session->get('user')['kode'])) {
+        //     return redirect()->to('/login');
+        // }
+        
+        $this->session = \Config\Services::session();
+        $user = $this->session->get('user');
+        if (!$user || !isset($user['kode'])) {
+            return redirect()->to('/login')->with('error', 'Silakan login terlebih dahulu.');
         }
     }
     
