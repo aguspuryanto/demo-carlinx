@@ -242,7 +242,7 @@
 
                     if((is_vendor == '1' && ['1','4','5'].includes(itemData.stat)) || (is_pemesan == '1' && ['9'].includes(itemData.stat))){
                         // form driver
-                        newForm.innerHTML += '<h6 class="mb-3">Driver</h6><div class="list-group mb-3" id="list_driver"></div>';
+                        newForm.innerHTML += '<h6 class="mb-3">Unit</h6><div class="list-group mb-3" id="list_driver"></div>';
                         // loop jml_order
                         for(let i = 0; i < itemData.jml_order; i++){
                             let html_driver = `<a href="#" data-bs-toggle="modal" data-bs-target="#driverModal" data-id="` + (i+1) + `" data-item='` + JSON.stringify(resultPlgn) + `' data-order='` + idOrder + `' class="list-group-item list-group-item-action">
@@ -343,6 +343,18 @@
                         </li>`;
                         $('#list_pembayaran').append(html_pembayaran);
                     }
+
+                    // unggah Dokumen Serah/terima
+                    // if(is_vendor == '1' && itemData.stat == '9'){
+                        newForm.innerHTML += '<h6 class="mb-3">Dokumen Serah Terima</h6><ul class="list-group" id="list_dokumen"></ul>';
+                        let html_dokumen = `<li class="list-group-item">
+                         <div class="mb-3 align-items-center">
+                            <label class="form-label visually-hidden">Dokumen Serah Terima</label>
+                            <input type="file" name="dokumen" class="form-control" id="dokumen" required>
+                        </div></li>`;
+                        $('#list_dokumen').append(html_dokumen);
+                    // }
+
                 });
                 
                 // Then append the form to the formConfirmOrder div
