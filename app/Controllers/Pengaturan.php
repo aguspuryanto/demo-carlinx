@@ -448,7 +448,7 @@ class Pengaturan extends BaseController
             $updateData = [
                 'kd_unit' => $data['kd_unit'],
                 'nama' => $data['nama'],
-                'kategori' => SUBSTR($data['kd_unit'],0,8).$data['kategori'],
+                'kategori' => $data['kategori'],
                 'bbm' => $data['bbm'],
                 'dlm_kota' => $data['dlm_kota'],
                 'dlm_prop' => $data['dlm_prop'],
