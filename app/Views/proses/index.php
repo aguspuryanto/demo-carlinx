@@ -356,7 +356,7 @@
                             <div class="col-6">
                                 <div class="mb-3 align-items-center">
                                     <div class="img-fluid mb-3">
-                                        <img data-url="${foto_serah}" src="${foto_serah}" />
+                                        <img class="avatar avatar-lg" data-url="${foto_serah}" src="${foto_serah}" />
                                     </div>
                                     <label class="form-label visually-hidden">Dokumen Serah Terima</label>
                                     <input type="file" name="foto_serah" class="form-control" id="foto_serah" required>
@@ -365,7 +365,7 @@
                             <div class="col-6">
                                 <div class="mb-3 align-items-center">
                                     <div class="img-fluid mb-3">
-                                        <img data-url="${foto_terima}" src="${foto_terima}" />
+                                        <img class="avatar avatar-lg" data-url="${foto_terima}" src="${foto_terima}" />
                                     </div>
                                     <label class="form-label visually-hidden">Dokumen Serah Terima</label>
                                     <input type="file" name="foto_terima" class="form-control" id="foto_terima" required>
@@ -398,6 +398,8 @@
                             <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="selesai">Selesaikan Pelayanan</button>
                         `);
                     }
+                } else {
+                    $('#addModal .modal-footer').addClass('d-none');
                 }
 
                 $('#addModal').modal('show');

@@ -56,7 +56,7 @@ $routes->group('rate', ['filter' => 'auth'], function($routes) {
 // pelayanan
 $routes->group('order', ['filter' => 'auth'], function($routes) {
     $routes->get('orderlayanan', 'Order::orderLayanan');
-    $routes->post('search-order', 'Order::searchOrder');
+    $routes->add('search-order', 'Order::searchOrder');
     // $routes->get('search-order/(:num)', 'Order::searchOrderDetail/$1');
     $routes->post('select-order', 'Order::selectOrder');
 

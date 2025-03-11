@@ -102,6 +102,11 @@ class Order extends BaseController
         ];
 
         // handle POST
+        // if empty, then redirect to searchorder
+        if(empty($this->request->getPost())) {
+            return redirect()->to('order/orderlayanan');
+        }
+
         if ($this->request->getMethod() == 'POST') {
             $data = $this->request->getPost();
             // echo json_encode($data); die;
