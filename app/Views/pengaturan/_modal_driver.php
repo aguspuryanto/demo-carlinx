@@ -10,7 +10,7 @@
                         <!-- kategory -->
                         <div class="form-group">
                             <label for="kd_kat">Kategori</label>
-                            <select class="form-control" id="kd_kat" name="kd_kat" required>
+                            <select class="form-select" id="kd_kat" name="kd_kat" required>
                                 <?php foreach ($listKategori['result_kategori'] as $item) : ?>
                                     <option value="<?= $item['kode'] ?>"><?= $item['descr'] ?></option>
                                 <?php endforeach ?>

@@ -8,7 +8,7 @@
         
         <div class="row">
             <div class="card">
-            <form action="<?= base_url('pengaturan/unit') ?>" method="POST">
+            <form id="formUnit" action="<?= base_url('pengaturan/unit') ?>" method="POST">
                 <div class="card-header">
                     <a href="<?= base_url('pengaturan/unit') ?>" class="btn">
                         <i class="fa fa-arrow-left"></i> Unit
@@ -21,7 +21,7 @@
                     ?>
                 </div>                
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="submit" class="btn btn-primary" id="formUnit">Simpan</button>
                 </div>
             </form>
             </div>
@@ -84,9 +84,9 @@
 
             // set value into form
             $('#nama').val(item.nama);
-            $('#kategori').select2("trigger", "select", {
-                data: { id: item.kode, text: item.kategori }
-            });
+            // $('#kategori').select2("trigger", "select", {
+            //     data: { id: item.kode, text: item.kategori }
+            // });
             $('#bbm').select2("trigger", "select", {
                 data: { id: item.bbm, text: item.bbm }
             });
@@ -336,7 +336,14 @@
 
         $(document).on('click', '#btnSimpan', function(e) {
             e.preventDefault();
-            $('#formHargaUnit').submit();
+            // $('#formHargaUnit').submit();
+        });
+
+        $(document).on('click', '#formUnit', function(e) {
+            e.preventDefault();
+            // var kategori = $('#kategori').val();
+            // console.log(kategori, 'kategori');
+            $('#formUnit').submit();
         });
     });
 
