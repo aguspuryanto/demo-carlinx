@@ -10,7 +10,7 @@
                     <select class="form-select select2x" id="kategori" name="kategori">
                         <option value="">Pilih Kategori</option>
                         <?php foreach ($listKategori['result_kategori'] as $kategori_it) : ?>
-                        <option value="<?= $kategori_it['kode'] ?>" selected><?= $kategori_it['descr'] ?></option>
+                        <option value="<?= $kategori_it['kode'] ?>" <?php if($kategori_it['descr'] == $listData['result_unit'][0]['kategori']) echo "selected"; ?>><?= $kategori_it['descr'] ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
@@ -19,7 +19,7 @@
                     <select class="form-select select2x" id="bbm" name="bbm">
                         <option value="">Pilih BBM</option>
                         <?php foreach ($listPaketBbm['result_bbm'] as $bbm_it) : ?>
-                        <option value="<?= $bbm_it['kode'] ?>" selected><?= $bbm_it['descr'] ?></option>
+                        <option value="<?= $bbm_it['kode'] ?>" <?php if($bbm_it['descr'] == $listData['result_unit'][0]['bbm']) echo "selected"; ?>><?= $bbm_it['descr'] ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>

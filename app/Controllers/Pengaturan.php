@@ -458,7 +458,7 @@ class Pengaturan extends BaseController
                 'biaya_ambil' => $data['biaya_ambil'],
                 'tuslah' => $data['tuslah'],
                 'is_tuslah' => $data['is_tuslah'],
-                'stat' => ($data['stat'] == 'on') ? 1 : 0,
+                'stat' => isset($data['stat']) ? 1 : 0,
                 'kons_bbm' => $data['kons_bbm'],
                 'kursi' => $data['kursi'],
                 'tahun' => $data['tahun'],

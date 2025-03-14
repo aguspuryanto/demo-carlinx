@@ -64,12 +64,12 @@
         const listPaketBbm  = '<?= json_encode($listPaketBbm['result_bbm']) ?>';
         const listData      = '<?= json_encode($listData['result_unit']) ?>';
 
-        // $('#kategori').select2({
-        //     theme: 'bootstrap-5',
-        //     placeholder: 'Type to search...',
-        //     minimumInputLength: 2,
-        //     data: listKategori
-        // });
+        $('#kategori').select2({
+            theme: 'bootstrap-5',
+            placeholder: 'Type to search...',
+            minimumInputLength: 2,
+            data: listKategori
+        });
 
         $('#bbm').select2({
             theme: 'bootstrap-5',
@@ -81,6 +81,9 @@
         function initForm(){
             var item = JSON.parse(listData)[0];
             console.log(item, '81_item');
+            console.log(item.kode, '82_kode');
+            console.log(item.kategori, '83_kategori');
+            console.log(item.bbm, '84_bbm');
 
             // set value into form
             $('#nama').val(item.nama);
