@@ -64,12 +64,12 @@
         const listPaketBbm  = '<?= json_encode($listPaketBbm['result_bbm']) ?>';
         const listData      = '<?= json_encode($listData['result_unit']) ?>';
 
-        $('#kategori').select2({
-            theme: 'bootstrap-5',
-            placeholder: 'Type to search...',
-            minimumInputLength: 2,
-            data: listKategori
-        });
+        // $('#kategori').select2({
+        //     theme: 'bootstrap-5',
+        //     placeholder: 'Type to search...',
+        //     minimumInputLength: 2,
+        //     data: listKategori
+        // });
 
         $('#bbm').select2({
             theme: 'bootstrap-5',

@@ -458,7 +458,7 @@ class Pengaturan extends BaseController
                 'biaya_ambil' => $data['biaya_ambil'],
                 'tuslah' => $data['tuslah'],
                 'is_tuslah' => $data['is_tuslah'],
-                'stat' => $data['stat'],
+                'stat' => ($data['stat'] == 'on') ? 1 : 0,
                 'kons_bbm' => $data['kons_bbm'],
                 'kursi' => $data['kursi'],
                 'tahun' => $data['tahun'],
@@ -470,7 +470,7 @@ class Pengaturan extends BaseController
                 'stgh_hr' => $data['stgh_hr'],
                 'bulanan' => $data['bulanan']
             ];
-            // echo json_encode($updateData);
+            // echo json_encode($updateData); die();
 
             $resultData = getCurl($updateData, $this->ipAddress . 'update_unit_1.php');
             // echo json_encode($resultData);
