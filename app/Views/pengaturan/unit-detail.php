@@ -84,9 +84,9 @@
 
             // set value into form
             $('#nama').val(item.nama);
-            // $('#kategori').select2("trigger", "select", {
-            //     data: { id: item.kode, text: item.kategori }
-            // });
+            $('#kategori').select2("trigger", "select", {
+                data: { id: item.kategori, text: item.kategori }
+            });
             $('#bbm').select2("trigger", "select", {
                 data: { id: item.bbm, text: item.bbm }
             });
@@ -339,11 +339,11 @@
             // $('#formHargaUnit').submit();
         });
 
-        $(document).on('click', '#formUnit', function(e) {
+        $(document).on('click', 'button#formUnit', function(e) {
             e.preventDefault();
-            // var kategori = $('#kategori').val();
-            // console.log(kategori, 'kategori');
-            $('#formUnit').submit();
+            var kategori = $('#kategori').val();
+            console.log(kategori, 'kategori');
+            $('form#formUnit').submit();
         });
     });
 
