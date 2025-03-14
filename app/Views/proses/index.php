@@ -349,7 +349,7 @@
 
                     // unggah Dokumen Serah/terima
                     // Is_vendor== 1 && stat ==   9 && jns_order == 2 || jns_order == 4 (selesaikan pelayanan)
-                    if(is_vendor == '1' && itemData.stat != '9'){
+                    if(is_vendor == '1' && itemData.stat == '9'){
 
                         if (['2', '4'].includes(itemData.jns_order)) {
                             let foto_serah =  (itemData.foto_serah) ? "<?= base_url(); ?>proxy.php?url=<?= $_ENV['API_BASEURL']; ?>images_lk/" + encodeURIComponent(itemData.foto_serah) : "https://placehold.co/100";
@@ -394,13 +394,13 @@
 
                 // append to modal footer
                 if(is_vendor == '1'){
-                    if (itemData.stat == '9'){
+                    if (itemData.stat == '9' && (itemData.jns_order == '2' || itemData.jns_order == '4')) {
                         $('#addModal .modal-footer').html(`
-                            <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="selesai">Selesaikan Pelayanan</button>
+                            <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="selesai">UNGGAH FOTO PENYERTAAN UNIT</button>
                         `);
                     } else {
                         $('#addModal .modal-footer').html(`
-                            <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="selesai">UNGGAH FOTO PENYERTAAN UNIT</button>
+                            <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="selesai">Selesaikan Pelayanan</button>
                         `);
                     }
                 } else {
