@@ -345,41 +345,44 @@
                     }
 
                     // unggah Dokumen Serah/terima
-                    // if(is_vendor == '1' && itemData.stat == '9'){
-                    
-                        let foto_serah =  (itemData.foto_serah) ? "<?= base_url(); ?>proxy.php?url=<?= $_ENV['API_BASEURL']; ?>images_lk/" + encodeURIComponent(itemData.foto_serah) : "https://placehold.co/100";
-                        let foto_terima = (itemData.foto_terima) ? "<?= base_url(); ?>proxy.php?url=<?= $_ENV['API_BASEURL']; ?>images_lk/" + encodeURIComponent(itemData.foto_terima) : "https://placehold.co/100";
+                    // Is_vendor== 1 && stat ==   9 && jns_order == 2 || jns_order == 4 (selesaikan pelayanan)
+                    if(is_vendor == '1' && itemData.stat != '9'){
 
-                        newForm.innerHTML += '<h6 class="mb-3">Dokumen Serah/Terima</h6><ul class="list-group" id="list_dokumen"></ul>';
-                        let html_dokumen = `<li class="list-group-item">
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="mb-3 align-items-center">
-                                    <div class="img-fluid mb-3">
-                                        <img class="avatar avatar-lg" data-url="${foto_serah}" src="${foto_serah}" />
+                        if (['2', '4'].includes(itemData.jns_order)) {
+                            let foto_serah =  (itemData.foto_serah) ? "<?= base_url(); ?>proxy.php?url=<?= $_ENV['API_BASEURL']; ?>images_lk/" + encodeURIComponent(itemData.foto_serah) : "https://placehold.co/100";
+                            let foto_terima = (itemData.foto_terima) ? "<?= base_url(); ?>proxy.php?url=<?= $_ENV['API_BASEURL']; ?>images_lk/" + encodeURIComponent(itemData.foto_terima) : "https://placehold.co/100";
+
+                            newForm.innerHTML += '<h6 class="mb-3">Dokumen Serah/Terima</h6><ul class="list-group" id="list_dokumen"></ul>';
+                            let html_dokumen = `<li class="list-group-item">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="mb-3 align-items-center">
+                                        <div class="img-fluid mb-3">
+                                            <img class="avatar avatar-lg" data-url="${foto_serah}" src="${foto_serah}" />
+                                        </div>
+                                        <label class="form-label visually-hidden">Dokumen Serah Terima</label>
+                                        <input type="file" name="foto_serah" class="form-control" id="foto_serah" required>
                                     </div>
-                                    <label class="form-label visually-hidden">Dokumen Serah Terima</label>
-                                    <input type="file" name="foto_serah" class="form-control" id="foto_serah" required>
                                 </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="mb-3 align-items-center">
-                                    <div class="img-fluid mb-3">
-                                        <img class="avatar avatar-lg" data-url="${foto_terima}" src="${foto_terima}" />
+                                <div class="col-6">
+                                    <div class="mb-3 align-items-center">
+                                        <div class="img-fluid mb-3">
+                                            <img class="avatar avatar-lg" data-url="${foto_terima}" src="${foto_terima}" />
+                                        </div>
+                                        <label class="form-label visually-hidden">Dokumen Serah Terima</label>
+                                        <input type="file" name="foto_terima" class="form-control" id="foto_terima" required>
                                     </div>
-                                    <label class="form-label visually-hidden">Dokumen Serah Terima</label>
-                                    <input type="file" name="foto_terima" class="form-control" id="foto_terima" required>
                                 </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="mb-3 align-items-center">
-                                    <input type="checkbox" name="check_dokumen" class="form-check-input" id="check_dokumen" required>
-                                    <label class="form-check-label" for="check_dokumen">Pihak Rental telah menyetujui dan menerima pengembalian Unit</label>
+                                <div class="col-12">
+                                    <div class="mb-3 align-items-center">
+                                        <input type="checkbox" name="check_dokumen" class="form-check-input" id="check_dokumen" required>
+                                        <label class="form-check-label" for="check_dokumen">Pihak Rental telah menyetujui dan menerima pengembalian Unit</label>
+                                    </div>
                                 </div>
-                            </div>
-                        </div></li>`;
-                        $('#list_dokumen').append(html_dokumen);
-                    // }
+                            </div></li>`;
+                            $('#list_dokumen').append(html_dokumen);
+                        }
+                    }
 
                 });
                 
@@ -388,14 +391,13 @@
 
                 // append to modal footer
                 if(is_vendor == '1'){
-                    // when empty
-                    if(itemData.foto_terima == '' || itemData.foto_terima == ''){
-                        $('#addModal .modal-footer').html(`
-                            <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="selesai">UNGGAH FOTO PENYERTAAN UNIT</button>
-                        `);
-                    } else if (itemData.stat == '9'){
+                    if (itemData.stat == '9'){
                         $('#addModal .modal-footer').html(`
                             <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="selesai">Selesaikan Pelayanan</button>
+                        `);
+                    } else {
+                        $('#addModal .modal-footer').html(`
+                            <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="selesai">UNGGAH FOTO PENYERTAAN UNIT</button>
                         `);
                     }
                 } else {
