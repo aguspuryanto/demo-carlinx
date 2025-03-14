@@ -229,15 +229,15 @@ class Inbox extends BaseController
 
             if($data['is_vendor'] == '1'){
                 // update driver
-                $countDrv = count($data['nama_driver']);
+                $countDrv = count($data['nopol_driver']);
                 for($i=0; $i<$countDrv; $i++){
                     $curlOptDrv    = [
                         'id_order' => $data['id_order'],
                         'no' => ($i+1),
-                        'nama' => $data['nama_driver'][$i],
-                        'nohp' => $data['no_hp_driver'][$i],
-                        'nopol' => $data['nopol_driver'][$i],
-                        'note' => $data['note_driver'][$i]
+                        'nama' => ($data['nama_driver'][$i]) ?? '',
+                        'nohp' => ($data['no_hp_driver'][$i]) ?? '',
+                        'nopol' => ($data['nopol_driver'][$i]) ?? '',
+                        'note' => ($data['note_driver'][$i]) ?? ''
                     ];
                     // echo json_encode($curlOptDrv); //die(); //{"id_order":"250218000007","no":["08271615"],"nama":["TEST DRIVER"],"nohp":["08271615"],"nopol":["L 2345 WE"],"note":["test terima"]}
 
