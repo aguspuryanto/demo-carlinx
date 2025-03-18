@@ -64,19 +64,19 @@
         const listPaketBbm  = '<?= json_encode($listPaketBbm['result_bbm']) ?>';
         const listData      = '<?= json_encode($listData['result_unit']) ?>';
 
-        $('#kategori').select2({
-            theme: 'bootstrap-5',
-            placeholder: 'Type to search...',
-            minimumInputLength: 2,
-            data: listKategori
-        });
+        // $('#kategori').select2({
+        //     theme: 'bootstrap-5',
+        //     placeholder: 'Type to search...',
+        //     minimumInputLength: 2,
+        //     data: listKategori
+        // });
 
-        $('#bbm').select2({
-            theme: 'bootstrap-5',
-            placeholder: 'Type to search...',
-            minimumInputLength: 2,
-            data: listPaketBbm
-        });
+        // $('#bbm').select2({
+        //     theme: 'bootstrap-5',
+        //     placeholder: 'Type to search...',
+        //     minimumInputLength: 2,
+        //     data: listPaketBbm
+        // });
 
         function initForm(){
             var item = JSON.parse(listData)[0];
@@ -87,12 +87,12 @@
 
             // set value into form
             $('#nama').val(item.nama);
-            $('#kategori').select2("trigger", "select", {
-                data: { id: item.kategori, text: item.kategori }
-            });
-            $('#bbm').select2("trigger", "select", {
-                data: { id: item.bbm, text: item.bbm }
-            });
+            // $('#kategori').select2("trigger", "select", {
+            //     data: { id: item.kategori, text: item.kategori }
+            // });
+            // $('#bbm').select2("trigger", "select", {
+            //     data: { id: item.bbm, text: item.bbm }
+            // });
 
             $('#kursi').val(item.kursi);
             $('#tahun').val(item.tahun);
