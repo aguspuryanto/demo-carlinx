@@ -180,13 +180,6 @@ class Proses extends BaseController
             //     }                
             // }
 
-            // $id_order = $_POST['id_order'];
-            // $stat_ori = $_POST['stat_ori'];
-            $curlOpt    = [
-                'id_order' => $data['id_order'],
-                'stat_ori' => $data['stat_ori']
-            ];
-
             // upload dokumen serah/terima
             // API: upload_foto_lk.php
             // Set the target directory for uploaded images
@@ -249,13 +242,26 @@ class Proses extends BaseController
                 }
             }
 
-            $listData   = getCurl($curlOpt, $this->ipAddress . 'update_order_closed_1.php');
-            // echo json_encode($listData); die();
-            
-            $response = [
-                'success' => ($listData['success']=='1') ? true : false,
-                'message' => $listData['message']
-            ];
+            if(!empty($errors)){
+                // echo json_encode($errors);
+                // die();
+                $response = [
+                    'success' => false,
+                    'message' => $errors
+                ];
+            } else {
+                $curlOpt = [
+                    'id_order' => $data['id_order'],
+                    'stat' => $data['stat']
+                ];
+                $listData = getCurl($curlOpt, $this->ipAddress . 'update_order_closed_1.php');
+                // echo json_encode($listData); die();
+                
+                $response = [
+                    'success' => ($listData['success']=='1') ? true : false,
+                    'message' => $listData['message']
+                ];
+            }
 
             echo json_encode($response);
             // return redirect()->to(base_url('inbox'))->with('success', 'Order confirmed successfully');
