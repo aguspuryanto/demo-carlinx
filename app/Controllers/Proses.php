@@ -159,7 +159,7 @@ class Proses extends BaseController
         if ($this->request->getMethod() == 'POST') {
             $data = $this->request->getPost();
             // echo print_r($_FILES);
-            // echo json_encode($data); die();
+            echo json_encode($data); die();
 
             // if($data['is_vendor'] == '1'){
             //     if($data['stat_ori'] == '1'){

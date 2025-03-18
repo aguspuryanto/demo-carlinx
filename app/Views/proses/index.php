@@ -58,6 +58,15 @@
         </div>
     </div>
     <!-- end main page content -->
+
+    <!-- <div class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="d-flex">
+        <div class="toast-body">
+        Hello, world! This is a toast message.
+        </div>
+        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    </div> -->
      
     <?php include_once '_modal_order.php'; ?>
     <?php include_once '_modal_payment.php'; ?>
@@ -524,7 +533,7 @@
                             Order confirmed successfully!
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>`;
-                        form.before(successAlert);
+                        form.after(successAlert);
                         
                         setTimeout(() => {
                             $('#addModal').modal('hide');
@@ -536,7 +545,7 @@
                             ${data.message || 'Failed to confirm order'}
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>`;
-                        form.before(errorAlert);
+                        form.after(errorAlert);
                     }
                 },
                 error: function(xhr, status, error) {
@@ -545,7 +554,7 @@
                         An error occurred: ${error}
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>`;
-                    form.before(errorAlert);
+                    form.after(errorAlert);
                 }
             });
         });
