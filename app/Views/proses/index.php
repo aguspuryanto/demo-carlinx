@@ -373,7 +373,7 @@
                                             <img class="avatar avatar-lg" data-url="${foto_serah}" src="${foto_serah}" />
                                         </div>
                                         <label class="form-label visually-hidden">Dokumen Serah Terima</label>
-                                        <input type="file" name="foto_serah" class="form-control" id="foto_serah" required>
+                                        <input type="file" name="foto_serah" class="form-control" id="foto_serah" ${itemData.foto_serah ? '' : 'required'}>
                                     </div>
                                 </div>
                                 <div class="col-6">
@@ -382,7 +382,7 @@
                                             <img class="avatar avatar-lg" data-url="${foto_terima}" src="${foto_terima}" />
                                         </div>
                                         <label class="form-label visually-hidden">Dokumen Serah Terima</label>
-                                        <input type="file" name="foto_terima" class="form-control" id="foto_terima" required>
+                                        <input type="file" name="foto_terima" class="form-control" id="foto_terima" ${(itemData.foto_serah && !itemData.foto_terima) ? 'required' : ''}>
                                     </div>
                                 </div>
                                 <div class="col-12">
