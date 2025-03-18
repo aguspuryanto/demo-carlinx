@@ -80,10 +80,10 @@
 
         function initForm(){
             var item = JSON.parse(listData)[0];
-            console.log(item, '81_item');
-            console.log(item.kode, '82_kode');
-            console.log(item.kategori, '83_kategori');
-            console.log(item.bbm, '84_bbm');
+            // console.log(item, '81_item');
+            // console.log(item.kode, '82_kode');
+            // console.log(item.kategori, '83_kategori');
+            // console.log(item.bbm, '84_bbm');
 
             // set value into form
             $('#nama').val(item.nama);
