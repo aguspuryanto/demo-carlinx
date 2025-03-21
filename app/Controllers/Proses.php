@@ -195,7 +195,7 @@ class Proses extends BaseController
 
             // Loop through each file input
             foreach ($file_keys as $fileKey) {
-                if (isset($_FILES[$fileKey]) && $_FILES[$fileKey]['error'] === 0) {
+                if (isset($_FILES[$fileKey]) && $_FILES[$fileKey]['error'] === 0 && $_FILES[$fileKey]['size'] > 0) {
                     // $fileName = basename($_FILES[$fileKey]["name"]);
                     if($fileKey == 'foto_serah'){
                         $fileName = $data['id_order'] . "_SRH.jpg";

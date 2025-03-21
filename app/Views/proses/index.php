@@ -359,35 +359,59 @@
                     // unggah Dokumen Serah/terima
                     // Is_vendor== 1 && stat ==   9 && jns_order == 2 || jns_order == 4 (selesaikan pelayanan)
                     if(is_vendor == '1' && itemData.stat == '9'){
+                        // instruksi Saat klik Tombol cek :
+                        // 1. Sdh pilih nama file penyerahan ato blm, jika blm, kasih notif.
+                        // 2. Jika pilih nama file penerimaan, tp nama file penyerahan blm ada, kasih notif klo foto penyerahan blm ada
+                        // 3. Klo kedua file sdh ada, tp blm persetujuan blm dicontreng, kasih notif...
+                        // 4. Klo sudah persetujuan, klik tombol cek, kasih notif sudah disetujui.
+                        // 5. Klo blm ada nama file penyerahan, kasih notif klo foto penyerahan blm ada
+                        // 6. Klo ada nama file penyerahan, tp blm ada nama file penerimaan, kasih notif klo foto penerimaan blm ada
+                        // 7. Klo ada kedua file, tp blm persetujuan, kasih notif blm disetujui.
+                        
+                        let foto_serah =  (itemData.foto_serah) ? "<?= base_url(); ?>proxy.php?url=<?= $_ENV['API_BASEURL']; ?>images_lk/" + encodeURIComponent(itemData.foto_serah) : "https://placehold.co/100";
+                        let foto_terima = (itemData.foto_terima) ? "<?= base_url(); ?>proxy.php?url=<?= $_ENV['API_BASEURL']; ?>images_lk/" + encodeURIComponent(itemData.foto_terima) : "https://placehold.co/100";
 
                         if (['2', '4'].includes(itemData.jns_order)) {
-                            let foto_serah =  (itemData.foto_serah) ? "<?= base_url(); ?>proxy.php?url=<?= $_ENV['API_BASEURL']; ?>images_lk/" + encodeURIComponent(itemData.foto_serah) : "https://placehold.co/100";
-                            let foto_terima = (itemData.foto_terima) ? "<?= base_url(); ?>proxy.php?url=<?= $_ENV['API_BASEURL']; ?>images_lk/" + encodeURIComponent(itemData.foto_terima) : "https://placehold.co/100";
+                            let foto_serah_html = `<div class="img-fluid mb-3">
+                                <img class="avatar avatar-lg img-thumbnail foto_serah" data-url="${foto_serah}" src="${foto_serah}" />
+                            </div>
+                            <label class="form-label visually-hidden">Dokumen Serah Terima</label>
+                            <input type="file" name="foto_serah" class="form-control" id="foto_serah" ${itemData.foto_serah ? '' : 'required'}>`;
+
+                            let foto_terima_html = `<div class="img-fluid mb-3">
+                                <img class="avatar avatar-lg img-thumbnail foto_terima" data-url="${foto_terima}" src="${foto_terima}" />
+                            </div>
+                            <label class="form-label visually-hidden">Dokumen Serah Terima</label>
+                            <input type="file" name="foto_terima" class="form-control" id="foto_terima" ${(itemData.foto_serah && !itemData.foto_terima) ? 'required' : ''}>`;
+
+                            if(itemData.foto_serah && itemData.foto_serah != 'https://placehold.co/100'){
+                                foto_serah_html = `<div class="img-fluid mb-3">
+                                    <img class="avatar avatar-lg img-thumbnail foto_serah" data-url="${foto_serah}" src="${foto_serah}" />
+                                </div>`;
+                            }
+
+                            if(itemData.foto_terima && itemData.foto_terima != 'https://placehold.co/100'){
+                                foto_terima_html = `<div class="img-fluid mb-3">
+                                    <img class="avatar avatar-lg img-thumbnail foto_terima" data-url="${foto_terima}" src="${foto_terima}" />
+                                </div>`;
+                            }
 
                             newForm.innerHTML += '<h6 class="mb-3">Dokumen Serah/Terima</h6><ul class="list-group" id="list_dokumen"></ul>';
                             let html_dokumen = `<li class="list-group-item">
                             <div class="row">
                                 <div class="col-6">
                                     <div class="mb-3 align-items-center">
-                                        <div class="img-fluid mb-3">
-                                            <img class="avatar avatar-lg" data-url="${foto_serah}" src="${foto_serah}" />
-                                        </div>
-                                        <label class="form-label visually-hidden">Dokumen Serah Terima</label>
-                                        <input type="file" name="foto_serah" class="form-control" id="foto_serah" ${itemData.foto_serah ? '' : 'required'}>
+                                        ${foto_serah_html}
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="mb-3 align-items-center">
-                                        <div class="img-fluid mb-3">
-                                            <img class="avatar avatar-lg" data-url="${foto_terima}" src="${foto_terima}" />
-                                        </div>
-                                        <label class="form-label visually-hidden">Dokumen Serah Terima</label>
-                                        <input type="file" name="foto_terima" class="form-control" id="foto_terima" ${(itemData.foto_serah && !itemData.foto_terima) ? 'required' : ''}>
+                                        ${foto_terima_html}
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="mb-3 align-items-center">
-                                        <input type="checkbox" name="check_dokumen" class="form-check-input" id="check_dokumen" required>
+                                        <input type="checkbox" name="check_dokumen" class="form-check-input" id="check_dokumen" ${itemData.foto_serah && itemData.foto_terima ? 'checked' : ''} required>
                                         <label class="form-check-label" for="check_dokumen">Pihak Rental telah menyetujui dan menerima pengembalian Unit</label>
                                     </div>
                                 </div>
@@ -420,11 +444,18 @@
             }
         });
 
+        // Modify the existing click handler for btnConfirmOrder
         $(document).on('click', 'button.btnConfirmOrder', function(e) {
             e.preventDefault();
             let action = $(this).data('action');
-            console.log(action, 'action');
             
+            // Add document validation for relevant cases
+            if (action === 'selesai') {
+                if (!validateDocuments()) {
+                    return false;
+                }
+            }
+
             let form = $('#formConfirmOrder form'); // Get the actual form element inside #formConfirmOrder
             form.addClass('was-validated'); // Add Bootstrap validation class
             
@@ -732,18 +763,96 @@
             });
         });
 
+        // $(".container").imageBox();
+        $(document).on('click', 'img.avatar', function(e) {
+            $('#imgViewer').html('').append(
+                $(e.currentTarget).clone()
+                    .removeAttr('style')
+                    .attr('style', 'width:100%') // Add width:100% style
+                    .addClass('img-fluid')
+            );
+            $('#viewImg').modal('show');
+        });
+
+        // Add validation on file input changes
+        $(document).on('change', '#foto_serah, #foto_terima', function() {
+            validateDocuments();
+        });
+
+        // Add validation on checkbox change
+        $(document).on('change', '#check_dokumen', function() {
+            validateDocuments();
+        });
+
     });
 
-    // $(".container").imageBox();
-    $(document).on('click', 'img.avatar', function(e) {
-        $('#imgViewer').html('').append(
-            $(e.currentTarget).clone()
-                .removeAttr('style')
-                .attr('style', 'width:100%') // Add width:100% style
-                .addClass('img-fluid')
-        );
-        $('#viewImg').modal('show');
-    });
+    // Add validation function for document checks
+    function validateDocuments() {
+        const fotoSerah = $('#foto_serah').val();
+        const fotoTerima = $('#foto_terima').val();
+        const checkDokumen = $('#check_dokumen').is(':checked');
+        const existingFotoSerah = $('img.foto_serah').attr('src') !== 'https://placehold.co/100';
+        const existingFotoTerima = $('img.foto_terima').attr('src') !== 'https://placehold.co/100';
+        console.log(fotoSerah, '_fotoSerah');
+        console.log(fotoTerima, '_fotoTerima');
+        console.log(existingFotoSerah, '_existingFotoSerah');
+        console.log(existingFotoTerima, '_existingFotoTerima');
+
+        // Clear any existing alerts
+        $('.alert').remove();
+
+        // instruksi Saat klik Tombol cek :
+        // 1. Sdh pilih nama file penyerahan ato blm, jika blm, kasih notif.
+        // 2. Jika pilih nama file penerimaan, tp nama file penyerahan blm ada, kasih notif klo foto penyerahan blm ada
+        // 3. Klo kedua file sdh ada, tp blm persetujuan blm dicontreng, kasih notif...
+        // 4. Klo sudah persetujuan, klik tombol cek, kasih notif sudah disetujui.
+        // 5. Klo blm ada nama file penyerahan, kasih notif klo foto penyerahan blm ada
+        // 6. Klo ada nama file penyerahan, tp blm ada nama file penerimaan, kasih notif klo foto penerimaan blm ada
+        // 7. Klo ada kedua file, tp blm persetujuan, kasih notif blm disetujui.
+
+        // Case 1: No handover photo selected
+        if (!existingFotoSerah && !fotoSerah) {
+            showAlert('warning', 'Foto penyerahan unit belum dipilih');
+            return false;
+        }
+
+        // Case 2: Return photo selected but no handover photo
+        if (!existingFotoSerah && (fotoTerima)) {
+            showAlert('warning', 'Foto penyerahan unit harus diupload terlebih dahulu');
+            return false;
+        }
+
+        // Case 3 & 7: Both photos exist but no approval
+        if ((existingFotoSerah || fotoSerah) && (existingFotoTerima || fotoTerima) && !checkDokumen) {
+            showAlert('warning', 'Mohon centang persetujuan pengembalian unit');
+            return false;
+        }
+
+        // Case 6: Has handover photo but no return photo
+        if ((existingFotoSerah || fotoSerah) && !existingFotoTerima) {
+            // showAlert('warning', 'Foto penerimaan unit belum dipilih');
+            // return false;
+        }
+
+        // Case 4: Everything is complete
+        if ((existingFotoSerah || fotoSerah) && (existingFotoTerima || fotoTerima) && checkDokumen) {
+            showAlert('success', 'Dokumen lengkap dan telah disetujui');
+            return true;
+        }
+
+        return true;
+    }
+
+    // Helper function to show alerts
+    function showAlert(type, message) {
+        const alertHtml = `
+            <div class="alert alert-${type} alert-dismissible fade show mt-3" role="alert">
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        `;
+        $('#list_dokumen').after(alertHtml);
+    }
 
     async function loadDetailOrder(idOrder) {
         try {
