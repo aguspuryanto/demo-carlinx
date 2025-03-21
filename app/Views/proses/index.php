@@ -369,20 +369,22 @@
                         // 7. Klo ada kedua file, tp blm persetujuan, kasih notif blm disetujui.
                         
                         let foto_serah =  (itemData.foto_serah) ? "<?= base_url(); ?>proxy.php?url=<?= $_ENV['API_BASEURL']; ?>images_lk/" + encodeURIComponent(itemData.foto_serah) : "https://placehold.co/100";
+                        
                         let foto_terima = (itemData.foto_terima) ? "<?= base_url(); ?>proxy.php?url=<?= $_ENV['API_BASEURL']; ?>images_lk/" + encodeURIComponent(itemData.foto_terima) : "https://placehold.co/100";
 
-                        if (['2', '4'].includes(itemData.jns_order)) {
-                            let foto_serah_html = `<div class="img-fluid mb-3">
-                                <img class="avatar avatar-lg img-thumbnail foto_serah" data-url="${foto_serah}" src="${foto_serah}" />
-                            </div>
-                            <label class="form-label visually-hidden">Dokumen Serah Terima</label>
-                            <input type="file" name="foto_serah" class="form-control" id="foto_serah" ${itemData.foto_serah ? '' : 'required'}>`;
+                        let foto_serah_html = `<div class="img-fluid mb-3">
+                            <img class="avatar avatar-lg img-thumbnail foto_serah" data-url="${foto_serah}" src="${foto_serah}" />
+                        </div>
+                        <label class="form-label visually-hidden">Dokumen Serah Terima</label>
+                        <input type="file" name="foto_serah" class="form-control" id="foto_serah" ${itemData.foto_serah ? '' : 'required'}>`;
 
-                            let foto_terima_html = `<div class="img-fluid mb-3">
-                                <img class="avatar avatar-lg img-thumbnail foto_terima" data-url="${foto_terima}" src="${foto_terima}" />
-                            </div>
-                            <label class="form-label visually-hidden">Dokumen Serah Terima</label>
-                            <input type="file" name="foto_terima" class="form-control" id="foto_terima" ${(itemData.foto_serah && !itemData.foto_terima) ? 'required' : ''}>`;
+                        let foto_terima_html = `<div class="img-fluid mb-3">
+                            <img class="avatar avatar-lg img-thumbnail foto_terima" data-url="${foto_terima}" src="${foto_terima}" />
+                        </div>
+                        <label class="form-label visually-hidden">Dokumen Serah Terima</label>
+                        <input type="file" name="foto_terima" class="form-control" id="foto_terima" ${(itemData.foto_serah && !itemData.foto_terima) ? 'required' : ''}>`;
+
+                        if (['2', '4'].includes(itemData.jns_order)) {
 
                             if(itemData.foto_serah && itemData.foto_serah != 'https://placehold.co/100'){
                                 foto_serah_html = `<div class="img-fluid mb-3">
@@ -427,13 +429,13 @@
 
                 // append to modal footer
                 if(is_vendor == '1'){
-                    if (itemData.stat == '9' && (itemData.jns_order == '2' || itemData.jns_order == '4')) {
+                    if (itemData.stat == '9' && (itemData.jns_order == '2' || itemData.jns_order == '4') && (!itemData.foto_serah || !itemData.foto_terima)) {
                         $('#addModal .modal-footer').html(`
                             <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="selesai">UNGGAH FOTO PENYERTAAN UNIT</button>
                         `);
                     } else {
                         $('#addModal .modal-footer').html(`
-                            <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="selesai">Selesaikan Pelayanan</button>
+                            <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="selesai">SELESAIKAN PELAYANAN</button>
                         `);
                     }
                 } else {
