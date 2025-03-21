@@ -358,6 +358,10 @@
 
                     // unggah Dokumen Serah/terima
                     // Is_vendor== 1 && stat ==   9 && jns_order == 2 || jns_order == 4 (selesaikan pelayanan)
+                    // reset foto_serah dan foto_terima
+                    itemData.foto_serah = '';
+                    itemData.foto_terima = '';
+
                     if(is_vendor == '1' && itemData.stat == '9'){
                         // instruksi Saat klik Tombol cek :
                         // 1. Sdh pilih nama file penyerahan ato blm, jika blm, kasih notif.
@@ -369,16 +373,16 @@
                         // 7. Klo ada kedua file, tp blm persetujuan, kasih notif blm disetujui.
                         
                         let foto_serah =  (itemData.foto_serah) ? "<?= base_url(); ?>proxy.php?url=<?= $_ENV['API_BASEURL']; ?>images_lk/" + encodeURIComponent(itemData.foto_serah) : "https://placehold.co/100";
-                        
+
                         let foto_terima = (itemData.foto_terima) ? "<?= base_url(); ?>proxy.php?url=<?= $_ENV['API_BASEURL']; ?>images_lk/" + encodeURIComponent(itemData.foto_terima) : "https://placehold.co/100";
 
-                        let foto_serah_html = `<div class="img-fluid mb-3">
+                        let foto_serah_html = `<div class="img-fluid mb-3 text-center">
                             <img class="avatar avatar-lg img-thumbnail foto_serah" data-url="${foto_serah}" src="${foto_serah}" />
                         </div>
                         <label class="form-label visually-hidden">Dokumen Serah Terima</label>
                         <input type="file" name="foto_serah" class="form-control" id="foto_serah" ${itemData.foto_serah ? '' : 'required'}>`;
 
-                        let foto_terima_html = `<div class="img-fluid mb-3">
+                        let foto_terima_html = `<div class="img-fluid mb-3 text-center">
                             <img class="avatar avatar-lg img-thumbnail foto_terima" data-url="${foto_terima}" src="${foto_terima}" />
                         </div>
                         <label class="form-label visually-hidden">Dokumen Serah Terima</label>
@@ -387,13 +391,13 @@
                         if (['2', '4'].includes(itemData.jns_order)) {
 
                             if(itemData.foto_serah && itemData.foto_serah != 'https://placehold.co/100'){
-                                foto_serah_html = `<div class="img-fluid mb-3">
+                                foto_serah_html = `<div class="img-fluid mb-3 text-center">
                                     <img class="avatar avatar-lg img-thumbnail foto_serah" data-url="${foto_serah}" src="${foto_serah}" />
                                 </div>`;
                             }
 
                             if(itemData.foto_terima && itemData.foto_terima != 'https://placehold.co/100'){
-                                foto_terima_html = `<div class="img-fluid mb-3">
+                                foto_terima_html = `<div class="img-fluid mb-3 text-center">
                                     <img class="avatar avatar-lg img-thumbnail foto_terima" data-url="${foto_terima}" src="${foto_terima}" />
                                 </div>`;
                             }
