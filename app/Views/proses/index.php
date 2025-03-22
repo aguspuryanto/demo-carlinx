@@ -359,8 +359,8 @@
                     // unggah Dokumen Serah/terima
                     // Is_vendor== 1 && stat ==   9 && jns_order == 2 || jns_order == 4 (selesaikan pelayanan)
                     // reset foto_serah dan foto_terima
-                    itemData.foto_serah = '';
-                    itemData.foto_terima = '';
+                    // itemData.foto_serah = '';
+                    // itemData.foto_terima = '';
 
                     if(is_vendor == '1' && itemData.stat == '9'){
                         // instruksi Saat klik Tombol cek :
