@@ -289,59 +289,136 @@
                             $('#list_driver').append(html_driver);
                         }
                     }
+
+                    if(is_vendor == '1'){
+                        if(is_pemesan == '1'){
+                            newForm.innerHTML += '<h6 class="mb-3">Pembayaran</h6><ul class="list-group mb-3" id="list_pembayaran"></ul>';
+                        } else {
+                            newForm.innerHTML += `<h6 class="mb-3 d-flex justify-content-between">Pembayaran <span class="pull-right"><a href="#" data-bs-toggle="modal" data-bs-target="#paymentModal" data-id="` + idOrder + `" data-item='` + JSON.stringify(itemData) + `'>Ubah Pembayaran</a></span></h6><ul class="list-group mb-3" id="list_pembayaran"></ul>`;
+                        }
                     
-                    newForm.innerHTML += '<h6 class="mb-3">Pembayaran</h6><ul class="list-group" id="list_pembayaran"></ul>';
-                    
-                    let html_pembayaran = `<li class="list-group-item">
-                    <table class="table table-borderless">
-                        <tbody>
-                            <tr>
-                                <td>Sub Total</td>
-                                <td>Rp. <span class="pull-right">` + numberFormat(itemData.hrg_sewa_total) + `</span></td>
-                            </tr>
-                            <tr>
-                                <td>Diskon</td>
-                                <td>Rp. <span class="pull-right">` + numberFormat(itemData.nominal_disc) + `</span></td>
-                            </tr>
-                            <tr>
-                                <td>Uang Muka</td>
-                                <td>Rp. <span class="pull-right">` + numberFormat(itemData.nominal_dp || 0) + `</span></td>
-                            </tr>
-                            <tr class="h6">
-                                <td>Total Tagihan</td>
-                                <td>Rp. <span class="pull-right">` + numberFormat(itemData.hrg_sewa_total - itemData.nominal_dp - itemData.nominal_disc) + `</span></td>
-                            </tr>
-                            <tr>
-                                <td>Metode Bayar</td>
-                                <td>` + textPayment.toUpperCase() + `</td>
-                            </tr>
-                            <tr>
-                                <td>Jatuh Tempo</td>
-                                <td>` + (itemData.tgl_tempo || '') + `</td>
-                            </tr>
-                            <tr>
-                                <td>*Keterangan</td>
-                                <td>` + (itemData.ketr || '') + `</td>
-                            </tr>
-                            <tr>
-                                <td colspan="2">Bank Tujuan Transfer <br>` + (itemData.norek_rental || '') + `</td>
+                        // newForm.innerHTML += '<h6 class="mb-3">Pembayaran</h6><ul class="list-group" id="list_pembayaran"></ul>';                    
+                        let html_pembayaran = `<li class="list-group-item">
+                        <table class="table table-borderless">
+                            <tbody>
+                                <tr>
+                                    <td>Sub Total</td>
+                                    <td>Rp. <span class="pull-right">` + numberFormat(itemData.hrg_sewa_total) + `</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Diskon</td>
+                                    <td>Rp. <span class="pull-right">` + numberFormat(itemData.nominal_disc) + `</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Uang Muka</td>
+                                    <td>Rp. <span class="pull-right">` + numberFormat(itemData.nominal_dp || 0) + `</span></td>
+                                </tr>
+                                <tr class="h6">
+                                    <td>Total Tagihan</td>
+                                    <td>Rp. <span class="pull-right">` + numberFormat(itemData.hrg_sewa_total - itemData.nominal_dp - itemData.nominal_disc) + `</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Metode Bayar</td>
+                                    <td>` + textPayment.toUpperCase() + `</td>
+                                </tr>
+                                <tr>
+                                    <td>Jatuh Tempo</td>
+                                    <td>` + (itemData.tgl_tempo || '') + `</td>
+                                </tr>
+                                <tr>
+                                    <td>*Keterangan</td>
+                                    <td>` + (itemData.ketr || '') + `</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">Bank Tujuan Transfer <br>` + (itemData.norek_rental || '') + `</td>
+                                </tr>`;
+                                
+                        let path_img = "<?= base_url(); ?>proxy.php?url=<?= $_ENV['API_BASEURL']; ?>images_dp/" + encodeURIComponent(itemData.path_foto);
+                        // console.log(path_img,'path_img');
+                        if(itemData.path_foto) {
+                            let link_img = `<img class="avatar avatar-lg" data-url="${path_img}" src="${path_img}" style="width: 64px; height: 64px;" />`;
+                            html_pembayaran += `<tr>
+                                <td colspan="2">
+                                    <div class="d-flex align-items-center">${link_img}</div>
+                                </td>
                             </tr>`;
-                            
-                    let path_img = "<?= base_url(); ?>proxy.php?url=<?= $_ENV['API_BASEURL']; ?>images_dp/" + encodeURIComponent(itemData.path_foto);
-                    // console.log(path_img,'path_img');
-                    if(itemData.path_foto) {
-                        let link_img = `<img class="avatar avatar-lg" data-url="${path_img}" src="${path_img}" style="width: 64px; height: 64px;" />`;
-                        html_pembayaran += `<tr>
-                            <td colspan="2">
-                                <div class="d-flex align-items-center">${link_img}</div>
-                            </td>
-                        </tr>`;
+                        }
+                                
+                        html_pembayaran += `</tbody>
+                        </table>
+                        </li>`;
+                        $('#list_pembayaran').append(html_pembayaran);
                     }
-                            
-                    html_pembayaran += `</tbody>
-                    </table>
-                    </li>`;
-                    $('#list_pembayaran').append(html_pembayaran);
+
+                    // unggah Dokumen Serah/terima
+                    // Is_vendor== 1 && stat ==   9 && jns_order == 2 || jns_order == 4 (selesaikan pelayanan)
+                    // reset foto_serah dan foto_terima
+                    // itemData.foto_serah = '';
+                    // itemData.foto_terima = '';
+
+                    if(is_vendor == '1' && itemData.stat == '9'){
+                        // instruksi Saat klik Tombol cek :
+                        // 1. Sdh pilih nama file penyerahan ato blm, jika blm, kasih notif.
+                        // 2. Jika pilih nama file penerimaan, tp nama file penyerahan blm ada, kasih notif klo foto penyerahan blm ada
+                        // 3. Klo kedua file sdh ada, tp blm persetujuan blm dicontreng, kasih notif...
+                        // 4. Klo sudah persetujuan, klik tombol cek, kasih notif sudah disetujui.
+                        // 5. Klo blm ada nama file penyerahan, kasih notif klo foto penyerahan blm ada
+                        // 6. Klo ada nama file penyerahan, tp blm ada nama file penerimaan, kasih notif klo foto penerimaan blm ada
+                        // 7. Klo ada kedua file, tp blm persetujuan, kasih notif blm disetujui.
+                        
+                        let foto_serah =  (itemData.foto_serah) ? "<?= base_url(); ?>proxy.php?url=<?= $_ENV['API_BASEURL']; ?>images_lk/" + encodeURIComponent(itemData.foto_serah) : "https://placehold.co/100";
+
+                        let foto_terima = (itemData.foto_terima) ? "<?= base_url(); ?>proxy.php?url=<?= $_ENV['API_BASEURL']; ?>images_lk/" + encodeURIComponent(itemData.foto_terima) : "https://placehold.co/100";
+
+                        let foto_serah_html = `<div class="img-fluid mb-3 text-center">
+                            <img class="avatar avatar-lg img-thumbnail foto_serah" data-url="${foto_serah}" src="${foto_serah}" />
+                        </div>
+                        <label class="form-label visually-hidden">Dokumen Serah Terima</label>
+                        <input type="file" name="foto_serah" class="form-control" id="foto_serah" ${itemData.foto_serah ? '' : 'required'}>`;
+
+                        let foto_terima_html = `<div class="img-fluid mb-3 text-center">
+                            <img class="avatar avatar-lg img-thumbnail foto_terima" data-url="${foto_terima}" src="${foto_terima}" />
+                        </div>
+                        <label class="form-label visually-hidden">Dokumen Serah Terima</label>
+                        <input type="file" name="foto_terima" class="form-control" id="foto_terima" ${(itemData.foto_serah && !itemData.foto_terima) ? 'required' : ''}>`;
+
+                        if (['2', '4'].includes(itemData.jns_order)) {
+
+                            if(itemData.foto_serah && itemData.foto_serah != 'https://placehold.co/100'){
+                                foto_serah_html = `<div class="img-fluid mb-3 text-center">
+                                    <img class="avatar avatar-lg img-thumbnail foto_serah" data-url="${foto_serah}" src="${foto_serah}" />
+                                </div>`;
+                            }
+
+                            if(itemData.foto_terima && itemData.foto_terima != 'https://placehold.co/100'){
+                                foto_terima_html = `<div class="img-fluid mb-3 text-center">
+                                    <img class="avatar avatar-lg img-thumbnail foto_terima" data-url="${foto_terima}" src="${foto_terima}" />
+                                </div>`;
+                            }
+
+                            newForm.innerHTML += '<h6 class="mb-3">Dokumen Serah/Terima</h6><ul class="list-group" id="list_dokumen"></ul>';
+                            let html_dokumen = `<li class="list-group-item">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="mb-3 align-items-center">
+                                        ${foto_serah_html}
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="mb-3 align-items-center">
+                                        ${foto_terima_html}
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="mb-3 align-items-center">
+                                        <input type="checkbox" name="check_dokumen" class="form-check-input" id="check_dokumen" checked disabled>
+                                        <label class="form-check-label" for="check_dokumen">Pihak Rental telah menyetujui dan menerima pengembalian Unit</label>
+                                    </div>
+                                </div>
+                            </div></li>`;
+                            $('#list_dokumen').append(html_dokumen);
+                        }
+                    }
                 });
                 
                 // Then append the form to the formConfirmOrder div
@@ -349,11 +426,23 @@
 
                 // append to modal footer
                 if(is_vendor == '1'){
-                    if(itemData.stat == '9'){
+                    // if(itemData.stat == '9'){
+                    //     $('#addModal .modal-footer').html(`
+                    //         <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="selesai">Selesaikan Pelayanan</button>
+                    //     `);
+                    // }
+                    
+                    if (itemData.stat == '9' && (itemData.jns_order == '2' || itemData.jns_order == '4') && (!itemData.foto_serah || !itemData.foto_terima)) {
                         $('#addModal .modal-footer').html(`
-                            <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="selesai">Selesaikan Pelayanan</button>
+                            <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="selesai">UNGGAH FOTO PENYERTAAN UNIT</button>
+                        `);
+                    } else {
+                        $('#addModal .modal-footer').html(`
+                            <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="selesai">SELESAIKAN PELAYANAN</button>
                         `);
                     }
+                } else {
+                    $('#addModal .modal-footer').addClass('d-none');
                 }
 
                 $('#addModal').modal('show');
