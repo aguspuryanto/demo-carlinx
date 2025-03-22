@@ -837,15 +837,15 @@
         }
 
         // Case 6: Has handover photo but no return photo
-        if ((existingFotoSerah || fotoSerah) && !existingFotoTerima) {
-            // showAlert('warning', 'Foto penerimaan unit belum dipilih');
-            // return false;
+        if ((existingFotoSerah || fotoSerah) && !existingFotoTerima && !fotoTerima) {
+            showAlert('warning', 'Foto Pengembalian unit belum di-unggah');
+            return false;
         }
 
         // Case 4: Everything is complete
         if ((existingFotoSerah || fotoSerah) && (existingFotoTerima || fotoTerima) && checkDokumen) {
-            showAlert('success', 'Dokumen lengkap dan telah disetujui');
-            return true;
+            // showAlert('success', 'Dokumen lengkap dan telah disetujui');
+            // return true;
         }
 
         return true;
