@@ -290,7 +290,7 @@
                         }
                     }
 
-                    if(is_vendor == '1'){
+                    // if(is_vendor == '1'){
                         if(is_pemesan == '1'){
                             newForm.innerHTML += '<h6 class="mb-3">Pembayaran</h6><ul class="list-group mb-3" id="list_pembayaran"></ul>';
                         } else {
@@ -348,7 +348,7 @@
                         </table>
                         </li>`;
                         $('#list_pembayaran').append(html_pembayaran);
-                    }
+                    // }
 
                     // unggah Dokumen Serah/terima
                     // Is_vendor== 1 && stat ==   9 && jns_order == 2 || jns_order == 4 (selesaikan pelayanan)

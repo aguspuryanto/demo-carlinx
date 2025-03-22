@@ -366,7 +366,8 @@
                         // instruksi Saat klik Tombol cek :
                         // 1. Sdh pilih nama file penyerahan ato blm, jika blm, kasih notif.
                         // 2. Jika pilih nama file penerimaan, tp nama file penyerahan blm ada, kasih notif klo foto penyerahan blm ada
-                        // 3. Klo kedua file sdh ada, tp blm persetujuan blm dicontreng, kasih notif...
+                        // 3. Klo kedua file sdh ada, tp blm persetujuan blm dicontreng, kasih notif...
+
                         // 4. Klo sudah persetujuan, klik tombol cek, kasih notif sudah disetujui.
                         // 5. Klo blm ada nama file penyerahan, kasih notif klo foto penyerahan blm ada
                         // 6. Klo ada nama file penyerahan, tp blm ada nama file penerimaan, kasih notif klo foto penerimaan blm ada
@@ -799,8 +800,8 @@
         const checkDokumen = $('#check_dokumen').is(':checked');
         const existingFotoSerah = $('img.foto_serah').attr('src') !== 'https://placehold.co/100';
         const existingFotoTerima = $('img.foto_terima').attr('src') !== 'https://placehold.co/100';
-        console.log(fotoSerah, '_fotoSerah');
-        console.log(fotoTerima, '_fotoTerima');
+        // console.log(fotoSerah, '_fotoSerah');
+        // console.log(fotoTerima, '_fotoTerima');
         console.log(existingFotoSerah, '_existingFotoSerah');
         console.log(existingFotoTerima, '_existingFotoTerima');
 
@@ -811,6 +812,7 @@
         // 1. Sdh pilih nama file penyerahan ato blm, jika blm, kasih notif.
         // 2. Jika pilih nama file penerimaan, tp nama file penyerahan blm ada, kasih notif klo foto penyerahan blm ada
         // 3. Klo kedua file sdh ada, tp blm persetujuan blm dicontreng, kasih notif...
+        
         // 4. Klo sudah persetujuan, klik tombol cek, kasih notif sudah disetujui.
         // 5. Klo blm ada nama file penyerahan, kasih notif klo foto penyerahan blm ada
         // 6. Klo ada nama file penyerahan, tp blm ada nama file penerimaan, kasih notif klo foto penerimaan blm ada
