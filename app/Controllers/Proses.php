@@ -194,57 +194,60 @@ class Proses extends BaseController
             $file_keys = ["foto_serah", "foto_terima"];
 
             // Loop through each file input
-            foreach ($file_keys as $fileKey) {
-                if (isset($_FILES[$fileKey]) && $_FILES[$fileKey]['error'] === 0 && $_FILES[$fileKey]['size'] > 0) {
-                    // $fileName = basename($_FILES[$fileKey]["name"]);
-                    if($fileKey == 'foto_serah'){
-                        $fileName = $data['id_order'] . "_SRH.jpg";
-                    }
-                    if($fileKey == 'foto_terima'){
-                        $fileName = $data['id_order'] . "_TRM.jpg";
-                    }
-
-                    $targetFile = $uploadDir . $fileName;
-                    // $file_type = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
-
-                    // $fileExt = pathinfo($_FILES['bukti_transfer']['name'], PATHINFO_EXTENSION);
-                    // $fileName = 'DP_' . $data['id_order'] . "." . $fileExt;
-                    // $targetFile = $uploadDir . $fileName;
-                    // Format nama foto serah terima unit:
-                    // - foto serah: no_order + "_SRH.jpg"
-                    // - foto terima: no_order + "_TRM.jpg"
-
-                    if (!move_uploaded_file($_FILES[$fileKey]['tmp_name'], $targetFile)) {
-                        $errors[] = "Failed to upload file: $fileName. Please check file permissions and try again.";
-                    }
-                    
-                    // $destinationUrl = $this->ipAddress . 'upload_bukti_dp_1.php';
-                    if (is_file($targetFile)) {
-                        $ch = curl_init();
-
-                        $postData = [
-                            'uploaded_file' => new \CURLFile($targetFile)
-                        ];
-
-                        curl_setopt($ch, CURLOPT_URL, $this->ipAddress . 'upload_foto_lk.php');
-                        curl_setopt($ch, CURLOPT_POST, true);
-                        curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
-                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-                        $response = curl_exec($ch);
-                        if (curl_errno($ch)) {
-                            $errors[] = "Failed to copy file: $fileName. Error: " . curl_error($ch);
-                        }
-                        curl_close($ch);
-                    }
-                } else {
-                    $errors[] = "No file uploaded for $fileKey or an error occurred.<br>";
-                }
+            // foreach ($file_keys as $fileKey) {
+            if(isset($_FILES['foto_serah']) && $_FILES['foto_serah']['error'] === 0 && $_FILES['foto_serah']['size'] > 0){
+                $fileKey = 'foto_serah';
+            }
+            if(isset($_FILES['foto_terima']) && $_FILES['foto_terima']['error'] === 0 && $_FILES['foto_terima']['size'] > 0){
+                $fileKey = 'foto_terima';
             }
 
+            if(isset($fileKey) && $fileKey){
+                // $fileName = basename($_FILES[$fileKey]["name"]);
+                if($fileKey == 'foto_serah'){
+                    $fileName = $data['id_order'] . "_SRH.jpg";
+                }
+                if($fileKey == 'foto_terima'){
+                    $fileName = $data['id_order'] . "_TRM.jpg";
+                }
+
+                $targetFile = $uploadDir . $fileName;
+                // $file_type = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+
+                // $fileExt = pathinfo($_FILES['bukti_transfer']['name'], PATHINFO_EXTENSION);
+                // $fileName = 'DP_' . $data['id_order'] . "." . $fileExt;
+                // $targetFile = $uploadDir . $fileName;
+                // Format nama foto serah terima unit:
+                // - foto serah: no_order + "_SRH.jpg"
+                // - foto terima: no_order + "_TRM.jpg"
+
+                if (!move_uploaded_file($_FILES[$fileKey]['tmp_name'], $targetFile)) {
+                    $errors[] = "Failed to upload file: $fileName. Please check file permissions and try again.";
+                }
+                
+                // $destinationUrl = $this->ipAddress . 'upload_bukti_dp_1.php';
+                if (is_file($targetFile) && file_exists($targetFile)) {
+                    $ch = curl_init();
+
+                    $postData = [
+                        'uploaded_file' => new \CURLFile($targetFile)
+                    ];
+
+                    curl_setopt($ch, CURLOPT_URL, $this->ipAddress . 'upload_foto_lk.php');
+                    curl_setopt($ch, CURLOPT_POST, true);
+                    curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+                    $response = curl_exec($ch);
+                    if (curl_errno($ch)) {
+                        $errors[] = "Failed to copy file: $fileName. Error: " . curl_error($ch);
+                    }
+                    curl_close($ch);
+                }
+            }
+            // }
+
             if(!empty($errors)){
-                // echo json_encode($errors);
-                // die();
                 $response = [
                     'success' => false,
                     'message' => $errors
@@ -252,7 +255,7 @@ class Proses extends BaseController
             } else {
                 $curlOpt = [
                     'id_order' => $data['id_order'],
-                    'stat' => $data['stat']
+                    'stat_ori' => $data['stat']
                 ];
                 $listData = getCurl($curlOpt, $this->ipAddress . 'update_order_closed_1.php');
                 // echo json_encode($listData); die();
