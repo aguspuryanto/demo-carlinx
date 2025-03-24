@@ -64,17 +64,17 @@
 
     function incrementValue(e) {
         e.preventDefault();
-        var currentVal = parseInt($('#lamaSewa').val(), 10);
+        var currentVal = parseInt($('#jmlBulan').val(), 10);
         if (!isNaN(currentVal)) {
-            $('#lamaSewa').val(currentVal + 1);
+            $('#jmlBulan').val(currentVal + 1);
         }
     }
 
     function decrementValue(e) {
         e.preventDefault();
-        var currentVal = parseInt($('#lamaSewa').val(), 10);
+        var currentVal = parseInt($('#jmlBulan').val(), 10);
         if (!isNaN(currentVal) && currentVal > 1) {
-            $('#lamaSewa').val(currentVal - 1);
+            $('#jmlBulan').val(currentVal - 1);
         }
     }
 
