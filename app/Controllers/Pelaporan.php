@@ -148,12 +148,12 @@ class Pelaporan extends BaseController
         }
 
         if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'report_hutang.php');
-        // echo json_encode($listData);
+        // echo json_encode($listData); die();
         
         return view('pages/pelaporan/hutang', [
             'title' => 'Hutang',
             'curlOpt' => $curlOpt,
-            'listData' => ($listData['result_hutang']) ?? $listData,
+            'listData' => $listData,
         ]);
     }
 
@@ -176,7 +176,7 @@ class Pelaporan extends BaseController
         return view('pages/pelaporan/detail-hutang', [
             'title' => 'Detail Hutang',
             'curlOpt' => $curlOpt,
-            'listData' => ($listData['result_hutang']) ?? $listData,
+            'listData' => $listData,
         ]);
     }
 

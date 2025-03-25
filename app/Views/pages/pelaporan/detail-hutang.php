@@ -29,7 +29,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <?php if ($listData['success'] == '0'): ?>
+                        <?php if (empty($listData['result_hutang']) || $listData['success'] == '0'): ?>
                             <tr>
                                 <td colspan="3">
                                     <p class="text-center text-danger">Data tidak ditemukan</p>

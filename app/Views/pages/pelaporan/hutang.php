@@ -26,7 +26,7 @@
                     <?php echo form_close(); ?>
 
                     <?php
-                    // echo json_encode($listData);
+                    // echo json_encode($listData); die();
                     // {"success":1,"result_hutang":[{"tgl_jam":"2024-12-05 14:03:55","kd_site":"23050001","kd_rental":"22040001","id_order":"241205000002","nominal":"0","due_date":"2024-12-12","sisa":"0","stat":"1","nama_site":"MCORNER SMSX","nama_rental":"GASIK TRANSXX"}]}
                     $subTotal = 0;
                     ?>
@@ -39,7 +39,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <?php if ($listData['success'] == '0'): ?>
+                        <?php if (empty($listData['result_hutang']) || $listData['success'] == '0'): ?>
                             <tr>
                                 <td colspan="3">
                                     <p class="text-center text-danger">Data tidak ditemukan</p>
