@@ -253,17 +253,24 @@ class Proses extends BaseController
                     'message' => $errors
                 ];
             } else {
-                $curlOpt = [
-                    'id_order' => $data['id_order'],
-                    'stat_ori' => $data['stat']
-                ];
-                $listData = getCurl($curlOpt, $this->ipAddress . 'update_order_closed_1.php');
-                // echo json_encode($listData); die();
-                
-                $response = [
-                    'success' => ($listData['success']=='1') ? true : false,
-                    'message' => $listData['message']
-                ];
+                if($data['action'] == 'unggah'){
+                    $response = [
+                        'success' => true,
+                        'message' => 'Foto berhasil diunggah'
+                    ];
+                } else {
+                    $curlOpt = [
+                        'id_order' => $data['id_order'],
+                        'stat_ori' => $data['stat']
+                    ];
+                    $listData = getCurl($curlOpt, $this->ipAddress . 'update_order_closed_1.php');
+                    // echo json_encode($listData); die();
+                    
+                    $response = [
+                        'success' => ($listData['success']=='1') ? true : false,
+                        'message' => $listData['message']
+                    ];
+                }
             }
 
             echo json_encode($response);

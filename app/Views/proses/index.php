@@ -436,7 +436,7 @@
                 if(is_vendor == '1'){
                     if (itemData.stat == '9' && (itemData.jns_order == '2' || itemData.jns_order == '4') && (!itemData.foto_serah || !itemData.foto_terima)) {
                         $('#addModal .modal-footer').html(`
-                            <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="selesai">UNGGAH FOTO PENYERTAAN UNIT</button>
+                            <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="unggah">UNGGAH FOTO PENYERTAAN UNIT</button>
                         `);
                     } else {
                         $('#addModal .modal-footer').html(`
