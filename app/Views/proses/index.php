@@ -457,7 +457,7 @@
             let action = $(this).data('action');
             
             // Add document validation for relevant cases
-            if (action === 'selesai') {
+            if (action === 'selesai' || action === 'unggah') {
                 if (!validateDocuments()) {
                     return false;
                 }
@@ -837,7 +837,7 @@
         }
 
         // Case 6: Has handover photo but no return photo
-        if ((!existingFotoSerah || !fotoSerah) && existingFotoTerima && fotoTerima) {
+        if ((existingFotoSerah || fotoSerah) && !existingFotoTerima && !fotoTerima) {
             showAlert('warning', 'Foto Pengembalian unit belum di-unggah');
             return false;
         }
