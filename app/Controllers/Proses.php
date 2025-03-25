@@ -191,7 +191,7 @@ class Proses extends BaseController
             }
 
             // Array of file input names
-            $file_keys = ["foto_serah", "foto_terima"];
+            // $file_keys = ["foto_serah", "foto_terima"];
 
             // Loop through each file input
             // foreach ($file_keys as $fileKey) {

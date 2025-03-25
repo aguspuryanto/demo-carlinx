@@ -574,8 +574,8 @@
                         form.after(successAlert);
                         
                         setTimeout(() => {
-                            $('#addModal').modal('hide');
-                            location.reload();
+                            // $('#addModal').modal('hide');
+                            // location.reload();
                         }, 1500);
                     } else {
                         // Show error message
