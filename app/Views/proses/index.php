@@ -568,7 +568,7 @@
                     if (data.success) {
                         // Show success message with Bootstrap toast or alert
                         const successAlert = `<div class="alert alert-success alert-dismissible fade show" role="alert">
-                            Order confirmed successfully!
+                            ${data.message || 'Order confirmed successfully!'}
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>`;
                         form.after(successAlert);
