@@ -20,11 +20,9 @@
                                     <p class="text-muted size-12"><?= isset($_SESSION['user']) ? ($_SESSION['user']['kota']) : ''; ?></p>
                                 </div>
                                 <div class="col-auto">
-                                    <button class="btn btn-44 btn-light">
-                                        <a href="<?= base_url('logout') ?>">
-                                            <i class="bi bi-box-arrow-right"></i>
-                                        </a>
-                                    </button>
+                                    <a href="<?= base_url('logout') ?>" class="btn btn-44 btn-light">
+                                        <i class="bi bi-box-arrow-right"></i>
+                                    </a>
                                 </div>
                             </div>
                         </div>
