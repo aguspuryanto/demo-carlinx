@@ -451,7 +451,6 @@
             }
         });
 
-
         // JavaScript to handle file input change and preview the image
         const fileInputSerah = $(document).find('input#foto_serah');
         const fileInputTerima = $(document).find('input#foto_terima');
