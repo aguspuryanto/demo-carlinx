@@ -208,7 +208,6 @@ class Order extends BaseController
                 
                 $decoded = rawurldecode($data['item']);
                 $array_data = json_decode($decoded, true);
-                // $resp = json_encode($array_data);
                 $array_data['jns_order'] = $data['jns_order'] ?? 1;
                 // $array_data['tempo_bayar'] = $data['tempo_bayar'] ?? 0;
 
