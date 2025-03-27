@@ -21,7 +21,9 @@
                                 </div>
                                 <div class="col-auto">
                                     <button class="btn btn-44 btn-light">
-                                        <i class="bi bi-box-arrow-right"></i>
+                                        <a href="<?= base_url('logout') ?>">
+                                            <i class="bi bi-box-arrow-right"></i>
+                                        </a>
                                     </button>
                                 </div>
                             </div>
