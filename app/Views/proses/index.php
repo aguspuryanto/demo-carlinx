@@ -451,6 +451,36 @@
             }
         });
 
+
+        // JavaScript to handle file input change and preview the image
+        const fileInputSerah = $(document).find('input#foto_serah');
+        const fileInputTerima = $(document).find('input#foto_terima');
+        fileInputSerah.on('change', function(event) {
+            const file = event.target.files[0]; // Get the selected file
+            console.log(file, 'file_foto_serah');
+            if(file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const img = $(document).find('img.foto_serah');
+                    img.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        fileInputTerima.on('change', function(event) {
+            const file = event.target.files[0]; // Get the selected file
+            console.log(file, 'file_foto_terima');
+            if(file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const img = $(document).find('img.foto_terima');
+                    img.src = event.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
         // Modify the existing click handler for btnConfirmOrder
         $(document).on('click', 'button.btnConfirmOrder', function(e) {
             e.preventDefault();
@@ -837,7 +867,7 @@
         }
 
         // Case 6: Has handover photo but no return photo
-        if ((existingFotoSerah || fotoSerah) && !existingFotoTerima && !fotoTerima) {
+        if ((existingFotoSerah && fotoSerah) && !existingFotoTerima && !fotoTerima) {
             showAlert('warning', 'Foto Pengembalian unit belum di-unggah');
             return false;
         }
