@@ -356,7 +356,7 @@
                     // itemData.foto_serah = '';
                     // itemData.foto_terima = '';
 
-                    if(is_vendor == '1' && itemData.stat == '9'){
+                    if((is_vendor == '1' || is_pemesan == '1') && itemData.stat == '9'){
                         // instruksi Saat klik Tombol cek :
                         // 1. Sdh pilih nama file penyerahan ato blm, jika blm, kasih notif.
                         // 2. Jika pilih nama file penerimaan, tp nama file penyerahan blm ada, kasih notif klo foto penyerahan blm ada
