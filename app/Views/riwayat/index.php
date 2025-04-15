@@ -145,6 +145,8 @@
                 console.log(itemData.jns_order, '_jns_order');
                 if(itemData.jns_order == '2'){
                     listInclude = 'Mobil Lepas Kunci';
+                } else if(itemData.jns_order == '4') {
+                    listInclude = 'Mobil Bulanan';
                 }
 
                 // text Pembayaran

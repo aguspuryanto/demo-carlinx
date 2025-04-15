@@ -118,6 +118,8 @@
                 if(itemData.is_hotel == '1') listInclude += ', Hotel';
                 if(itemData.jns_order == '2'){
                     listInclude = 'Mobil Lepas Kunci';
+                } else if(itemData.jns_order == '4') {
+                    listInclude = 'Mobil Bulanan';
                 }
 
                 // text Pembayaran
