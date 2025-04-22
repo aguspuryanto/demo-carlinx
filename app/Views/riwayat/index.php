@@ -223,7 +223,7 @@
 
                     let is_readonly = (is_vendor == '1') ? 'readonly' : '';
                     // form pelanggan
-                    newForm.innerHTML += '<h6 class="mb-3">Pelanggan</h6><div class="list-group mb-3" id="list_plgn"></div>';
+                    newForm.innerHTML += '<h6 class="mb-3">Data Marketing Pemesan</h6><div class="list-group mb-3" id="list_plgn"></div>';
 
                     // loop jml_order
                     for(let i = 0; i < itemData.jml_order; i++){
@@ -256,30 +256,30 @@
                     }
                     
                     // form driver
-                    newForm.innerHTML += '<h6 class="mb-3">Driver</h6><div class="list-group mb-3" id="list_driver"></div>';
+                    newForm.innerHTML += '<h6 class="mb-3">Unit</h6><div class="list-group mb-3" id="list_driver"></div>';
                     // loop jml_order
                     for(let i = 0; i < itemData.jml_order; i++){
 
-                        if (['2', '4'].includes(itemData.jns_order)) {
-                            let html_driver = `<li class="list-group-item mb-3">
-                                <div class="mb-3 align-items-center">
-                                    <label class="form-label visually-hidden">Nopol</label>
-                                    <input type="text" name="nopol_driver[` + i + `]" class="form-control" id="nopol_driver" placeholder="Nopol" value="` + (resultPlgn.nopol || '') + `" required>
-                                </div>
-                            </div></li>`;
+                        // if (['2', '4'].includes(itemData.jns_order)) {
+                        //     let html_driver = `<li class="list-group-item mb-3">
+                        //         <div class="mb-3 align-items-center">
+                        //             <label class="form-label visually-hidden">Nopol</label>
+                        //             <input type="text" name="nopol_driver[` + i + `]" class="form-control-plaintext" id="nopol_driver" placeholder="Nopol" value="` + (resultPlgn.nopol || '') + `" required>
+                        //         </div>
+                        //     </div></li>`;
 
-                            $('#list_driver').append(html_driver);
-                        } else {
+                        //     $('#list_driver').append(html_driver);
+                        // } else {
                             let html_driver = `<a href="#" data-bs-toggle="modal" data-bs-target="#driverModal" data-id="` + (i+1) + `" data-item='` + JSON.stringify(resultPlgn) + `' data-order='` + idOrder + `' class="list-group-item list-group-item-action">
-                            <div class="mb-3 align-items-center">
+                            <div class="mb-0 align-items-center">
                                 <label class="form-label visually-hidden">Driver</label>
                                 <input type="text" name="nama_driver[` + i + `]" class="form-control-plaintext" id="nama_driver" placeholder="Nama Driver" value="` + (resultPlgn.nama_drv || '') + `" readonly>
                             </div>
-                            <div class="mb-3 align-items-center">
+                            <div class="mb-0 align-items-center">
                                 <label class="form-label visually-hidden">No HP</label>
                                 <input type="text" name="no_hp_driver[` + i + `]" class="form-control-plaintext" id="no_hp_driver" placeholder="No HP" value="` + (resultPlgn.hp_drv || '') + `" readonly>
                             </div>
-                            <div class="mb-3 align-items-center">
+                            <div class="mb-0 align-items-center">
                                 <label class="form-label visually-hidden">Nopol</label>
                                 <input type="text" name="nopol_driver[` + i + `]" class="form-control-plaintext" id="nopol_driver" placeholder="Nopol" value="` + (resultPlgn.nopol || '') + `" readonly>
                             </div>
@@ -289,7 +289,7 @@
                             </div></a>`;
 
                             $('#list_driver').append(html_driver);
-                        }
+                        // }
                     }
 
                     // if(is_vendor == '1'){
@@ -428,12 +428,6 @@
 
                 // append to modal footer
                 if(is_vendor == '1'){
-                    // if(itemData.stat == '9'){
-                    //     $('#addModal .modal-footer').html(`
-                    //         <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="selesai">Selesaikan Pelayanan</button>
-                    //     `);
-                    // }
-                    
                     if (itemData.stat == '9' && (itemData.jns_order == '2' || itemData.jns_order == '4') && (!itemData.foto_serah || !itemData.foto_terima)) {
                         $('#addModal .modal-footer').html(`
                             <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="selesai">UNGGAH FOTO PENYERTAAN UNIT</button>
@@ -444,7 +438,9 @@
                         `);
                     }
                 } else {
-                    $('#addModal .modal-footer').addClass('d-none');
+                    $(document).find('#addModal .modal-footer').html(`
+                        <button type="submit" class="btn btn-primary w-100 btnConfirmOrder" data-action="selesai">BERI PENILAIAN</button>
+                    `);
                 }
 
                 $('#addModal').modal('show');

@@ -11,6 +11,9 @@
         <div class="modal-body">
             ...
         </div>
+        <div class="modal-footer justify-content-between">
+            ...
+        </div>
         </div>
     </div>
     </div>
