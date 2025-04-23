@@ -151,6 +151,116 @@ class Proses extends BaseController
         ]);
     }
 
+    // compress max 100kb
+    protected function compressImage($source, $destination, $quality = 80)
+    {
+        // Get image info
+        $imageInfo = getimagesize($source);
+        if ($imageInfo === false) {
+            throw new \Exception('Invalid image file');
+        }
+
+        // Create image resource based on type
+        switch ($imageInfo[2]) {
+            case IMAGETYPE_JPEG:
+                $image = imagecreatefromjpeg($source);
+                break;
+            case IMAGETYPE_PNG:
+                $image = imagecreatefrompng($source);
+                // Preserve transparency for PNG
+                imagealphablending($image, false);
+                imagesavealpha($image, true);
+                break;
+            case IMAGETYPE_GIF:
+                $image = imagecreatefromgif($source);
+                break;
+            default:
+                throw new \Exception('Unsupported image type');
+        }
+
+        // Initial save to get file size
+        $tempFile = tempnam(sys_get_temp_dir(), 'img');
+        switch ($imageInfo[2]) {
+            case IMAGETYPE_JPEG:
+                imagejpeg($image, $tempFile, $quality);
+                break;
+            case IMAGETYPE_PNG:
+                imagepng($image, $tempFile, 6);
+                break;
+            case IMAGETYPE_GIF:
+                imagegif($image, $tempFile);
+                break;
+        }
+
+        // Check file size and adjust quality if needed
+        $maxSize = 100 * 1024; // 100KB in bytes
+        $currentSize = filesize($tempFile);
+        
+        if ($currentSize > $maxSize) {
+            // Calculate new quality based on current size
+            $newQuality = floor(($maxSize / $currentSize) * $quality);
+            $newQuality = max(10, $newQuality); // Don't go below 10% quality
+            
+            // Try again with new quality
+            switch ($imageInfo[2]) {
+                case IMAGETYPE_JPEG:
+                    imagejpeg($image, $destination, $newQuality);
+                    break;
+                case IMAGETYPE_PNG:
+                    // For PNG, we'll try to reduce dimensions if still too large
+                    if (filesize($tempFile) > $maxSize) {
+                        $this->resizeImage($image, $destination, $maxSize);
+                    } else {
+                        imagepng($image, $destination, 9);
+                    }
+                    break;
+                case IMAGETYPE_GIF:
+                    imagegif($image, $destination);
+                    break;
+            }
+        } else {
+            // If within size limit, just move the temp file
+            rename($tempFile, $destination);
+        }
+
+        // Clean up
+        imagedestroy($image);
+        if (file_exists($tempFile)) {
+            unlink($tempFile);
+        }
+
+        return true;
+    }
+
+    protected function resizeImage($image, $destination, $maxSize)
+    {
+        $width = imagesx($image);
+        $height = imagesy($image);
+        $ratio = $width / $height;
+        
+        // Start with 80% of original size
+        $newWidth = $width * 0.8;
+        $newHeight = $newWidth / $ratio;
+        
+        $newImage = imagecreatetruecolor($newWidth, $newHeight);
+        
+        // Preserve transparency for PNG
+        imagealphablending($newImage, false);
+        imagesavealpha($newImage, true);
+        
+        imagecopyresampled($newImage, $image, 0, 0, 0, 0, $newWidth, $newHeight, $width, $height);
+        
+        // Save with maximum compression
+        imagepng($newImage, $destination, 9);
+        
+        // If still too large, try again with smaller dimensions
+        if (filesize($destination) > $maxSize) {
+            $this->resizeImage($newImage, $destination, $maxSize);
+        }
+        
+        imagedestroy($newImage);
+    }
+
     public function confirm()
     {
         $listData = [];
@@ -160,25 +270,6 @@ class Proses extends BaseController
             $data = $this->request->getPost();
             // echo print_r($_FILES); die();
             // echo json_encode($data); die();
-
-            // if($data['is_vendor'] == '1'){
-            //     if($data['stat_ori'] == '1'){
-            //         if($data['action'] == 'tolak'){
-            //             $data['stat'] = '6'; // tolak
-            //         }
-            //         if($data['action'] == 'terima'){
-            //             $data['stat'] = '4'; // terima  
-            //         }
-            //     }
-            //     if($data['stat_ori'] == '5'){
-            //         if($data['action'] == 'batal'){
-            //             $data['stat'] = '7'; // batal
-            //         }
-            //         if($data['action'] == 'selesai'){
-            //             $data['stat'] = '9'; // submit
-            //         }
-            //     }                
-            // }
 
             // upload dokumen serah/terima
             // API: upload_foto_lk.php
@@ -190,11 +281,6 @@ class Proses extends BaseController
                 mkdir($uploadDir, 0777, true);
             }
 
-            // Array of file input names
-            // $file_keys = ["foto_serah", "foto_terima"];
-
-            // Loop through each file input
-            // foreach ($file_keys as $fileKey) {
             if(isset($_FILES['foto_serah']) && $_FILES['foto_serah']['error'] === 0 && $_FILES['foto_serah']['size'] > 0){
                 $fileKey = 'foto_serah';
             }
@@ -203,7 +289,6 @@ class Proses extends BaseController
             }
 
             if(isset($fileKey) && $fileKey){
-                // $fileName = basename($_FILES[$fileKey]["name"]);
                 if($fileKey == 'foto_serah'){
                     $fileName = $data['id_order'] . "_SRH.jpg";
                 }
@@ -212,40 +297,33 @@ class Proses extends BaseController
                 }
 
                 $targetFile = $uploadDir . $fileName;
-                // $file_type = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
-
-                // $fileExt = pathinfo($_FILES['bukti_transfer']['name'], PATHINFO_EXTENSION);
-                // $fileName = 'DP_' . $data['id_order'] . "." . $fileExt;
-                // $targetFile = $uploadDir . $fileName;
-                // Format nama foto serah terima unit:
-                // - foto serah: no_order + "_SRH.jpg"
-                // - foto terima: no_order + "_TRM.jpg"
-
-                if (!move_uploaded_file($_FILES[$fileKey]['tmp_name'], $targetFile)) {
-                    $errors[] = "Failed to upload file: $fileName. Please check file permissions and try again.";
-                }
                 
-                // $destinationUrl = $this->ipAddress . 'upload_bukti_dp_1.php';
-                if (is_file($targetFile) && file_exists($targetFile)) {
-                    $ch = curl_init();
+                try {
+                    // Compress and save the image
+                    $this->compressImage($_FILES[$fileKey]['tmp_name'], $targetFile);
+                    
+                    if (is_file($targetFile) && file_exists($targetFile)) {
+                        $ch = curl_init();
 
-                    $postData = [
-                        'uploaded_file' => new \CURLFile($targetFile)
-                    ];
+                        $postData = [
+                            'uploaded_file' => new \CURLFile($targetFile)
+                        ];
 
-                    curl_setopt($ch, CURLOPT_URL, $this->ipAddress . 'upload_foto_lk.php');
-                    curl_setopt($ch, CURLOPT_POST, true);
-                    curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
-                    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                        curl_setopt($ch, CURLOPT_URL, $this->ipAddress . 'upload_foto_lk.php');
+                        curl_setopt($ch, CURLOPT_POST, true);
+                        curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-                    $response = curl_exec($ch);
-                    if (curl_errno($ch)) {
-                        $errors[] = "Failed to copy file: $fileName. Error: " . curl_error($ch);
+                        $response = curl_exec($ch);
+                        if (curl_errno($ch)) {
+                            $errors[] = "Failed to copy file: $fileName. Error: " . curl_error($ch);
+                        }
+                        curl_close($ch);
                     }
-                    curl_close($ch);
+                } catch (\Exception $e) {
+                    $errors[] = "Failed to process image: " . $e->getMessage();
                 }
             }
-            // }
 
             if(!empty($errors)){
                 $response = [
