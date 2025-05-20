@@ -12,9 +12,10 @@ class Pengaturan extends BaseController
 
     public function __construct()
     {
-        helper('my');
-        $this->ipAddress = $_ENV['API_BASEURL'];
+        parent::__construct();
         $this->session = session();
+        $this->ipAddress = $_ENV['API_BASEURL'];
+        helper('my');
         // jika tidak ada session, redirect ke login
         if (!$this->session->get('user') || !isset($this->session->get('user')['kode'])) {
             return redirect()->to('/login');
