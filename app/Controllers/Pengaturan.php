@@ -397,53 +397,24 @@ class Pengaturan extends BaseController
          * caller optional
          * kd_member required
          */
-        // echo json_encode($this->session->get('user'));
-        // select_unit_1.php
-        // select_unit_by_name_1.php
-        // select_user.php
-        // select_kategori.php
-        // select_bbm.php
-        // add_unit_1.php
-        // update_unit_1.php
-
         $listData = [];
         $listPaketDriver = [];
         $listPaketBbm    = [];
         $listKategori = [];
 
-        $curlOpt    = [
+        $curlOpt = [
             'caller' => 'MASTER',
             'kd_member' => $this->session->get('user')['kode']
         ];
 
+        // Initialize cache
+        $cache = \Config\Services::cache();
+        $cacheKey = 'unit_data_' . $this->session->get('user')['kode'];
+        $cacheTime = 300; // 5 minutes cache
+
         // handle POST
         if ($this->request->getMethod() == 'POST') {
             $data = $this->request->getPost();
-            // echo json_encode($data); die();
-
-            /* $kd_unit = $_POST['kd_unit'];
-            $nama = $_POST['nama'];					
-            $kat = SUBSTR($kd_unit,0,8).$_POST['kategori'];
-            $bbm = $_POST['bbm'];
-            $dlm_kota = $_POST['dlm_kota'];
-            $dlm_prop = $_POST['dlm_prop'];
-            $luar_prop = $_POST['luar_prop'];
-            $lepas_kunci = $_POST['lepas_kunci'];
-            $biaya_antar = $_POST['biaya_antar'];
-            $biaya_ambil = $_POST['biaya_ambil'];
-            $tuslah = $_POST['tuslah'];
-            $is_tuslah = $_POST['is_tuslah'];
-            $stat = $_POST['stat'];
-            $kons_bbm = $_POST['kons_bbm'];
-            $kursi = $_POST['kursi'];
-            $tahun = $_POST['tahun'];		
-            $transmisi = $_POST['transmisi'];
-            $warna = $_POST['warna'];
-            $drop_in = $_POST['drop_in'];
-            $over_time = $_POST['over_time'];
-            $fee = $_POST['fee'];
-            $stgh_hr = $_POST['stgh_hr'];
-            $bulanan = $_POST['bulanan']; */
 
             $updateData = [
                 'kd_unit' => $data['kd_unit'],
@@ -470,29 +441,43 @@ class Pengaturan extends BaseController
                 'stgh_hr' => $data['stgh_hr'],
                 'bulanan' => $data['bulanan']
             ];
-            // echo json_encode($updateData); die();
 
             $resultData = getCurl($updateData, $this->ipAddress . 'update_unit_1.php');
-            // echo json_encode($resultData);
+            
             if($resultData['success'] == '1'){
+                // Clear cache on successful update
+                $cache->delete($cacheKey);
                 $this->session->setFlashdata('success', 'Data berhasil diubah');
             } else {
                 $this->session->setFlashdata('error', 'Data gagal diubah ' . $resultData['error_message']);
             }
-            // return redirect()->back()->with('success', 'Data berhasil diubah');
         }
 
-        if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'select_unit_1.php');
-        // echo json_encode($listData);
+        // Try to get data from cache first
+        $cachedData = $cache->get($cacheKey);
+        
+        if ($cachedData === null) {
+            // If not in cache, fetch from API
+            if(empty($listData)) $listData = getCurl($curlOpt, $this->ipAddress . 'select_unit_1.php');
+            if(empty($listPaketDriver)) $listPaketDriver = getCurl($curlOpt, $this->ipAddress . 'select_driver.php');
+            if(empty($listPaketBbm)) $listPaketBbm = getCurl($curlOpt, $this->ipAddress . 'select_bbm.php');
+            if(empty($listKategori)) $listKategori = getCurl(['kd_member' => $this->session->get('user')['kode']], $this->ipAddress . 'select_kategori.php');
 
-        if(empty($listPaketDriver)) $listPaketDriver = getCurl($curlOpt, $this->ipAddress . 'select_driver.php');
-        // echo json_encode($listPaketDriver);
-
-        if(empty($listPaketBbm)) $listPaketBbm = getCurl($curlOpt, $this->ipAddress . 'select_bbm.php');
-        // echo json_encode($listPaketBbm);
-
-        if(empty($listKategori)) $listKategori = getCurl(['kd_member' => $this->session->get('user')['kode']], $this->ipAddress . 'select_kategori.php');
-        // echo json_encode($listKategori);
+            // Store in cache
+            $cacheData = [
+                'listData' => $listData,
+                'listPaketDriver' => $listPaketDriver,
+                'listPaketBbm' => $listPaketBbm,
+                'listKategori' => $listKategori
+            ];
+            $cache->save($cacheKey, $cacheData, $cacheTime);
+        } else {
+            // Use cached data
+            $listData = $cachedData['listData'];
+            $listPaketDriver = $cachedData['listPaketDriver'];
+            $listPaketBbm = $cachedData['listPaketBbm'];
+            $listKategori = $cachedData['listKategori'];
+        }
 
         return view('pengaturan/unit', [
             'title' => 'Unit',
