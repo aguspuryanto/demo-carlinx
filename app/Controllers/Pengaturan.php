@@ -19,6 +19,10 @@ class Pengaturan extends BaseController
         if (!$this->session->get('user') || !isset($this->session->get('user')['kode'])) {
             return redirect()->to('/login');
         }
+
+        parent::__construct();
+        ob_flush();
+        ob_start('ob_gzhandler');
     }
 
     public function index()
